@@ -3,7 +3,7 @@ import { ServiceIDs } from "data/phils-vision/services/ids";
 import { eventCoverage } from "./event-coverage";
 import { PriceType } from "types";
 
-const { HOURLY, FIXED } = PriceType;
+const { HOURLY, FIXED, STARTING } = PriceType;
 
 export const allServices = [
   {
@@ -16,6 +16,7 @@ export const allServices = [
       path: require("data/phils-vision/images/personal-shoot.jpeg"),
       altText: "",
     },
+    price: { value: 75, type: STARTING },
     prices: [
       { name: 'Head Shots', value: 75, type: FIXED },
       { name: 'Portraits', value: 125, type: FIXED },
@@ -32,6 +33,7 @@ export const allServices = [
       path: require("data/phils-vision/images/content-creation.jpeg"),
       altText: "",
     },
+    price: { value: 150, type: STARTING },
     prices: [
       { name: 'Food Shoot', value: 150, type: HOURLY },
       { name: 'Product Shoot', value: 150, type: HOURLY },
