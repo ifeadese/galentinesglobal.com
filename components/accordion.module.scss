@@ -37,9 +37,20 @@ $accordion-row-padding: 0 2rem;
 
 
         .priceValue {
+          text-align: right;
           font-weight: bold;
           font-size: 1.1rem;
           color: goldenrod;
+        }
+
+        @media (max-width: $sm-screens) {
+          flex-direction: column;
+
+          .priceValue {
+            width: 100%;
+            text-align: left;
+            margin-top: unset;
+          }
         }
       }
 
