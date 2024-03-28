@@ -96,7 +96,7 @@ const Service = ({
               variant="primary"
               onClick={calendlyEventURL && (() => setIsBookingAppointment(true))}
             >
-              Book Appointment
+              Book This Service
             </Button>
             {showPriceListButton()}
           </div>

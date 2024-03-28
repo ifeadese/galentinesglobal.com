@@ -20,6 +20,7 @@ export interface Price {
   value: number;
   type: PriceType;
   name?: string;
+  description?: string;
 }
 
 export interface Service {

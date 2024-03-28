@@ -5,8 +5,8 @@ export const enum ServiceIDs {
     // ----------------------------------------
     FORMAL_EVENT_COVERAGE = "formal",
     //-----------------------------------------
-    EVENT_COVERAGE = "wedding",
-    WEDDING_COVERAGE_PHOTO = "photo-coverage",
-    WEDDING_COVERAGE_VIDEO = "video-coverage",
-    WEDDING_COVERAGE_COMBO = "full-coverage",
+    EVENT_COVERAGE = "wedding-coverage",
+    WEDDING_COVERAGE_PHOTO = "photos",
+    WEDDING_COVERAGE_VIDEO = "videos",
+    WEDDING_COVERAGE_COMBO = "photos-and-videos",
 }

@@ -20,22 +20,24 @@ export default function ControlledAccordions({ prices, onClose }: Props) {
             setExpanded(isExpanded ? panel : false);
         };
 
+    const hasDescription = (price) => price.hasOwnProperty('description');
+    const isExpanded = (price: Price, panelId: string) => {
+        return !hasDescription(price) ? false : expanded === panelId;
+    }
     return (
         <div className={styles.accordion}>
             <div className={styles.accordionHeader}>
                 <p>Price List</p>
-                <Close
-                    // sx={{ fontSize: 35, color: "white" }}
-                    onClick={onClose}
-                />
+                <Close onClick={onClose} />
             </div>
             <div className={styles.accordionRows}>
                 {prices.map((price, idx) => {
                     const panelId = `panel${idx}`;
+                    const isExpandable = isExpanded(price, panelId)
                     return (
-                        <Accordion key={idx} expanded={expanded === panelId} onChange={handleChange(panelId)}>
+                        <Accordion key={idx} expanded={isExpandable} onChange={handleChange(panelId)}>
                             <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
+                                expandIcon={hasDescription(price) && <ExpandMoreIcon />}
                                 aria-controls={`${panelId}bh-content`}
                                 id={`${panelId}bh-header`}
                                 className={styles.accordionSummary}
@@ -47,8 +49,7 @@ export default function ControlledAccordions({ prices, onClose }: Props) {
                             </AccordionSummary>
                             <AccordionDetails>
                                 <p>
-                                    Nulla facilisi. Phasellus sollicitudin nulla et quam mattis feugiat.
-                                    Aliquam eget maximus est, id dignissim quam.
+                                    {price.description}
                                 </p>
                             </AccordionDetails>
                         </Accordion>

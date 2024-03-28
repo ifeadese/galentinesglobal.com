@@ -8,7 +8,7 @@ export const eventCoverage = [
     id: ServiceIDs.WEDDING_COVERAGE_PHOTO,
     name: strings.WEDDING_COVERAGE_PHOTO,
     description:
-      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      "Every shot needs to tell a story of love and devotion. From the exchanging of vows to the joyous celebrations, we'll document every detail of your special day and ensure your memories are preserved with elegance. Trust us to deliver stunning images that you'll cherish for a lifetime.",
     pagePath: `/services/${ServiceIDs.EVENT_COVERAGE}/${ServiceIDs.WEDDING_COVERAGE_PHOTO}`,
     featuredImage: {
       path: require("data/phils-vision/images/wedding-coverage-4.jpeg"),
@@ -26,7 +26,7 @@ export const eventCoverage = [
     id: ServiceIDs.WEDDING_COVERAGE_VIDEO,
     name: strings.WEDDING_COVERAGE_VIDEO,
     description:
-      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      "Every frame is a piece of your love story. Let's help you relive the magic of your wedding day by capturing the raw emotion and authentic moments that make your day unforgettable. We'll create a captivating film that turns your most cherished wedding moments into a timeless masterpiece.",
     pagePath: `/services/${ServiceIDs.EVENT_COVERAGE}/${ServiceIDs.WEDDING_COVERAGE_VIDEO}`,
     featuredImage: {
       path: require("data/phils-vision/images/wedding-coverage-3.jpeg"),
@@ -44,7 +44,7 @@ export const eventCoverage = [
     id: ServiceIDs.WEDDING_COVERAGE_COMBO,
     name: strings.WEDDING_COVERAGE_COMBO,
     description:
-      "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s",
+      "This comprehensive package ensures your special day is beautifully documented by combining the artistry of photography and the storytelling of videography. You get to experience the best of both worlds.",
     pagePath: `/services/${ServiceIDs.EVENT_COVERAGE}/${ServiceIDs.WEDDING_COVERAGE_COMBO}`,
     featuredImage: {
       path: require("data/phils-vision/images/wedding-coverage.jpeg"),
