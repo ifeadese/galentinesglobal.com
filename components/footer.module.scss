@@ -1,0 +1,20 @@
+@import '/common.scss';
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  padding: 2rem 5%;
+  width: 100%;
+  align-items: center;
+  color: lightgray;
+  border-top: 1px solid rgb(76, 76, 76);
+
+  a {
+    font-weight: 600;
+    text-decoration: underline;
+  }
+
+  @media screen and (max-width: $md-screens) {
+    flex-direction: column;
+  }
+}

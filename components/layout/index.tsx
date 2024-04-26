@@ -6,6 +6,7 @@ import { FacebookMessengerChat } from "components/chat-button";
 import styles from "components/layout/index.module.scss";
 import { Business } from "types";
 import { getBusinessLogo } from "helpers";
+import Footer from "components/footer";
 
 interface Props {
   business: Business;
@@ -15,7 +16,6 @@ interface Props {
 const Layout = ({ business, children }: Props) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const showDrawer = (state) => setIsDrawerOpen(state);
-  const currentYear = new Date().getFullYear();
   const { name, description, facebookPageId } = business;
   const Logo = getBusinessLogo(business.id);
   return (
@@ -37,19 +37,7 @@ const Layout = ({ business, children }: Props) => {
           <FacebookMessengerChat facebookPageId={facebookPageId} />
         </main>
 
-        <footer className={styles.footer}>
-          <p>Copyright © {currentYear} {name} - All Rights Reserved.</p>
-          <p className={styles.siteAuthor}>
-            Made by{" "}
-            <a
-              href="https://ifedaviid.com"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              IfeDaviid
-            </a>
-          </p>
-        </footer>
+        <Footer />
       </div>
       {isDrawerOpen && (
         <MenuBarDrawer isDrawerOpen={isDrawerOpen} showDrawer={showDrawer} logo={<Logo />} />
