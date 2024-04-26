@@ -10,7 +10,7 @@ export const Footer = (): ReactElement => {
         <footer className={styles.footer}>
             <div>
                 <SocialIcon url="mailto:ayoolumide@yahoo.ca" style={iconStyles} bgColor="lightgray" fgColor="black" />
-                <SocialIcon url="https://https://www.instagram.com/philsvisionphotography" style={iconStyles} bgColor="lightgray" fgColor="black" />
+                <SocialIcon url="https://www.instagram.com/philsvisionphotography" style={iconStyles} bgColor="lightgray" fgColor="black" />
             </div>
             <p>
                 Made by{" "}
