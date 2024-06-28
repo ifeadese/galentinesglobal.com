@@ -11,4 +11,7 @@ export const PHILSVISION = {
         altText: "",
     },
     services: allServices,
+    contactEmailAddress: "ifeadese16@gmail.com",
+    instagramPageUrl: "https://www.instagram.com/ife.daviid",
+    facebookPageUrl: "https://www.facebook.com/ifedaviid",
 }

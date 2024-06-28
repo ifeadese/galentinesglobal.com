@@ -16,7 +16,7 @@ interface Props {
 const Layout = ({ business, children }: Props) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const showDrawer = (state) => setIsDrawerOpen(state);
-  const { name, description, facebookPageId } = business;
+  const { name, description, facebookPageId, facebookPageUrl, instagramPageUrl, contactEmailAddress } = business;
   const Logo = getBusinessLogo(business.id);
   return (
     <>
@@ -37,7 +37,7 @@ const Layout = ({ business, children }: Props) => {
           <FacebookMessengerChat facebookPageId={facebookPageId} />
         </main>
 
-        <Footer />
+        <Footer contactEmailAddress={contactEmailAddress} facebookPageUrl={facebookPageUrl} instagramPageUrl={instagramPageUrl} />
       </div>
       {isDrawerOpen && (
         <MenuBarDrawer isDrawerOpen={isDrawerOpen} showDrawer={showDrawer} logo={<Logo />} />

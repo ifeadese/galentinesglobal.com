@@ -45,5 +45,8 @@ export interface Business {
   logo?: JSX.Element;
   services: Service[];
   calendlyLink?: string;
+  contactEmailAddress: string;
   facebookPageId?: string;
+  facebookPageUrl?: string;
+  instagramPageUrl?: string;
 }

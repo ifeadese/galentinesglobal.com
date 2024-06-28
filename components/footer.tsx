@@ -5,12 +5,13 @@ import { SocialIcon } from "react-social-icons";
 
 const iconStyles = { margin: '0.5rem', height: 40, width: 40 }
 
-export const Footer = (): ReactElement => {
+export const Footer = ({ contactEmailAddress, facebookPageUrl, instagramPageUrl }): ReactElement => {
     return (
         <footer className={styles.footer}>
             <div>
-                <SocialIcon url="mailto:ayoolumide@yahoo.ca" style={iconStyles} bgColor="lightgray" fgColor="black" />
-                <SocialIcon url="https://www.instagram.com/philsvisionphotography" style={iconStyles} bgColor="lightgray" fgColor="black" />
+                {contactEmailAddress && <SocialIcon url={`mailto:${contactEmailAddress}`} style={iconStyles} bgColor="lightgray" fgColor="black" />}
+                {facebookPageUrl && <SocialIcon url={facebookPageUrl} style={iconStyles} bgColor="lightgray" fgColor="black" />}
+                {instagramPageUrl && <SocialIcon url={instagramPageUrl} style={iconStyles} bgColor="lightgray" fgColor="black" />}
             </div>
             <p>
                 Made by{" "}
