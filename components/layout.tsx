@@ -1,11 +1,10 @@
 import React, { useState } from "react";
 import Head from "next/head";
-import MenuBar from "components/layout/menu-bar";
-import MenuBarDrawer from "components/layout/menu-bar-drawer";
+import MenuBar from "components/menu-bar";
+import MobileDrawer from "components/mobile-drawer";
 import { FacebookMessengerChat } from "components/chat-button";
-import styles from "components/layout/index.module.scss";
+import styles from "components/layout.module.scss";
 import { Business } from "types";
-import { getBusinessLogo } from "helpers";
 import Footer from "components/footer";
 
 interface Props {
@@ -17,7 +16,7 @@ const Layout = ({ business, children }: Props) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const showDrawer = (state) => setIsDrawerOpen(state);
   const { name, description, facebookPageId, facebookPageUrl, instagramPageUrl, contactEmailAddress } = business;
-  const Logo = getBusinessLogo(business.id);
+
   return (
     <>
       <div className={styles.container}>
@@ -29,7 +28,7 @@ const Layout = ({ business, children }: Props) => {
         <MenuBar
           isDrawerOpen={isDrawerOpen}
           showDrawer={showDrawer}
-          logo={<Logo width={100} height={100} />}
+          businessName={name}
         />
 
         <main>
@@ -40,7 +39,7 @@ const Layout = ({ business, children }: Props) => {
         <Footer contactEmailAddress={contactEmailAddress} facebookPageUrl={facebookPageUrl} instagramPageUrl={instagramPageUrl} />
       </div>
       {isDrawerOpen && (
-        <MenuBarDrawer isDrawerOpen={isDrawerOpen} showDrawer={showDrawer} logo={<Logo />} />
+        <MobileDrawer isDrawerOpen={isDrawerOpen} showDrawer={showDrawer} businessName={name} />
       )}
     </>
   );

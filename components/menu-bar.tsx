@@ -1,14 +1,14 @@
 import React from "react";
 import { Twirl as Hamburger } from "hamburger-react";
 import Link from "next/link";
-import styles from "components/layout/menu-bar.module.scss";
+import styles from "components/menu-bar.module.scss";
 import { pages } from "./pages";
 
-const MenuDesktop = ({ isDrawerOpen, showDrawer, logo }) => {
+const MenuBar = ({ businessName, isDrawerOpen, showDrawer }) => {
   return (
     <div className={styles.menuContainer}>
-      <Link href="/">
-        {logo}
+      <Link href="/" className={styles.businessName} >
+        {businessName}
       </Link>
       <ul>
         {pages.map((page, idx) => {
@@ -30,4 +30,4 @@ const MenuDesktop = ({ isDrawerOpen, showDrawer, logo }) => {
   );
 };
 
-export default MenuDesktop;
+export default MenuBar;

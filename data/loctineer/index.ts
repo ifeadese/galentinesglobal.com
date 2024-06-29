@@ -11,5 +11,6 @@ export const LOCTINEER = {
         altText: "",
     },
     services: allServices,
-    facebookPageId: '156788817527257'
+    facebookPageId: '156788817527257',
+    contactEmailAddress: 'ifeoluwaadese@gmail.com'
 }

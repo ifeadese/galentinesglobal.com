@@ -8,7 +8,7 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import { pages } from "./pages";
 
-const MenuBarDrawer = ({ isDrawerOpen, showDrawer, logo }) => {
+const MobileDrawer = ({ isDrawerOpen, showDrawer, businessName }) => {
   const router = useRouter();
   return (
     <Drawer
@@ -22,11 +22,14 @@ const MenuBarDrawer = ({ isDrawerOpen, showDrawer, logo }) => {
         onKeyDown={() => showDrawer(false)}
         sx={{ backgroundColor: '#151515', color: 'lightgray', height: '100%' }}
       >
-        <div style={{ display: 'flex', justifyContent: 'center', padding: '2rem' }}>
-          {logo}
+        <div style={{ padding: '2rem' }}>
+          <p style={{ fontSize: '1.2rem', color: 'goldenrod', textAlign: 'center' }}>
+            {businessName}
+          </p>
         </div>
+
         <List>
-          {pages.map((page, index) => {
+          {pages.map((page, _index) => {
             if (!page.disabled)
               return (
                 <ListItem
@@ -48,4 +51,4 @@ const MenuBarDrawer = ({ isDrawerOpen, showDrawer, logo }) => {
   );
 };
 
-export default MenuBarDrawer;
+export default MobileDrawer;

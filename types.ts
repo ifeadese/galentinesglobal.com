@@ -42,7 +42,6 @@ export interface Business {
   marketingCopy: string;
   pagePath: string;
   heroImage: AppImage;
-  logo?: JSX.Element;
   services: Service[];
   calendlyLink?: string;
   contactEmailAddress: string;

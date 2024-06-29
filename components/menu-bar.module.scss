@@ -1,13 +1,19 @@
 @import "/common.scss";
 
 .menuContainer {
-
   display: flex;
   justify-content: space-between;
   align-items: center;
   color: lightgray;
-  padding: 1% 5%;
+  padding: 2.5% 5%;
   border-bottom: 1px solid $border-color;
+
+  >.businessName {
+    font-size: 1.4rem;
+    letter-spacing: 2.3px;
+    font-weight: bold;
+    color: goldenrod;
+  }
 
   svg {
     width: fit-content;
@@ -39,6 +45,10 @@
 @media (max-width: $md-screens) {
   .menuContainer {
 
+    .businessName {
+      font-size: 1.2rem;
+    }
+
     svg {
       width: 7rem;
       height: 5rem;
@@ -60,5 +70,11 @@
         align-self: center;
       }
     }
+  }
+}
+
+@media (max-width: $sm-screens) {
+  .menuContainer {
+    padding: 3% 5%;
   }
 }
