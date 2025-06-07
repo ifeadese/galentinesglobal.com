@@ -1,9 +1,9 @@
 import React from "react";
 import { useRouter } from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
-import { FreeMode, Pagination } from "swiper";
+import { FreeMode, Pagination } from "swiper/modules";
 import { Business } from "types";
-import "swiper/swiper.min.css";
+import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
 import { getSubServices } from "helpers";
