@@ -1,0 +1,81 @@
+@import "/common.scss";
+
+.supportGrid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  align-items: center;
+
+  @media (max-width: $lg-screens) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.supportTextLeft {
+  text-align: left;
+
+  @media (max-width: $lg-screens) {
+    text-align: center;
+  }
+}
+
+.supportTextRight {
+  text-align: right;
+
+  @media (max-width: $lg-screens) {
+    text-align: center;
+  }
+}
+
+.supportIconLeft {
+  display: flex;
+  justify-content: flex-start;
+
+  @media (max-width: $lg-screens) {
+    justify-content: center;
+  }
+}
+
+.supportIconRight {
+  display: flex;
+  justify-content: flex-end;
+
+  @media (max-width: $lg-screens) {
+    justify-content: center;
+  }
+}
+
+.supportButtonLeft {
+  display: flex;
+  justify-content: flex-start;
+
+  @media (max-width: $lg-screens) {
+    justify-content: center;
+  }
+}
+
+.supportButtonRight {
+  display: flex;
+  justify-content: flex-end;
+
+  @media (max-width: $lg-screens) {
+    justify-content: center;
+  }
+}
+
+.imageContainer {
+  width: 100%;
+
+  img {
+    border-radius: 0.5rem;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    height: 400px;
+    object-fit: cover;
+
+    @media (max-width: $lg-screens) {
+      height: 300px;
+    }
+  }
+}
+
