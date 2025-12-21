@@ -1,7 +1,13 @@
 import React from "react";
 import styles from "components/button.module.scss";
 
-const Button = ({ children, variant, disabled = false, ...rest }) => {
+interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
+  children: React.ReactNode;
+  variant: "primary" | "secondary";
+  disabled?: boolean;
+}
+
+const Button = ({ children, variant, disabled = false, ...rest }: ButtonProps) => {
   return (
     <button
       className={` ${styles["default"]} ${styles[variant]} ${disabled ? styles["disabled"] : ""

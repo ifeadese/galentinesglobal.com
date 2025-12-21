@@ -5,7 +5,11 @@ import Layout from "components/layout";
 import { Business } from "types";
 import { getBusinessById } from "helpers";
 
-export default function ErrorPage({ business: stringifiedBusinessObj }) {
+interface ErrorPageProps {
+  business: string;
+}
+
+export default function ErrorPage({ business: stringifiedBusinessObj }: ErrorPageProps) {
   const business: Business = JSON.parse(stringifiedBusinessObj);
   return (
     <Layout business={business}>
@@ -24,6 +28,6 @@ export default function ErrorPage({ business: stringifiedBusinessObj }) {
 
 export const getStaticProps = () => ({
   props: {
-    business: JSON.stringify(getBusinessById(process.env.BUSINESS_ID)),
+    business: JSON.stringify(getBusinessById(process.env.BUSINESS_ID || 'loctineer')),
   },
 });

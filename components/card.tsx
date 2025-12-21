@@ -6,14 +6,14 @@ import { Service } from "types";
 
 interface Props {
   service: Service;
-  height: string;
+  height?: string | null;
 }
 
 const Card = ({ service, height = null }: Props) => {
   const { name, featuredImage, pagePath } = service
 
   return (
-    <div className={styles.card} style={{ height }}>
+    <div className={styles.card} style={height ? { height } : undefined}>
       <Image
         src={featuredImage.path}
         alt={featuredImage.altText}

@@ -38,7 +38,7 @@ const Services = ({ service, returnRoute }: Props) => {
             <h1 style={{ fontSize: '3rem', textAlign: 'center' }}>{name}</h1>
             <p>{description}</p>
             <div className="services-content">
-                {services.map((option, idx) => (
+                {services && services.map((option, idx) => (
                     <Card key={idx} service={option} height='25rem' />
                 ))}
             </div>

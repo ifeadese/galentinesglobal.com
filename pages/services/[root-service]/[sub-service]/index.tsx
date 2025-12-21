@@ -34,15 +34,15 @@ export default function SubServicesPage({
 }
 
 export const getStaticPaths = () => {
-  const business = getBusinessById(process.env.BUSINESS_ID)
+  const business = getBusinessById(process.env.BUSINESS_ID || 'loctineer')
   return {
     paths: createSubServicePaths(business),
     fallback: false
   }
 };
 
-export const getStaticProps = ({ params }) => {
-  const business = getBusinessById(process.env.BUSINESS_ID)
+export const getStaticProps = ({ params }: { params: { "sub-service": string } }) => {
+  const business = getBusinessById(process.env.BUSINESS_ID || 'loctineer')
   const subService = getServiceById(business, params["sub-service"])?.service
   const rootService = getServiceById(business, params["sub-service"])?.parent
   return {

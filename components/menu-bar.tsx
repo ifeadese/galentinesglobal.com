@@ -4,7 +4,13 @@ import Link from "next/link";
 import styles from "components/menu-bar.module.scss";
 import { pages } from "./pages";
 
-const MenuBar = ({ businessName, isDrawerOpen, showDrawer }) => {
+interface MenuBarProps {
+  businessName: string;
+  isDrawerOpen: boolean;
+  showDrawer: (state: boolean) => void;
+}
+
+const MenuBar = ({ businessName, isDrawerOpen, showDrawer }: MenuBarProps) => {
   return (
     <div className={styles.menuContainer}>
       <Link href="/" className={styles.businessName} >

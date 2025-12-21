@@ -5,7 +5,13 @@ import { SocialIcon } from "react-social-icons";
 
 const iconStyles = { margin: '0.5rem', height: 40, width: 40 }
 
-export const Footer = ({ contactEmailAddress, facebookPageUrl, instagramPageUrl }): ReactElement => {
+interface FooterProps {
+  contactEmailAddress: string;
+  facebookPageUrl?: string;
+  instagramPageUrl?: string;
+}
+
+export const Footer = ({ contactEmailAddress, facebookPageUrl, instagramPageUrl }: FooterProps): ReactElement => {
     return (
         <footer className={styles.footer}>
             <div>

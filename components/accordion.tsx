@@ -7,9 +7,10 @@ import styles from './accordion.module.scss'
 import { Close } from '@mui/icons-material';
 import Price from './price';
 import { getPriceSuffix } from 'helpers';
+import type { Price as PriceType } from 'types';
 
 interface Props {
-    prices: Price[];
+    prices: PriceType[];
     onClose: (event: React.KeyboardEvent | React.MouseEvent) => void;
 }
 
@@ -20,8 +21,8 @@ export default function ControlledAccordions({ prices, onClose }: Props) {
             setExpanded(isExpanded ? panel : false);
         };
 
-    const hasDescription = (price) => price.hasOwnProperty('description');
-    const isExpanded = (price: Price, panelId: string) => {
+    const hasDescription = (price: PriceType) => price.hasOwnProperty('description');
+    const isExpanded = (price: PriceType, panelId: string) => {
         return !hasDescription(price) ? false : expanded === panelId;
     }
     return (

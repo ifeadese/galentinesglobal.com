@@ -1,6 +1,10 @@
 import Script from "next/script";
 
-export const FacebookMessengerChat = ({ facebookPageId }) => {
+interface FacebookMessengerChatProps {
+  facebookPageId?: string;
+}
+
+export const FacebookMessengerChat = ({ facebookPageId }: FacebookMessengerChatProps) => {
   if (!facebookPageId) return null;
   return (
     <div>

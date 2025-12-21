@@ -32,12 +32,12 @@ export default function RootServicesPage({
 }
 
 export const getStaticPaths = () => ({
-  paths: createRootServicePaths(getBusinessById(process.env.BUSINESS_ID)),
+  paths: createRootServicePaths(getBusinessById(process.env.BUSINESS_ID || 'loctineer')),
   fallback: false
 });
 
-export const getStaticProps = ({ params }) => {
-  const business = getBusinessById(process.env.BUSINESS_ID)
+export const getStaticProps = ({ params }: { params: { "root-service": string } }) => {
+  const business = getBusinessById(process.env.BUSINESS_ID || 'loctineer')
   const service = getServiceById(business, params["root-service"])?.service
   return {
     props: {

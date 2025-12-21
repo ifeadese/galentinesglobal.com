@@ -1,3 +1,4 @@
+
 import { StaticImageData } from "next/legacy/image";
 
 export interface AppImage {

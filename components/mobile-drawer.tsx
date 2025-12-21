@@ -8,7 +8,13 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import { pages } from "./pages";
 
-const MobileDrawer = ({ isDrawerOpen, showDrawer, businessName }) => {
+interface MobileDrawerProps {
+  isDrawerOpen: boolean;
+  showDrawer: (state: boolean) => void;
+  businessName: string;
+}
+
+const MobileDrawer = ({ isDrawerOpen, showDrawer, businessName }: MobileDrawerProps) => {
   const router = useRouter();
   return (
     <Drawer

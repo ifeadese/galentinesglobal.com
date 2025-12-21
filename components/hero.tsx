@@ -25,7 +25,6 @@ const Hero = ({ business }: Props) => {
         <h1>{marketingCopy}</h1>
         <Button
           variant="primary"
-          size="large"
           onClick={() => router.push(pagePath.toString())}
         >
           See Services

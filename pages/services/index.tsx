@@ -7,7 +7,11 @@ import Card from "components/card";
 import { getBusinessById } from "helpers";
 import { Business } from "types";
 
-export default function ServicesPage({ business: stringifiedBusinessObj }) {
+interface ServicesPageProps {
+  business: string;
+}
+
+export default function ServicesPage({ business: stringifiedBusinessObj }: ServicesPageProps) {
   const router = useRouter();
   const returnRoute = { path: "/", name: "Back to Home" }
   const business: Business = JSON.parse(stringifiedBusinessObj);
@@ -44,6 +48,6 @@ export default function ServicesPage({ business: stringifiedBusinessObj }) {
 
 export const getStaticProps = () => ({
   props: {
-    business: JSON.stringify(getBusinessById(process.env.BUSINESS_ID)),
+    business: JSON.stringify(getBusinessById(process.env.BUSINESS_ID || 'loctineer')),
   },
 });

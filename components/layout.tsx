@@ -14,7 +14,7 @@ interface Props {
 
 const Layout = ({ business, children }: Props) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
-  const showDrawer = (state) => setIsDrawerOpen(state);
+  const showDrawer = (state: boolean) => setIsDrawerOpen(state);
   const { name, description, facebookPageId, facebookPageUrl, instagramPageUrl, contactEmailAddress } = business;
 
   return (
