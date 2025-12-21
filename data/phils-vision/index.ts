@@ -12,6 +12,6 @@ export const PHILSVISION = {
     },
     services: allServices,
     contactEmailAddress: "ifeadese16@gmail.com",
-    instagramPageUrl: "https://www.instagram.com/ife.daviid",
+    instagramPageUrl: "https://www.instagram.com/galentinesglobal",
     facebookPageUrl: "https://www.facebook.com/ifedaviid",
 }

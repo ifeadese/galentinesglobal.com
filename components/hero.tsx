@@ -4,6 +4,8 @@ import Button from "components/button";
 import styles from "components/hero.module.scss";
 import { Business } from "types";
 import { useRouter } from "next/router";
+import EventIcon from "@mui/icons-material/Event";
+import PersonIcon from "@mui/icons-material/Person";
 
 interface Props {
   business: Business;
@@ -21,6 +23,7 @@ const Hero = ({ business }: Props) => {
         className={styles["content"]}
         style={{ opacity: "unset" }}
       >
+        <p className={styles.presents}>Presents...</p>
         <Image 
           src="/images/the-love-of-god.svg" 
           alt="The Love of God"
@@ -29,11 +32,22 @@ const Hero = ({ business }: Props) => {
           className={styles.logo}
         />
         <p className={styles.verse}>&ldquo;And to know the love of Christ which passes knowledge; that you might be filled with all the fullness of God.&rdquo; - Ephesians 3:19</p>
+        <div className={styles.eventInfo}>
+          <span className={styles.eventInfoItem}>
+            <EventIcon sx={{ fontSize: '1rem', marginRight: '0.5rem', verticalAlign: 'middle' }} />
+            February 7, 2026
+          </span>
+          <span className={styles.eventInfoDivider}>•</span>
+          <span className={styles.eventInfoItem}>
+            <PersonIcon sx={{ fontSize: '1rem', marginRight: '0.5rem', verticalAlign: 'middle' }} />
+            Hosted by Shile Adeyoyin
+          </span>
+        </div>
         <Button
           variant="primary"
-          onClick={() => router.push(pagePath.toString())}
+          onClick={() => window.open('https://rsvpify.com/', '_blank')}
         >
-          See Services
+          RSVP Now
         </Button>
       </div>
     </header>

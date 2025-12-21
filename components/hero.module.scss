@@ -47,13 +47,42 @@
 
     .verse {
       font-style: italic;
-      margin-bottom: 2rem;
+      margin-bottom: 1.5rem;
       line-height: 1.8;
+    }
+
+    .eventInfo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      font-size: 1rem;
+      letter-spacing: 1px;
+      flex-wrap: wrap;
+    }
+
+    .eventInfoItem {
+      display: inline-flex;
+      align-items: center;
+    }
+
+    .eventInfoDivider {
+      opacity: 0.7;
     }
 
     .description {
       margin-top: 2rem;
       margin-bottom: 1rem;
+    }
+
+    .presents {
+      font-family: "Dancing Script", cursive;
+      font-size: 1.25rem;
+      margin-bottom: 0.5rem;
+      margin-top: 0;
+      letter-spacing: 2px;
+      font-weight: 500;
     }
 
     .logo {
