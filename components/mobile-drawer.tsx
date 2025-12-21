@@ -1,5 +1,6 @@
 import React from "react";
 import { useRouter } from "next/router";
+import Image from "next/legacy/image";
 import Drawer from "@mui/material/Drawer";
 import Box from "@mui/material/Box";
 import List from "@mui/material/List";
@@ -28,10 +29,14 @@ const MobileDrawer = ({ isDrawerOpen, showDrawer, businessName }: MobileDrawerPr
         onKeyDown={() => showDrawer(false)}
         sx={{ backgroundColor: '#151515', color: 'lightgray', height: '100%' }}
       >
-        <div style={{ padding: '2rem' }}>
-          <p style={{ fontSize: '1.2rem', color: 'goldenrod', textAlign: 'center' }}>
-            {businessName}
-          </p>
+        <div style={{ padding: '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
+          <Image 
+            src="/images/galentines-white-logo.svg" 
+            alt={businessName}
+            width={150}
+            height={50}
+            style={{ maxHeight: '50px', width: 'auto', height: 'auto' }}
+          />
         </div>
 
         <List>

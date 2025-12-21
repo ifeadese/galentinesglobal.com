@@ -1,6 +1,7 @@
 import React from "react";
 import { Twirl as Hamburger } from "hamburger-react";
 import Link from "next/link";
+import Image from "next/legacy/image";
 import styles from "components/menu-bar.module.scss";
 import { pages } from "./pages";
 
@@ -13,8 +14,14 @@ interface MenuBarProps {
 const MenuBar = ({ businessName, isDrawerOpen, showDrawer }: MenuBarProps) => {
   return (
     <div className={styles.menuContainer}>
-      <Link href="/" className={styles.businessName} >
-        {businessName}
+      <Link href="/" >
+        <Image 
+          src="/images/galentines-white-logo.svg" 
+          alt={businessName}
+          width={150}
+          height={50}
+          className={styles.logo}
+        />
       </Link>
       <ul>
         {pages.map((page, idx) => {
