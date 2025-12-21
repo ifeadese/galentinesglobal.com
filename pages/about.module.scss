@@ -1,0 +1,131 @@
+@import "/common.scss";
+
+.aboutCards {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 2rem;
+  max-width: 72rem;
+  margin: 0 auto;
+
+  @media (max-width: $lg-screens) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+}
+
+.featureCard {
+  border-radius: 0.5rem;
+  border: 1px solid rgba(255, 107, 107, 0.2);
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 240, 240, 0.5) 100%);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    0 0 0 1px rgba(255, 107, 107, 0.05);
+  padding: 1.5rem;
+  text-align: center;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, transparent, $dark-text, transparent);
+    opacity: 0;
+    transition: opacity 0.4s ease;
+  }
+
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+      0 20px 25px -5px rgba(255, 107, 107, 0.15),
+      0 10px 10px -5px rgba(255, 107, 107, 0.1),
+      0 0 0 1px rgba(255, 107, 107, 0.2);
+    border-color: rgba(255, 107, 107, 0.4);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(255, 245, 245, 0.8) 100%);
+
+    &::before {
+      opacity: 1;
+    }
+
+    .iconContainer {
+      transform: scale(1.1) rotate(5deg);
+      
+      svg {
+        filter: drop-shadow(0 4px 8px rgba(255, 107, 107, 0.3));
+      }
+    }
+
+    .cardTitle {
+      color: $dark-text;
+      transform: translateX(2px);
+    }
+  }
+
+  &:nth-child(1):hover .iconContainer {
+    animation: heartbeat 1s ease-in-out;
+  }
+
+  &:nth-child(2):hover .iconContainer {
+    animation: pulse 1s ease-in-out;
+  }
+
+  &:nth-child(3):hover .iconContainer {
+    animation: bounce 1s ease-in-out;
+  }
+}
+
+@keyframes heartbeat {
+  0%, 100% { transform: scale(1.1); }
+  50% { transform: scale(1.2); }
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1.1); }
+  50% { transform: scale(1.15); }
+}
+
+@keyframes bounce {
+  0%, 100% { transform: translateY(0) scale(1.1); }
+  50% { transform: translateY(-5px) scale(1.1); }
+}
+
+.iconContainer {
+  margin-bottom: 1rem;
+  display: flex;
+  justify-content: center;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  svg {
+    transition: filter 0.4s ease;
+    filter: drop-shadow(0 2px 4px rgba(255, 107, 107, 0.2));
+  }
+}
+
+.cardTitle {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 0.75rem;
+  letter-spacing: 1px;
+  transition: all 0.3s ease;
+  background: linear-gradient(135deg, rgb(54, 5, 8) 0%, $dark-text 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.cardDescription {
+  font-size: 0.875rem;
+  line-height: 1.5rem;
+  color: rgba(54, 5, 8, 0.8);
+  transition: color 0.3s ease;
+
+  .featureCard:hover & {
+    color: rgba(54, 5, 8, 0.95);
+  }
+}
+
