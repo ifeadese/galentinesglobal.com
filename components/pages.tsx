@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { HomeRounded, BallotRounded, CropOriginalRounded } from '@mui/icons-material';
+import { HomeRounded, BallotRounded, CropOriginalRounded, InfoRounded, HelpRounded } from '@mui/icons-material';
 
 export const pages = [
   {
@@ -9,15 +9,15 @@ export const pages = [
     icon: <HomeRounded sx={{ color: 'lightgray' }} />,
   },
   {
-    name: "Services",
-    url: `/services`,
+    name: "About",
+    url: `/about`,
     disabled: false,
-    icon: <BallotRounded sx={{ color: 'lightgray' }} />,
+    icon: <InfoRounded sx={{ color: 'lightgray' }} />,
   },
   {
-    name: "Photos",
-    url: `/photos`,
-    disabled: true,
-    icon: <CropOriginalRounded sx={{ color: 'lightgray' }} />,
+    name: "Support",
+    url: `/support`,
+    disabled: false,
+    icon: <HelpRounded sx={{ color: 'lightgray' }} />,
   },
 ];
