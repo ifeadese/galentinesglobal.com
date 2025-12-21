@@ -31,7 +31,7 @@ const MobileDrawer = ({ isDrawerOpen, showDrawer, businessName }: MobileDrawerPr
       >
         <div style={{ padding: '2rem', display: 'flex', justifyContent: 'center', alignItems: 'center' }}>
           <Image 
-            src="/images/galentines-white-logo.svg" 
+            src="/images/galentines-gradient-logo.svg" 
             alt={businessName}
             width={150}
             height={50}

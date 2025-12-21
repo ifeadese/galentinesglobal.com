@@ -16,7 +16,7 @@ export const Footer = ({ contactEmailAddress, facebookPageUrl, instagramPageUrl 
     return (
         <footer className={styles.footer}>
             <Image 
-                src="/images/galentines-white-logo.svg" 
+                src="/images/galentines-gradient-logo.svg" 
                 alt="Galentines"
                 width={200}
                 height={60}

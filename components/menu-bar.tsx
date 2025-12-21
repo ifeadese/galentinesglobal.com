@@ -16,7 +16,7 @@ const MenuBar = ({ businessName, isDrawerOpen, showDrawer }: MenuBarProps) => {
     <div className={styles.menuContainer}>
       <Link href="/" >
         <Image 
-          src="/images/galentines-white-logo.svg" 
+          src="/images/galentines-gradient-logo.svg" 
           alt={businessName}
           width={150}
           height={50}
