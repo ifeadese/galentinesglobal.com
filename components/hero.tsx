@@ -21,8 +21,14 @@ const Hero = ({ business }: Props) => {
         className={styles["content"]}
         style={{ opacity: "unset" }}
       >
-        <p>{description}</p>
-        <h1>{marketingCopy}</h1>
+        <Image 
+          src="/images/the-love-of-god.svg" 
+          alt="The Love of God"
+          width={750}
+          height={226}
+          className={styles.logo}
+        />
+        <p className={styles.verse}>&ldquo;And to know the love of Christ which passes knowledge; that you might be filled with all the fullness of God.&rdquo; - Ephesians 3:19</p>
         <Button
           variant="primary"
           onClick={() => router.push(pagePath.toString())}

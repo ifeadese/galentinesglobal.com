@@ -6,7 +6,7 @@
 html,
 body {
   /* From https://mycolor.space/gradient?ori=circle&hex=%23282826&hex2=%23050803&sub=1 */
-  background-image: radial-gradient(circle, #282826, #20211f, #191a17, #11120f, #050803);
+  background-image: linear-gradient(to right bottom, rgb(71, 34, 119), rgb(52, 25, 87), rgb(71, 34, 119));
   padding: 0;
   margin: 0;
   font-family: "DM Sans", serif;

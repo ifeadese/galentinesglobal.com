@@ -1,6 +1,6 @@
 @import "/common.scss";
 
-header.heroImage {
+.heroImage {
   background: black;
   overflow: hidden;
   display: flex;
@@ -45,6 +45,25 @@ header.heroImage {
       font-weight: 500;
     }
 
+    .verse {
+      font-style: italic;
+      margin-bottom: 2rem;
+      line-height: 1.8;
+    }
+
+    .description {
+      margin-top: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .logo {
+      margin: 3rem 0;
+      max-width: 100%;
+      height: auto;
+      width: 100%;
+      min-width: 600px;
+    }
+
     button {
       margin: 2rem 0;
       width: fit-content;
@@ -53,12 +72,28 @@ header.heroImage {
 }
 
 @media (max-width: $lg-screens) {
-  header.heroImage {
+  .heroImage {
     >.content {
       max-width: 80%;
 
       h1 {
         font-size: 3rem;
+      }
+
+      .logo {
+        min-width: 400px;
+        max-width: 100%;
+      }
+    }
+  }
+}
+
+@media (max-width: $md-screens) {
+  .heroImage {
+    >.content {
+      .logo {
+        min-width: 300px;
+        max-width: 100%;
       }
     }
   }

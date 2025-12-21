@@ -14,8 +14,8 @@
 }
 
 .default.primary {
-  background-color: goldenrod;
-  color: black;
+  background-color: $dark-text;
+  color: white;
 
   &:hover:enabled {
     background-color: white;
