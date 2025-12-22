@@ -41,7 +41,6 @@
     }
 
     p {
-      letter-spacing: 2px;
       font-weight: 500;
     }
 
@@ -58,7 +57,7 @@
       gap: 0.75rem;
       margin-bottom: 2rem;
       font-size: 1rem;
-      letter-spacing: 1px;
+      // letter-spacing: 1px;
       flex-wrap: wrap;
     }
 
@@ -91,6 +90,12 @@
       height: auto;
       width: 100%;
       min-width: 600px;
+      
+      img {
+        object-fit: contain !important;
+        image-rendering: -webkit-optimize-contrast;
+        image-rendering: crisp-edges;
+      }
     }
 
     button {
@@ -112,6 +117,11 @@
       .logo {
         min-width: 400px;
         max-width: 100%;
+        
+        img {
+          width: 100% !important;
+          height: auto !important;
+        }
       }
     }
   }
@@ -123,6 +133,11 @@
       .logo {
         min-width: 300px;
         max-width: 100%;
+        
+        img {
+          width: 100% !important;
+          height: auto !important;
+        }
       }
     }
   }

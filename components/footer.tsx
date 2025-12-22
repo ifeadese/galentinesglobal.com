@@ -15,15 +15,26 @@ interface FooterProps {
 export const Footer = ({ contactEmailAddress, facebookPageUrl, instagramPageUrl }: FooterProps): ReactElement => {
     return (
         <footer className={styles.footer}>
-            <Image 
+            <div style={{ marginBottom: '1rem' }}>
+<Image 
                 src="/images/galentines-gradient-logo.svg" 
                 alt="Galentines"
                 width={200}
                 height={60}
                 className={styles.logo}
             />
-            <p className={styles.conference}>The Love of God Conference • February 7, 2026</p>
-            <p className={styles.copyright}>&copy; 2026 Galentines. All rights reserved.</p>
+            </div>
+            
+            <div className={styles.conference}>
+              <span>The Love of God Conference</span>
+              <span className={styles.separator}>•</span>
+              <span>February 7, 2026</span>
+            </div>
+            <div className={styles.copyright}>
+              <span>&copy; 2026 Galentines</span>
+              <span className={styles.separator}>•</span>
+              <span>All rights reserved.</span>
+            </div>
             <div className={styles.socialIcons}>
                 {contactEmailAddress && <SocialIcon url={`mailto:${contactEmailAddress}`} style={iconStyles} bgColor="lightgray" fgColor="black" />}
                 {facebookPageUrl && <SocialIcon url={facebookPageUrl} style={iconStyles} bgColor="lightgray" fgColor="black" />}

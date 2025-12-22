@@ -30,6 +30,9 @@ const Hero = ({ business }: Props) => {
           width={750}
           height={226}
           className={styles.logo}
+          quality={100}
+          priority
+          unoptimized
         />
         <p className={styles.verse}>&ldquo;And to know the love of Christ which passes knowledge; that you might be filled with all the fullness of God.&rdquo; - Ephesians 3:19</p>
         <div className={styles.eventInfo}>

@@ -21,12 +21,47 @@
     margin: 0.5rem 0;
     font-size: 0.875rem;
     letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+
+    .separator {
+      @media (max-width: $lg-screens) {
+        display: none;
+      }
+    }
+
+    @media (max-width: $lg-screens) {
+      flex-direction: column;
+      gap: 0.25rem;
+      line-height: 1.4;
+      margin-bottom: 1.5rem;
+    }
   }
 
   .copyright {
     margin: 0;
     font-size: 0.875rem;
     letter-spacing: 1px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+
+    .separator {
+      @media (max-width: $lg-screens) {
+        display: none;
+      }
+    }
+
+    @media (max-width: $lg-screens) {
+      flex-direction: column;
+      gap: 0.25rem;
+      line-height: 1.4;
+    }
   }
 
   .socialIcons {
