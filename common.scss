@@ -1,14 +1,174 @@
-$dark-bg: #0b0b0b;
-$border-color: rgb(76, 76, 76);
-$dark-text: rgb(255, 107, 107);
-$soft-pink: #e5bcbc;
-$ready-pink: #d7a3a3;
+// ============================================
+// BREAKPOINTS (Screen Sizes)
+// ============================================
 $xs-screens: 320px;
 $sm-screens: 520px;
 $md-screens: 768px;
 $lg-screens: 968px;
 $xl-screens: 1120px;
 
+// ============================================
+// BASE COLORS (Raw values - single source of truth)
+// Brand: "The Love of God Conference" - Annual Ladies' Christian Faith Event
+// ============================================
+
+// Primary Colors (Love & Warmth - God's Love)
+$color-primary: rgb(220, 108, 140);          // Soft rose-coral - represents love and warmth (more cohesive)
+$color-primary-light: rgb(255, 192, 203);    // Light pink - soft, feminine (matching palette)
+$color-primary-dark: rgb(200, 85, 115);      // Deeper rose for emphasis (harmonious with primary)
+
+// Secondary Colors (Spiritual Depth)
+$color-secondary: rgb(88, 35, 55);           // Rich burgundy - elegant, meaningful (better contrast)
+$color-secondary-light: rgb(139, 69, 85);    // Muted rose - sophisticated (coordinates with primary)
+
+// Background Colors (Grace & Peace)
+$color-bg-primary: #ffffff;                   // Pure white - clean, holy
+$color-bg-secondary: rgb(255, 240, 245);     // Very light rose-pink - soft, feminine (matches primary)
+$color-bg-cream: #fff8f5;                     // Warm cream with slight pink tint - welcoming
+$color-bg-light: #fef9f9;                     // Very light rose tint - cohesive with palette
+$color-bg-muted: #f8f5f5;                     // Soft warm gray with pink tint - cohesive
+
+// Text Colors (Readability & Elegance)
+$color-text-primary: rgb(88, 35, 55);        // Rich burgundy - elegant, readable (matches secondary)
+$color-text-secondary: rgb(102, 85, 95);     // Warm gray with burgundy tint - secondary text (cohesive)
+$color-text-light: rgb(140, 120, 130);       // Muted warm gray - muted text (harmonious)
+$color-text-on-dark: #ffffff;                 // White text on dark backgrounds
+$color-text-accent: rgb(220, 108, 140);      // Primary color for emphasis (matches primary)
+
+// Accent Colors (Supporting Tones - Feminine, Gentle)
+$color-accent-pink-light: rgb(255, 240, 245); // Very light rose-pink (matches bg-secondary)
+$color-accent-pink-medium: rgb(255, 192, 203); // Light pink (matches primary-light)
+$color-accent-rose: rgb(230, 180, 190);       // Soft rose (harmonious middle tone)
+$color-accent-rose-dark: rgb(200, 140, 155);  // Deeper rose (coordinates with primary-dark)
+
+// Dark Backgrounds (Contrast & Depth)
+$color-bg-dark: #0b0b0b;                      // Near black - sophisticated
+$color-bg-darker: #151515;                    // Slightly lighter black
+$color-border-dark: rgb(76, 76, 76);          // Medium gray borders
+
+// ============================================
+// LEGACY VARIABLES (Backwards compatibility during migration)
+// ============================================
+$dark-bg: $color-bg-dark;
+$border-color: $color-border-dark;
+$dark-text: $color-primary;                   // Note: This is actually the primary coral color
+$soft-pink: $color-accent-rose;
+$ready-pink: $color-accent-rose-dark;
+
+// ============================================
+// SEMANTIC COLORS (Purpose-based names)
+// ============================================
+
+// Primary Actions & Emphasis
+$primary: $color-primary;                      // Use for CTAs, icons, highlights
+$primary-hover: $color-primary-dark;           // Hover states
+$primary-light: $color-primary-light;          // Light variant
+
+// Text Hierarchy
+$text-primary: $color-text-primary;            // Main text color
+$text-secondary: $color-text-secondary;        // Secondary/subtle text
+$text-light: $color-text-light;                 // Light/muted text
+$text-accent: $color-text-accent;              // Accented text (brand color)
+$text-on-dark: $color-text-on-dark;           // Text on dark backgrounds
+
+// Background Hierarchy
+$bg-primary: $color-bg-primary;                // Main background
+$bg-secondary: $color-bg-secondary;            // Alternative background
+$bg-elevated: $color-bg-cream;                 // Elevated sections
+$bg-subtle: $color-bg-light;                   // Very subtle background tint
+$bg-muted: $color-bg-muted;                    // Muted background
+$bg-dark: $color-bg-dark;                     // Dark background
+$bg-darker: $color-bg-darker;                  // Darker background
+
+// Borders & Dividers (using updated primary color)
+$border-light: rgba(220, 108, 140, 0.2);      // Light border (primary tint)
+$border-medium: $color-border-dark;            // Medium border
+$border-dark: rgba(220, 108, 140, 0.4);       // Darker border (on hover)
+
+// Shadows (Brand-appropriate soft shadows - using updated primary color)
+$shadow-subtle: rgba(220, 108, 140, 0.05);    // Very subtle shadow
+$shadow-soft: rgba(220, 108, 140, 0.1);       // Soft shadow
+$shadow-medium: rgba(220, 108, 140, 0.15);    // Medium shadow
+
+// ============================================
+// GRADIENT MIXINS (Reusable gradients - God's Love Theme)
+// ============================================
+
+// Main Background Gradient (Light & Graceful)
+@mixin gradient-bg-primary {
+  background-image: linear-gradient(90deg, $color-bg-secondary 0%, $color-bg-primary 100%);
+  // Soft pink to white - represents grace and light
+}
+
+// Subtle Section Gradient (Gentle Warmth)
+@mixin gradient-bg-subtle {
+  background: linear-gradient(180deg, 
+    rgba(255, 192, 203, 0.1) 0%, 
+    transparent 50%, 
+    rgba(255, 192, 203, 0.05) 100%);
+  // Very subtle pink tint - soft, welcoming (using primary-light)
+}
+
+// Card Background Gradient (Elevated, Warm)
+@mixin gradient-card-default {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 0.9) 0%, 
+    rgba(255, 240, 240, 0.5) 100%);
+  // White to soft pink tint - warm, feminine
+}
+
+// Card Hover Gradient (Love & Warmth)
+@mixin gradient-card-hover {
+  background: linear-gradient(135deg, 
+    rgba(255, 255, 255, 1) 0%, 
+    rgba(255, 245, 245, 0.8) 100%);
+  // Slightly more pronounced pink on hover
+}
+
+// Hero/Dark Section Gradient (Depth with Love)
+@mixin gradient-primary-accent {
+  background: linear-gradient(to bottom right, 
+    $color-primary 0%, 
+    $color-primary-light 50%, 
+    $color-primary-light 100%);
+  // Coral to light pink - warm, inviting
+}
+
+// Muted Section Background
+@mixin gradient-bg-muted {
+  background: linear-gradient(to bottom right, 
+    $color-bg-muted 0%, 
+    $color-bg-primary 50%, 
+    $color-bg-muted 100%);
+  // Soft gray to white - neutral, professional
+}
+
+// Primary Text Gradient (Love & Depth)
+@mixin gradient-text-primary {
+  background: linear-gradient(135deg, 
+    $color-text-primary 0%, 
+    $color-primary 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  // Burgundy to coral - elegant, meaningful
+}
+
+// Accent Line Gradient (Subtle Elegance)
+@mixin gradient-line-accent {
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    $color-primary 50%, 
+    transparent 100%);
+  // Subtle accent line for hover effects
+}
+
+// NOTE: CSS Custom Properties (:root) are defined in globals.scss
+// because :root cannot be used in CSS modules
+
+// ============================================
+// ANIMATIONS
+// ============================================
 @keyframes reveal {
   0% {
     opacity: 0;

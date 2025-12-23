@@ -19,13 +19,13 @@ export default function SupportPage({ business: stringifiedBusinessObj }: Suppor
       {/* First Section: To the Willing Hearted */}
       <section style={{ 
         padding: '5rem 5%', 
-        background: 'linear-gradient(to bottom right, #f5f5f5, white, #f5f5f5)' 
+        background: `linear-gradient(to bottom right, var(--color-bg-muted), var(--color-bg-primary), var(--color-bg-muted))` 
       }}>
         <div style={{ maxWidth: '48rem', margin: '0 auto', textAlign: 'center' }}>
           <h2 style={{ fontSize: '2.5rem', fontWeight: 'bold', marginBottom: '1.5rem', letterSpacing: '2px' }}>
             To the Willing Hearted
           </h2>
-          <p style={{ fontSize: '0.875rem', color: '#666', marginBottom: '1.5rem', lineHeight: '1.75rem' }}>
+          <p style={{ fontSize: '0.875rem', color: 'var(--color-text-secondary)', marginBottom: '1.5rem', lineHeight: '1.75rem' }}>
             The Love of God Conference is made possible through the generous support of willing-hearted individuals and organizations who share our vision of empowering women through faith.
           </p>
           <p style={{ fontSize: '0.875rem', color: '#666', lineHeight: '1.75rem' }}>
@@ -35,7 +35,7 @@ export default function SupportPage({ business: stringifiedBusinessObj }: Suppor
       </section>
 
       {/* Second Section: Volunteer with Us */}
-      <section style={{ padding: '3rem 5%', background: 'white' }}>
+      <section style={{ padding: '3rem 5%', background: 'var(--color-bg-primary)' }}>
         <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
           <div className={styles.supportGrid}>
             <div className={styles.imageContainer}>
@@ -46,7 +46,7 @@ export default function SupportPage({ business: stringifiedBusinessObj }: Suppor
             </div>
             <div>
               <div className={styles.supportIconLeft} style={{ marginBottom: '1.5rem' }}>
-                <FavoriteIcon sx={{ fontSize: '3rem', color: 'rgb(255, 107, 107)' }} />
+                <FavoriteIcon sx={{ fontSize: '3rem', color: 'var(--color-primary)' }} />
               </div>
               <h2 className={styles.supportTextLeft} style={{ 
                 fontSize: '2rem', 
@@ -58,7 +58,7 @@ export default function SupportPage({ business: stringifiedBusinessObj }: Suppor
               </h2>
               <p className={styles.supportTextLeft} style={{ 
                 fontSize: '0.875rem', 
-                color: '#666', 
+                color: 'var(--color-text-secondary)', 
                 marginBottom: '1.5rem', 
                 lineHeight: '1.75rem'
               }}>
@@ -66,7 +66,7 @@ export default function SupportPage({ business: stringifiedBusinessObj }: Suppor
               </p>
               <p className={styles.supportTextLeft} style={{ 
                 fontSize: '0.875rem', 
-                color: '#666', 
+                color: 'var(--color-text-secondary)', 
                 marginBottom: '2rem', 
                 lineHeight: '1.75rem'
               }}>
@@ -96,21 +96,21 @@ export default function SupportPage({ business: stringifiedBusinessObj }: Suppor
       {/* Third Section: Become a Partner */}
       <section style={{ 
         padding: '3rem 5%', 
-        background: 'linear-gradient(to bottom right, rgb(255, 107, 107), #ffb6c1, #ffb6c1)',
-        color: 'white'
+        background: `linear-gradient(to bottom right, var(--color-primary), var(--color-primary-light), var(--color-primary-light))`,
+        color: 'var(--color-text-on-dark)'
       }}>
         <div style={{ maxWidth: '72rem', margin: '0 auto' }}>
           <div className={styles.supportGrid}>
             <div>
               <div className={styles.supportIconRight} style={{ marginBottom: '1.5rem' }}>
-                <HandshakeIcon sx={{ fontSize: '3rem', color: 'white' }} />
+                <HandshakeIcon sx={{ fontSize: '3rem', color: 'var(--color-text-on-dark)' }} />
               </div>
               <h2 className={styles.supportTextRight} style={{ 
                 fontSize: '2rem', 
                 fontWeight: 'bold', 
                 marginBottom: '1.5rem', 
                 letterSpacing: '2px',
-                color: 'white'
+                color: 'var(--color-text-on-dark)'
               }}>
                 Become a Partner
               </h2>
@@ -119,7 +119,7 @@ export default function SupportPage({ business: stringifiedBusinessObj }: Suppor
                 marginBottom: '2rem', 
                 lineHeight: '1.75rem',
                 opacity: 0.9,
-                color: 'white'
+                color: 'var(--color-text-on-dark)'
               }}>
                 Join us through sponsorship, volunteering, or custom partnership. Together, we can create an unforgettable experience that draws women closer to the love of God.
               </p>

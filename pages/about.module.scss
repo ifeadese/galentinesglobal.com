@@ -15,12 +15,12 @@
 
 .featureCard {
   border-radius: 0.5rem;
-  border: 1px solid rgba(255, 107, 107, 0.2);
-  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(255, 240, 240, 0.5) 100%);
+  border: 1px solid $border-light; // Using semantic border color
+  @include gradient-card-default; // Using brand gradient mixin
   box-shadow: 
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06),
-    0 0 0 1px rgba(255, 107, 107, 0.05);
+    0 0 0 1px $shadow-subtle; // Using semantic shadow
   padding: 1.5rem;
   text-align: center;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -34,7 +34,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    background: linear-gradient(90deg, transparent, $dark-text, transparent);
+    @include gradient-line-accent; // Using brand gradient mixin
     opacity: 0;
     transition: opacity 0.4s ease;
   }
@@ -42,11 +42,11 @@
   &:hover {
     transform: translateY(-8px) scale(1.02);
     box-shadow: 
-      0 20px 25px -5px rgba(255, 107, 107, 0.15),
-      0 10px 10px -5px rgba(255, 107, 107, 0.1),
-      0 0 0 1px rgba(255, 107, 107, 0.2);
-    border-color: rgba(255, 107, 107, 0.4);
-    background: linear-gradient(135deg, rgba(255, 255, 255, 1) 0%, rgba(255, 245, 245, 0.8) 100%);
+      0 20px 25px -5px $shadow-medium,
+      0 10px 10px -5px $shadow-soft,
+      0 0 0 1px $border-dark; // Using semantic shadows and borders
+    border-color: $border-dark;
+    @include gradient-card-hover; // Using brand gradient mixin
 
     &::before {
       opacity: 1;
@@ -56,12 +56,12 @@
       transform: scale(1.1) rotate(5deg);
       
       svg {
-        filter: drop-shadow(0 4px 8px rgba(255, 107, 107, 0.3));
+        filter: drop-shadow(0 4px 8px rgba(220, 108, 140, 0.3)); // Using updated primary color for icon shadow
       }
     }
 
     .cardTitle {
-      color: $dark-text;
+      color: $primary; // Using semantic primary color
       transform: translateX(2px);
     }
   }
@@ -102,7 +102,7 @@
 
   svg {
     transition: filter 0.4s ease;
-    filter: drop-shadow(0 2px 4px rgba(255, 107, 107, 0.2));
+    filter: drop-shadow(0 2px 4px rgba(220, 108, 140, 0.2)); // Using updated primary color for icon shadow
   }
 }
 
@@ -112,7 +112,7 @@
   margin-bottom: 0.75rem;
   letter-spacing: 1px;
   transition: all 0.3s ease;
-  background: linear-gradient(135deg, rgb(54, 5, 8) 0%, $dark-text 100%);
+  @include gradient-text-primary; // Using brand gradient mixin
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -121,11 +121,11 @@
 .cardDescription {
   font-size: 0.875rem;
   line-height: 1.5rem;
-  color: rgba(54, 5, 8, 0.8);
+  color: rgba($text-primary, 0.8); // Using semantic text color with opacity
   transition: color 0.3s ease;
 
   .featureCard:hover & {
-    color: rgba(54, 5, 8, 0.95);
+    color: rgba($text-primary, 0.95); // Using semantic text color with opacity
   }
 }
 

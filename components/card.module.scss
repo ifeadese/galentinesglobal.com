@@ -10,13 +10,13 @@
   transition: transform .3s;
   border-radius: 1rem;
   overflow: hidden;
-  border: 3px solid #282828;
-  color: #fff;
+  border: 3px solid $bg-darker; // Using semantic dark background
+  color: $text-on-dark;
 }
 
 .overlay {
   text-align: center;
-  background: #000;
+  background: $bg-dark; // Using semantic dark background
   background-blend-mode: multiply;
   width: 100%;
   height: 100%;
@@ -35,8 +35,8 @@
 
 .card:hover {
   cursor: pointer;
-  color: $dark-text;
-  border: 3px solid $dark-text;
+  color: $primary; // Using semantic primary color
+  border: 3px solid $primary;
 }
 
 .card:active {

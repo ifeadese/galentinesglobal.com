@@ -17,7 +17,7 @@ export default function AboutPage({ business: stringifiedBusinessObj }: AboutPag
     <Layout business={business}>
       <section style={{ 
         padding: '5rem 5%',
-        background: 'linear-gradient(180deg, rgba(255, 182, 193, 0.1) 0%, transparent 50%, rgba(255, 182, 193, 0.05) 100%)'
+        background: `linear-gradient(180deg, rgba(255, 192, 203, 0.1) 0%, transparent 50%, rgba(255, 192, 203, 0.05) 100%)`
       }}>
         <div style={{ maxWidth: '56rem', margin: '0 auto 4rem', textAlign: 'center' }}>
           <h1 style={{ 
@@ -25,11 +25,11 @@ export default function AboutPage({ business: stringifiedBusinessObj }: AboutPag
             fontWeight: 'bold', 
             marginBottom: '1rem', 
             letterSpacing: '2px',
-            background: 'linear-gradient(135deg, rgb(54, 5, 8) 0%, rgb(255, 107, 107) 100%)',
+            background: `linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-primary) 100%)`,
             WebkitBackgroundClip: 'text',
             WebkitTextFillColor: 'transparent',
             backgroundClip: 'text',
-            filter: 'drop-shadow(0 2px 4px rgba(255, 107, 107, 0.2))'
+            filter: 'drop-shadow(0 2px 4px var(--shadow-soft))'
           }}>
             About Galentines
           </h1>
@@ -37,7 +37,7 @@ export default function AboutPage({ business: stringifiedBusinessObj }: AboutPag
             fontSize: '0.875rem',
             marginBottom: '2rem',
             fontWeight: 500,
-            color: 'rgb(255, 107, 107)',
+            color: 'var(--color-primary)',
             letterSpacing: '1px',
             textTransform: 'uppercase'
           }}>
@@ -62,7 +62,7 @@ export default function AboutPage({ business: stringifiedBusinessObj }: AboutPag
         <div className={styles.aboutCards}>
           <div className={styles.featureCard}>
             <div className={styles.iconContainer}>
-              <FavoriteIcon sx={{ fontSize: '2.5rem', color: 'rgb(255, 107, 107)' }} />
+              <FavoriteIcon sx={{ fontSize: '2.5rem', color: 'var(--color-primary)' }} />
             </div>
             <h3 className={styles.cardTitle}>Our Mission</h3>
             <p className={styles.cardDescription}>
@@ -72,7 +72,7 @@ export default function AboutPage({ business: stringifiedBusinessObj }: AboutPag
 
           <div className={styles.featureCard}>
             <div className={styles.iconContainer}>
-              <PeopleIcon sx={{ fontSize: '2.5rem', color: 'rgb(255, 107, 107)' }} />
+              <PeopleIcon sx={{ fontSize: '2.5rem', color: 'var(--color-primary)' }} />
             </div>
             <h3 className={styles.cardTitle}>Our Community</h3>
             <p className={styles.cardDescription}>
@@ -82,7 +82,7 @@ export default function AboutPage({ business: stringifiedBusinessObj }: AboutPag
 
           <div className={styles.featureCard}>
             <div className={styles.iconContainer}>
-              <CalendarTodayIcon sx={{ fontSize: '2.5rem', color: 'rgb(255, 107, 107)' }} />
+              <CalendarTodayIcon sx={{ fontSize: '2.5rem', color: 'var(--color-primary)' }} />
             </div>
             <h3 className={styles.cardTitle}>Annual Event</h3>
             <p className={styles.cardDescription}>

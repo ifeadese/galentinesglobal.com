@@ -7,7 +7,7 @@
   justify-content: center;
   padding: 3rem 5%;
   width: 100%;
-  border-top: 1px solid rgb(76, 76, 76);
+  border-top: 1px solid $border-medium; // Using semantic border color
   text-align: center;
 
   .logo {
