@@ -1,4 +1,5 @@
 import React from "react";
+import Image from "next/legacy/image";
 import Layout from "components/layout";
 import { getBusinessById } from "helpers";
 import { Business } from "types";
@@ -12,34 +13,29 @@ export default function SupportPage({ business: stringifiedBusinessObj }: Suppor
   const business: Business = JSON.parse(stringifiedBusinessObj);
   return (
     <Layout business={business}>
+      {/* Hero Section with Background Image */}
+      <section className={styles.heroSection}>
+        <div className={styles.heroImageContainer}>
+          <Image 
+            src="/images/support.jpeg" 
+            alt="Support Galentines" 
+            layout="fill"
+            objectFit="cover"
+            priority
+          />
+        </div>
+        <div className={styles.heroContent}>
+          <h1 className={styles.heroTitle}>To the Willing Hearted</h1>
+          <p className={styles.heroSubtitle}>Work With Us</p>
+        </div>
+      </section>
+
+      {/* Content Section */}
       <section style={{ 
-        padding: '3rem 5%',
+        padding: '2rem 5%',
         background: `linear-gradient(180deg, rgba(255, 192, 203, 0.1) 0%, transparent 50%, rgba(255, 192, 203, 0.05) 100%)`
       }}>
         <div style={{ maxWidth: '56rem', margin: '0 auto 2rem', textAlign: 'center' }}>
-          <h1 style={{ 
-            fontSize: '2.5rem', 
-            fontWeight: 'bold', 
-            marginBottom: '1rem', 
-            letterSpacing: '2px',
-            background: `linear-gradient(135deg, var(--color-text-primary) 0%, var(--color-primary) 100%)`,
-            WebkitBackgroundClip: 'text',
-            WebkitTextFillColor: 'transparent',
-            backgroundClip: 'text',
-            filter: 'drop-shadow(0 2px 4px var(--shadow-soft))'
-          }}>
-            To the Willing Hearted
-          </h1>
-          <p style={{ 
-            fontSize: '0.875rem',
-            marginBottom: '2rem',
-            fontWeight: 500,
-            color: 'var(--color-primary)',
-            letterSpacing: '1px',
-            textTransform: 'uppercase'
-          }}>
-            Work With Us
-          </p>
           <p style={{ 
             fontSize: '0.875rem', 
             marginBottom: '1rem', 

@@ -6,8 +6,8 @@
   align-items: center;
   color: lightgray;
   padding: 2.5% 5%;
-  border-bottom: 1px solid $border-color;
-  position: relative;
+  position: absolute;
+  width: 100%;
   z-index: 100;
 
   >.logo {
@@ -37,6 +37,16 @@
       font-size: 1rem;
       padding: 0 1rem;
       letter-spacing: 1px;
+      color: white;
+
+      a {
+        color: white;
+        transition: color 0.3s ease;
+
+        &:hover {
+          color: $primary;
+        }
+      }
     }
   }
 
