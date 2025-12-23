@@ -7,7 +7,7 @@ export const LOCTINEER = {
     marketingCopy: 'Creating your best look',
     pagePath: '/services',
     heroImage: {
-        path: "/images/panelists.jpeg" as any,
+        path: "/images/panelists.jpeg",
         altText: "Galentines Conference Panelists",
     },
     services: allServices,

@@ -2,7 +2,7 @@
 import { StaticImageData } from "next/legacy/image";
 
 export interface AppImage {
-  path: StaticImageData;
+  path: StaticImageData | string;
   altText: string;
 }
 

@@ -7,7 +7,7 @@ export const PHILSVISION = {
     marketingCopy: 'Capturing you in your best light',
     pagePath: `/services`,
     heroImage: {
-        path: "/images/panelists.jpeg" as any,
+        path: "/images/panelists.jpeg",
         altText: "Galentines Conference Panelists",
     },
     services: allServices,
