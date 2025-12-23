@@ -23,26 +23,11 @@ export function getEventFromCMS(cms: CMSContent): Event {
   };
 }
 
-export function getCMSById(id: string): CMSContent {
+export function getCMSById(id: string | undefined): CMSContent {
     switch (id) {
         case 'WINDSOFCHANGE':
-        case 'PHILSVISION': // Legacy ID support
             return WINDSOFCHANGE;
-        case 'GALENTINESGLOBAL':
-        case 'LOCTINEER': // Legacy ID support
         default:
             return GALENTINESGLOBAL;
     }
 }
-
-
-
-export const useScreenSizeDetector = () => {
-    const [width, setWidth] = useState(968);
-    useEffect(() => {
-        const updateWidth = () => setWidth(window.innerWidth);
-        updateWidth();
-        return () => window.removeEventListener('resize', updateWidth);
-    }, []);
-    return { isMobile: width <= 968, isTablet: width <= 1024, isDesktop: width > 1024 };
-};

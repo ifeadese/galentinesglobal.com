@@ -79,10 +79,9 @@ export default function SupportPage({ cms: stringifiedCMS }: SupportPageProps) {
 }
 
 export const getStaticProps = () => {
-  const businessId = process.env.BUSINESS_ID || 'loctineer';
   return {
     props: {
-      cms: JSON.stringify(getCMSById(businessId)),
+      cms: JSON.stringify(getCMSById(process.env.EVENT_ID)),
     },
   };
 };

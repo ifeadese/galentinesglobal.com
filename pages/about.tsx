@@ -88,10 +88,9 @@ export default function AboutPage({ cms: stringifiedCMS }: AboutPageProps) {
 }
 
 export const getStaticProps = () => {
-  const businessId = process.env.BUSINESS_ID || 'loctineer';
   return {
     props: {
-      cms: JSON.stringify(getCMSById(businessId)),
+      cms: JSON.stringify(getCMSById(process.env.EVENT_ID)),
     },
   };
 };
