@@ -2,18 +2,18 @@ import React from "react";
 import Image from "next/legacy/image";
 import Button from "components/button";
 import styles from "components/hero.module.scss";
-import { Business } from "types";
+import { Event } from "types";
 import { useRouter } from "next/router";
 import EventIcon from "@mui/icons-material/Event";
 import PersonIcon from "@mui/icons-material/Person";
 
 interface Props {
-  business: Business;
+  event: Event;
 }
 
-const Hero = ({ business }: Props) => {
+const Hero = ({ event }: Props) => {
   const router = useRouter();
-  const { description, marketingCopy, pagePath, heroImage } = business;
+  const { description, marketingCopy, pagePath, heroImage } = event;
   return (
     <header className={styles["heroImage"]}>
       <div>

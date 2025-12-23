@@ -2,17 +2,17 @@ import React from "react";
 import Hero from "components/hero";
 import Layout from "components/layout";
 import { getBusinessById } from "helpers";
-import { Business } from "types";
+import { Event } from "types";
 
 interface HomePageProps {
   business: string;
 }
 
 export default function HomePage({ business: stringifiedBusinessObj }: HomePageProps) {
-  const business: Business = JSON.parse(stringifiedBusinessObj);
+  const event: Event = JSON.parse(stringifiedBusinessObj);
   return (
-    <Layout business={business}>
-      <Hero business={business} />
+    <Layout event={event}>
+      <Hero event={event} />
     </Layout>
   );
 }

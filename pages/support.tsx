@@ -2,7 +2,7 @@ import React from "react";
 import Image from "next/legacy/image";
 import Layout from "components/layout";
 import { getBusinessById } from "helpers";
-import { Business } from "types";
+import { Event } from "types";
 import styles from "./support.module.scss";
 
 interface SupportPageProps {
@@ -10,9 +10,9 @@ interface SupportPageProps {
 }
 
 export default function SupportPage({ business: stringifiedBusinessObj }: SupportPageProps) {
-  const business: Business = JSON.parse(stringifiedBusinessObj);
+  const event: Event = JSON.parse(stringifiedBusinessObj);
   return (
-    <Layout business={business}>
+    <Layout event={event}>
       {/* Hero Section with Background Image */}
       <section className={styles.heroSection}>
         <div className={styles.heroImageContainer}>

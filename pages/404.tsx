@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/legacy/image";
 import Button from "components/button";
 import Layout from "components/layout";
-import { Business } from "types";
+import { Event } from "types";
 import { getBusinessById } from "helpers";
 
 interface ErrorPageProps {
@@ -10,9 +10,9 @@ interface ErrorPageProps {
 }
 
 export default function ErrorPage({ business: stringifiedBusinessObj }: ErrorPageProps) {
-  const business: Business = JSON.parse(stringifiedBusinessObj);
+  const event: Event = JSON.parse(stringifiedBusinessObj);
   return (
-    <Layout business={business}>
+    <Layout event={event}>
       <section style={{ padding: '5rem 2rem', textAlign: "center" }}>
         <Image src="/images/404.png" alt="404" width={150} height={150} />
         <h1 style={{ marginBottom: 'unset' }}>We don&apos;t have this page</h1>

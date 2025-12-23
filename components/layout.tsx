@@ -3,18 +3,18 @@ import Head from "next/head";
 import MenuBar from "components/menu-bar";
 import { FacebookMessengerChat } from "components/chat-button";
 import styles from "components/layout.module.scss";
-import { Business } from "types";
+import { Event } from "types";
 import Footer from "components/footer";
 
 interface Props {
-  business: Business;
+  event: Event;
   children: React.ReactNode;
 }
 
-const Layout = ({ business, children }: Props) => {
+const Layout = ({ event, children }: Props) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const showDrawer = (state: boolean) => setIsDrawerOpen(state);
-  const { name, description, facebookPageId, facebookPageUrl, instagramPageUrl, contactEmailAddress } = business;
+  const { name, description, facebookPageId, facebookPageUrl, instagramPageUrl, contactEmailAddress } = event;
 
   return (
     <div className={styles.container}>

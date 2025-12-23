@@ -2,7 +2,7 @@ import React from "react";
 import { useRouter } from "next/router";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { FreeMode, Pagination } from "swiper/modules";
-import { Business } from "types";
+import { Event } from "types";
 import "swiper/css";
 import "swiper/css/pagination";
 import "swiper/css/free-mode";
@@ -10,11 +10,11 @@ import { getSubServices } from "helpers";
 import Card from "./card";
 
 interface Props {
-  business: Business;
+  event: Event;
 }
 
-const SubServicesCarousel = ({ business }: Props) => {
-  const subServices = getSubServices(business)
+const SubServicesCarousel = ({ event }: Props) => {
+  const subServices = getSubServices(event)
   const router = useRouter();
   return (
     <section style={{ background: "#0c0c0c", padding: '1.7rem 0', borderTop: '1px solid rgb(76, 76, 76)' }}>

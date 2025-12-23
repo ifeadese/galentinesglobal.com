@@ -5,7 +5,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import Button from "components/button";
 import CustomImage from "components/custom-image";
 import Price from "components/price";
-import type { Business, Service } from "types";
+import type { Event, Service } from "types";
 import styles from "./service.module.scss";
 import SubServicesCarousel from "components/sub-services-carousel";
 import { PopupModal } from "react-calendly";
@@ -13,7 +13,7 @@ import PriceList from "components/price-list";
 import { getPriceSuffix, useScreenSizeDetector } from "helpers";
 
 interface Props {
-  business: Business;
+  event: Event;
   service: Service;
   returnRoute?: {
     path: string;
@@ -23,7 +23,7 @@ interface Props {
 const PRICE_LIST_MAX = 5;
 
 const Service = ({
-  business,
+  event,
   service,
   returnRoute
 }: Props) => {
@@ -56,11 +56,11 @@ const Service = ({
       );
     }
   }
-  const toggleDrawer = (event: React.KeyboardEvent | React.MouseEvent) => {
+  const toggleDrawer = (e: React.KeyboardEvent | React.MouseEvent) => {
     if (
-      event.type === 'keydown' &&
-      ((event as React.KeyboardEvent).key === 'Tab' ||
-        (event as React.KeyboardEvent).key === 'Shift')
+      e.type === 'keydown' &&
+      ((e as React.KeyboardEvent).key === 'Tab' ||
+        (e as React.KeyboardEvent).key === 'Shift')
     ) {
       return;
     }
@@ -107,7 +107,7 @@ const Service = ({
         </div>
         <CustomImage image={featuredImage} height={isMobile ? 400 : 650} width={1000} />
       </div>
-      <SubServicesCarousel business={business} />
+      <SubServicesCarousel event={event} />
       {calendlyEventURL && typeof window !== 'undefined' && document.getElementById("__next") && (
         <PopupModal
           open={isBookingAppointment}

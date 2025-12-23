@@ -36,7 +36,7 @@ export interface Service {
   calendlyEventURL?: string;
 }
 
-export interface Business {
+export interface Event {
   id: string;
   name: string;
   description: string;

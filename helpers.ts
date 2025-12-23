@@ -1,14 +1,14 @@
 import { useEffect, useState } from "react";
 import { LOCTINEER } from "data/loctineer/index";
 import { PHILSVISION } from "data/phils-vision/index";
-import { Business } from "types";
+import { Event } from "types";
 import { PriceType } from "types";
 
 type Props = {
     debounceTime?: number;
 };
 
-export function getBusinessById(id: string): Business {
+export function getBusinessById(id: string): Event {
     switch (id) {
         case PHILSVISION.id:
             return PHILSVISION;
@@ -17,8 +17,8 @@ export function getBusinessById(id: string): Business {
     }
 }
 
-export function getServiceById(business: Business, id: string) {
-    for (const service of business.services) {
+export function getServiceById(event: Event, id: string) {
+    for (const service of event.services) {
         if (service.id === id) return { service: service, parent: null };
         if (service.services) {
             const subServices = service.services;
@@ -30,17 +30,17 @@ export function getServiceById(business: Business, id: string) {
     return undefined;
 }
 
-export function createRootServicePaths(business: Business) {
+export function createRootServicePaths(event: Event) {
     const servicePaths = [];
-    for (const service of business.services) {
+    for (const service of event.services) {
         servicePaths.push({ params: { "root-service": service.id } });
     }
     return servicePaths;
 }
 
-export function createSubServicePaths(business: Business) {
+export function createSubServicePaths(event: Event) {
     const subServicePaths = [];
-    for (const service of business.services) {
+    for (const service of event.services) {
         if (!service.services) continue;
         for (const subService of service.services) {
             subServicePaths.push({ params: { "root-service": service.id, "sub-service": subService.id } });
@@ -71,9 +71,9 @@ export const useScreenSizeDetector = () => {
     return { isMobile: width <= 968, isTablet: width <= 1024, isDesktop: width > 1024 };
 };
 
-export function getSubServices(business: Business) {
+export function getSubServices(event: Event) {
     const subServices = [];
-    for (const service of business.services) {
+    for (const service of event.services) {
         if (service.services) {
             // subServices.push(service); // Optional
             for (const subService of service.services) {
