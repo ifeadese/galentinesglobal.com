@@ -1,7 +1,4 @@
 @import "/common.scss";
-// @import "swiper/swiper.min.css";
-// @import "swiper/css/pagination";
-// @import "swiper/css/free-mode";
 
 // ============================================
 // CSS CUSTOM PROPERTIES (For React/Inline Styles)
@@ -118,67 +115,13 @@ section {
     text-align: center;
     width: 70%;
   }
-
-  // The menu container
-  .services-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 1.5rem;
-    padding-top: 3%;
-  }
-
-  .nav-buttons {
-    width: 80%;
-    display: flex;
-    justify-content: space-between;
-    margin: 0 3rem;
-  }
-
-  >.swiper-horizontal>.swiper-pagination-bullets,
-  .swiper-pagination-bullets.swiper-pagination-horizontal,
-  .swiper-pagination-custom,
-  .swiper-pagination-fraction {
-    position: relative;
-    margin-top: 3rem;
-  }
-
-  .swiper-wrapper {
-    > :first-child {
-      padding-left: 1rem;
-    }
-
-    > :last-child {
-      padding-right: 1rem;
-    }
-  }
-
-  >.carousel {
-    width: 100%;
-    min-height: 100% !important;
-  }
 }
 
 @media (max-width: $lg-screens) {
-
   main {
     >section>p {
       margin: 5%;
       width: 80%;
-    }
-
-    >.services-content {
-      grid-template-columns: 1fr;
-      row-gap: 1rem;
-    }
-  }
-}
-
-@media (max-width: $md-screens) {
-  main>section {
-
-    // The menu container
-    .services-content {
-      grid-template-columns: 1fr;
     }
   }
 }

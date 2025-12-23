@@ -150,13 +150,6 @@
     color: $primary;
     transform: scale(1.05);
   }
-
-  .menuIcon {
-    margin-right: 1rem;
-    display: flex;
-    align-items: center;
-    color: $primary;
-  }
 }
 
 @media (max-width: $md-screens) {
