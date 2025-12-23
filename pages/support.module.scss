@@ -1,81 +1,96 @@
 @import "/common.scss";
 
-.supportGrid {
+.supportCards {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 3rem;
-  align-items: center;
+  gap: 1rem;
+  width: 80%;
+  // margin: 0 auto;
 
   @media (max-width: $lg-screens) {
     grid-template-columns: 1fr;
-  }
-}
-
-.supportTextLeft {
-  text-align: left;
-
-  @media (max-width: $lg-screens) {
-    text-align: center;
-  }
-}
-
-.supportTextRight {
-  text-align: right;
-
-  @media (max-width: $lg-screens) {
-    text-align: center;
-  }
-}
-
-.supportIconLeft {
-  display: flex;
-  justify-content: flex-start;
-
-  @media (max-width: $lg-screens) {
-    justify-content: center;
-  }
-}
-
-.supportIconRight {
-  display: flex;
-  justify-content: flex-end;
-
-  @media (max-width: $lg-screens) {
-    justify-content: center;
-  }
-}
-
-.supportButtonLeft {
-  display: flex;
-  justify-content: flex-start;
-
-  @media (max-width: $lg-screens) {
-    justify-content: center;
-  }
-}
-
-.supportButtonRight {
-  display: flex;
-  justify-content: flex-end;
-
-  @media (max-width: $lg-screens) {
-    justify-content: center;
-  }
-}
-
-.imageContainer {
-  width: 100%;
-
-  img {
-    border-radius: 0.5rem;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    gap: 1.5rem;
     width: 100%;
-    height: 400px;
-    object-fit: cover;
+  }
+}
 
-    @media (max-width: $lg-screens) {
-      height: 300px;
+.featureCard {
+  border-radius: 0.5rem;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  min-height: 500px;
+  position: relative;
+  overflow: hidden;
+  cursor: pointer;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  @media (max-width: $lg-screens) {
+    min-height: 400px;
+  }
+
+  &:hover {
+    transform: translateY(-8px) scale(1.02);
+    box-shadow: 
+      0 20px 25px -5px rgba(0, 0, 0, 0.25),
+      0 10px 10px -5px rgba(0, 0, 0, 0.15);
+
+    .overlay {
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0.8) 0%,
+        rgba(0, 0, 0, 0.7) 50%,
+        rgba(0, 0, 0, 0.8) 100%
+      );
     }
+
+    .cardTitle {
+      transform: scale(1.05);
+      text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+    }
+  }
+
+  &:active {
+    transform: translateY(-4px) scale(1.01);
+  }
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.7) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+  transition: background 0.4s ease;
+  z-index: 1;
+}
+
+.cardTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  color: $text-on-dark;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+  padding: 0 1.5rem;
+
+  @media (max-width: $lg-screens) {
+    font-size: 1.25rem;
   }
 }
 

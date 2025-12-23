@@ -2,7 +2,7 @@ import { allServices } from "./services";
 
 export const PHILSVISION = {
     id: 'PHILSVISION',
-    name: 'Phil\'s Vision',
+    name: 'Galentines Global',
     description: "Photography & Film Specialist in Ottawa",
     marketingCopy: 'Capturing you in your best light',
     pagePath: `/services`,
