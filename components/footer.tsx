@@ -4,7 +4,13 @@ import styles from "components/footer.module.scss";
 import { SocialIcon } from "react-social-icons";
 
 
-const iconStyles = { margin: '0.5rem', height: 40, width: 40 }
+const iconStyles = { 
+  margin: '0.5rem', 
+  height: 40, 
+  width: 40,
+  border: '1px solid rgba(220, 108, 140, 0.4)',
+  borderRadius: '50%'
+}
 
 interface FooterProps {
   contactEmailAddress: string;
@@ -40,9 +46,9 @@ export const Footer = ({ contactEmailAddress, logo, logoAlt, facebookPageUrl, in
               <span>All rights reserved.</span>
             </div>
             <div className={styles.socialIcons}>
-                {contactEmailAddress && <SocialIcon url={`mailto:${contactEmailAddress}`} style={iconStyles} bgColor="lightgray" fgColor="black" />}
-                {facebookPageUrl && <SocialIcon url={facebookPageUrl} style={iconStyles} bgColor="lightgray" fgColor="black" />}
-                {instagramPageUrl && <SocialIcon url={instagramPageUrl} style={iconStyles} bgColor="lightgray" fgColor="black" />}
+                {contactEmailAddress && <SocialIcon url={`mailto:${contactEmailAddress}`} style={iconStyles} bgColor="rgb(255, 240, 245)" fgColor="rgb(220, 108, 140)" />}
+                {facebookPageUrl && <SocialIcon url={facebookPageUrl} style={iconStyles} bgColor="rgb(255, 240, 245)" fgColor="rgb(220, 108, 140)" />}
+                {instagramPageUrl && <SocialIcon url={instagramPageUrl} style={iconStyles} bgColor="rgb(255, 240, 245)" fgColor="rgb(220, 108, 140)" />}
             </div>
         </footer >
     );
