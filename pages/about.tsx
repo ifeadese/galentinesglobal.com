@@ -1,6 +1,6 @@
 import React from "react";
-import Image from "next/legacy/image";
 import Layout from "components/layout";
+import TitleHero from "components/title-hero";
 import { getCMSById, getEventFromCMS } from "helpers";
 import { CMSContent } from "data/cms-types";
 import FavoriteIcon from "@mui/icons-material/Favorite";
@@ -32,22 +32,12 @@ export default function AboutPage({ cms: stringifiedCMS }: AboutPageProps) {
 
   return (
     <Layout event={event}>
-      {/* Hero Section with Background Image */}
-      <section className={styles.heroSection}>
-        <div className={styles.heroImageContainer}>
-          <Image 
-            src={aboutContent.heroImage || "/images/ladies.jpeg"} 
-            alt={aboutContent.heroImageAlt || "Galentines Community"} 
-            layout="fill"
-            objectFit="cover"
-            priority
-          />
-        </div>
-        <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>{aboutContent.heroTitle || "About Galentines"}</h1>
-          <p className={styles.heroSubtitle}>{aboutContent.heroSubtitle || "Empowering Women Through Faith"}</p>
-        </div>
-      </section>
+      <TitleHero
+        image={aboutContent.heroImage || "/images/ladies.jpeg"}
+        imageAlt={aboutContent.heroImageAlt || "Galentines Community"}
+        title={aboutContent.heroTitle || "About Galentines"}
+        subtitle={aboutContent.heroSubtitle || "Empowering Women Through Faith"}
+      />
 
       {/* Content Section */}
       <section style={{ 

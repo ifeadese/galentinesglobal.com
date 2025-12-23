@@ -1,0 +1,162 @@
+@import "/common.scss";
+
+.heroImage {
+  background: black;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.slideshowContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+}
+
+.slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+
+  &.active {
+    opacity: 0.2;
+  }
+
+  > span {
+    height: 100% !important;
+    width: 100% !important;
+  }
+
+  img {
+    object-fit: cover;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  text-align: center;
+  align-items: center;
+  align-self: center;
+  color: white;
+  max-width: 70%;
+  z-index: 2;
+
+  h1 {
+    margin: unset;
+  }
+
+  p {
+    font-weight: 500;
+  }
+
+  .verse {
+    font-style: italic;
+    margin-bottom: 1.5rem;
+    line-height: 1.8;
+  }
+
+  .eventInfo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+    margin-bottom: 2rem;
+    font-size: 1rem;
+    flex-wrap: wrap;
+  }
+
+  .eventInfoItem {
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .eventInfoDivider {
+    opacity: 0.7;
+  }
+
+  .description {
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  .presents {
+    font-family: "Dancing Script", cursive;
+    font-size: 1.25rem;
+    margin-bottom: 0.5rem;
+    margin-top: 0;
+    letter-spacing: 2px;
+    font-weight: 500;
+  }
+
+  .logo {
+    margin: 3rem 0;
+    max-width: 100%;
+    height: auto;
+    width: 100%;
+    min-width: 600px;
+    
+    img {
+      object-fit: contain !important;
+      image-rendering: -webkit-optimize-contrast;
+      image-rendering: crisp-edges;
+    }
+  }
+
+  button {
+    margin: 2rem 0;
+    width: fit-content;
+  }
+}
+
+@media (max-width: $lg-screens) {
+  .heroImage {
+    .content {
+      max-width: 80%;
+
+      h1 {
+        font-size: 3rem;
+      }
+
+      .logo {
+        min-width: 400px;
+        max-width: 100%;
+        
+        img {
+          width: 100% !important;
+          height: auto !important;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: $md-screens) {
+  .heroImage {
+    .content {
+      .logo {
+        min-width: 300px;
+        max-width: 100%;
+        
+        img {
+          width: 100% !important;
+          height: auto !important;
+        }
+      }
+    }
+  }
+}
+

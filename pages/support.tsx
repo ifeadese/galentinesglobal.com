@@ -1,6 +1,6 @@
 import React from "react";
-import Image from "next/legacy/image";
 import Layout from "components/layout";
+import TitleHero from "components/title-hero";
 import { getCMSById, getEventFromCMS } from "helpers";
 import { CMSContent } from "data/cms-types";
 import styles from "./support.module.scss";
@@ -24,22 +24,12 @@ export default function SupportPage({ cms: stringifiedCMS }: SupportPageProps) {
 
   return (
     <Layout event={event}>
-      {/* Hero Section with Background Image */}
-      <section className={styles.heroSection}>
-        <div className={styles.heroImageContainer}>
-          <Image 
-            src={supportContent.heroImage || "/images/support.jpeg"} 
-            alt={supportContent.heroImageAlt || "Support Galentines"} 
-            layout="fill"
-            objectFit="cover"
-            priority
-          />
-        </div>
-        <div className={styles.heroContent}>
-          <h1 className={styles.heroTitle}>{supportContent.heroTitle || "To the Willing Hearted"}</h1>
-          <p className={styles.heroSubtitle}>{supportContent.heroSubtitle || "Work With Us"}</p>
-        </div>
-      </section>
+      <TitleHero
+        image={supportContent.heroImage || "/images/support.jpeg"}
+        imageAlt={supportContent.heroImageAlt || "Support Galentines"}
+        title={supportContent.heroTitle || "To the Willing Hearted"}
+        subtitle={supportContent.heroSubtitle || "Work With Us"}
+      />
 
       {/* Content Section */}
       <section style={{ 
