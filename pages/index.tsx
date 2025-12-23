@@ -1,24 +1,28 @@
 import React from "react";
 import Hero from "components/hero";
 import Layout from "components/layout";
-import { getBusinessById } from "helpers";
-import { Event } from "types";
+import { getCMSById, getEventFromCMS } from "helpers";
+import { CMSContent } from "data/cms-types";
 
 interface HomePageProps {
-  business: string;
+  cms: string;
 }
 
-export default function HomePage({ business: stringifiedBusinessObj }: HomePageProps) {
-  const event: Event = JSON.parse(stringifiedBusinessObj);
+export default function HomePage({ cms: stringifiedCMS }: HomePageProps) {
+  const cms: CMSContent = JSON.parse(stringifiedCMS);
+  const event = getEventFromCMS(cms);
   return (
     <Layout event={event}>
-      <Hero event={event} />
+      <Hero event={event} cms={cms} />
     </Layout>
   );
 }
 
-export const getStaticProps = () => ({
-  props: {
-    business: JSON.stringify(getBusinessById(process.env.BUSINESS_ID || 'loctineer')),
-  },
-});
+export const getStaticProps = () => {
+  const businessId = process.env.BUSINESS_ID || 'loctineer';
+  return {
+    props: {
+      cms: JSON.stringify(getCMSById(businessId)),
+    },
+  };
+};

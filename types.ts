@@ -43,7 +43,6 @@ export interface Event {
   marketingCopy: string;
   pagePath: string;
   heroImage: AppImage;
-  services: Service[];
   calendlyLink?: string;
   contactEmailAddress: string;
   facebookPageId?: string;

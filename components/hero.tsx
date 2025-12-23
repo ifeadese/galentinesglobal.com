@@ -3,17 +3,21 @@ import Image from "next/legacy/image";
 import Button from "components/button";
 import styles from "components/hero.module.scss";
 import { Event } from "types";
+import { CMSContent } from "data/cms-types";
 import { useRouter } from "next/router";
 import EventIcon from "@mui/icons-material/Event";
 import PersonIcon from "@mui/icons-material/Person";
 
 interface Props {
   event: Event;
+  cms?: CMSContent;
 }
 
-const Hero = ({ event }: Props) => {
+const Hero = ({ event, cms }: Props) => {
   const router = useRouter();
-  const { description, marketingCopy, pagePath, heroImage } = event;
+  const { heroImage } = event;
+  const homeContent = cms?.home || {};
+
   return (
     <header className={styles["heroImage"]}>
       <div>
@@ -34,21 +38,26 @@ const Hero = ({ event }: Props) => {
           priority
           unoptimized
         />
-        <p className={styles.verse}>&ldquo;And to know the love of Christ which passes knowledge; that you might be filled with all the fullness of God.&rdquo; - Ephesians 3:19</p>
+        <p className={styles.verse}>
+          &ldquo;{homeContent.verse || "And to know the love of Christ which passes knowledge; that you might be filled with all the fullness of God."}&rdquo;
+          {homeContent.verseReference && ` - ${homeContent.verseReference}`}
+          {!homeContent.verseReference && homeContent.verse && " - Ephesians 3:19"}
+          {!homeContent.verse && !homeContent.verseReference && " - Ephesians 3:19"}
+        </p>
         <div className={styles.eventInfo}>
           <span className={styles.eventInfoItem}>
             <EventIcon sx={{ fontSize: '1rem', marginRight: '0.5rem', verticalAlign: 'middle' }} />
-            February 7, 2026
+            {homeContent.eventDate || "February 7, 2026"}
           </span>
           <span className={styles.eventInfoDivider}>•</span>
           <span className={styles.eventInfoItem}>
             <PersonIcon sx={{ fontSize: '1rem', marginRight: '0.5rem', verticalAlign: 'middle' }} />
-            Hosted by Shile Adeyoyin
+            {homeContent.host || "Hosted by Shile Adeyoyin"}
           </span>
         </div>
         <Button
           variant="primary"
-          onClick={() => window.open('https://rsvpify.com/', '_blank')}
+          onClick={() => window.open(homeContent.rsvpUrl || 'https://rsvpify.com/', '_blank')}
         >
           RSVP Now
         </Button>

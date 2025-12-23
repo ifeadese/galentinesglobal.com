@@ -1,53 +1,41 @@
 import { useEffect, useState } from "react";
-import { LOCTINEER } from "data/loctineer/index";
-import { PHILSVISION } from "data/phils-vision/index";
-import { Event } from "types";
-import { PriceType } from "types";
+import { GALENTINESGLOBAL } from "data/galentinesglobal/index";
+import { WINDSOFCHANGE } from "data/windsofchange/index";
+import { CMSContent } from "data/cms-types";
+import { Event, PriceType } from "types";
 
-type Props = {
-    debounceTime?: number;
-};
+// Convert CMS content to Event type for backward compatibility
+export function getEventFromCMS(cms: CMSContent): Event {
+  return {
+    id: cms.general.id,
+    name: cms.general.name,
+    description: cms.general.description,
+    marketingCopy: cms.general.marketingCopy,
+    pagePath: '/',
+    heroImage: {
+      path: cms.home.heroImage || "/images/panelists.jpeg",
+      altText: cms.home.heroImageAlt || "Galentines Conference Panelists",
+    },
+    contactEmailAddress: cms.general.contactEmailAddress,
+    facebookPageId: cms.general.facebookPageId,
+    facebookPageUrl: cms.general.facebookPageUrl,
+    instagramPageUrl: cms.general.instagramPageUrl,
+  };
+}
 
-export function getBusinessById(id: string): Event {
+export function getCMSById(id: string): CMSContent {
     switch (id) {
-        case PHILSVISION.id:
-            return PHILSVISION;
+        case 'WINDSOFCHANGE':
+        case 'PHILSVISION': // Legacy ID support
+            return WINDSOFCHANGE;
+        case 'GALENTINESGLOBAL':
+        case 'LOCTINEER': // Legacy ID support
         default:
-            return LOCTINEER;
+            return GALENTINESGLOBAL;
     }
 }
 
-export function getServiceById(event: Event, id: string) {
-    for (const service of event.services) {
-        if (service.id === id) return { service: service, parent: null };
-        if (service.services) {
-            const subServices = service.services;
-            for (const subservice of subServices) {
-                if (subservice.id === id) return { service: subservice, parent: service };
-            }
-        }
-    }
-    return undefined;
-}
 
-export function createRootServicePaths(event: Event) {
-    const servicePaths = [];
-    for (const service of event.services) {
-        servicePaths.push({ params: { "root-service": service.id } });
-    }
-    return servicePaths;
-}
-
-export function createSubServicePaths(event: Event) {
-    const subServicePaths = [];
-    for (const service of event.services) {
-        if (!service.services) continue;
-        for (const subService of service.services) {
-            subServicePaths.push({ params: { "root-service": service.id, "sub-service": subService.id } });
-        }
-    }
-    return subServicePaths;
-}
 
 export const getPriceSuffix = (priceType: PriceType) => {
     const { STARTING, HOURLY } = PriceType;
@@ -70,19 +58,3 @@ export const useScreenSizeDetector = () => {
     }, []);
     return { isMobile: width <= 968, isTablet: width <= 1024, isDesktop: width > 1024 };
 };
-
-export function getSubServices(event: Event) {
-    const subServices = [];
-    for (const service of event.services) {
-        if (service.services) {
-            // subServices.push(service); // Optional
-            for (const subService of service.services) {
-                subServices.push(subService);
-            }
-        } else {
-            subServices.push(service);
-        }
-
-    }
-    return subServices;
-}

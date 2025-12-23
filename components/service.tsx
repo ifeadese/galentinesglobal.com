@@ -7,7 +7,6 @@ import CustomImage from "components/custom-image";
 import Price from "components/price";
 import type { Event, Service } from "types";
 import styles from "./service.module.scss";
-import SubServicesCarousel from "components/sub-services-carousel";
 import { PopupModal } from "react-calendly";
 import PriceList from "components/price-list";
 import { getPriceSuffix, useScreenSizeDetector } from "helpers";
@@ -107,7 +106,6 @@ const Service = ({
         </div>
         <CustomImage image={featuredImage} height={isMobile ? 400 : 650} width={1000} />
       </div>
-      <SubServicesCarousel event={event} />
       {calendlyEventURL && typeof window !== 'undefined' && document.getElementById("__next") && (
         <PopupModal
           open={isBookingAppointment}
