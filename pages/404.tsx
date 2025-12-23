@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/legacy/image";
 import Button from "components/button";
 import Layout from "components/layout";
-import { CMSContent } from "data/cms-types";
+import { CMSContent } from "types";
 import { getCMSById, getEventFromCMS } from "helpers";
 
 interface ErrorPageProps {

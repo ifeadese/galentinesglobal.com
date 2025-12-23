@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "components/layout";
 import TitleHero from "components/title-hero";
 import { getCMSById, getEventFromCMS } from "helpers";
-import { CMSContent } from "data/cms-types";
+import { CMSContent } from "types";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";

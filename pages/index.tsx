@@ -3,7 +3,7 @@ import Image from "next/legacy/image";
 import Button from "components/button";
 import Layout from "components/layout";
 import { getCMSById, getEventFromCMS } from "helpers";
-import { CMSContent } from "data/cms-types";
+import { CMSContent } from "types";
 import EventIcon from "@mui/icons-material/Event";
 import PersonIcon from "@mui/icons-material/Person";
 import styles from "pages/index.module.scss";

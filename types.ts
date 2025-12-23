@@ -6,34 +6,30 @@ export interface AppImage {
   altText: string;
 }
 
-export interface Action {
-  href: string;
-  text?: string;
+export interface PageContent {
+  title?: string;
+  subtitle?: string;
+  image?: string;
+  altText?: string;
+  paragraphs?: string[];
+  [key: string]: any; // Allow additional properties for flexibility
 }
 
-export enum PriceType {
-  FIXED = "fixed",
-  HOURLY = "hourly",
-  STARTING = "starting"
-}
-
-export interface Price {
-  value: number;
-  type: PriceType;
-  name?: string;
-  description?: string;
-}
-
-export interface Service {
-  id: string;
-  name: string;
-  description: string;
-  pagePath: string;
-  featuredImage: AppImage;
-  services?: Service[];
-  price?: Price;
-  prices?: Price[]
-  calendlyEventURL?: string;
+export interface CMSContent {
+  general: {
+    id: string;
+    name: string;
+    description: string;
+    marketingCopy: string;
+    contactEmailAddress: string;
+    facebookPageId?: string;
+    facebookPageUrl?: string;
+    instagramPageUrl?: string;
+  };
+  home: PageContent;
+  about: PageContent;
+  support: PageContent;
+  error404: PageContent;
 }
 
 export interface Event {

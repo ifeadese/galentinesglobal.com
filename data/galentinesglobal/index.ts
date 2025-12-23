@@ -1,4 +1,4 @@
-import { CMSContent } from "data/cms-types";
+import { CMSContent } from "types";
 
 export const GALENTINESGLOBAL: CMSContent = {
   general: {

@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { GALENTINESGLOBAL } from "data/galentinesglobal/index";
 import { WINDSOFCHANGE } from "data/windsofchange/index";
-import { CMSContent } from "data/cms-types";
+import { CMSContent } from "types";
 import { Event } from "types";
 
 // Convert CMS content to Event type for backward compatibility

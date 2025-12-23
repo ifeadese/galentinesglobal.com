@@ -2,7 +2,7 @@ import React from "react";
 import Layout from "components/layout";
 import TitleHero from "components/title-hero";
 import { getCMSById, getEventFromCMS } from "helpers";
-import { CMSContent } from "data/cms-types";
+import { CMSContent } from "types";
 import styles from "./support.module.scss";
 
 interface SupportPageProps {

@@ -1,4 +1,4 @@
-import { CMSContent } from "data/cms-types";
+import { CMSContent } from "types";
 
 // For now, windsofchange can use similar structure to galentinesglobal
 // This can be customized later with different content
