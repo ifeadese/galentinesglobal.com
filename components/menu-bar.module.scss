@@ -5,7 +5,7 @@
   justify-content: space-between;
   align-items: center;
   color: lightgray;
-  padding: 2.5% 5%;
+  padding: 3.5% 5%;
   position: absolute;
   width: 100%;
   z-index: 100;
@@ -161,6 +161,8 @@
 
 @media (max-width: $md-screens) {
   .menuContainer {
+    padding: 4.5% 3% 5% 5%;
+    
     svg {
       width: 7rem;
       height: 5rem;
@@ -186,7 +188,7 @@
 
 @media (max-width: $sm-screens) {
   .menuContainer {
-    padding: 3% 5%;
+    padding: 9% 3% 9% 5%;
   }
 
   .mobileMenuItem {
