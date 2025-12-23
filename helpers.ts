@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import { GALENTINESGLOBAL } from "data/galentinesglobal/index";
 import { WINDSOFCHANGE } from "data/windsofchange/index";
 import { CMSContent } from "data/cms-types";
-import { Event, PriceType } from "types";
+import { Event } from "types";
 
 // Convert CMS content to Event type for backward compatibility
 export function getEventFromCMS(cms: CMSContent): Event {
@@ -36,18 +36,6 @@ export function getCMSById(id: string): CMSContent {
 }
 
 
-
-export const getPriceSuffix = (priceType: PriceType) => {
-    const { STARTING, HOURLY } = PriceType;
-    switch (priceType) {
-        case STARTING:
-            return '+';
-        case HOURLY:
-            return ' per hour';
-        default:
-            return '';
-    }
-};
 
 export const useScreenSizeDetector = () => {
     const [width, setWidth] = useState(968);
