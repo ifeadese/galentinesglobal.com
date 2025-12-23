@@ -7,6 +7,8 @@
   color: lightgray;
   padding: 2.5% 5%;
   border-bottom: 1px solid $border-color;
+  position: relative;
+  z-index: 100;
 
   >.logo {
     height: auto;
@@ -22,12 +24,13 @@
     scale: 1.5;
   }
 
-  >ul {
+  .desktopMenu {
     display: flex;
     flex-direction: row;
     list-style-type: none;
     padding: unset;
     width: fit-content;
+    margin: 0;
 
     >* {
       font-weight: bold;
@@ -42,17 +45,119 @@
   }
 }
 
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  z-index: 9999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  animation: fadeIn 0.3s ease-out;
+  cursor: pointer;
+}
+
+.closeButton {
+  position: absolute;
+  top: 1.5rem;
+  right: 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10000;
+  transition: all 0.3s ease;
+  border-radius: 50%;
+  width: 3rem;
+  height: 3rem;
+
+  &:hover {
+    background: rgba(0, 0, 0, 0.05);
+    transform: scale(1.1);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  svg {
+    color: $text-primary !important;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+.mobileMenu {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  cursor: default;
+  pointer-events: auto;
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    gap: 2rem;
+  }
+}
+
+.mobileMenuItem {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: $text-primary;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+  padding: 1rem 2rem;
+
+  &:hover {
+    color: $primary;
+    transform: scale(1.05);
+  }
+
+  .menuIcon {
+    margin-right: 1rem;
+    display: flex;
+    align-items: center;
+    color: $primary;
+  }
+}
+
 @media (max-width: $md-screens) {
   .menuContainer {
-
     svg {
       width: 7rem;
       height: 5rem;
       margin: 1rem 0 0 0.5rem;
     }
 
-
-    >ul {
+    .desktopMenu {
       display: none;
     }
 
@@ -72,5 +177,9 @@
 @media (max-width: $sm-screens) {
   .menuContainer {
     padding: 3% 5%;
+  }
+
+  .mobileMenuItem {
+    font-size: 1.25rem;
   }
 }

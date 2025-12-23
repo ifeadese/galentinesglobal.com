@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import MenuBar from "components/menu-bar";
-import MobileDrawer from "components/mobile-drawer";
 import { FacebookMessengerChat } from "components/chat-button";
 import styles from "components/layout.module.scss";
 import { Business } from "types";
@@ -18,30 +17,25 @@ const Layout = ({ business, children }: Props) => {
   const { name, description, facebookPageId, facebookPageUrl, instagramPageUrl, contactEmailAddress } = business;
 
   return (
-    <>
-      <div className={styles.container}>
-        <Head>
-          <title>{name}</title>
-          <meta name="description" content={description} />
-          <link rel="icon" href="/favicon.ico" />
-        </Head>
-        <MenuBar
-          isDrawerOpen={isDrawerOpen}
-          showDrawer={showDrawer}
-          businessName={name}
-        />
+    <div className={styles.container}>
+      <Head>
+        <title>{name}</title>
+        <meta name="description" content={description} />
+        <link rel="icon" href="/favicon.ico" />
+      </Head>
+      <MenuBar
+        isDrawerOpen={isDrawerOpen}
+        showDrawer={showDrawer}
+        businessName={name}
+      />
 
-        <main>
-          {children}
-          <FacebookMessengerChat facebookPageId={facebookPageId} />
-        </main>
+      <main>
+        {children}
+        <FacebookMessengerChat facebookPageId={facebookPageId} />
+      </main>
 
-        <Footer contactEmailAddress={contactEmailAddress} facebookPageUrl={facebookPageUrl} instagramPageUrl={instagramPageUrl} />
-      </div>
-      {isDrawerOpen && (
-        <MobileDrawer isDrawerOpen={isDrawerOpen} showDrawer={showDrawer} businessName={name} />
-      )}
-    </>
+      <Footer contactEmailAddress={contactEmailAddress} facebookPageUrl={facebookPageUrl} instagramPageUrl={instagramPageUrl} />
+    </div>
   );
 };
 
