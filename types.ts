@@ -22,11 +22,16 @@ export interface CMSContent {
     description: string;
     marketingCopy: string;
     contactEmailAddress: string;
-    facebookPageId?: string;
+    logo?: string; // Logo image path (e.g., "/images/logo.svg")
+    logoAlt?: string; // Logo alt text
     facebookPageUrl?: string;
     instagramPageUrl?: string;
   };
-  home: PageContent;
+  home: PageContent & {
+    slideshowImages?: string[]; // Array of image paths for home page slideshow
+    mainLogo?: string; // Main logo/branding image for home page (e.g., "/images/the-love-of-god.svg")
+    mainLogoAlt?: string; // Main logo alt text
+  };
   about: PageContent;
   support: PageContent;
   error404: PageContent;
@@ -39,9 +44,10 @@ export interface Event {
   marketingCopy: string;
   pagePath: string;
   heroImage: AppImage;
+  logo?: string; // Logo image path for navigation/footer
+  logoAlt?: string; // Logo alt text
   calendlyLink?: string;
   contactEmailAddress: string;
-  facebookPageId?: string;
   facebookPageUrl?: string;
   instagramPageUrl?: string;
 }

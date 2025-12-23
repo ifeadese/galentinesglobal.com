@@ -33,10 +33,10 @@ export default function AboutPage({ cms: stringifiedCMS }: AboutPageProps) {
   return (
     <Layout event={event}>
       <TitleHero
-        image={aboutContent.heroImage || "/images/ladies.jpeg"}
-        imageAlt={aboutContent.heroImageAlt || "Galentines Community"}
-        title={aboutContent.heroTitle || "About Galentines"}
-        subtitle={aboutContent.heroSubtitle || "Empowering Women Through Faith"}
+        image={aboutContent.heroImage!}
+        imageAlt={aboutContent.heroImageAlt!}
+        title={aboutContent.heroTitle!}
+        subtitle={aboutContent.heroSubtitle!}
       />
 
       {/* Content Section */}

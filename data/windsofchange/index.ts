@@ -9,13 +9,22 @@ export const WINDSOFCHANGE: CMSContent = {
     description: "Annual Ladies' Christian Faith Conference",
     marketingCopy: 'Empowering Women Through Faith',
     contactEmailAddress: 'ifeadese16@gmail.com',
+    logo: "/images/galentines-gradient-logo.svg", // TODO: Replace with Winds of Change logo
+    logoAlt: "Winds of Change",
     instagramPageUrl: "https://www.instagram.com/galentineglobal",
   },
   home: {
     heroImage: "/images/panelists.jpeg",
     heroImageAlt: "Galentines Conference Panelists",
-    verse: "And to know the love of Christ which passes knowledge; that you might be filled with all the fullness of God.",
-    verseReference: "Ephesians 3:19",
+    slideshowImages: [
+      "/images/panelists.jpeg",
+      "/images/ladies.jpeg",
+      "/images/support.jpeg",
+      "/images/volunteer.jpeg",
+    ], // TODO: Replace with Winds of Change images
+    mainLogo: "/images/the-love-of-god.svg", // TODO: Replace with Winds of Change main logo
+    mainLogoAlt: "Winds of Change",
+    verse: "And to know the love of Christ which passes knowledge; that you might be filled with all the fullness of God. - Ephesians 3:19",
     eventDate: "February 7, 2026",
     host: "Hosted by Shile Adeyoyin",
     rsvpUrl: "https://rsvpify.com/",

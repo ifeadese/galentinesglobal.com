@@ -25,10 +25,10 @@ export default function SupportPage({ cms: stringifiedCMS }: SupportPageProps) {
   return (
     <Layout event={event}>
       <TitleHero
-        image={supportContent.heroImage || "/images/support.jpeg"}
-        imageAlt={supportContent.heroImageAlt || "Support Galentines"}
-        title={supportContent.heroTitle || "To the Willing Hearted"}
-        subtitle={supportContent.heroSubtitle || "Work With Us"}
+        image={supportContent.heroImage!}
+        imageAlt={supportContent.heroImageAlt!}
+        title={supportContent.heroTitle!}
+        subtitle={supportContent.heroSubtitle!}
       />
 
       {/* Content Section */}

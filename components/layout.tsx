@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import MenuBar from "components/menu-bar";
-import { FacebookMessengerChat } from "components/chat-button";
 import styles from "components/layout.module.scss";
 import { Event } from "types";
 import Footer from "components/footer";
@@ -14,7 +13,7 @@ interface Props {
 const Layout = ({ event, children }: Props) => {
   const [isDrawerOpen, setIsDrawerOpen] = useState(false);
   const showDrawer = (state: boolean) => setIsDrawerOpen(state);
-  const { name, description, facebookPageId, facebookPageUrl, instagramPageUrl, contactEmailAddress } = event;
+  const { name, description, logo, logoAlt, facebookPageUrl, instagramPageUrl, contactEmailAddress } = event;
 
   return (
     <div className={styles.container}>
@@ -27,14 +26,21 @@ const Layout = ({ event, children }: Props) => {
         isDrawerOpen={isDrawerOpen}
         showDrawer={showDrawer}
         businessName={name}
+        logo={logo}
+        logoAlt={logoAlt}
       />
 
       <main>
         {children}
-        <FacebookMessengerChat facebookPageId={facebookPageId} />
       </main>
 
-      <Footer contactEmailAddress={contactEmailAddress} facebookPageUrl={facebookPageUrl} instagramPageUrl={instagramPageUrl} />
+      <Footer 
+        contactEmailAddress={contactEmailAddress} 
+        logo={logo}
+        logoAlt={logoAlt}
+        facebookPageUrl={facebookPageUrl} 
+        instagramPageUrl={instagramPageUrl} 
+      />
     </div>
   );
 };

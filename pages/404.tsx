@@ -17,12 +17,12 @@ export default function ErrorPage({ cms: stringifiedCMS }: ErrorPageProps) {
   return (
     <Layout event={event}>
       <section style={{ padding: '5rem 2rem', textAlign: "center" }}>
-        <Image src={errorContent.image || "/images/404.png"} alt={errorContent.imageAlt || "404"} width={150} height={150} />
-        <h1 style={{ marginBottom: 'unset' }}>{errorContent.title || "We don't have this page"}</h1>
+        <Image src={errorContent.image!} alt={errorContent.imageAlt!} width={150} height={150} />
+        <h1 style={{ marginBottom: 'unset' }}>{errorContent.title!}</h1>
         <br />
-        <p style={{ marginTop: 'unset' }}>{errorContent.message || "Your URL is probably invalid. Make sure you have the correct one."}</p>
-        <Link href={errorContent.buttonLink || "/"} legacyBehavior>
-          <Button variant="primary">{errorContent.buttonText || "Return Home"}</Button>
+        <p style={{ marginTop: 'unset' }}>{errorContent.message!}</p>
+        <Link href={errorContent.buttonLink!} legacyBehavior>
+          <Button variant="primary">{errorContent.buttonText!}</Button>
         </Link>
       </section>
     </Layout>

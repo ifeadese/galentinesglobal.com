@@ -9,11 +9,13 @@ import { pages } from "./pages";
 
 interface MenuBarProps {
   businessName: string;
+  logo?: string;
+  logoAlt?: string;
   isDrawerOpen: boolean;
   showDrawer: (state: boolean) => void;
 }
 
-const MenuBar = ({ businessName, isDrawerOpen, showDrawer }: MenuBarProps) => {
+const MenuBar = ({ businessName, logo, logoAlt, isDrawerOpen, showDrawer }: MenuBarProps) => {
   const router = useRouter();
 
   // Close menu when route changes
@@ -34,15 +36,17 @@ const MenuBar = ({ businessName, isDrawerOpen, showDrawer }: MenuBarProps) => {
   return (
     <>
       <div className={styles.menuContainer}>
-        <Link href="/" >
-          <Image 
-            src="/images/galentines-gradient-logo.svg" 
-            alt={businessName}
-            width={150}
-            height={50}
-            className={styles.logo}
-          />
-        </Link>
+        {logo && (
+          <Link href="/" >
+            <Image 
+              src={logo} 
+              alt={logoAlt || businessName}
+              width={150}
+              height={50}
+              className={styles.logo}
+            />
+          </Link>
+        )}
         <ul className={styles.desktopMenu}>
           {pages.map((page, idx) => {
             if (!page.disabled)

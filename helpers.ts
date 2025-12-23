@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { GALENTINESGLOBAL } from "data/galentinesglobal/index";
 import { WINDSOFCHANGE } from "data/windsofchange/index";
+import { mergeWithDefaults } from "data/defaults";
 import { CMSContent } from "types";
 import { Event } from "types";
 
@@ -13,21 +14,26 @@ export function getEventFromCMS(cms: CMSContent): Event {
     marketingCopy: cms.general.marketingCopy,
     pagePath: '/',
     heroImage: {
-      path: cms.home.heroImage || "/images/panelists.jpeg",
-      altText: cms.home.heroImageAlt || "Galentines Conference Panelists",
+      path: cms.home.heroImage!,
+      altText: cms.home.heroImageAlt!,
     },
+    logo: cms.general.logo,
+    logoAlt: cms.general.logoAlt || cms.general.name,
     contactEmailAddress: cms.general.contactEmailAddress,
-    facebookPageId: cms.general.facebookPageId,
     facebookPageUrl: cms.general.facebookPageUrl,
     instagramPageUrl: cms.general.instagramPageUrl,
   };
 }
 
 export function getCMSById(id: string | undefined): CMSContent {
+    let eventCMS: CMSContent;
     switch (id) {
         case 'WINDSOFCHANGE':
-            return WINDSOFCHANGE;
+            eventCMS = WINDSOFCHANGE;
+            break;
         default:
-            return GALENTINESGLOBAL;
+            eventCMS = GALENTINESGLOBAL;
     }
+    // Merge with defaults to ensure all fields are present
+    return mergeWithDefaults(eventCMS);
 }

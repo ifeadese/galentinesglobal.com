@@ -1,10 +1,11 @@
 {
-  "name": "loctineer.com",
+  "name": "galentinesglobal.com",
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
-    "build": "next build",
+    "copy-images": "node scripts/copy-images.js",
+    "dev": "npm run copy-images && next dev",
+    "build": "npm run copy-images && next build",
     "start": "next start",
     "lint": "next lint"
   },

@@ -40,7 +40,6 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    "data/loctineer/services/natural-hair-locking.js",
     ".next/types/**/*.ts"
   ],
   "exclude": [
