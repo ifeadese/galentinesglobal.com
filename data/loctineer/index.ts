@@ -7,10 +7,8 @@ export const LOCTINEER = {
     marketingCopy: 'Creating your best look',
     pagePath: '/services',
     heroImage: {
-        path: require("data/loctineer/images/braids-and-twists.jpg"),
-        altText: "",
+        path: "/images/panelists.jpeg" as any,
+        altText: "Galentines Conference Panelists",
     },
-    services: allServices,
-    facebookPageId: '156788817527257',
-    contactEmailAddress: 'ifeoluwaadese@gmail.com'
+    contactEmailAddress: 'galentinesglobal@gmail.com'
 }

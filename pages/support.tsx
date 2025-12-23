@@ -38,7 +38,7 @@ export default function SupportPage({ business: stringifiedBusinessObj }: Suppor
             letterSpacing: '1px',
             textTransform: 'uppercase'
           }}>
-            Partner with Us
+            Work With Us
           </p>
           <p style={{ 
             fontSize: '0.875rem', 
@@ -60,7 +60,7 @@ export default function SupportPage({ business: stringifiedBusinessObj }: Suppor
           <div 
             className={styles.featureCard}
             style={{
-              backgroundImage: `url('https://media.gettyimages.com/id/1408412107/photo/storing-the-donations.jpg?b=1&s=2048x2048&w=0&k=20&c=IKgHUEXDjvXQo1S2A_rk0AFEpzislJZ0oHF5VJxl9cA=')`
+              backgroundImage: `url('/images/volunteer.jpeg')`
             }}
             onClick={() => window.open('https://galentines.fillout.com/volunteers', '_blank')}
           >

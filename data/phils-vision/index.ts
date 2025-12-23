@@ -7,11 +7,10 @@ export const PHILSVISION = {
     marketingCopy: 'Capturing you in your best light',
     pagePath: `/services`,
     heroImage: {
-        path: require("data/phils-vision/images/fashion-shoot.jpeg"),
-        altText: "",
+        path: "/images/panelists.jpeg" as any,
+        altText: "Galentines Conference Panelists",
     },
     services: allServices,
     contactEmailAddress: "ifeadese16@gmail.com",
-    instagramPageUrl: "https://www.instagram.com/galentinesglobal",
-    facebookPageUrl: "https://www.facebook.com/ifedaviid",
+    instagramPageUrl: "https://www.instagram.com/galentineglobal",
 }
