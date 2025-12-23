@@ -10,5 +10,6 @@ export const LOCTINEER = {
         path: "/images/panelists.jpeg" as any,
         altText: "Galentines Conference Panelists",
     },
+    services: allServices,
     contactEmailAddress: 'galentinesglobal@gmail.com'
 }

@@ -62,7 +62,7 @@ By Gods beautiful grace, Galentines has held annually since 2023. We’ve explor
             </div>
             <h3 className={styles.cardTitle}>Healing Hurting Hearts</h3>
             <p className={styles.cardDescription}>
-              Through prayer, worship, and authentic fellowship, we create a space where women find healing and restoration in God's perfect love.
+              Through prayer, worship, and authentic fellowship, we create a space where women find healing and restoration in God&apos;s perfect love.
             </p>
           </div>
 
