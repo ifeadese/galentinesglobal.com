@@ -37,9 +37,4 @@ next-env.d.ts
 
 # Generated images (copied from data/galentinesglobal/images during build)
 # Keep 404.png as it's event-agnostic
-/public/images/galentines-gradient-logo.svg
-/public/images/ladies.jpeg
-/public/images/panelists.jpeg
-/public/images/support.jpeg
-/public/images/the-love-of-god.svg
-/public/images/volunteer.jpeg
+/public/images/*

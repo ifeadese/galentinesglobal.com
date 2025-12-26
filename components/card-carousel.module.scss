@@ -18,10 +18,6 @@
   animation: scroll 30s linear infinite;
   width: fit-content;
   will-change: transform;
-  
-  &:hover {
-    animation-play-state: paused;
-  }
 
   @media (min-width: $lg-screens) {
     gap: 1.5rem;
