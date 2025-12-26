@@ -16,12 +16,14 @@ export const WINDSOFCHANGE: CMSContent = {
   home: {
     heroImage: "/images/panelists.jpeg",
     heroImageAlt: "Galentines Conference Panelists",
-    slideshowImages: [
+    heroImages: [
       "/images/panelists.jpeg",
       "/images/ladies.jpeg",
       "/images/support.jpeg",
+    ], // TODO: Replace with Winds of Change hero images
+    carouselImages: [
       "/images/volunteer.jpeg",
-    ], // TODO: Replace with Winds of Change images
+    ], // TODO: Replace with Winds of Change carousel images
     mainLogo: "/images/the-love-of-god.svg", // TODO: Replace with Winds of Change main logo
     mainLogoAlt: "Winds of Change",
     verse: "And to know the love of Christ which passes knowledge; that you might be filled with all the fullness of God. - Ephesians 3:19",

@@ -28,7 +28,8 @@ export interface CMSContent {
     instagramPageUrl?: string;
   };
   home: PageContent & {
-    slideshowImages?: string[]; // Array of image paths for home page slideshow
+    heroImages?: string[]; // Array of image paths for home page hero slideshow
+    carouselImages?: string[]; // Array of image paths for home page carousel
     mainLogo?: string; // Main logo/branding image for home page (e.g., "/images/the-love-of-god.svg")
     mainLogoAlt?: string; // Main logo alt text
   };

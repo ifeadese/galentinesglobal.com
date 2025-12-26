@@ -18,11 +18,16 @@ export const DEFAULT_CMS: Partial<CMSContent> = {
   home: {
     heroImage: "/images/panelists.jpeg",
     heroImageAlt: "Conference Panelists",
-    slideshowImages: [
+    heroImages: [
       "/images/panelists.jpeg",
       "/images/ladies.jpeg",
       "/images/support.jpeg",
+    ],
+    carouselImages: [
       "/images/volunteer.jpeg",
+      "/images/panelists.jpeg",
+      "/images/ladies.jpeg",
+      "/images/support.jpeg",
     ],
     mainLogo: undefined,
     mainLogoAlt: undefined,

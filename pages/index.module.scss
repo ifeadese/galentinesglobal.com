@@ -65,7 +65,7 @@
 
   .verse {
     font-style: italic;
-    margin-bottom: 1.5rem;
+    margin: 1.5rem 0;
     line-height: 1.8;
   }
 
@@ -114,6 +114,40 @@
   button {
     margin: 2rem 0;
     width: fit-content;
+  }
+}
+
+.aboutSection {
+  background: linear-gradient(180deg, rgb(232, 206, 215) 0%, rgb(251, 251, 251) 100%);
+  text-align: center;
+  overflow-x: hidden;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.aboutContent {
+  max-width: 56rem;
+  margin: 2rem;
+}
+
+.aboutParagraphs {
+  margin-bottom: 1.5rem;
+  font-weight: 500;
+}
+
+.carouselContainer {
+  width: 100%;
+  margin: 1rem 0;
+}
+
+.aboutParagraph {
+  font-size: 1.125rem;
+  line-height: 1.875rem;
+  margin-bottom: 1.5rem;
+  color: $color-text-primary;
+  
+  &:last-child {
+    margin-bottom: 0;
   }
 }
 

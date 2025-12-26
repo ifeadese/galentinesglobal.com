@@ -14,15 +14,24 @@ export const GALENTINESGLOBAL: CMSContent = {
   home: {
     heroImage: "/images/panelists.jpeg",
     heroImageAlt: "Galentines Conference Panelists",
-    slideshowImages: [
+    heroImages: [
       "/images/panelists.jpeg",
       "/images/ladies.jpeg",
-      "/images/support.jpeg",
+      "/images/2024-stage.JPG",
+      "/images/selfie.JPG",
+      "/images/held-hands.jpg",
+    ],
+    carouselImages: [
       "/images/volunteer.jpeg",
+      "/images/prayer.jpg",
+      "/images/dance.jpeg",
+      "/images/worship.jpeg",
+      "/images/joy.jpg",
+      
     ],
     mainLogo: "/images/the-love-of-god.svg",
     mainLogoAlt: "The Love of God",
-    verse: "And to know the love of Christ which passes knowledge; that you might be filled with all the fullness of God. - Ephesians 3:19",
+    verse: "..to know the love of Christ which passes knowledge; that you might be filled with all the fullness of God.\" - Ephesians 3:19",
     eventDate: "February 7, 2026",
     host: "Hosted by Shile Adeyoyin",
     rsvpUrl: "https://rsvpify.com/",
