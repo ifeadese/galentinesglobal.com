@@ -16,7 +16,7 @@ export const GALENTINESGLOBAL: CMSContent = {
     heroImageAlt: "Galentines Conference Panelists",
     heroImages: [
       "/images/panelists.jpeg",
-      "/images/ladies.jpeg",
+      "/images/ladies.JPG",
       "/images/2024-stage.JPG",
       "/images/selfie.JPG",
       "/images/held-hands.jpg",
@@ -39,7 +39,7 @@ export const GALENTINESGLOBAL: CMSContent = {
   about: {
     heroTitle: "About Galentines",
     heroSubtitle: "Empowering Women Through Faith",
-    heroImage: "/images/ladies.jpeg",
+    heroImage: "/images/ladies.JPG",
     heroImageAlt: "Galentines Community",
     paragraphs: [
       "Galentines is more than a love month gathering. It is a movement, where women experience the healing & transforming power of God through prayer, worship and fellowship.",

@@ -20,13 +20,13 @@ export const DEFAULT_CMS: Partial<CMSContent> = {
     heroImageAlt: "Conference Panelists",
     heroImages: [
       "/images/panelists.jpeg",
-      "/images/ladies.jpeg",
-      "/images/support.jpeg",
+      "/images/ladies.JPG",
+      "/images/support.JPG",
     ],
     carouselImages: [
       "/images/volunteer.jpeg",
       "/images/panelists.jpeg",
-      "/images/ladies.jpeg",
+      "/images/ladies.JPG",
       "/images/support.jpeg",
     ],
     mainLogo: undefined,
@@ -37,7 +37,7 @@ export const DEFAULT_CMS: Partial<CMSContent> = {
     rsvpUrl: "https://rsvpify.com/",
   },
   about: {
-    heroImage: "/images/ladies.jpeg",
+    heroImage: "/images/ladies.JPG",
     heroImageAlt: "Community",
     heroTitle: "About",
     heroSubtitle: "Empowering Through Faith",
