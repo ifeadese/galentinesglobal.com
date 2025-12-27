@@ -39,9 +39,10 @@ export default function SupportPage({ cms: stringifiedCMS }: SupportPageProps) {
         <div style={{ maxWidth: '56rem', margin: '0 auto 2rem', textAlign: 'center' }}>
           {supportContent.paragraphs?.map((paragraph, index) => (
             <p key={index} style={{ 
-              fontSize: '0.875rem', 
+              fontSize: '1.125rem', 
               marginBottom: '1rem', 
-              lineHeight: '1.75rem' 
+              lineHeight: '1.75rem',
+              fontWeight: 500
             }}>
               {paragraph}
             </p>
