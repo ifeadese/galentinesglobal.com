@@ -71,12 +71,12 @@ export default function HomePage({ cms: stringifiedCMS }: HomePageProps) {
           <div className={styles.eventInfo}>
             <span className={styles.eventInfoItem}>
               <EventIcon sx={{ fontSize: '1rem', marginRight: '0.5rem', verticalAlign: 'middle' }} />
-              {homeContent.eventDate}
+              <small>{homeContent.eventDate}</small>
             </span>
             <span className={styles.eventInfoDivider}>•</span>
             <span className={styles.eventInfoItem}>
               <PersonIcon sx={{ fontSize: '1rem', marginRight: '0.5rem', verticalAlign: 'middle' }} />
-              {homeContent.host}
+              <small>{homeContent.host}</small>
             </span>
           </div>
           <Button

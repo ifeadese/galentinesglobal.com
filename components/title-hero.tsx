@@ -23,7 +23,6 @@ const TitleHero = ({ image, imageAlt, title, subtitle }: TitleHeroProps) => {
       </div>
       <div className={styles.heroContent}>
         <h1 className={styles.heroTitle}>{title}</h1>
-        {subtitle && <p className={styles.heroSubtitle}>{subtitle}</p>}
       </div>
     </section>
   );

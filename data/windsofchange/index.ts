@@ -38,7 +38,7 @@ export const WINDSOFCHANGE: CMSContent = {
     heroImageAlt: "Galentines Community",
     paragraphs: [
       "Galentines is more than a love month gathering. It is a movement, where women experience the healing & transforming power of God through prayer, worship and fellowship.",
-      "By Gods beautiful grace, Galentines has held annually since 2023. We've explored several powerful themes such as boldness, purpose and newness, but our vision remains the same — to bring women into the revelation of the Fathers love and the fullness of who they truly are in God."
+      "By God's beautiful grace, Galentines has held annually since 2023. We've explored several powerful themes such as boldness, purpose and newness, but our vision remains the same — to bring women into the revelation of the Fathers love and the fullness of who they truly are in God."
     ],
     features: [
       {
