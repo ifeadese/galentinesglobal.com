@@ -12,7 +12,8 @@ function formatReadableTimestamp(date: Date = new Date()): string {
     'July', 'August', 'September', 'October', 'November', 'December'
   ];
 
-  // Format date in EST/EDT timezone (America/Toronto)
+  // Format date in EST/EDT timezone (America/Toronto) with 12-hour format
+  // This ensures AM/PM is correctly determined by the browser's locale handling
   const estDateStr = date.toLocaleString('en-US', {
     timeZone: 'America/Toronto',
     year: 'numeric',
@@ -21,23 +22,32 @@ function formatReadableTimestamp(date: Date = new Date()): string {
     hour: '2-digit',
     minute: '2-digit',
     second: '2-digit',
-    hour12: false
+    hour12: true // Use 12-hour format to get AM/PM directly
   });
 
-  // Parse the formatted string: "MM/DD/YYYY, HH:mm:ss"
-  const [datePart, timePart] = estDateStr.split(', ');
+  // Parse the formatted string: "MM/DD/YYYY, HH:mm:ss AM/PM"
+  const [datePart, timePartWithAmPm] = estDateStr.split(', ');
   const [monthStr, dayStr, yearStr] = datePart.split('/');
-  const [hourStr, minuteStr] = timePart.split(':');
+  
+  // Extract time and AM/PM separately
+  const timeMatch = timePartWithAmPm.match(/(\d{1,2}):(\d{2}):(\d{2})\s*(AM|PM)/i);
+  if (!timeMatch) {
+    // Fallback if regex doesn't match
+    const [hourStr, minuteStr] = timePartWithAmPm.split(':');
+    const month = months[parseInt(monthStr) - 1];
+    const day = parseInt(dayStr);
+    const year = parseInt(yearStr);
+    return `${month} ${day}, ${year} at ${hourStr}:${minuteStr}`;
+  }
 
+  const [, hourStr, minuteStr, , ampmUpper] = timeMatch;
   const month = months[parseInt(monthStr) - 1];
   const day = parseInt(dayStr);
   const year = parseInt(yearStr);
-  
-  let hours = parseInt(hourStr);
+  const hours = parseInt(hourStr);
   const minutes = parseInt(minuteStr);
-  const ampm = hours >= 12 ? 'pm' : 'am';
-  hours = hours % 12;
-  hours = hours ? hours : 12; // 0 should be 12
+  const ampm = ampmUpper.toLowerCase();
+  
   const minutesStr = minutes < 10 ? `0${minutes}` : minutes.toString();
   
   return `${month} ${day}, ${year} at ${hours}:${minutesStr}${ampm}`;

@@ -27,7 +27,6 @@ export const GALENTINESGLOBAL: CMSContent = {
       "/images/dance.jpeg",
       "/images/worship.jpeg",
       "/images/joy.jpg",
-      
     ],
     mainLogo: "/images/the-love-of-god.svg",
     mainLogoAlt: "The Love of God",
