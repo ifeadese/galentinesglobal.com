@@ -19,6 +19,23 @@ interface AdminPageProps {
   cms: string;
 }
 
+type ConfigState = {
+  sheetId: string;
+  sheetName: string;
+  ownerEmail: string;
+  sheetMode: 'existing' | 'create';
+};
+
+// Move defaultConfig outside component to prevent infinite re-renders
+const defaultConfig: ConfigState = {
+  sheetId: '',
+  sheetName: 'Form Submissions',
+  ownerEmail: '',
+  sheetMode: 'existing',
+};
+
+const DEFAULT_SHEET_NAME = defaultConfig.sheetName;
+
 export default function AdminPage({ cms: stringifiedCMS }: AdminPageProps) {
   const cms: CMSContent = JSON.parse(stringifiedCMS);
   const event = getEventFromCMS(cms);
@@ -33,27 +50,11 @@ export default function AdminPage({ cms: stringifiedCMS }: AdminPageProps) {
   const [loadingSheets, setLoadingSheets] = useState(false);
   const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
   const [authorized, setAuthorized] = useState<boolean | null>(null); // null = checking, true = authorized, false = denied
-  
-  type ConfigState = {
-    sheetId: string;
-    sheetName: string;
-    ownerEmail: string;
-    sheetMode: 'existing' | 'create';
-  };
-
-  const defaultConfig: ConfigState = {
-    sheetId: '',
-    sheetName: 'Form Submissions',
-    ownerEmail: '',
-    sheetMode: 'existing',
-  };
-
-  const DEFAULT_SHEET_NAME = defaultConfig.sheetName;
 
   const [initialConfig, setInitialConfig] = useState<ConfigState | null>(null);
   const [configLoaded, setConfigLoaded] = useState(false);
 
-  async function loadSheets() {
+  const loadSheets = useCallback(async () => {
     setLoadingSheets(true);
     try {
       const res = await fetch('/api/sheets/list');
@@ -71,9 +72,9 @@ export default function AdminPage({ cms: stringifiedCMS }: AdminPageProps) {
     } finally {
       setLoadingSheets(false);
     }
-  }
+  }, []);
 
-  async function loadConfig() {
+  const loadConfig = useCallback(async () => {
     try {
       const res = await fetch('/api/setup/config');
       if (res.status === 403) {
@@ -101,7 +102,7 @@ export default function AdminPage({ cms: stringifiedCMS }: AdminPageProps) {
       console.error('Failed to load config:', error);
       setConfigLoaded(true);
     }
-  }
+  }, []);
 
   const checkConnection = useCallback(async () => {
     try {
@@ -139,7 +140,7 @@ export default function AdminPage({ cms: stringifiedCMS }: AdminPageProps) {
     } finally {
       setLoading(false);
     }
-  }, [defaultConfig]);
+  }, [loadSheets, loadConfig]); // loadSheets and loadConfig are now wrapped in useCallback
 
   useEffect(() => {
     checkConnection();
