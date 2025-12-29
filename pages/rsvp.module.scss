@@ -13,3 +13,27 @@
   }
 }
 
+.warningBanner {
+  background: linear-gradient(135deg, #fff3cd 0%, #ffeaa7 100%);
+  border: 2px solid #ffc107;
+  border-radius: 12px;
+  padding: 1.25rem 1.5rem;
+  margin-bottom: 1.5rem;
+  box-shadow: 0 2px 8px rgba(255, 193, 7, 0.2);
+}
+
+.warningText {
+  margin: 0;
+  color: #856404;
+  font-size: 0.9375rem;
+  line-height: 1.6;
+  text-align: left;
+
+  strong {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+    color: #664d03;
+  }
+}
+

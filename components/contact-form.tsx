@@ -13,6 +13,7 @@ interface ContactFormProps {
   onSubmit?: (data: FormData) => void;
   submitButtonText?: string;
   description?: React.ReactNode;
+  disabled?: boolean; // Disable form submission (e.g., when Google connection is not set up)
   fields?: Array<{
     name: string;
     label: string;
@@ -38,6 +39,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
   onSubmit,
   submitButtonText = "Submit",
   description,
+  disabled = false,
   fields = [
     { name: "name", label: "Name", type: "text", required: true, placeholder: "Your name" },
     { name: "email", label: "Email", type: "email", required: true, placeholder: "your.email@example.com" },
@@ -176,7 +178,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
         <Button
           type="submit"
           variant="primary"
-          disabled={isSubmitting}
+          disabled={isSubmitting || disabled}
         >
           {isSubmitting ? "Submitting..." : submitButtonText}
         </Button>
