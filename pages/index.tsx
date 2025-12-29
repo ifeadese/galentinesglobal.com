@@ -8,7 +8,6 @@ import { getCMSById, getEventFromCMS } from "helpers";
 import { CMSContent } from "types";
 import EventIcon from "@mui/icons-material/Event";
 import PersonIcon from "@mui/icons-material/Person";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import styles from "pages/index.module.scss";
 
 interface HomePageProps {
@@ -80,13 +79,11 @@ export default function HomePage({ cms: stringifiedCMS }: HomePageProps) {
               <small>{homeContent.host}</small>
             </span>
           </div>
-          <Button
-            variant="primary"
-            onClick={() => window.open(homeContent.rsvpUrl!, '_blank')}
-          >
-            RSVP Now
-            <OpenInNewIcon sx={{ fontSize: '1rem', marginLeft: '0.5rem', verticalAlign: 'middle' }} />
-          </Button>
+          <Link href="/rsvp" legacyBehavior>
+            <Button variant="primary">
+              RSVP Now
+            </Button>
+          </Link>
         </div>
       </header>
 

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { HomeRounded, BallotRounded, CropOriginalRounded, InfoRounded, HelpRounded } from '@mui/icons-material';
+import { HomeRounded, BallotRounded, CropOriginalRounded, InfoRounded, HelpRounded, EventAvailableRounded } from '@mui/icons-material';
 
 export const pages = [
   {
@@ -19,5 +19,11 @@ export const pages = [
     url: `/support`,
     disabled: false,
     icon: <HelpRounded sx={{ color: 'lightgray' }} />,
+  },
+  {
+    name: "RSVP",
+    url: `/rsvp`,
+    disabled: false,
+    icon: <EventAvailableRounded sx={{ color: 'lightgray' }} />,
   },
 ];

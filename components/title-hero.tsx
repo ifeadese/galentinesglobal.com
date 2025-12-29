@@ -6,10 +6,11 @@ interface TitleHeroProps {
   image: string;
   imageAlt: string;
   title: string;
-  subtitle?: string;
+  subtitle?: React.ReactNode;
+  children?: React.ReactNode;
 }
 
-const TitleHero = ({ image, imageAlt, title, subtitle }: TitleHeroProps) => {
+const TitleHero = ({ image, imageAlt, title, subtitle, children }: TitleHeroProps) => {
   return (
     <section className={styles.heroSection}>
       <div className={styles.heroImageContainer}>
@@ -23,6 +24,8 @@ const TitleHero = ({ image, imageAlt, title, subtitle }: TitleHeroProps) => {
       </div>
       <div className={styles.heroContent}>
         <h1 className={styles.heroTitle}>{title}</h1>
+        {subtitle && <p className={styles.heroSubtitle}>{subtitle}</p>}
+        {children && <div className={styles.heroChildren}>{children}</div>}
       </div>
     </section>
   );
