@@ -15,12 +15,6 @@ export const pages = [
     icon: <InfoRounded sx={{ color: 'lightgray' }} />,
   },
   {
-    name: "Support",
-    url: `/support`,
-    disabled: false,
-    icon: <HelpRounded sx={{ color: 'lightgray' }} />,
-  },
-  {
     name: "RSVP",
     url: `/rsvp`,
     disabled: false,
