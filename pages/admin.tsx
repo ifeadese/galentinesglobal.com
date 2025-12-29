@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Head from 'next/head';
 import type { GetServerSideProps } from 'next';
 import Layout from 'components/layout';
@@ -48,83 +48,10 @@ export default function AdminPage({ cms: stringifiedCMS }: AdminPageProps) {
     sheetMode: 'existing',
   };
 
+  const DEFAULT_SHEET_NAME = defaultConfig.sheetName;
+
   const [initialConfig, setInitialConfig] = useState<ConfigState | null>(null);
   const [configLoaded, setConfigLoaded] = useState(false);
-
-  useEffect(() => {
-    checkConnection();
-    
-    const params = new URLSearchParams(window.location.search);
-    const success = params.get('success');
-    const error = params.get('error');
-    
-    if (success) {
-      setMessage({ type: 'success', text: 'Google account connected successfully!' });
-      window.history.replaceState({}, '', '/admin');
-    } else if (error && error !== 'unauthorized') {
-      // Only show error if it's not "unauthorized" (that's handled by admin check)
-      setMessage({ type: 'error', text: `Connection failed: ${error.replace(/_/g, ' ')}` });
-      window.history.replaceState({}, '', '/admin');
-    } else if (error === 'unauthorized') {
-      // Clear unauthorized error from URL - admin check will handle it
-      window.history.replaceState({}, '', '/admin');
-    }
-  }, []);
-
-  // Sync initialConfig with form state after config loads
-  useEffect(() => {
-    if (configLoaded && !initialConfig) {
-      const currentSheetId = sheetMode === 'existing' ? sheetId : '';
-      const currentSheetName = sheetMode === 'create' 
-        ? sheetName.trim() 
-        : (sheets.find(s => s.id === sheetId)?.name || defaultConfig.sheetName);
-      
-      setInitialConfig({
-        sheetId: currentSheetId,
-        sheetName: currentSheetName,
-        ownerEmail: ownerEmail.trim(),
-        sheetMode: sheetMode,
-      });
-    }
-  }, [configLoaded, sheetId, sheetName, ownerEmail, sheetMode, sheets, initialConfig]);
-
-  async function checkConnection() {
-    try {
-      const res = await fetch('/api/auth/status');
-      if (!res.ok) throw new Error('Failed to check connection status');
-      const data = await res.json();
-      setConnected(data.connected);
-      if (data.connected) {
-        // Check admin access after connection
-        try {
-          const adminRes = await fetch('/api/auth/admin-check');
-          if (adminRes.status === 403) {
-            setAuthorized(false);
-            setMessage({ type: 'error', text: 'Access denied. Only administrators can access this page.' });
-            setLoading(false);
-            return;
-          }
-          setAuthorized(true);
-        } catch (error) {
-          // If admin check fails, allow access (for backward compatibility)
-          setAuthorized(true);
-        }
-        await loadSheets();
-        await loadConfig();
-      } else {
-        // If not connected, check if admin emails are configured
-        // If not configured, allow access (for initial setup)
-        const adminEmails = process.env.ADMIN_EMAILS;
-        setAuthorized(adminEmails ? false : true); // If no admin emails, allow (will check after connection)
-        setInitialConfig(defaultConfig);
-      }
-    } catch (error) {
-      console.error('Failed to check connection:', error);
-      setInitialConfig(defaultConfig);
-    } finally {
-      setLoading(false);
-    }
-  }
 
   async function loadSheets() {
     setLoadingSheets(true);
@@ -175,6 +102,81 @@ export default function AdminPage({ cms: stringifiedCMS }: AdminPageProps) {
       setConfigLoaded(true);
     }
   }
+
+  const checkConnection = useCallback(async () => {
+    try {
+      const res = await fetch('/api/auth/status');
+      if (!res.ok) throw new Error('Failed to check connection status');
+      const data = await res.json();
+      setConnected(data.connected);
+      if (data.connected) {
+        // Check admin access after connection
+        try {
+          const adminRes = await fetch('/api/auth/admin-check');
+          if (adminRes.status === 403) {
+            setAuthorized(false);
+            setMessage({ type: 'error', text: 'Access denied. Only administrators can access this page.' });
+            setLoading(false);
+            return;
+          }
+          setAuthorized(true);
+        } catch (error) {
+          // If admin check fails, allow access (for backward compatibility)
+          setAuthorized(true);
+        }
+        await loadSheets();
+        await loadConfig();
+      } else {
+        // If not connected, check if admin emails are configured
+        // If not configured, allow access (for initial setup)
+        const adminEmails = process.env.ADMIN_EMAILS;
+        setAuthorized(adminEmails ? false : true); // If no admin emails, allow (will check after connection)
+        setInitialConfig(defaultConfig);
+      }
+    } catch (error) {
+      console.error('Failed to check connection:', error);
+      setInitialConfig(defaultConfig);
+    } finally {
+      setLoading(false);
+    }
+  }, [defaultConfig]);
+
+  useEffect(() => {
+    checkConnection();
+    
+    const params = new URLSearchParams(window.location.search);
+    const success = params.get('success');
+    const error = params.get('error');
+    
+    if (success) {
+      setMessage({ type: 'success', text: 'Google account connected successfully!' });
+      window.history.replaceState({}, '', '/admin');
+    } else if (error && error !== 'unauthorized') {
+      // Only show error if it's not "unauthorized" (that's handled by admin check)
+      setMessage({ type: 'error', text: `Connection failed: ${error.replace(/_/g, ' ')}` });
+      window.history.replaceState({}, '', '/admin');
+    } else if (error === 'unauthorized') {
+      // Clear unauthorized error from URL - admin check will handle it
+      window.history.replaceState({}, '', '/admin');
+    }
+  }, [checkConnection]);
+
+  // Sync initialConfig with form state after config loads
+  useEffect(() => {
+    if (configLoaded && !initialConfig) {
+      const currentSheetId = sheetMode === 'existing' ? sheetId : '';
+      const currentSheetName = sheetMode === 'create' 
+        ? sheetName.trim() 
+        : (sheets.find(s => s.id === sheetId)?.name || DEFAULT_SHEET_NAME);
+      
+      setInitialConfig({
+        sheetId: currentSheetId,
+        sheetName: currentSheetName,
+        ownerEmail: ownerEmail.trim(),
+        sheetMode: sheetMode,
+      });
+    }
+  }, [configLoaded, sheetId, sheetName, ownerEmail, sheetMode, sheets, initialConfig, DEFAULT_SHEET_NAME]);
 
   function validateEmail(email: string): boolean {
     return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
@@ -403,7 +405,7 @@ export default function AdminPage({ cms: stringifiedCMS }: AdminPageProps) {
               margin: '0 auto 2rem'
             }}>
               Connect your Google account to save form submissions directly to Google Sheets. 
-              You'll only need to do this once.
+              You&apos;ll only need to do this once.
             </p>
             <div style={{ display: 'inline-flex', alignItems: 'center' }}>
               <Button 
@@ -643,7 +645,7 @@ export default function AdminPage({ cms: stringifiedCMS }: AdminPageProps) {
                 marginTop: '0.5rem',
                 marginBottom: 0
               }}>
-                You'll receive an email notification for each form submission.
+                You&apos;ll receive an email notification for each form submission.
               </p>
             </div>
             
