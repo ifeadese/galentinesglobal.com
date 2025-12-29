@@ -14,10 +14,11 @@ interface CardCarouselProps {
 
 export const CardCarousel = ({ cards, className }: CardCarouselProps) => {
   // Memoize duplicated cards for seamless infinite scroll animation
+  // Using 3 sets instead of 2 to create a buffer and prevent visible gaps on reset
   // This prevents recalculation on every render
   const duplicatedCards = useMemo(() => {
     if (!cards || cards.length === 0) return [];
-    return [...cards, ...cards];
+    return [...cards, ...cards, ...cards];
   }, [cards]);
 
   // Early return for empty cards (after hooks)

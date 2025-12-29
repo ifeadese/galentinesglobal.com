@@ -18,6 +18,13 @@
   animation: scroll 30s linear infinite;
   width: fit-content;
   will-change: transform;
+  // Ensure smooth animation without gaps
+  animation-fill-mode: both;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  // Force hardware acceleration for smoother animation
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
 
   @media (min-width: $lg-screens) {
     gap: 1rem;
@@ -29,7 +36,9 @@
     transform: translateX(0);
   }
   100% {
-    transform: translateX(-50%);
+    // Animate to -33.333% since we now have 3 sets of cards
+    // This ensures seamless loop: when it resets, the middle set looks identical to the first
+    transform: translateX(-33.333%);
   }
 }
 
