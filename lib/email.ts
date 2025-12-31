@@ -39,11 +39,16 @@ function escapeHtml(text: string): string {
 export async function sendEmail(to: string, subject: string, html: string): Promise<void> {
   try {
     const emailTransporter = getTransporter();
-    await emailTransporter.sendMail({
+    const result = await emailTransporter.sendMail({
       from: process.env.EMAIL_FROM,
       to,
       subject,
       html,
+    });
+    console.log('[Email] Email sent successfully:', {
+      to,
+      subject,
+      messageId: result.messageId,
     });
   } catch (error: any) {
     // Log detailed error for debugging
@@ -53,12 +58,16 @@ export async function sendEmail(to: string, subject: string, html: string): Prom
       error: error.message,
       code: error.code,
       response: error.response,
+      responseCode: error.responseCode,
+      command: error.command,
     });
     throw error; // Re-throw so caller can handle it
   }
 }
 
 export async function sendSubmitterEmail(email: string, data: any): Promise<void> {
+  console.log('[Email] Sending submitter confirmation email:', { email, dataKeys: Object.keys(data) });
+  
   // Format field names for display
   const formatFieldName = (key: string): string => {
     return key

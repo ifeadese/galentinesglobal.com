@@ -21,21 +21,36 @@ export default async function handler(
     // Send emails (don't wait, but log errors properly)
     if (isEmailConfigured()) {
       const config = await readConfig();
-      if (data.email) {
-        sendSubmitterEmail(data.email, data).catch((error) => {
+      const submitterEmail = data.email;
+      
+      // Log for debugging
+      console.log('[Email] Attempting to send emails:', {
+        hasSubmitterEmail: !!submitterEmail,
+        submitterEmail: submitterEmail,
+        hasOwnerEmail: !!config?.ownerEmail,
+        ownerEmail: config?.ownerEmail,
+      });
+      
+      if (submitterEmail) {
+        sendSubmitterEmail(submitterEmail, data).catch((error) => {
           console.error('[Email] Failed to send confirmation to submitter:', {
-            email: data.email,
+            email: submitterEmail,
             error: error.message,
             code: error.code,
+            response: error.response,
           });
         });
+      } else {
+        console.warn('[Email] No submitter email found in form data. Available fields:', Object.keys(data));
       }
+      
       if (config?.ownerEmail) {
         sendOwnerEmail(config.ownerEmail, data).catch((error) => {
           console.error('[Email] Failed to send notification to owner:', {
             ownerEmail: config.ownerEmail,
             error: error.message,
             code: error.code,
+            response: error.response,
           });
         });
       }
