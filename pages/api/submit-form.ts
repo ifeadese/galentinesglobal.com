@@ -3,6 +3,7 @@ import { appendToSheet } from 'lib/google-sheets';
 import { sendSubmitterEmail, sendOwnerEmail, isEmailConfigured } from 'lib/email';
 import { readConfig } from 'lib/token-storage';
 import { sanitizeFormData } from 'lib/sanitize';
+import { getCMSById } from 'helpers';
 
 export default async function handler(
   req: NextApiRequest,
@@ -22,6 +23,7 @@ export default async function handler(
     if (isEmailConfigured()) {
       const config = await readConfig();
       const submitterEmail = data.email;
+      const cms = getCMSById(process.env.EVENT_ID);
       
       // Log for debugging
       console.log('[Email] Attempting to send emails:', {
@@ -32,7 +34,7 @@ export default async function handler(
       });
       
       if (submitterEmail) {
-        sendSubmitterEmail(submitterEmail, data).catch((error) => {
+        sendSubmitterEmail(submitterEmail, data, cms).catch((error) => {
           console.error('[Email] Failed to send confirmation to submitter:', {
             email: submitterEmail,
             error: error.message,
@@ -45,7 +47,7 @@ export default async function handler(
       }
       
       if (config?.ownerEmail) {
-        sendOwnerEmail(config.ownerEmail, data).catch((error) => {
+        sendOwnerEmail(config.ownerEmail, data, cms).catch((error) => {
           console.error('[Email] Failed to send notification to owner:', {
             ownerEmail: config.ownerEmail,
             error: error.message,

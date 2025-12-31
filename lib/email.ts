@@ -1,4 +1,6 @@
 import nodemailer from 'nodemailer';
+import { CMSContent } from 'types';
+import { getCMSById } from 'helpers';
 
 // Create transporter only if email is configured
 let transporter: nodemailer.Transporter | null = null;
@@ -75,8 +77,18 @@ export async function sendEmail(to: string, subject: string, html: string): Prom
   }
 }
 
-export async function sendSubmitterEmail(email: string, data: any): Promise<void> {
+export async function sendSubmitterEmail(email: string, data: any, cms?: CMSContent): Promise<void> {
   console.log('[Email] Sending submitter confirmation email:', { email, dataKeys: Object.keys(data) });
+  
+  // Get CMS content if not provided
+  const eventData = cms || getCMSById(process.env.EVENT_ID);
+  const baseUrl = process.env.BASE_URL || 'https://www.galentinesglobal.com';
+  const logoUrl = eventData.general.logo ? `${baseUrl}${eventData.general.logo}` : '';
+  const eventName = eventData.general.name;
+  const eventDate = eventData.home.eventDate;
+  const verse = eventData.home.verse;
+  const contactEmail = eventData.general.contactEmailAddress || 'galentinesglobal@gmail.com';
+  const instagramUrl = eventData.general.instagramPageUrl;
   
   // Format field names for display
   const formatFieldName = (key: string): string => {
@@ -94,9 +106,9 @@ export async function sendSubmitterEmail(email: string, data: any): Promise<void
 
   const fieldsHtml = fieldsToShow.length > 0
     ? fieldsToShow.map(([key, value]) => 
-        `<tr><td style="padding: 8px 0; font-weight: 600; color: #333;">${formatFieldName(key)}:</td><td style="padding: 8px 0; padding-left: 16px; color: #666;">${escapeHtml(String(value))}</td></tr>`
+        `<tr><td style="padding: 8px 0; font-weight: 600; color: rgb(88, 35, 55);">${formatFieldName(key)}:</td><td style="padding: 8px 0; padding-left: 16px; color: rgb(102, 85, 95);">${escapeHtml(String(value))}</td></tr>`
       ).join('')
-    : '<tr><td colspan="2" style="padding: 8px 0; color: #666;">Your submission has been received.</td></tr>';
+    : '<tr><td colspan="2" style="padding: 8px 0; color: rgb(102, 85, 95);">Your submission has been received.</td></tr>';
 
   const html = `
     <!DOCTYPE html>
@@ -105,33 +117,67 @@ export async function sendSubmitterEmail(email: string, data: any): Promise<void
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
-      <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f5f5; padding: 40px 20px;">
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: rgb(255, 240, 245);">
+      <table width="100%" cellpadding="0" cellspacing="0" style="background-color: rgb(255, 240, 245); padding: 40px 20px;">
         <tr>
           <td align="center">
-            <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(220, 108, 140, 0.15); max-width: 600px;">
+              <!-- Header with gradient -->
               <tr>
-                <td style="padding: 40px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                  <h1 style="margin: 0; color: #ffffff; font-size: 28px; font-weight: 600;">Thank You! 🎉</h1>
+                <td style="padding: 40px 40px 30px; background: linear-gradient(135deg, rgb(220, 108, 140) 0%, rgb(200, 85, 115) 100%); text-align: center;">
+                  ${logoUrl ? `<img src="${logoUrl}" alt="${eventData.general.logoAlt || eventName}" style="max-width: 200px; height: auto; margin-bottom: 20px;" />` : ''}
+                  <h1 style="margin: 0 0 10px 0; color: #ffffff; font-size: 32px; font-weight: 600; letter-spacing: -0.5px;">Thank You! 💝</h1>
+                  <p style="margin: 0; color: rgba(255, 255, 255, 0.95); font-size: 16px; line-height: 1.5;">We&apos;re so excited to have you join us!</p>
                 </td>
               </tr>
+              
+              <!-- Event details -->
               <tr>
-                <td style="padding: 40px;">
-                  <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.6; color: #333;">
-                    We've successfully received your submission and are so excited to have you join us!
+                <td style="padding: 30px 40px; background-color: #ffffff;">
+                  <div style="text-align: center; padding: 20px; background-color: rgb(255, 240, 245); border-radius: 8px; margin-bottom: 30px;">
+                    <h2 style="margin: 0 0 8px 0; color: rgb(88, 35, 55); font-size: 22px; font-weight: 600;">${escapeHtml(eventName)}</h2>
+                    ${eventDate ? `<p style="margin: 0 0 12px 0; color: rgb(220, 108, 140); font-size: 18px; font-weight: 500;">${escapeHtml(eventDate)}</p>` : ''}
+                    ${verse ? `<p style="margin: 0; color: rgb(102, 85, 95); font-size: 14px; font-style: italic; line-height: 1.6;">${escapeHtml(verse)}</p>` : ''}
+                  </div>
+                </td>
+              </tr>
+              
+              <!-- Submission details -->
+              <tr>
+                <td style="padding: 0 40px 30px;">
+                  <p style="margin: 0 0 20px 0; font-size: 16px; line-height: 1.6; color: rgb(88, 35, 55);">
+                    We&apos;ve successfully received your submission! Here&apos;s a summary of what you submitted:
                   </p>
-                  <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.6; color: #333;">
-                    Here's a summary of what you submitted:
-                  </p>
-                  <table width="100%" cellpadding="0" cellspacing="0" style="margin: 24px 0; border-collapse: collapse;">
+                  <table width="100%" cellpadding="0" cellspacing="0" style="margin: 0; border-collapse: collapse; background-color: rgb(255, 240, 245); border-radius: 8px; padding: 20px;">
                     ${fieldsHtml}
                   </table>
-                  <p style="margin: 32px 0 0 0; font-size: 16px; line-height: 1.6; color: #333;">
-                    We're looking forward to seeing you soon! If you have any questions, feel free to reach out to us.
+                </td>
+              </tr>
+              
+              <!-- Closing message -->
+              <tr>
+                <td style="padding: 0 40px 40px;">
+                  <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.7; color: rgb(88, 35, 55);">
+                    We&apos;re looking forward to seeing you and celebrating God&apos;s love together. This gathering is designed to bring women into the revelation of the Father&apos;s love and the fullness of who we truly are in Christ.
                   </p>
-                  <p style="margin: 24px 0 0 0; font-size: 16px; line-height: 1.6; color: #666;">
-                    Best regards,<br>
-                    The Team
+                  <p style="margin: 0 0 24px 0; font-size: 15px; line-height: 1.6; color: rgb(102, 85, 95);">
+                    If you have any questions or need assistance, please don&apos;t hesitate to reach out to us at <a href="mailto:${contactEmail}" style="color: rgb(220, 108, 140); text-decoration: none; font-weight: 500;">${contactEmail}</a>.
+                  </p>
+                  ${instagramUrl ? `<p style="margin: 0 0 32px 0; font-size: 15px; color: rgb(102, 85, 95);">
+                    Follow us on <a href="${instagramUrl}" style="color: rgb(220, 108, 140); text-decoration: none; font-weight: 500;">Instagram</a> for updates and encouragement!
+                  </p>` : ''}
+                  <p style="margin: 0; padding-top: 24px; border-top: 2px solid rgb(255, 240, 245); font-size: 15px; line-height: 1.6; color: rgb(102, 85, 95);">
+                    With love and blessings,<br>
+                    <strong style="color: rgb(88, 35, 55);">The ${escapeHtml(eventName)} Team</strong>
+                  </p>
+                </td>
+              </tr>
+              
+              <!-- Footer -->
+              <tr>
+                <td style="padding: 30px 40px; background-color: rgb(88, 35, 55); text-align: center;">
+                  <p style="margin: 0; color: rgba(255, 255, 255, 0.8); font-size: 13px; line-height: 1.5;">
+                    Empowering Women Through Faith
                   </p>
                 </td>
               </tr>
@@ -145,7 +191,7 @@ export async function sendSubmitterEmail(email: string, data: any): Promise<void
   
   try {
     console.log('[Email] About to call sendEmail for submitter:', email);
-    await sendEmail(email, 'Thank You For Your Submission!', html);
+    await sendEmail(email, `Thank You For Your Submission - ${eventName}`, html);
     console.log('[Email] sendEmail completed successfully for submitter:', email);
   } catch (error: any) {
     console.error('[Email] Error in sendSubmitterEmail when calling sendEmail:', {
@@ -157,13 +203,23 @@ export async function sendSubmitterEmail(email: string, data: any): Promise<void
   }
 }
 
-export async function sendOwnerEmail(ownerEmail: string, data: any): Promise<void> {
+export async function sendOwnerEmail(ownerEmail: string, data: any, cms?: CMSContent): Promise<void> {
+  // Get CMS content if not provided
+  const eventData = cms || getCMSById(process.env.EVENT_ID);
+  const baseUrl = process.env.BASE_URL || 'https://www.galentinesglobal.com';
+  const logoUrl = eventData.general.logo ? `${baseUrl}${eventData.general.logo}` : '';
+  const eventName = eventData.general.name;
+  const eventDate = eventData.home.eventDate;
+  
   // Format field names for display (handle common variations)
   const formatFieldName = (key: string): string => {
     const nameMap: Record<string, string> = {
       fullName: 'Full Name',
       firstName: 'First Name',
       lastName: 'Last Name',
+      email: 'Email Address',
+      phone: 'Phone Number',
+      message: 'Message',
     };
     
     if (nameMap[key]) return nameMap[key];
@@ -181,9 +237,13 @@ export async function sendOwnerEmail(ownerEmail: string, data: any): Promise<voi
 
   const fieldsHtml = fieldsToShow.length > 0
     ? fieldsToShow.map(([key, value]) => 
-        `<tr><td style="padding: 10px; font-weight: 600; color: #333; border-bottom: 1px solid #e0e0e0; width: 140px;">${formatFieldName(key)}</td><td style="padding: 10px; color: #666; border-bottom: 1px solid #e0e0e0;">${escapeHtml(String(value))}</td></tr>`
+        `<tr><td style="padding: 12px; font-weight: 600; color: rgb(88, 35, 55); border-bottom: 1px solid rgba(220, 108, 140, 0.2); width: 160px; vertical-align: top;">${formatFieldName(key)}</td><td style="padding: 12px; color: rgb(102, 85, 95); border-bottom: 1px solid rgba(220, 108, 140, 0.2); line-height: 1.6;">${escapeHtml(String(value))}</td></tr>`
       ).join('')
-    : '<tr><td colspan="2" style="padding: 10px; color: #666;">No fields submitted.</td></tr>';
+    : '<tr><td colspan="2" style="padding: 12px; color: rgb(102, 85, 95);">No fields submitted.</td></tr>';
+
+  // Extract email if available for quick reference
+  const submitterEmail = data.email || data.emailAddress || '';
+  const submitterName = data.fullName || data.firstName || data.name || 'A potential attendee';
 
   const html = `
     <!DOCTYPE html>
@@ -192,35 +252,74 @@ export async function sendOwnerEmail(ownerEmail: string, data: any): Promise<voi
       <meta charset="utf-8">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: #f5f5f5;">
-      <table width="100%" cellpadding="0" cellspacing="0" style="background-color: #f5f5f5; padding: 40px 20px;">
+    <body style="margin: 0; padding: 0; font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif; background-color: rgb(255, 240, 245);">
+      <table width="100%" cellpadding="0" cellspacing="0" style="background-color: rgb(255, 240, 245); padding: 40px 20px;">
         <tr>
           <td align="center">
-            <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 8px; overflow: hidden; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+            <table width="600" cellpadding="0" cellspacing="0" style="background-color: #ffffff; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 12px rgba(220, 108, 140, 0.15); max-width: 600px;">
+              <!-- Header with gradient -->
               <tr>
-                <td style="padding: 30px 40px; background-color: #4a5568; border-bottom: 3px solid #667eea;">
-                  <h1 style="margin: 0; color: #ffffff; font-size: 24px; font-weight: 600;">📬 New Form Submission</h1>
-                  <p style="margin: 8px 0 0 0; color: #cbd5e0; font-size: 14px;">You have received a new form submission</p>
+                <td style="padding: 30px 40px; background: linear-gradient(135deg, rgb(88, 35, 55) 0%, rgb(139, 69, 85) 100%); text-align: center;">
+                  ${logoUrl ? `<img src="${logoUrl}" alt="${eventData.general.logoAlt || eventName}" style="max-width: 180px; height: auto; margin-bottom: 16px;" />` : ''}
+                  <h1 style="margin: 0 0 8px 0; color: #ffffff; font-size: 26px; font-weight: 600; letter-spacing: -0.3px;">📬 New Form Submission</h1>
+                  <p style="margin: 0; color: rgba(255, 255, 255, 0.9); font-size: 15px;">You have received a new submission</p>
                 </td>
               </tr>
+              
+              <!-- Event context -->
               <tr>
-                <td style="padding: 40px;">
-                  <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.6; color: #333;">
-                    A new submission has been received through your form. Details are below:
+                <td style="padding: 24px 40px; background-color: rgb(255, 240, 245); border-bottom: 1px solid rgba(220, 108, 140, 0.2);">
+                  <div style="text-align: center;">
+                    <h2 style="margin: 0 0 6px 0; color: rgb(88, 35, 55); font-size: 20px; font-weight: 600;">${escapeHtml(eventName)}</h2>
+                    ${eventDate ? `<p style="margin: 0; color: rgb(220, 108, 140); font-size: 16px; font-weight: 500;">${escapeHtml(eventDate)}</p>` : ''}
+                  </div>
+                </td>
+              </tr>
+              
+              <!-- Quick summary -->
+              <tr>
+                <td style="padding: 30px 40px; background-color: #ffffff;">
+                  <div style="margin-bottom: 24px; padding: 16px; background-color: rgb(255, 240, 245); border-left: 4px solid rgb(220, 108, 140); border-radius: 4px;">
+                    <p style="margin: 0 0 8px 0; font-size: 15px; color: rgb(88, 35, 55); font-weight: 600;">From:</p>
+                    <p style="margin: 0; font-size: 16px; color: rgb(102, 85, 95);">${escapeHtml(submitterName)}${submitterEmail ? ` &lt;${escapeHtml(submitterEmail)}&gt;` : ''}</p>
+                  </div>
+                  
+                  <p style="margin: 0 0 24px 0; font-size: 16px; line-height: 1.6; color: rgb(88, 35, 55);">
+                    A new submission has been received through your form. All details are listed below:
                   </p>
-                  <table width="100%" cellpadding="0" cellspacing="0" style="margin: 24px 0; border-collapse: collapse; background-color: #f8f9fa; border-radius: 6px; overflow: hidden;">
+                  
+                  <!-- Submission details table -->
+                  <table width="100%" cellpadding="0" cellspacing="0" style="margin: 0; border-collapse: collapse; background-color: #ffffff; border: 1px solid rgba(220, 108, 140, 0.2); border-radius: 8px; overflow: hidden;">
                     <thead>
-                      <tr style="background-color: #e9ecef;">
-                        <th style="padding: 12px; text-align: left; font-weight: 600; color: #333; border-bottom: 2px solid #dee2e6;">Field</th>
-                        <th style="padding: 12px; text-align: left; font-weight: 600; color: #333; border-bottom: 2px solid #dee2e6;">Value</th>
+                      <tr style="background-color: rgb(255, 240, 245);">
+                        <th style="padding: 14px 12px; text-align: left; font-weight: 600; color: rgb(88, 35, 55); border-bottom: 2px solid rgb(220, 108, 140);">Field</th>
+                        <th style="padding: 14px 12px; text-align: left; font-weight: 600; color: rgb(88, 35, 55); border-bottom: 2px solid rgb(220, 108, 140);">Value</th>
                       </tr>
                     </thead>
                     <tbody>
                       ${fieldsHtml}
                     </tbody>
                   </table>
-                  <p style="margin: 32px 0 0 0; padding-top: 24px; border-top: 1px solid #e0e0e0; font-size: 14px; color: #666; line-height: 1.6;">
-                    This is an automated notification. The submission has been saved to your Google Sheet.
+                </td>
+              </tr>
+              
+              <!-- Footer info -->
+              <tr>
+                <td style="padding: 0 40px 30px;">
+                  <div style="margin-top: 24px; padding: 20px; background-color: rgb(255, 240, 245); border-radius: 8px; text-align: center;">
+                    <p style="margin: 0; font-size: 14px; line-height: 1.6; color: rgb(102, 85, 95);">
+                      <strong style="color: rgb(88, 35, 55);">✓ Saved to Google Sheet</strong><br>
+                      This is an automated notification. The submission has been saved and can be viewed in your connected Google Sheet.
+                    </p>
+                  </div>
+                </td>
+              </tr>
+              
+              <!-- Footer -->
+              <tr>
+                <td style="padding: 24px 40px; background-color: rgb(88, 35, 55); text-align: center;">
+                  <p style="margin: 0; color: rgba(255, 255, 255, 0.85); font-size: 13px; line-height: 1.5;">
+                    ${escapeHtml(eventName)} • Empowering Women Through Faith
                   </p>
                 </td>
               </tr>
@@ -232,5 +331,5 @@ export async function sendOwnerEmail(ownerEmail: string, data: any): Promise<voi
     </html>
   `;
   
-  await sendEmail(ownerEmail, 'New Form Submission Received', html);
+  await sendEmail(ownerEmail, `New ${eventName} Form Submission - ${submitterName}`, html);
 }
