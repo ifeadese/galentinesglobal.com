@@ -15,6 +15,12 @@ function getTransporter(): nodemailer.Transporter {
         user: process.env.EMAIL_FROM,
         pass: process.env.EMAIL_PASSWORD,
       },
+      // Add timeout and connection settings
+      connectionTimeout: 10000, // 10 seconds
+      greetingTimeout: 10000, // 10 seconds
+      socketTimeout: 10000, // 10 seconds
+      // Retry configuration
+      pool: false, // Don't use connection pooling for serverless
     });
   }
   
@@ -38,13 +44,22 @@ function escapeHtml(text: string): string {
 
 export async function sendEmail(to: string, subject: string, html: string): Promise<void> {
   try {
+    console.log('[Email] sendEmail called:', { to, subject, from: process.env.EMAIL_FROM });
     const emailTransporter = getTransporter();
-    const result = await emailTransporter.sendMail({
-      from: process.env.EMAIL_FROM,
-      to,
-      subject,
-      html,
-    });
+    console.log('[Email] Transporter obtained, sending mail...');
+    
+    const result = await Promise.race([
+      emailTransporter.sendMail({
+        from: process.env.EMAIL_FROM,
+        to,
+        subject,
+        html,
+      }),
+      new Promise((_, reject) => 
+        setTimeout(() => reject(new Error('Email send timeout after 15 seconds')), 15000)
+      )
+    ]) as any;
+    
     console.log('[Email] Email sent successfully:', {
       to,
       subject,
@@ -60,6 +75,7 @@ export async function sendEmail(to: string, subject: string, html: string): Prom
       response: error.response,
       responseCode: error.responseCode,
       command: error.command,
+      stack: error.stack,
     });
     throw error; // Re-throw so caller can handle it
   }
