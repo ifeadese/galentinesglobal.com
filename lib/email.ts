@@ -15,13 +15,7 @@ function getTransporter(): nodemailer.Transporter {
         user: process.env.EMAIL_FROM,
         pass: process.env.EMAIL_PASSWORD,
       },
-      // Add timeout and connection settings
-      connectionTimeout: 10000, // 10 seconds
-      greetingTimeout: 10000, // 10 seconds
-      socketTimeout: 10000, // 10 seconds
-      // Retry configuration
-      pool: false, // Don't use connection pooling for serverless
-    });
+    } as any);
   }
   
   return transporter;
