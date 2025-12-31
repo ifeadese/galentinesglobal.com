@@ -64,7 +64,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
       if (urlParams.get('success') === 'true') {
         setSubmitStatus({
           type: "success",
-          message: "We've received your submission and sent you a confirmation email. There's one more email coming your way on January 15th to confirm your RSVP closer to the event—keep an eye out for it.",
+          message: "We've sent you a confirmation email and there's one more email coming your way on January 15th to re-confirm your RSVP. Please look out for it.",
         });
         setFormData(createEmptyFormData(fields));
         // Clean up URL
@@ -88,6 +88,11 @@ const ContactForm: React.FC<ContactFormProps> = ({
     e.preventDefault();
     
     // Check if Formspree is configured
+    const formId = getFormspreeFormId();
+    console.log('[Form Debug] Form ID:', formId);
+    console.log('[Form Debug] NEXT_PUBLIC_FORMSPREE_FORM_ID:', process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID);
+    console.log('[Form Debug] FORMSPREE_FORM_ID:', process.env.FORMSPREE_FORM_ID);
+    
     if (!isFormspreeConfigured()) {
       setSubmitStatus({
         type: "error",
@@ -172,7 +177,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
       <div className={styles.form}>
         <div className={styles.successMessage}>
           <span className={styles.icon}>🎉</span>
-          <h2 className={styles.title}>Yayyy!</h2>
+          <h2 className={styles.title}>Yayyy! We got it!</h2>
           <p className={styles.message}>
             {submitStatus.message}
           </p>

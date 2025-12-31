@@ -12,9 +12,14 @@
 
 /**
  * Get Formspree form ID from environment variables
+ * Uses NEXT_PUBLIC_ prefix so it's accessible on the client side
  */
 export function getFormspreeFormId(): string | null {
-  return process.env.FORMSPREE_FORM_ID || null;
+  const formId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || process.env.FORMSPREE_FORM_ID || null;
+  if (!formId) {
+    console.warn('[Formspree] Form ID not found. Check NEXT_PUBLIC_FORMSPREE_FORM_ID environment variable.');
+  }
+  return formId;
 }
 
 /**
