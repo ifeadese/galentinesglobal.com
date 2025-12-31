@@ -49,6 +49,10 @@ export const Footer = ({ contactEmailAddress, logo, logoAlt, facebookPageUrl, in
               <Link href="/privacy" legacyBehavior>
                 <a className={styles.privacyLink}>Privacy Policy</a>
               </Link>
+              <span className={styles.separator}>•</span>
+              <Link href="/terms" legacyBehavior>
+                <a className={styles.privacyLink}>Terms of Service</a>
+              </Link>
             </div>
             <div className={styles.socialIcons}>
                 {contactEmailAddress && <SocialIcon url={`mailto:${contactEmailAddress}`} style={iconStyles} bgColor="rgb(255, 240, 245)" fgColor="rgb(220, 108, 140)" />}

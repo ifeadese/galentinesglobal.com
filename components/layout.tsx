@@ -25,7 +25,7 @@ const Layout = ({ event, children }: Props) => {
       <MenuBar
         isDrawerOpen={isDrawerOpen}
         showDrawer={showDrawer}
-        businessName={name}
+        siteName={name}
         logo={logo}
         logoAlt={logoAlt}
       />
