@@ -125,7 +125,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
             {submitStatus.message}
           </p>
           <p className={styles.spamNote}>
-            💌 <strong>Tip:</strong> Check your spam or junk folder if you don't see the confirmation email in your inbox.
+            💌 <strong>Tip:</strong> Check your spam or junk folder if you don&apos;t see the confirmation email in your inbox.
           </p>
         </div>
       </div>

@@ -1,6 +1,5 @@
 import React, { ReactElement } from "react";
 import Image from "next/legacy/image";
-import Link from "next/link";
 import styles from "components/footer.module.scss";
 import { SocialIcon } from "react-social-icons";
 
@@ -45,14 +44,6 @@ export const Footer = ({ contactEmailAddress, logo, logoAlt, facebookPageUrl, in
               <span>&copy; 2026 Galentines Global</span>
               <span className={styles.separator}>•</span>
               <span>All rights reserved.</span>
-              <span className={styles.separator}>•</span>
-              <Link href="/privacy" legacyBehavior>
-                <a className={styles.privacyLink}>Privacy Policy</a>
-              </Link>
-              <span className={styles.separator}>•</span>
-              <Link href="/terms" legacyBehavior>
-                <a className={styles.privacyLink}>Terms of Service</a>
-              </Link>
             </div>
             <div className={styles.socialIcons}>
                 {contactEmailAddress && <SocialIcon url={`mailto:${contactEmailAddress}`} style={iconStyles} bgColor="rgb(255, 240, 245)" fgColor="rgb(220, 108, 140)" />}
