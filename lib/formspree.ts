@@ -28,9 +28,10 @@ export function isFormspreeConfigured(): boolean {
  * Submit form data to Formspree
  * 
  * @param data Form data to submit
+ * @param redirectUrl Optional redirect URL after successful submission
  * @returns Promise<boolean> Success status
  */
-export async function submitToFormspree(data: Record<string, any>): Promise<boolean> {
+export async function submitToFormspree(data: Record<string, any>, redirectUrl?: string): Promise<boolean> {
   const formId = getFormspreeFormId();
   
   if (!formId) {
@@ -41,9 +42,13 @@ export async function submitToFormspree(data: Record<string, any>): Promise<bool
   try {
     const submitUrl = `https://formspree.io/f/${formId}`;
     
+    // Add redirect URL to data if provided
+    const dataWithRedirect = redirectUrl ? { ...data, _next: redirectUrl } : data;
+    
     console.log('[Formspree] Submitting form data:', {
       url: submitUrl,
       fields: Object.keys(data),
+      hasRedirect: !!redirectUrl,
     });
     
     const response = await fetch(submitUrl, {
@@ -52,7 +57,7 @@ export async function submitToFormspree(data: Record<string, any>): Promise<bool
         'Content-Type': 'application/json',
         'Accept': 'application/json',
       },
-      body: JSON.stringify(data),
+      body: JSON.stringify(dataWithRedirect),
     });
 
     const responseData = await response.json();

@@ -1,6 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "components/button";
 import styles from "components/contact-form.module.scss";
+import { isFormspreeConfigured, getFormspreeFormId } from "lib/formspree";
+import { sanitizeFormData } from "lib/sanitize";
 
 export interface FormData {
   name: string;
@@ -55,6 +57,22 @@ const ContactForm: React.FC<ContactFormProps> = ({
     message: string;
   }>({ type: null, message: "" });
 
+  // Check for success parameter in URL (from Formspree redirect)
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      const urlParams = new URLSearchParams(window.location.search);
+      if (urlParams.get('success') === 'true') {
+        setSubmitStatus({
+          type: "success",
+          message: "We've received your submission and sent you a confirmation email. There's one more email coming your way on January 15th to confirm your RSVP closer to the event—keep an eye out for it.",
+        });
+        setFormData(createEmptyFormData(fields));
+        // Clean up URL
+        window.history.replaceState({}, '', window.location.pathname);
+      }
+    }
+  }, [fields]);
+
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -68,6 +86,16 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    
+    // Check if Formspree is configured
+    if (!isFormspreeConfigured()) {
+      setSubmitStatus({
+        type: "error",
+        message: "Form submissions are temporarily unavailable. Please try again later or contact the event organizer.",
+      });
+      return;
+    }
+
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: "" });
 
@@ -78,38 +106,62 @@ const ContactForm: React.FC<ContactFormProps> = ({
         dataToSend[field.name] = formData[field.name] || "";
       });
 
-      const response = await fetch("/api/submit-form", {
-        method: "POST",
+      // Sanitize form data
+      const sanitizedData = sanitizeFormData(dataToSend);
+
+      // Create redirect URL with success parameter
+      const redirectUrl = typeof window !== 'undefined' 
+        ? `${window.location.origin}${window.location.pathname}?success=true`
+        : undefined;
+
+      // Submit directly to Formspree with redirect URL
+      const formId = getFormspreeFormId();
+      if (!formId) {
+        throw new Error('Formspree not configured');
+      }
+
+      const submitUrl = `https://formspree.io/f/${formId}`;
+      const dataWithRedirect = redirectUrl ? { ...sanitizedData, _next: redirectUrl } : sanitizedData;
+
+      const response = await fetch(submitUrl, {
+        method: 'POST',
         headers: {
-          "Content-Type": "application/json",
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
         },
-        body: JSON.stringify(dataToSend),
+        body: JSON.stringify(dataWithRedirect),
       });
 
       const result = await response.json();
 
       if (response.ok) {
-        setSubmitStatus({
-          type: "success",
-          message: "We've received your submission and sent you a confirmation email. See you soon!",
-        });
-        setFormData(createEmptyFormData(fields));
-        // Call custom onSubmit handler with the data that was sent
-        if (onSubmit) {
-          onSubmit(dataToSend as FormData);
+        // If redirect URL is provided, redirect to it
+        if (redirectUrl) {
+          window.location.href = redirectUrl;
+        } else {
+          setSubmitStatus({
+            type: "success",
+            message: "We've received your submission and sent you a confirmation email. See you soon! We'll ask you to confirm your RSVP closer to the event—keep an eye out for a confirmation email on January 15th.",
+          });
+          setFormData(createEmptyFormData(fields));
+          setIsSubmitting(false);
+          // Call custom onSubmit handler with the data that was sent
+          if (onSubmit) {
+            onSubmit(dataToSend as FormData);
+          }
         }
       } else {
         setSubmitStatus({
           type: "error",
-          message: result.error || "Something went wrong. Please try again.",
+          message: result.error || "Form submission failed. Please try again later or contact the event organizer.",
         });
+        setIsSubmitting(false);
       }
     } catch (error) {
       setSubmitStatus({
         type: "error",
         message: "Network error. Please check your connection and try again.",
       });
-    } finally {
       setIsSubmitting(false);
     }
   };
@@ -133,60 +185,71 @@ const ContactForm: React.FC<ContactFormProps> = ({
   }
 
   return (
-    <form onSubmit={handleSubmit} className={styles.form}>
-      {description && (
-        <p className={styles.description}>{description}</p>
-      )}
-      {fields.map((field) => (
-        <div key={field.name} className={styles.field}>
-          <label htmlFor={field.name} className={styles.label}>
-            {field.label}
-            {field.required && <span className={styles.required}>*</span>}
-          </label>
-          {field.type === "textarea" ? (
-            <textarea
-              id={field.name}
-              name={field.name}
-              value={formData[field.name] || ""}
-              onChange={handleChange}
-              required={field.required}
-              placeholder={field.placeholder}
-              className={styles.textarea}
-              rows={5}
-            />
-          ) : (
-            <input
-              id={field.name}
-              name={field.name}
-              type={field.type || "text"}
-              value={formData[field.name] || ""}
-              onChange={handleChange}
-              required={field.required}
-              placeholder={field.placeholder}
-              className={styles.input}
-            />
-          )}
-        </div>
-      ))}
-
-      {submitStatus.type === "error" && (
-        <div
-          className={`${styles.status} ${styles.error}`}
-        >
-          {submitStatus.message}
+    <div className={styles.formWrapper}>
+      {isSubmitting && (
+        <div className={styles.loadingOverlay}>
+          <div className={styles.spinner}>
+            <div className={styles.spinnerCircle}></div>
+          </div>
         </div>
       )}
+      <form onSubmit={handleSubmit} className={styles.form}>
+        {description && (
+          <p className={styles.description}>{description}</p>
+        )}
+        {fields.map((field) => (
+          <div key={field.name} className={styles.field}>
+            <label htmlFor={field.name} className={styles.label}>
+              {field.label}
+              {field.required && <span className={styles.required}>*</span>}
+            </label>
+            {field.type === "textarea" ? (
+              <textarea
+                id={field.name}
+                name={field.name}
+                value={formData[field.name] || ""}
+                onChange={handleChange}
+                required={field.required}
+                placeholder={field.placeholder}
+                className={styles.textarea}
+                rows={5}
+                disabled={isSubmitting}
+              />
+            ) : (
+              <input
+                id={field.name}
+                name={field.name}
+                type={field.type || "text"}
+                value={formData[field.name] || ""}
+                onChange={handleChange}
+                required={field.required}
+                placeholder={field.placeholder}
+                className={styles.input}
+                disabled={isSubmitting}
+              />
+            )}
+          </div>
+        ))}
 
-      <div className={styles.submitContainer}>
-        <Button
-          type="submit"
-          variant="primary"
-          disabled={isSubmitting || disabled}
-        >
-          {isSubmitting ? "Submitting..." : submitButtonText}
-        </Button>
-      </div>
-    </form>
+        {submitStatus.type === "error" && (
+          <div
+            className={`${styles.status} ${styles.error}`}
+          >
+            {submitStatus.message}
+          </div>
+        )}
+
+        <div className={styles.submitContainer}>
+          <Button
+            type="submit"
+            variant="primary"
+            disabled={isSubmitting || disabled}
+          >
+            {isSubmitting ? "Submitting..." : submitButtonText}
+          </Button>
+        </div>
+      </form>
+    </div>
   );
 };
 

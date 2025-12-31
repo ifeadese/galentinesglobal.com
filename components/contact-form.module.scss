@@ -1,5 +1,10 @@
 @import "/common.scss";
 
+.formWrapper {
+  position: relative;
+  width: 100%;
+}
+
 .form {
   width: 100%;
   margin: 0 auto;
@@ -7,6 +12,44 @@
   background: rgba(255, 255, 255, 0.9);
   border-radius: 12px;
   box-shadow: 0 4px 20px var(--shadow-soft);
+  position: relative;
+}
+
+.loadingOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(2px);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.spinnerCircle {
+  width: 48px;
+  height: 48px;
+  border: 4px solid rgba(220, 108, 140, 0.2);
+  border-top-color: rgb(220, 108, 140);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 .description {
@@ -57,6 +100,11 @@
   &::placeholder {
     color: var(--color-text-secondary);
     opacity: 0.6;
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
   }
 }
 
