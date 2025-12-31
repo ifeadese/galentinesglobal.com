@@ -1,0 +1,126 @@
+@import "/common.scss";
+
+.contentSection {
+  padding: 2rem 5%;
+  background: linear-gradient(180deg, rgba(255, 192, 203, 0.1) 0%, transparent 50%, rgba(255, 192, 203, 0.05) 100%);
+  min-height: 60vh;
+}
+
+.container {
+  max-width: 56rem;
+  margin: 0 auto;
+}
+
+.content {
+  background: #ffffff;
+  padding: 3rem;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(220, 108, 140, 0.1);
+}
+
+.lastUpdated {
+  font-size: 0.875rem;
+  color: $text-light;
+  margin-bottom: 2rem;
+  font-style: italic;
+}
+
+.section {
+  margin-bottom: 2.5rem;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.heading {
+  font-size: 1.5rem;
+  color: $color-primary;
+  margin-bottom: 1rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+}
+
+.paragraph {
+  font-size: 1rem;
+  line-height: 1.75rem;
+  color: $text-primary;
+  margin-bottom: 1rem;
+  font-weight: 400;
+
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+.list {
+  margin: 1rem 0;
+  padding-left: 1.5rem;
+  color: $text-primary;
+  line-height: 1.75rem;
+
+  li {
+    margin-bottom: 0.5rem;
+    font-size: 1rem;
+  }
+}
+
+.link {
+  color: $color-primary;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.2s ease;
+
+  &:hover {
+    color: $color-primary-dark;
+    text-decoration: underline;
+  }
+}
+
+.contactInfo {
+  background: rgb(255, 240, 245);
+  padding: 1.5rem;
+  border-radius: 8px;
+  margin-top: 1rem;
+  border-left: 4px solid $color-primary;
+}
+
+// Responsive design
+@media (max-width: $md-screens) {
+  .contentSection {
+    padding: 1.5rem 3%;
+  }
+
+  .content {
+    padding: 2rem 1.5rem;
+  }
+
+  .heading {
+    font-size: 1.25rem;
+  }
+
+  .paragraph {
+    font-size: 0.9375rem;
+    line-height: 1.6rem;
+  }
+}
+
+@media (max-width: $sm-screens) {
+  .contentSection {
+    padding: 1rem 2%;
+  }
+
+  .content {
+    padding: 1.5rem 1rem;
+  }
+
+  .heading {
+    font-size: 1.125rem;
+  }
+
+  .paragraph {
+    font-size: 0.875rem;
+    line-height: 1.5rem;
+  }
+}
+
