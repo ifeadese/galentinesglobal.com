@@ -8,14 +8,14 @@ import styles from "components/menu-bar.module.scss";
 import { pages } from "./pages";
 
 interface MenuBarProps {
-  businessName: string;
+  siteName: string;
   logo?: string;
   logoAlt?: string;
   isDrawerOpen: boolean;
   showDrawer: (state: boolean) => void;
 }
 
-const MenuBar = ({ businessName, logo, logoAlt, isDrawerOpen, showDrawer }: MenuBarProps) => {
+const MenuBar = ({ siteName, logo, logoAlt, isDrawerOpen, showDrawer }: MenuBarProps) => {
   const router = useRouter();
 
   // Close menu when route changes
@@ -40,7 +40,7 @@ const MenuBar = ({ businessName, logo, logoAlt, isDrawerOpen, showDrawer }: Menu
           <Link href="/" >
             <Image 
               src={logo} 
-              alt={logoAlt || businessName}
+              alt={logoAlt || siteName}
               width={150}
               height={50}
               className={styles.logo}
