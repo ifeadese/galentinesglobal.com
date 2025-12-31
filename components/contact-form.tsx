@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Button from "components/button";
 import styles from "components/contact-form.module.scss";
 import { isFormspreeConfigured, getFormspreeFormId } from "lib/formspree";
@@ -57,21 +57,6 @@ const ContactForm: React.FC<ContactFormProps> = ({
     message: string;
   }>({ type: null, message: "" });
 
-  // Check for success parameter in URL (from Formspree redirect)
-  useEffect(() => {
-    if (typeof window !== 'undefined') {
-      const urlParams = new URLSearchParams(window.location.search);
-      if (urlParams.get('success') === 'true') {
-        setSubmitStatus({
-          type: "success",
-          message: "We've sent you a confirmation email and there's one more email coming your way on January 15th to re-confirm your RSVP. Please look out for it.",
-        });
-        setFormData(createEmptyFormData(fields));
-        // Clean up URL
-        window.history.replaceState({}, '', window.location.pathname);
-      }
-    }
-  }, [fields]);
 
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
@@ -88,11 +73,6 @@ const ContactForm: React.FC<ContactFormProps> = ({
     e.preventDefault();
     
     // Check if Formspree is configured
-    const formId = getFormspreeFormId();
-    console.log('[Form Debug] Form ID:', formId);
-    console.log('[Form Debug] NEXT_PUBLIC_FORMSPREE_FORM_ID:', process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID);
-    console.log('[Form Debug] FORMSPREE_FORM_ID:', process.env.FORMSPREE_FORM_ID);
-    
     if (!isFormspreeConfigured()) {
       setSubmitStatus({
         type: "error",
@@ -114,19 +94,13 @@ const ContactForm: React.FC<ContactFormProps> = ({
       // Sanitize form data
       const sanitizedData = sanitizeFormData(dataToSend);
 
-      // Create redirect URL with success parameter
-      const redirectUrl = typeof window !== 'undefined' 
-        ? `${window.location.origin}${window.location.pathname}?success=true`
-        : undefined;
-
-      // Submit directly to Formspree with redirect URL
+      // Submit directly to Formspree
       const formId = getFormspreeFormId();
       if (!formId) {
         throw new Error('Formspree not configured');
       }
 
       const submitUrl = `https://formspree.io/f/${formId}`;
-      const dataWithRedirect = redirectUrl ? { ...sanitizedData, _next: redirectUrl } : sanitizedData;
 
       const response = await fetch(submitUrl, {
         method: 'POST',
@@ -134,26 +108,21 @@ const ContactForm: React.FC<ContactFormProps> = ({
           'Content-Type': 'application/json',
           'Accept': 'application/json',
         },
-        body: JSON.stringify(dataWithRedirect),
+        body: JSON.stringify(sanitizedData),
       });
 
       const result = await response.json();
 
       if (response.ok) {
-        // If redirect URL is provided, redirect to it
-        if (redirectUrl) {
-          window.location.href = redirectUrl;
-        } else {
-          setSubmitStatus({
-            type: "success",
-            message: "We've received your submission and sent you a confirmation email. See you soon! We'll ask you to confirm your RSVP closer to the event—keep an eye out for a confirmation email on January 15th.",
-          });
-          setFormData(createEmptyFormData(fields));
-          setIsSubmitting(false);
-          // Call custom onSubmit handler with the data that was sent
-          if (onSubmit) {
-            onSubmit(dataToSend as FormData);
-          }
+        setSubmitStatus({
+          type: "success",
+          message: "We've sent you a confirmation email and there's one more email coming your way on January 15th to re-confirm your RSVP. Please look out for it.",
+        });
+        setFormData(createEmptyFormData(fields));
+        setIsSubmitting(false);
+        // Call custom onSubmit handler with the data that was sent
+        if (onSubmit) {
+          onSubmit(dataToSend as FormData);
         }
       } else {
         setSubmitStatus({
