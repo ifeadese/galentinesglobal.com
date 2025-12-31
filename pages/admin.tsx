@@ -48,7 +48,7 @@ export default function AdminPage({ cms: stringifiedCMS }: AdminPageProps) {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(false);
   const [loadingSheets, setLoadingSheets] = useState(false);
-  const [message, setMessage] = useState<{ type: 'success' | 'error'; text: string } | null>(null);
+  const [message, setMessage] = useState<{ type: 'success' | 'error' | 'warning'; text: string } | null>(null);
   const [authorized, setAuthorized] = useState<boolean | null>(null); // null = checking, true = authorized, false = denied
 
   const [initialConfig, setInitialConfig] = useState<ConfigState | null>(null);
@@ -110,6 +110,13 @@ export default function AdminPage({ cms: stringifiedCMS }: AdminPageProps) {
       if (!res.ok) throw new Error('Failed to check connection status');
       const data = await res.json();
       setConnected(data.connected);
+      // If connected but no refresh_token, show warning
+      if (data.connected && !data.hasRefreshToken) {
+        setMessage({
+          type: 'warning',
+          text: 'Your Google connection is missing a refresh token. Please reconnect to ensure tokens can be refreshed automatically.',
+        });
+      }
       if (data.connected) {
         // Check admin access after connection
         try {
@@ -367,7 +374,7 @@ export default function AdminPage({ cms: stringifiedCMS }: AdminPageProps) {
               </p>
               <Button 
                 variant="primary" 
-                onClick={() => window.location.href = '/api/auth/google?force=true'}
+                onClick={() => window.location.href = '/api/auth/google?force_consent=true'}
               >
                 Reconnect with Google
               </Button>
@@ -445,7 +452,7 @@ export default function AdminPage({ cms: stringifiedCMS }: AdminPageProps) {
               </div>
               <Button 
                 variant="secondary" 
-                onClick={() => window.location.href = '/api/auth/google?force=true'}
+                onClick={() => window.location.href = '/api/auth/google?force_consent=true'}
                 style={{ fontSize: '0.875rem', padding: '0.5rem 1rem' }}
               >
                 Reconnect

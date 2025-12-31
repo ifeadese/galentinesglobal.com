@@ -9,6 +9,8 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     await deleteTokens();
   }
   
-  res.redirect(getAuthUrl(forceConsent));
+  // getAuthUrl is now async and checks for existing tokens
+  const authUrl = await getAuthUrl(forceConsent);
+  res.redirect(authUrl);
 }
 
