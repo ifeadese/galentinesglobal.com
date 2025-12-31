@@ -133,7 +133,18 @@ export async function sendSubmitterEmail(email: string, data: any): Promise<void
     </html>
   `;
   
-  await sendEmail(email, 'Thank You For Your Submission!', html);
+  try {
+    console.log('[Email] About to call sendEmail for submitter:', email);
+    await sendEmail(email, 'Thank You For Your Submission!', html);
+    console.log('[Email] sendEmail completed successfully for submitter:', email);
+  } catch (error: any) {
+    console.error('[Email] Error in sendSubmitterEmail when calling sendEmail:', {
+      email,
+      error: error.message,
+      stack: error.stack,
+    });
+    throw error;
+  }
 }
 
 export async function sendOwnerEmail(ownerEmail: string, data: any): Promise<void> {
