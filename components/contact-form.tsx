@@ -177,7 +177,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
       <div className={styles.form}>
         <div className={styles.successMessage}>
           <span className={styles.icon}>🎉</span>
-          <h2 className={styles.title}>Yayyy! We got it!</h2>
+          <h2 className={styles.title}>Yayyy!</h2>
           <p className={styles.message}>
             {submitStatus.message}
           </p>
