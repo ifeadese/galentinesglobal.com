@@ -6,7 +6,7 @@ export const GALENTINESGLOBAL: CMSContent = {
     name: 'Galentines Global',
     description: "Annual Ladies' Christian Faith Conference",
     marketingCopy: 'Empowering Women Through Faith',
-    contactEmailAddress: 'galentinesglobal@gmail.com',
+    contactEmailAddress: 'galentineglobal@gmail.com',
     logo: "/images/galentines-gradient-logo.svg",
     logoAlt: "Galentines Global",
     instagramPageUrl: "https://www.instagram.com/galentineglobal",
