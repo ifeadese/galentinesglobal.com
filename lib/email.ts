@@ -1,17 +1,30 @@
 import nodemailer from 'nodemailer';
 
-// Validate email configuration at module load
-if (!process.env.EMAIL_FROM || !process.env.EMAIL_PASSWORD) {
-  throw new Error('EMAIL_FROM and EMAIL_PASSWORD must be configured');
+// Create transporter only if email is configured
+let transporter: nodemailer.Transporter | null = null;
+
+function getTransporter(): nodemailer.Transporter {
+  if (!transporter) {
+    if (!process.env.EMAIL_FROM || !process.env.EMAIL_PASSWORD) {
+      throw new Error('EMAIL_FROM and EMAIL_PASSWORD must be configured. Please set these environment variables in Vercel.');
+    }
+    
+    transporter = nodemailer.createTransport({
+      service: 'gmail',
+      auth: {
+        user: process.env.EMAIL_FROM,
+        pass: process.env.EMAIL_PASSWORD,
+      },
+    });
+  }
+  
+  return transporter;
 }
 
-const transporter = nodemailer.createTransport({
-  service: 'gmail',
-  auth: {
-    user: process.env.EMAIL_FROM,
-    pass: process.env.EMAIL_PASSWORD,
-  },
-});
+// Helper to check if email is configured
+export function isEmailConfigured(): boolean {
+  return !!(process.env.EMAIL_FROM && process.env.EMAIL_PASSWORD);
+}
 
 // Escape HTML to prevent XSS in email content
 function escapeHtml(text: string): string {
@@ -24,12 +37,25 @@ function escapeHtml(text: string): string {
 }
 
 export async function sendEmail(to: string, subject: string, html: string): Promise<void> {
-  await transporter.sendMail({
-    from: process.env.EMAIL_FROM,
-    to,
-    subject,
-    html,
-  });
+  try {
+    const emailTransporter = getTransporter();
+    await emailTransporter.sendMail({
+      from: process.env.EMAIL_FROM,
+      to,
+      subject,
+      html,
+    });
+  } catch (error: any) {
+    // Log detailed error for debugging
+    console.error('[Email] Failed to send email:', {
+      to,
+      subject,
+      error: error.message,
+      code: error.code,
+      response: error.response,
+    });
+    throw error; // Re-throw so caller can handle it
+  }
 }
 
 export async function sendSubmitterEmail(email: string, data: any): Promise<void> {

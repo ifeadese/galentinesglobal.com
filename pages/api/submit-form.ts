@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { appendToSheet } from 'lib/google-sheets';
-import { sendSubmitterEmail, sendOwnerEmail } from 'lib/email';
+import { sendSubmitterEmail, sendOwnerEmail, isEmailConfigured } from 'lib/email';
 import { readConfig } from 'lib/token-storage';
 import { sanitizeFormData } from 'lib/sanitize';
 
@@ -18,13 +18,29 @@ export default async function handler(
     // Save to sheets
     await appendToSheet(data);
     
-    // Send emails (don't wait)
-    const config = await readConfig();
-    if (data.email) {
-      sendSubmitterEmail(data.email, data).catch(console.error);
-    }
-    if (config?.ownerEmail) {
-      sendOwnerEmail(config.ownerEmail, data).catch(console.error);
+    // Send emails (don't wait, but log errors properly)
+    if (isEmailConfigured()) {
+      const config = await readConfig();
+      if (data.email) {
+        sendSubmitterEmail(data.email, data).catch((error) => {
+          console.error('[Email] Failed to send confirmation to submitter:', {
+            email: data.email,
+            error: error.message,
+            code: error.code,
+          });
+        });
+      }
+      if (config?.ownerEmail) {
+        sendOwnerEmail(config.ownerEmail, data).catch((error) => {
+          console.error('[Email] Failed to send notification to owner:', {
+            ownerEmail: config.ownerEmail,
+            error: error.message,
+            code: error.code,
+          });
+        });
+      }
+    } else {
+      console.warn('[Email] Email not configured. Skipping email notifications. Set EMAIL_FROM and EMAIL_PASSWORD in Vercel.');
     }
     
     res.json({ success: true });
