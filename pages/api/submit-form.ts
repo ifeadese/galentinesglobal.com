@@ -49,8 +49,21 @@ export default async function handler(
     
     // Check for specific Google API errors
     let errorMessage = error.message || 'Failed to submit form';
+    let statusCode = 500;
     
-    if (error.message?.includes('has not been used') || error.message?.includes('is disabled')) {
+    // Check for authentication errors from Google API
+    const isAuthError = 
+      error.message === 'Not connected' ||
+      error.code === 401 ||
+      error.response?.status === 401 ||
+      error.message?.includes('Invalid Credentials') ||
+      error.message?.includes('invalid_grant') ||
+      error.message?.includes('Token has been expired or revoked');
+    
+    if (isAuthError) {
+      errorMessage = 'Google account connection expired. Please reconnect in the admin panel.';
+      statusCode = 401;
+    } else if (error.message?.includes('has not been used') || error.message?.includes('is disabled')) {
       errorMessage = 'Google Sheets API is not enabled. Please enable it in Google Cloud Console and try again.';
     } else if (error.message?.includes('No sheet configured')) {
       errorMessage = 'No Google Sheet is configured. Please set up your sheet in the admin panel.';
@@ -58,6 +71,6 @@ export default async function handler(
       errorMessage = 'Permission denied. Please check your Google account permissions.';
     }
     
-    res.status(500).json({ error: errorMessage });
+    res.status(statusCode).json({ error: errorMessage });
   }
 }

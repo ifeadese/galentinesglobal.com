@@ -63,6 +63,8 @@ export async function appendToSheet(data: Record<string, any>): Promise<void> {
   }
 
   try {
+    // The Google API client will automatically refresh tokens if needed
+    // We don't need to handle REAUTH_NEEDED here - let actual API errors surface
     // Get existing headers
     const headersResponse = await sheets.spreadsheets.values.get({
       spreadsheetId: config.sheetId,

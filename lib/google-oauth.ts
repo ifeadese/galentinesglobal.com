@@ -38,19 +38,48 @@ export async function getAuthenticatedClient() {
   const oauth2Client = getOAuth2Client();
   oauth2Client.setCredentials(tokens);
 
-  // Auto-refresh if expired
-  if (tokens.expiry_date && tokens.expiry_date < Date.now()) {
-    if (!tokens.refresh_token) {
-      await deleteTokens();
-      throw new Error('REAUTH_NEEDED');
-    }
+  // Set up automatic token refresh using Google's built-in mechanism
+  // This listener will be called automatically when tokens are refreshed during API calls
+  oauth2Client.on('tokens', async (newTokens) => {
     try {
-      const { credentials } = await oauth2Client.refreshAccessToken();
-      await saveTokens(credentials);
-      oauth2Client.setCredentials(credentials);
-    } catch (error: any) {
-      await deleteTokens();
-      throw new Error('REAUTH_NEEDED');
+      // Merge new tokens with existing ones (preserve refresh_token if new one not provided)
+      const currentTokens = await readTokens() || tokens;
+      const updatedTokens = {
+        ...currentTokens,
+        ...newTokens,
+        // Preserve refresh_token if not in new tokens
+        refresh_token: newTokens.refresh_token || currentTokens.refresh_token || tokens.refresh_token,
+      };
+      await saveTokens(updatedTokens);
+    } catch (error) {
+      // Don't throw - token saving shouldn't break the API call
+      console.error('[OAuth] Failed to save refreshed tokens:', error);
+    }
+  });
+
+  // Proactively refresh if token is expired or will expire within the next 5 minutes
+  // This prevents unnecessary refresh attempts while still being proactive before expiration
+  const expiryBuffer = 5 * 60 * 1000; // 5 minutes
+  if (tokens.expiry_date && tokens.expiry_date < Date.now() + expiryBuffer) {
+    if (tokens.refresh_token) {
+      try {
+        // Try proactive refresh, but don't fail hard if it doesn't work
+        const { credentials } = await oauth2Client.refreshAccessToken();
+        // Set credentials immediately after refresh succeeds (before saving to storage)
+        // This ensures the client has fresh tokens even if saveTokens() fails
+        oauth2Client.setCredentials(credentials);
+        // Save to storage (don't fail if this errors - credentials are already set)
+        try {
+          await saveTokens(credentials);
+        } catch (saveError) {
+          // Log but don't throw - credentials are already set on the client
+          console.error('[OAuth] Failed to save refreshed tokens to storage, but credentials are set:', saveError);
+        }
+      } catch (error: any) {
+        // Log but don't throw - the API call will handle authentication errors
+        // This prevents REAUTH_NEEDED from being thrown prematurely
+        console.warn('[OAuth] Proactive token refresh failed, will rely on automatic refresh during API call:', error.message);
+      }
     }
   }
 
