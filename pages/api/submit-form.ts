@@ -4,6 +4,7 @@ import { sendSubmitterEmail, sendOwnerEmail, isEmailConfigured } from 'lib/email
 import { readConfig } from 'lib/token-storage';
 import { sanitizeFormData } from 'lib/sanitize';
 import { getCMSById } from 'helpers';
+import { submitToFormspree, isFormspreeConfigured } from 'lib/formspree';
 
 export default async function handler(
   req: NextApiRequest,
@@ -16,11 +17,25 @@ export default async function handler(
   try {
     const data = sanitizeFormData(req.body);
     
+    // Submit to Formspree if configured (do this first, before Google Sheets)
+    // Formspree will handle email notifications automatically
+    let formspreeSuccess = false;
+    if (isFormspreeConfigured()) {
+      formspreeSuccess = await submitToFormspree(data);
+      if (formspreeSuccess) {
+        console.log('[Formspree] Successfully submitted to Formspree - emails will be sent by Formspree');
+      } else {
+        console.warn('[Formspree] Submission failed, but continuing with Google Sheets save');
+        // Don't fail the entire submission if Formspree fails
+      }
+    }
+    
     // Save to sheets
     await appendToSheet(data);
     
-    // Send emails (don't wait, but log errors properly)
-    if (isEmailConfigured()) {
+    // Send emails only if Formspree is not handling them
+    // (i.e., Formspree is not configured or submission failed)
+    if (isEmailConfigured() && !formspreeSuccess) {
       const config = await readConfig();
       const submitterEmail = data.email;
       const cms = getCMSById(process.env.EVENT_ID);
@@ -56,7 +71,9 @@ export default async function handler(
           });
         });
       }
-    } else {
+    } else if (!isEmailConfigured() && !formspreeSuccess) {
+      // Only warn if email is not configured AND Formspree didn't handle emails
+      // (If Formspree succeeded, emails are handled by Formspree, so no warning needed)
       console.warn('[Email] Email not configured. Skipping email notifications. Set EMAIL_FROM and EMAIL_PASSWORD in Vercel.');
     }
     
