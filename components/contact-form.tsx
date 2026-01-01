@@ -116,7 +116,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
       if (response.ok) {
         setSubmitStatus({
           type: "success",
-          message: "We've sent you a confirmation email and there's one more email coming your way on January 15th to re-confirm your RSVP. Please look out for it.",
+          message: "Registration is a two-step process. Please check the email sent to you for additional important information on step 2.",
         });
         setFormData(createEmptyFormData(fields));
         setIsSubmitting(false);
@@ -146,7 +146,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
       <div className={styles.form}>
         <div className={styles.successMessage}>
           <span className={styles.icon}>🎉</span>
-          <h2 className={styles.title}>Yayyy!</h2>
+          <h2 className={styles.title}>Step 1 Complete!</h2>
           <p className={styles.message}>
             {submitStatus.message}
           </p>

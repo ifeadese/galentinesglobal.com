@@ -57,7 +57,7 @@ export default function RSVPPage({ cms }: RSVPPageProps) {
                 placeholder: "(555) 123-4567" 
               },
             ]}
-            submitButtonText="Confirm RSVP"
+            submitButtonText="Submit"
           />
         </div>
       </section>
