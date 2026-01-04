@@ -136,7 +136,7 @@ export default function TeamPage({ cms: stringifiedCMS }: TeamPageProps) {
         <div className={styles.joinContainer}>
           <h2 className={styles.joinTitle}>Join the Team</h2>
           <p className={styles.joinDescription}>
-            We're always looking for passionate individuals to join our mission of empowering women through faith and community.
+            We&apos;re always looking for passionate individuals to join our mission of empowering women through faith and community.
           </p>
           <a href="https://galentines.fillout.com/volunteers" target="_blank" rel="noopener noreferrer" className={styles.joinLink}>
             <Button variant="primary">
