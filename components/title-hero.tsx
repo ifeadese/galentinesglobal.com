@@ -8,9 +8,10 @@ interface TitleHeroProps {
   title: string;
   subtitle?: React.ReactNode;
   children?: React.ReactNode;
+  objectPosition?: string;
 }
 
-const TitleHero = ({ image, imageAlt, title, subtitle, children }: TitleHeroProps) => {
+const TitleHero = ({ image, imageAlt, title, subtitle, children, objectPosition = "center" }: TitleHeroProps) => {
   return (
     <section className={styles.heroSection}>
       <div className={styles.heroImageContainer}>
@@ -19,6 +20,7 @@ const TitleHero = ({ image, imageAlt, title, subtitle, children }: TitleHeroProp
           alt={imageAlt} 
           layout="fill"
           objectFit="cover"
+          objectPosition={objectPosition}
           priority
         />
       </div>
