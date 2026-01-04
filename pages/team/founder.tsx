@@ -27,7 +27,7 @@ export default function FounderPage({ cms: stringifiedCMS }: FounderPageProps) {
       <TitleHero
         image="/images/founder.jpeg"
         imageAlt="Shile Adeyoyin, Founder & Steward"
-        title="Founder"
+        title="Meet The Founder"
         subtitle="Shile Adeyoyin"
       />
 

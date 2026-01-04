@@ -3,6 +3,9 @@ import Layout from "components/layout";
 import TitleHero from "components/title-hero";
 import { getCMSById, getEventFromCMS } from "helpers";
 import { CMSContent } from "types";
+import Image from "next/legacy/image";
+import Link from "next/link";
+import Button from "components/button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
@@ -29,6 +32,17 @@ export default function AboutPage({ cms: stringifiedCMS }: AboutPageProps) {
   const cms: CMSContent = JSON.parse(stringifiedCMS);
   const event = getEventFromCMS(cms);
   const aboutContent = cms.about;
+
+  const founderData = {
+    name: "Meet The Founder",
+    role: "Shile Adeyoyin",
+    image: "/images/founder.jpeg",
+    imageAlt: "Shile Adeyoyin, Founder & Steward of Galentines Global",
+    description: [
+      "Shile is the visionary behind Galentines Global. A lawyer by profession and a worshipper at heart.",
+      "Her passion is to see every daughter of God walk in a conscious understanding of the Father's love for her. Her prayer is that the same love of God that found her will find every heart."
+    ]
+  };
 
   return (
     <Layout event={event}>
@@ -72,6 +86,40 @@ export default function AboutPage({ cms: stringifiedCMS }: AboutPageProps) {
               </div>
             );
           })}
+        </div>
+      </section>
+
+      {/* Founder Section */}
+      <section className={styles.founderSection}>
+        <div className={styles.founderContainer}>
+          <div className={styles.founderCard}>
+            <div className={styles.founderImageWrapper}>
+              <Image
+                src={founderData.image}
+                alt={founderData.imageAlt}
+                layout="fill"
+                objectFit="cover"
+                objectPosition="center top"
+                className={styles.founderImage}
+              />
+            </div>
+            <div className={styles.founderContent}>
+              <h2 className={styles.founderName}>{founderData.name}</h2>
+              <p className={styles.founderRole}>{founderData.role}</p>
+              <div className={styles.founderDescription}>
+                {founderData.description.map((paragraph, index) => (
+                  <p key={index} className={styles.founderDescriptionParagraph}>
+                    {paragraph}
+                  </p>
+                ))}
+                <div className={styles.founderButton}>
+                  <Link href="/team/founder" legacyBehavior>
+                    <Button variant="secondary">Learn More</Button>
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </div>
         </div>
       </section>
     </Layout>

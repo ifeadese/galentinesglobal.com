@@ -29,7 +29,7 @@ const teamMembers: TeamMember[] = [
     imageAlt: "Shile Adeyoyin, Founder & Steward of Galentines Global",
     description: [
       "Shile is the visionary behind Galentines Global. A lawyer by profession and a worshipper at heart.",
-      "My passion is to see every daughter of God walk in a conscious understanding of the Father's love for her. My prayer is that the same love of God that found me will find every heart."
+      "Her passion is to see every daughter of God walk in a conscious understanding of the Father's love for her. Her prayer is that the same love of God that found her will find every heart."
     ]
   },
   {
