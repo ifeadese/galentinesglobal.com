@@ -19,9 +19,10 @@ interface ContactFormProps {
   fields?: Array<{
     name: string;
     label: string;
-    type?: "text" | "email" | "textarea" | "tel";
+    type?: "text" | "email" | "textarea" | "tel" | "select";
     required?: boolean;
     placeholder?: string;
+    options?: Array<{ value: string; label: string }>;
   }>;
 }
 
@@ -59,7 +60,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
 
 
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
   ) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
@@ -173,34 +174,65 @@ const ContactForm: React.FC<ContactFormProps> = ({
         )}
         {fields.map((field) => (
           <div key={field.name} className={styles.field}>
-            <label htmlFor={field.name} className={styles.label}>
-              {field.label}
-              {field.required && <span className={styles.required}>*</span>}
-            </label>
-            {field.type === "textarea" ? (
-              <textarea
-                id={field.name}
-                name={field.name}
-                value={formData[field.name] || ""}
-                onChange={handleChange}
-                required={field.required}
-                placeholder={field.placeholder}
-                className={styles.textarea}
-                rows={5}
-                disabled={isSubmitting}
-              />
+            {field.type === "select" ? (
+              <>
+                <label htmlFor={field.name} className={styles.label}>
+                  {field.label}
+                  {field.required && <span className={styles.required}>*</span>}
+                </label>
+                <select
+                  id={field.name}
+                  name={field.name}
+                  value={formData[field.name] || ""}
+                  onChange={handleChange}
+                  required={field.required}
+                  className={styles.select}
+                  disabled={isSubmitting}
+                >
+                  <option value="">Select an option</option>
+                  {field.options?.map((option) => (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  ))}
+                </select>
+              </>
+            ) : field.type === "textarea" ? (
+              <>
+                <label htmlFor={field.name} className={styles.label}>
+                  {field.label}
+                  {field.required && <span className={styles.required}>*</span>}
+                </label>
+                <textarea
+                  id={field.name}
+                  name={field.name}
+                  value={formData[field.name] || ""}
+                  onChange={handleChange}
+                  required={field.required}
+                  placeholder={field.placeholder}
+                  className={styles.textarea}
+                  rows={5}
+                  disabled={isSubmitting}
+                />
+              </>
             ) : (
-              <input
-                id={field.name}
-                name={field.name}
-                type={field.type || "text"}
-                value={formData[field.name] || ""}
-                onChange={handleChange}
-                required={field.required}
-                placeholder={field.placeholder}
-                className={styles.input}
-                disabled={isSubmitting}
-              />
+              <>
+                <label htmlFor={field.name} className={styles.label}>
+                  {field.label}
+                  {field.required && <span className={styles.required}>*</span>}
+                </label>
+                <input
+                  id={field.name}
+                  name={field.name}
+                  type={field.type || "text"}
+                  value={formData[field.name] || ""}
+                  onChange={handleChange}
+                  required={field.required}
+                  placeholder={field.placeholder}
+                  className={styles.input}
+                  disabled={isSubmitting}
+                />
+              </>
             )}
           </div>
         ))}

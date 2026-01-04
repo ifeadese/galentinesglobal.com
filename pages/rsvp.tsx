@@ -40,7 +40,7 @@ export default function RSVPPage({ cms }: RSVPPageProps) {
                 label: "Full Name", 
                 type: "text", 
                 required: true, 
-                placeholder: "John Doe" 
+                placeholder: "Jane Doe" 
               },
               { 
                 name: "email", 
@@ -54,8 +54,18 @@ export default function RSVPPage({ cms }: RSVPPageProps) {
                 label: "Phone Number", 
                 type: "tel", 
                 required: true, 
-                placeholder: "(555) 123-4567" 
+                placeholder: "(123) 456-7890" 
               },
+              {
+                name: "shuttleInterest",
+                label: "I'm interested in shuttle service from Toronto to Ottawa",
+                type: "select",
+                required: true,
+                options: [
+                  { value: "Yes", label: "Yes" },
+                  { value: "No", label: "No" }
+                ]
+              }
             ]}
             submitButtonText="Submit"
           />
