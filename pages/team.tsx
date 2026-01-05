@@ -56,8 +56,19 @@ export default function TeamPage({ cms: stringifiedCMS }: TeamPageProps) {
   const cms: CMSContent = JSON.parse(stringifiedCMS);
   const event = getEventFromCMS(cms);
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
+
   return (
-    <Layout event={event}>
+    <Layout 
+      event={event}
+      seo={{
+        title: "Our Team",
+        description: "Meet the passionate team behind Galentines Global, dedicated to empowering women through faith and community.",
+        image: "/images/ladies-2.JPG",
+        url: `${siteUrl}/team`,
+        type: "website",
+      }}
+    >
       <TitleHero
         image="/images/ladies-2.JPG"
         imageAlt="Our Team"

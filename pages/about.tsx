@@ -44,8 +44,19 @@ export default function AboutPage({ cms: stringifiedCMS }: AboutPageProps) {
     ]
   };
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
+
   return (
-    <Layout event={event}>
+    <Layout 
+      event={event}
+      seo={{
+        title: "About Us",
+        description: "Learn about Galentines Global - a movement where women experience the healing and transforming power of God through prayer, worship and fellowship.",
+        image: aboutContent.heroImage || "/images/ladies.JPG",
+        url: `${siteUrl}/about`,
+        type: "website",
+      }}
+    >
       <TitleHero
         image={aboutContent.heroImage!}
         imageAlt={aboutContent.heroImageAlt!}

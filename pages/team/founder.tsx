@@ -22,8 +22,19 @@ export default function FounderPage({ cms: stringifiedCMS }: FounderPageProps) {
     "By profession, I'm a lawyer. At heart, I'm a worshipper. I love cooking for my loved ones, and I almost always have a song on my lips. My prayer is that the same love of God that found me will find every heart."
   ];
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
+
   return (
-    <Layout event={event}>
+    <Layout 
+      event={event}
+      seo={{
+        title: "Meet The Founder",
+        description: "Learn about Shile Adeyoyin, the visionary behind Galentines Global, dedicated to empowering women through the revelation of the Father's love.",
+        image: "/images/founder.jpeg",
+        url: `${siteUrl}/team/founder`,
+        type: "profile",
+      }}
+    >
       <TitleHero
         image="/images/founder.jpeg"
         imageAlt="Shile Adeyoyin, Founder & Steward"

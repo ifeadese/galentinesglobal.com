@@ -17,8 +17,23 @@ export default function RSVPPage({ cms }: RSVPPageProps) {
   const event = getEventFromCMS(cmsContent);
   const eventDate = getEventDate(cmsContent);
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
+  const eventDateStr = cmsContent.home.eventDate;
+  const isValidDate = eventDateStr && eventDateStr !== "TBD";
+
   return (
-    <Layout event={event}>
+    <Layout 
+      event={event}
+      seo={{
+        title: "RSVP",
+        description: isValidDate 
+          ? `RSVP for The Love of God Conference ${eventDateStr}. Join us for an empowering gathering of women in faith.`
+          : "RSVP for The Love of God Conference. Join us for an empowering gathering of women in faith.",
+        image: "/images/panelists.jpeg",
+        url: `${siteUrl}/rsvp`,
+        type: "website",
+      }}
+    >
       <TitleHero
         image="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
         imageAlt="RSVP"

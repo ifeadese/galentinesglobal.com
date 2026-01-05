@@ -31,8 +31,57 @@ export default function HomePage({ cms: stringifiedCMS }: HomePageProps) {
     return () => clearInterval(interval);
   }, [heroImages.length]);
 
+  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
+  const ogImage = homeContent.heroImages?.[0] || homeContent.mainLogo || event.logo || "/images/panelists.jpeg";
+  
+  // Extract year from event date if it's a valid date (not "TBD")
+  const eventDate = homeContent.eventDate;
+  const isValidDate = eventDate && eventDate !== "TBD";
+  
+  // Extract year from various date formats:
+  // - "February 7, 2026" -> split on comma
+  // - "2026-02-07" -> split on hyphen
+  // - "02/07/2026" -> split on slash
+  let eventYear: string | null = null;
+  if (isValidDate) {
+    if (eventDate.includes(',')) {
+      // Format: "February 7, 2026"
+      eventYear = eventDate.split(',')[1]?.trim() || null;
+    } else if (eventDate.includes('-')) {
+      // Format: "2026-02-07" or "2026-02-07T..."
+      const yearMatch = eventDate.match(/^(\d{4})/);
+      eventYear = yearMatch ? yearMatch[1] : null;
+    } else if (eventDate.includes('/')) {
+      // Format: "02/07/2026" or "2/7/2026"
+      const parts = eventDate.split('/');
+      const lastPart = parts[parts.length - 1]?.trim();
+      if (lastPart && /^\d{4}$/.test(lastPart)) {
+        eventYear = lastPart;
+      }
+    } else {
+      // Try to extract 4-digit year from anywhere in the string
+      const yearMatch = eventDate.match(/\b(\d{4})\b/);
+      eventYear = yearMatch ? yearMatch[1] : null;
+    }
+  }
+  
+  const seoTitle = eventYear 
+    ? `The Love of God Conference ${eventYear}` 
+    : undefined;
+
   return (
-    <Layout event={event}>
+    <Layout 
+      event={event}
+      seo={{
+        title: seoTitle,
+        description: isValidDate 
+          ? `${event.description} Join us on ${eventDate} for an empowering gathering of women in faith.`
+          : `${event.description} Join us for an empowering gathering of women in faith.`,
+        image: ogImage,
+        url: siteUrl,
+        type: "website",
+      }}
+    >
       <header className={styles.heroImage}>
         <div className={styles.slideshowContainer}>
           {heroImages.map((image, index) => (
