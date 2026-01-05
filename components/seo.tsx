@@ -10,6 +10,7 @@ interface SEOProps {
   url?: string;
   type?: string;
   noindex?: boolean;
+  preloadImage?: string; // Optional image to preload for critical above-the-fold images
 }
 
 const SEO: React.FC<SEOProps> = ({
@@ -20,6 +21,7 @@ const SEO: React.FC<SEOProps> = ({
   url,
   type = "website",
   noindex = false,
+  preloadImage,
 }) => {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
   const siteName = event.name;
@@ -64,6 +66,15 @@ const SEO: React.FC<SEOProps> = ({
       <meta name="description" content={siteDescription} />
       {noindex && <meta name="robots" content="noindex, nofollow" />}
       {absoluteUrl && <link rel="canonical" href={absoluteUrl} />}
+      
+      {/* Preload critical images */}
+      {preloadImage && (
+        <link
+          rel="preload"
+          as="image"
+          href={preloadImage.startsWith("http") ? preloadImage : `${baseUrl}${preloadImage}`}
+        />
+      )}
 
       {/* Open Graph Tags */}
       <meta property="og:type" content={type} />

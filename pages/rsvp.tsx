@@ -5,7 +5,6 @@ import ContactForm from "components/contact-form";
 import EventCountdown from "components/event-countdown";
 import { getCMSById, getEventFromCMS, getEventDate } from "helpers";
 import { CMSContent } from "types";
-import type { GetServerSideProps } from "next";
 import styles from "./rsvp.module.scss";
 
 interface RSVPPageProps {
@@ -29,13 +28,14 @@ export default function RSVPPage({ cms }: RSVPPageProps) {
         description: isValidDate 
           ? `RSVP for The Love of God Conference ${eventDateStr}. Join us for an empowering gathering of women in faith.`
           : "RSVP for The Love of God Conference. Join us for an empowering gathering of women in faith.",
-        image: "/images/panelists.jpeg",
+        image: "/images/rsvp.png",
         url: `${siteUrl}/rsvp`,
         type: "website",
+        preloadImage: "/images/rsvp.png", // Preload hero image for faster rendering
       }}
     >
       <TitleHero
-        image="https://images.unsplash.com/photo-1511795409834-ef04bbd61622?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80"
+        image="/images/rsvp.png"
         imageAlt="RSVP"
         title="RSVP"
         subtitle={
@@ -90,7 +90,7 @@ export default function RSVPPage({ cms }: RSVPPageProps) {
   );
 }
 
-export const getServerSideProps: GetServerSideProps = async (context) => {
+export const getStaticProps = () => {
   return {
     props: {
       cms: JSON.stringify(getCMSById(process.env.EVENT_ID)),

@@ -16,6 +16,7 @@ interface Props {
     url?: string;
     type?: string;
     noindex?: boolean;
+    preloadImage?: string;
   };
 }
 
@@ -34,6 +35,7 @@ const Layout = ({ event, children, seo }: Props) => {
         url={seo?.url}
         type={seo?.type}
         noindex={seo?.noindex}
+        preloadImage={seo?.preloadImage}
       />
       <Head>
         <link rel="icon" href="/favicon.ico" />
