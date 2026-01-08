@@ -155,6 +155,268 @@
   }
 }
 
+.ministersSection {
+  padding: 3rem 5%;
+  background: white;
+  border-top: 2px solid rgba(220, 108, 140, 0.15);
+}
+
+.ministersContainer {
+  max-width: 72rem;
+  margin: 0 auto;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.ministersTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  margin: 0 0 2.5rem 0;
+  text-align: center;
+  @include gradient-text-primary;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  letter-spacing: 0.5px;
+
+  @media (max-width: 768px) {
+    font-size: 1.75rem;
+    margin-bottom: 2rem;
+  }
+}
+
+.ministersGrid {
+  display: grid;
+  grid-template-columns: repeat(var(--ministers-count, 5), 1fr);
+  column-gap: 1.5rem;
+  row-gap: 1.5rem;
+  max-width: 100%;
+  width: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: 968px) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media (max-width: 480px) {
+    display: none; // Hide grid when carousel is active
+  }
+}
+
+.ministersCarousel {
+  display: none;
+
+  @media (max-width: 480px) {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+    position: relative;
+    box-sizing: border-box;
+  }
+}
+
+.ministersCarouselTrack {
+  display: flex;
+  flex-direction: row;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  width: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: 480px) {
+    width: 100%;
+    max-width: 100%;
+  }
+}
+
+.ministerCard {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-shrink: 0;
+  box-sizing: border-box;
+
+  @media (max-width: 480px) {
+    width: 100%;
+    min-width: 100%;
+    max-width: 100%;
+    padding: 0;
+  }
+}
+
+.minister {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+
+  @media (max-width: 480px) {
+    display: none; // Hide grid items when carousel is active
+  }
+}
+
+.ministerImageWrapper {
+  width: 100%;
+  max-width: 240px;
+  height: 320px;
+  margin: 0 auto 1.5rem;
+  border-radius: 16px;
+  overflow: hidden;
+  position: relative;
+  box-shadow: 
+    0 6px 20px rgba(0, 0, 0, 0.1),
+    0 0 0 1px rgba(220, 108, 140, 0.08);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              box-shadow 0.4s ease;
+  box-sizing: border-box;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(
+      to bottom,
+      transparent 0%,
+      transparent 70%,
+      rgba(220, 108, 140, 0.05) 100%
+    );
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 1;
+    pointer-events: none;
+  }
+
+  &:hover {
+    transform: translateY(-6px) scale(1.02);
+    box-shadow: 
+      0 14px 32px rgba(0, 0, 0, 0.15),
+      0 0 0 1px rgba(220, 108, 140, 0.15);
+
+    &::before {
+      opacity: 1;
+    }
+  }
+
+  @media (max-width: 768px) {
+    max-width: 200px;
+    height: 280px;
+    margin-bottom: 1.25rem;
+  }
+
+  @media (max-width: 480px) {
+    max-width: 240px;
+    height: 320px;
+  }
+}
+
+.ministerImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  border-radius: 16px;
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  .ministerImageWrapper:hover & {
+    transform: scale(1.05);
+  }
+}
+
+.ministerInfo {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0 1rem;
+
+  @media (max-width: 480px) {
+    padding: 0 1.5rem;
+  }
+}
+
+.ministerName {
+  font-size: 1.3125rem;
+  font-weight: 600;
+  margin: 0 0 0.625rem 0;
+  color: $color-text-primary;
+  letter-spacing: 0.5px;
+  line-height: 1.3;
+  transition: color 0.3s ease;
+
+  .minister:hover & {
+    color: $color-primary;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.1875rem;
+  }
+}
+
+.ministerRole {
+  font-size: 0.8125rem;
+  font-weight: 500;
+  color: rgba($color-text-primary, 0.65);
+  margin: 0;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  transition: color 0.3s ease;
+
+  .minister:hover & {
+    color: rgba($color-primary, 0.8);
+  }
+}
+
+.ministersNavigation {
+  display: none;
+
+  @media (max-width: 480px) {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1rem;
+    margin-top: 1rem;
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    padding: 0 1rem;
+  }
+}
+
+.navButton {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: $color-primary;
+  border: none;
+  color: $color-text-on-dark;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  flex-shrink: 0;
+
+  &:hover {
+    background: $color-primary-dark;
+    transform: scale(1.1);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  }
+
+  &:active {
+    transform: scale(0.95);
+  }
+
+  svg {
+    font-size: 1.25rem;
+  }
+}
+
 @media (max-width: $lg-screens) {
   .heroImage {
     .content {

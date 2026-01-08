@@ -8,11 +8,47 @@ import { getCMSById, getEventFromCMS } from "helpers";
 import { CMSContent } from "types";
 import EventIcon from "@mui/icons-material/Event";
 import PersonIcon from "@mui/icons-material/Person";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import styles from "pages/index.module.scss";
 
 interface HomePageProps {
   cms: string;
 }
+
+interface Minister {
+  name: string;
+  role: string;
+  image: string;
+  imageAlt: string;
+}
+
+const ministers: Minister[] = [
+  {
+    name: "Shile Adeyoyin",
+    role: "Host & Speaker",
+    image: "/images/founder.jpeg",
+    imageAlt: "Shile Adeyoyin, Host & Speaker"
+  },
+  {
+    name: "Pst. Oyin Brandy",
+    role: "Guest Speaker",
+    image: "/images/oyin.jpeg",
+    imageAlt: "Pst. Oyin Brandy, Guest Speaker"
+  },
+  {
+    name: "Obianuju Harbor",
+    role: "Guest Speaker",
+    image: "/images/obianuju.jpeg",
+    imageAlt: "Obianuju Harbor, Guest Speaker"
+  },
+  {
+    name: "Min. Toju Temile",
+    role: "Worship Lead",
+    image: "/images/toju.jpeg",
+    imageAlt: "Min. Toju Temile, Worship Leader"
+  }
+];
 
 export default function HomePage({ cms: stringifiedCMS }: HomePageProps) {
   const cms: CMSContent = JSON.parse(stringifiedCMS);
@@ -21,6 +57,8 @@ export default function HomePage({ cms: stringifiedCMS }: HomePageProps) {
   const heroImages = homeContent.heroImages || [];
   const carouselImages = homeContent.carouselImages || [];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
+  const [currentMinisterIndex, setCurrentMinisterIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
 
   useEffect(() => {
     if (heroImages.length === 0) return;
@@ -30,6 +68,28 @@ export default function HomePage({ cms: stringifiedCMS }: HomePageProps) {
 
     return () => clearInterval(interval);
   }, [heroImages.length]);
+
+  // Detect mobile viewport (carousel only on very small screens)
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 480);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const goToPreviousMinister = () => {
+    setCurrentMinisterIndex((prev) => 
+      prev === 0 ? ministers.length - 1 : prev - 1
+    );
+  };
+
+  const goToNextMinister = () => {
+    setCurrentMinisterIndex((prev) => 
+      prev === ministers.length - 1 ? 0 : prev + 1
+    );
+  };
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
   const ogImage = homeContent.heroImages?.[0] || homeContent.mainLogo || event.logo || "/images/panelists.jpeg";
@@ -166,6 +226,86 @@ export default function HomePage({ cms: stringifiedCMS }: HomePageProps) {
             <CardCarousel cards={carouselImages.map((image) => ({ image, title: '' }))} />
           </div>
         )}
+      </section>
+
+      {/* Ministers Section */}
+      <section className={styles.ministersSection}>
+        <div className={styles.ministersContainer}>
+          <h2 className={styles.ministersTitle}>Our Ministers</h2>
+          {isMobile ? (
+            <>
+              <div className={styles.ministersCarousel}>
+                <div 
+                  className={styles.ministersCarouselTrack}
+                  style={{
+                    transform: `translateX(-${currentMinisterIndex * 100}%)`,
+                  }}
+                >
+                  {ministers.map((minister, index) => (
+                    <div key={index} className={styles.ministerCard}>
+                      <div className={styles.ministerImageWrapper}>
+                        <Image
+                          src={minister.image}
+                          alt={minister.imageAlt}
+                          layout="fill"
+                          objectFit="cover"
+                          objectPosition="center top"
+                          className={styles.ministerImage}
+                        />
+                      </div>
+                      <div className={styles.ministerInfo}>
+                        <h3 className={styles.ministerName}>{minister.name}</h3>
+                        <p className={styles.ministerRole}>{minister.role}</p>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className={styles.ministersNavigation}>
+                <button
+                  className={styles.navButton}
+                  onClick={goToPreviousMinister}
+                  aria-label="Previous minister"
+                >
+                  <ArrowBackIosIcon />
+                </button>
+                <button
+                  className={styles.navButton}
+                  onClick={goToNextMinister}
+                  aria-label="Next minister"
+                >
+                  <ArrowForwardIosIcon />
+                </button>
+              </div>
+            </>
+          ) : (
+            <div 
+              className={styles.ministersGrid}
+              style={{
+                '--ministers-count': ministers.length,
+              } as React.CSSProperties}
+            >
+              {ministers.map((minister, index) => (
+                <div key={index} className={styles.minister}>
+                  <div className={styles.ministerImageWrapper}>
+                    <Image
+                      src={minister.image}
+                      alt={minister.imageAlt}
+                      layout="fill"
+                      objectFit="cover"
+                      objectPosition="center top"
+                      className={styles.ministerImage}
+                    />
+                  </div>
+                  <div className={styles.ministerInfo}>
+                    <h3 className={styles.ministerName}>{minister.name}</h3>
+                    <p className={styles.ministerRole}>{minister.role}</p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          )}
+        </div>
       </section>
     </Layout>
   );
