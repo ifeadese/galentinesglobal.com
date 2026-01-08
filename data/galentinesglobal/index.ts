@@ -33,7 +33,6 @@ export const GALENTINESGLOBAL: CMSContent = {
     verse: "..to know the love of Christ which passes knowledge; that you might be filled with all the fullness of God.\" - Ephesians 3:19",
     eventDate: "February 7, 2026",
     host: "Hosted by Shile Adeyoyin",
-    rsvpUrl: "https://rsvpify.com/",
   },
   about: {
     heroTitle: "About Galentines",

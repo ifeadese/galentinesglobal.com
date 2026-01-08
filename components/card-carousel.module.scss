@@ -52,18 +52,7 @@
   background-size: cover;
   background-position: center 30%;
   background-repeat: no-repeat;
-  
-  @media (max-width: $lg-screens) {
-    width: calc(100vw - 4rem);
-    min-width: calc(100vw - 4rem);
-    max-width: calc(100vw - 4rem);
-  }
-  
-  @media (min-width: $lg-screens) {
-    width: 300px;
-    min-width: 300px;
-    max-width: 300px;
-  }
+  width: 300px;
 }
 
 
