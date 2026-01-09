@@ -190,7 +190,7 @@ export default function SupportPage({ cms: stringifiedCMS }: SupportPageProps) {
       <section className={styles.ctaSection}>
         <div className={styles.ctaContent}>
           <h2>Thank You!</h2>
-          <p>Your support is honored beyond partnership. It&apos;s an act of faith which can be expressed in many forms. Whatever you have to offer; time, talent, or it&apos;ll be greatly appreciated.</p>
+          <p>Your support is honored beyond partnership. It&apos;s an act of faith which can be expressed in many forms. Whatever you have to offer; time, talent, or treasure—it&apos;ll be greatly appreciated.</p>
           <div className={styles.ctaButtons}>
             <a href={`mailto:${event.contactEmailAddress}?subject=Support Inquiry`} className={styles.ctaButtonLink}>
               <Button variant="primary">
