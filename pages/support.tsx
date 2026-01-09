@@ -1,9 +1,11 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Image from "next/legacy/image";
 import Layout from "components/layout";
 import TitleHero from "components/title-hero";
 import Button from "components/button";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
+import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
+import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { getCMSById, getEventFromCMS } from "helpers";
 import { CMSContent } from "types";
 import styles from "./support.module.scss";
@@ -15,6 +17,30 @@ interface SupportPageProps {
 export default function SupportPage({ cms: stringifiedCMS }: SupportPageProps) {
   const cms: CMSContent = JSON.parse(stringifiedCMS);
   const event = getEventFromCMS(cms);
+  const [currentTierIndex, setCurrentTierIndex] = useState(0);
+  const [isMobile, setIsMobile] = useState(false);
+
+  // Detect mobile viewport (carousel on tablet and mobile screens)
+  useEffect(() => {
+    const checkMobile = () => {
+      setIsMobile(window.innerWidth <= 768);
+    };
+    checkMobile();
+    window.addEventListener('resize', checkMobile);
+    return () => window.removeEventListener('resize', checkMobile);
+  }, []);
+
+  const goToPreviousTier = () => {
+    setCurrentTierIndex((prev) => 
+      prev === 0 ? 3 : prev - 1
+    );
+  };
+
+  const goToNextTier = () => {
+    setCurrentTierIndex((prev) => 
+      prev === 3 ? 0 : prev + 1
+    );
+  };
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
 
@@ -72,35 +98,92 @@ export default function SupportPage({ cms: stringifiedCMS }: SupportPageProps) {
         <div className={styles.tiersIntro}>
           <h2>Ways to Support</h2>
         </div>
-        <div className={styles.tiersContainer}>
-          <div className={`${styles.tierCard} ${styles.financialCard}`}>
-            <div className={styles.tierIcon}>💰</div>
-            <h3>Make Donations</h3>
-            <p>Your financial generosity via Interac transfers to <strong>{event.contactEmailAddress}</strong> makes it possible for us to allocate funds to the expenses necessary for the event.</p>
-            <p>Funds may be allocated to expenses such as venue booking, technical equipment rentals, refreshments and hospitality care supplies, shuttle services, travel expenses etc.</p>
-          </div>
+        {isMobile ? (
+          <>
+            <div className={styles.tiersCarousel}>
+              <div 
+                className={styles.tiersCarouselTrack}
+                style={{
+                  transform: `translateX(-${currentTierIndex * 100}%)`,
+                }}
+              >
+                <div className={`${styles.tierCard} ${styles.financialCard}`}>
+                  <div className={styles.tierIcon}>💰</div>
+                  <h3>Make Donations</h3>
+                  <p>Your financial generosity via Interac transfers to <strong>{event.contactEmailAddress}</strong> makes it possible for us to allocate funds to the expenses necessary for the event.</p>
+                  <p>Funds may be allocated to expenses such as venue booking, technical equipment rentals, refreshments and hospitality care supplies, shuttle services, travel expenses etc.</p>
+                </div>
 
-          <div className={`${styles.tierCard} ${styles.venueCard}`}>
-            <div className={styles.tierIcon}>🏛️</div>
-            <h3>Provide a Venue</h3>
-            <p>A safe and ideal space where women can gather, worship, and encounter God uninterruptedly. Your venue becomes a sacred space where lives are changed.</p>
-            <p>We&apos;re open to support from churches, event centers or community halls that can accommodate our attendees comfortably and provide the atmosphere needed for transformation.</p>
-          </div>
+                <div className={`${styles.tierCard} ${styles.venueCard}`}>
+                  <div className={styles.tierIcon}>🏛️</div>
+                  <h3>Provide a Venue</h3>
+                  <p>A safe and ideal space where women can gather, worship, and encounter God uninterruptedly. Your venue becomes a sacred space where lives are changed.</p>
+                  <p>We&apos;re open to support from churches, event centers or community halls that can accommodate our attendees comfortably and provide the atmosphere needed for transformation.</p>
+                </div>
 
-          <div className={`${styles.tierCard} ${styles.resourcesCard}`}>
-            <div className={styles.tierIcon}>🎁</div>
-            <h3>Provide Resources</h3>
-            <p>By providing resources, gifts, or branded materials, you&apos;re extending the experience into their daily lives and creating lasting reminders of God&apos;s faithfulness.</p>
-            <p>These could be free services, care packages, devotionals and books, journals for reflection, branded resources and materials etc. Your contribution helps women continue their journey long after the event ends.</p>
-          </div>
+                <div className={`${styles.tierCard} ${styles.resourcesCard}`}>
+                  <div className={styles.tierIcon}>🎁</div>
+                  <h3>Provide Resources</h3>
+                  <p>By providing resources, gifts, or branded materials, you&apos;re extending the experience into their daily lives and creating lasting reminders of God&apos;s faithfulness.</p>
+                  <p>These could be free services, care packages, devotionals and books, journals for reflection, branded resources and materials etc. Your contribution helps women continue their journey long after the event ends.</p>
+                </div>
 
-          <div className={`${styles.tierCard} ${styles.hospitalityCard}`}>
-            <div className={styles.tierIcon}>🍽️</div>
-            <h3>Provide Hospitality</h3>
-            <p>By providing meals and refreshments, you&apos;re creating moments of connection and care for our attendees. Food brings people together and creates opportunities for meaningful conversations.</p>
-            <p>These could be ready-made meals, hot or cold drinks, pastries, snacks at refreshment stations during the event. Your hospitality ensures that physical needs are met so attendees remain refreshed.</p>
+                <div className={`${styles.tierCard} ${styles.hospitalityCard}`}>
+                  <div className={styles.tierIcon}>🍽️</div>
+                  <h3>Provide Hospitality</h3>
+                  <p>By providing meals and refreshments, you&apos;re creating moments of connection and care for our attendees. Food brings people together and creates opportunities for meaningful conversations.</p>
+                  <p>These could be ready-made meals, hot or cold drinks, pastries, snacks at refreshment stations during the event. Your hospitality ensures that physical needs are met so attendees remain refreshed.</p>
+                </div>
+              </div>
+            </div>
+            <div className={styles.tiersNavigation}>
+              <button
+                className={styles.navButton}
+                onClick={goToPreviousTier}
+                aria-label="Previous tier"
+              >
+                <ArrowBackIosIcon />
+              </button>
+              <button
+                className={styles.navButton}
+                onClick={goToNextTier}
+                aria-label="Next tier"
+              >
+                <ArrowForwardIosIcon />
+              </button>
+            </div>
+          </>
+        ) : (
+          <div className={styles.tiersContainer}>
+            <div className={`${styles.tierCard} ${styles.financialCard}`}>
+              <div className={styles.tierIcon}>💰</div>
+              <h3>Make Donations</h3>
+              <p>Your financial generosity via Interac transfers to <strong>{event.contactEmailAddress}</strong> makes it possible for us to allocate funds to the expenses necessary for the event.</p>
+              <p>Funds may be allocated to expenses such as venue booking, technical equipment rentals, refreshments and hospitality care supplies, shuttle services, travel expenses etc.</p>
+            </div>
+
+            <div className={`${styles.tierCard} ${styles.venueCard}`}>
+              <div className={styles.tierIcon}>🏛️</div>
+              <h3>Provide a Venue</h3>
+              <p>A safe and ideal space where women can gather, worship, and encounter God uninterruptedly. Your venue becomes a sacred space where lives are changed.</p>
+              <p>We&apos;re open to support from churches, event centers or community halls that can accommodate our attendees comfortably and provide the atmosphere needed for transformation.</p>
+            </div>
+
+            <div className={`${styles.tierCard} ${styles.resourcesCard}`}>
+              <div className={styles.tierIcon}>🎁</div>
+              <h3>Provide Resources</h3>
+              <p>By providing resources, gifts, or branded materials, you&apos;re extending the experience into their daily lives and creating lasting reminders of God&apos;s faithfulness.</p>
+              <p>These could be free services, care packages, devotionals and books, journals for reflection, branded resources and materials etc. Your contribution helps women continue their journey long after the event ends.</p>
+            </div>
+
+            <div className={`${styles.tierCard} ${styles.hospitalityCard}`}>
+              <div className={styles.tierIcon}>🍽️</div>
+              <h3>Provide Hospitality</h3>
+              <p>By providing meals and refreshments, you&apos;re creating moments of connection and care for our attendees. Food brings people together and creates opportunities for meaningful conversations.</p>
+              <p>These could be ready-made meals, hot or cold drinks, pastries, snacks at refreshment stations during the event. Your hospitality ensures that physical needs are met so attendees remain refreshed.</p>
+            </div>
           </div>
-        </div>
+        )}
       </section>
 
       {/* CTA Section */}
