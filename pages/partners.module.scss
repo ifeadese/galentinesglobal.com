@@ -1,0 +1,591 @@
+@import "/common.scss";
+
+// Impact Story Section
+.impactStory {
+  padding: 3rem;
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+
+  @media (max-width: $lg-screens) {
+    padding: 2.5rem;
+  }
+}
+
+.storyContent {
+  max-width: 800px;
+  margin: 0;
+  animation: fadeIn 0.8s ease-out;
+  will-change: opacity;
+
+  > p {
+    font-size: 1.125rem;
+    margin: 0 0 1.5rem 0;
+    color: rgba($text-primary, 0.9);
+    line-height: 1.75rem;
+
+    &:last-of-type {
+      margin-bottom: 0;
+    }
+  }
+}
+
+.storyQuote {
+  margin: 2.5rem 0;
+  padding-left: 2rem;
+  border-left: 3px solid $primary;
+  font-style: italic;
+  font-size: 1rem;
+  color: $text-primary;
+
+  cite {
+    display: block;
+    margin-top: 1rem;
+    font-style: normal;
+    font-size: 0.875rem;
+    font-family: "Montserrat", sans-serif;
+    color: $primary;
+  }
+}
+
+// Financial Partnership Section
+.financialPartnership {
+  width: 100%;
+  margin: 0;
+  background: white;
+  text-align: left;
+  position: relative;
+  z-index: 1;
+}
+
+.financialLayout {
+  display: flex;
+  flex-direction: row;
+  gap: 2rem;
+  align-items: stretch;
+  margin: 0 auto;
+  width: 100%;
+  min-height: 0;
+
+  @media (max-width: $md-screens) {
+    flex-direction: column;
+    gap: 1.5rem;
+    align-items: flex-start;
+    min-height: auto;
+  }
+
+  @media (max-width: $sm-screens) {
+    gap: 1rem;
+  }
+}
+
+.financialLeftContainer {
+  background-image: url('/images/support-2.JPG');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  padding: 5%;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  flex: 1 1 100%;
+  max-width: 100%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  overflow: hidden;
+  min-height: 400px;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.7);
+    z-index: 0;
+  }
+
+  @media (max-width: $md-screens) {
+    min-height: 350px;
+  }
+
+  @media (max-width: $sm-screens) {
+    min-height: 300px;
+  }
+}
+
+.financialPartnership {
+  .logoContainer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 100%;
+    position: relative;
+    z-index: 1;
+
+    img {
+      filter: brightness(1.1);
+    }
+  }
+
+  .logoWrapper {
+    overflow: hidden;
+    background: rgba(255, 255, 255, 0.1);
+    padding: 0;
+    backdrop-filter: blur(10px);
+    transform: scale(0.7);
+  }
+
+  .contributionText {
+    margin: 0;
+    font-size: 20px;
+    color: var(--color-text-on-dark);
+    font-weight: 500;
+    text-align: center;
+    line-height: 2rem;
+
+    @media (max-width: $lg-screens) {
+      font-size: 18px;
+    }
+
+    @media (max-width: $md-screens) {
+      font-size: 16px;
+    }
+  }
+
+  .emailAddress {
+    font-weight: 900;
+    color: var(--color-text-on-dark);
+    word-break: break-word;
+  }
+}
+
+// Partnership Tiers
+.partnershipTiers {
+  background: white;
+  color: $text-primary;
+  padding: 5rem;
+  position: relative;
+  overflow: hidden;
+
+  @media (max-width: $lg-screens) {
+    padding: 4rem;
+  }
+
+  @media (max-width: $md-screens) {
+    padding: 3rem;
+  }
+
+  @media (max-width: $sm-screens) {
+    padding: 2rem;
+  }
+}
+
+.tiersIntro {
+  max-width: 1400px;
+  margin: 0 auto 2rem auto;
+  text-align: center;
+  animation: fadeIn 0.8s ease-out;
+  will-change: opacity;
+  position: relative;
+  z-index: 1;
+
+  @media (max-width: $md-screens) {
+    margin-bottom: 1.5rem;
+    text-align: left;
+  }
+
+  @media (max-width: $sm-screens) {
+    margin-bottom: 1rem;
+  }
+
+  h2 {
+    font-size: 2.5rem;
+    margin: 0 auto;
+    font-weight: 700;
+    @include gradient-text-primary;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    text-align: center;
+    width: fit-content;
+    display: block;
+
+    @media (max-width: $lg-screens) {
+      font-size: 2rem;
+    }
+
+    @media (max-width: $md-screens) {
+      font-size: 1.75rem;
+      margin: 0 0 1rem 0;
+      text-align: left;
+      width: 100%;
+    }
+  }
+
+  p {
+    font-size: 1.25rem;
+    color: rgba($text-primary, 0.85);
+    line-height: 1.75rem;
+
+    @media (max-width: $md-screens) {
+      font-size: 1.125rem;
+    }
+  }
+}
+
+.tiersContainer {
+  max-width: 1400px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2rem;
+  align-items: stretch;
+
+  @media (max-width: $md-screens) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  @media (max-width: $sm-screens) {
+    gap: 1rem;
+  }
+}
+
+.tierCard {
+  background: $bg-elevated;
+  padding: 3rem 2rem;
+  border-radius: 8px;
+  border: 1px solid rgba($text-primary, 0.1);
+  transition: transform 0.4s ease, box-shadow 0.4s ease, border-color 0.4s ease;
+  animation: fadeInUp 0.8s ease-out both;
+  will-change: transform, opacity;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+
+  &:hover {
+    transform: translateY(-10px);
+    background: $bg-elevated;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12);
+    border-color: rgba($text-primary, 0.15);
+  }
+
+  @media (max-width: $lg-screens) {
+    padding: 2.5rem 1.5rem;
+  }
+
+  @media (max-width: $md-screens) {
+    padding: 2rem 1.5rem;
+  }
+
+  @media (max-width: $sm-screens) {
+    padding: 1.75rem 1.25rem;
+  }
+}
+
+// Shared card content styles
+%cardContent {
+  .tierIcon {
+    margin: 0.5rem 0 1.5rem 0;
+  }
+
+  h3 {
+    margin: 0 0 0.75rem 0;
+    font-size: 1.5rem;
+    font-weight: 600;
+
+    @media (max-width: $md-screens) {
+      font-size: 1.25rem;
+    }
+  }
+
+  p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: rgba($text-primary, 0.85);
+    font-weight: 500;
+    margin-bottom: 1.5rem;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+
+    @media (max-width: $md-screens) {
+      font-size: 0.95rem;
+    }
+  }
+}
+
+.financialCard {
+  @extend %cardContent;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem 1.5rem;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 192, 203, 0.6) 0%,
+    rgba(220, 108, 140, 0.4) 25%,
+    rgba(200, 80, 120, 0.35) 50%,
+    rgba(220, 108, 140, 0.4) 75%,
+    rgba(255, 192, 203, 0.6) 100%
+  );
+  border-color: rgba($text-primary, 0.1);
+
+  @media (max-width: $md-screens) {
+    padding: 1.75rem 1.5rem;
+  }
+
+  @media (max-width: $sm-screens) {
+    padding: 1.5rem 1.25rem;
+  }
+
+  &:hover {
+    background: linear-gradient(
+      135deg,
+      rgba(255, 192, 203, 0.65) 0%,
+      rgba(220, 108, 140, 0.45) 25%,
+      rgba(200, 80, 120, 0.4) 50%,
+      rgba(220, 108, 140, 0.45) 75%,
+      rgba(255, 192, 203, 0.65) 100%
+    );
+    border-color: rgba($text-primary, 0.15);
+  }
+
+  h3 {
+    color: $text-primary;
+    -webkit-text-fill-color: initial;
+    background-clip: initial;
+  }
+
+  p strong {
+    color: $text-primary;
+    font-weight: 600;
+  }
+
+  .financialImpact {
+    text-align: left;
+    margin-top: 1.5rem;
+
+    strong {
+      display: block;
+      font-family: "Montserrat", sans-serif;
+      font-size: 0.875rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: $text-primary !important;
+      margin-bottom: 0.75rem;
+      font-weight: 600;
+    }
+
+    ul {
+      list-style: none;
+      font-size: 1rem;
+      color: rgba($text-primary, 0.85) !important;
+      padding-left: 0;
+      margin: 0;
+    }
+
+    li {
+      padding: 0.5rem 0;
+      padding-left: 1.5rem;
+      position: relative;
+      color: rgba($text-primary, 0.85) !important;
+
+      &::before {
+        content: '✓';
+        position: absolute;
+        left: 0;
+        color: $primary;
+        font-weight: bold;
+      }
+
+      @media (max-width: $sm-screens) {
+        font-size: 0.875rem;
+      }
+    }
+  }
+}
+
+.venueCard,
+.resourcesCard,
+.hospitalityCard {
+  @extend %cardContent;
+  border-radius: 0.5rem;
+  border: 1px solid $border-light;
+  @include gradient-card-default;
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06),
+    0 0 0 1px $shadow-subtle;
+  padding: 2rem 1.5rem;
+  text-align: left;
+  transition: box-shadow 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+  overflow: hidden;
+
+  @media (max-width: $md-screens) {
+    padding: 1.75rem 1.5rem;
+  }
+
+  @media (max-width: $sm-screens) {
+    padding: 1.5rem 1.25rem;
+  }
+
+  &:hover {
+    box-shadow: 
+      0 20px 25px -5px $shadow-medium,
+      0 10px 10px -5px $shadow-soft,
+      0 0 0 1px $border-dark;
+  }
+
+  h3 {
+    letter-spacing: 1px;
+    @include gradient-text-primary;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+.tierIcon {
+  font-size: 2.5rem;
+  margin: 0.5rem 0 1.5rem 0;
+  display: block;
+  line-height: 1;
+}
+
+// CTA Section
+.ctaSection {
+  padding: 5rem 5%;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 240, 245, 0.4) 0%,
+    rgba(255, 192, 203, 0.2) 25%,
+    rgba(220, 108, 140, 0.15) 50%,
+    rgba(255, 192, 203, 0.2) 75%,
+    rgba(255, 240, 245, 0.4) 100%
+  );
+  color: $text-primary;
+  text-align: center;
+  border-top: 2px solid rgba(220, 108, 140, 0.15);
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(
+      circle at 30% 50%,
+      rgba(220, 108, 140, 0.08) 0%,
+      transparent 50%
+    ),
+    radial-gradient(
+      circle at 70% 50%,
+      rgba(255, 192, 203, 0.1) 0%,
+      transparent 50%
+    );
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  @media (max-width: $lg-screens) {
+    padding: 4rem 5%;
+  }
+
+  @media (max-width: $md-screens) {
+    padding: 3rem 5%;
+  }
+}
+
+.ctaContent {
+  max-width: 800px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+
+  h2 {
+    font-size: 2.5rem;
+    margin: 0 0 1.5rem 0;
+    font-weight: 700;
+    @include gradient-text-primary;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+
+    @media (max-width: $lg-screens) {
+      font-size: 2rem;
+    }
+  }
+
+  p {
+    font-size: 1rem;
+    color: rgba($text-primary, 0.8);
+    line-height: 2rem;
+  }
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 1.5rem;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 1.5rem;
+}
+
+.ctaButtonLink {
+  text-decoration: none;
+
+  // Ensure buttons in CTA section have proper hover states for light background
+  :global(button.default.primary:hover:enabled) {
+    background-color: $primary !important;
+    color: var(--color-text-on-dark) !important;
+    border-color: $primary !important;
+  }
+
+  :global(button.default.secondary:hover:enabled) {
+    background-color: $primary !important;
+    color: var(--color-text-on-dark) !important;
+    border-color: $primary !important;
+  }
+
+  @media (max-width: 640px) {
+    button {
+      width: 100%;
+    }
+  }
+}
+
+// Animations
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+

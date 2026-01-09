@@ -62,6 +62,12 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
       changefreq: "monthly",
       priority: "0.6",
     },
+    {
+      url: "/partners",
+      lastmod: new Date().toISOString(),
+      changefreq: "monthly",
+      priority: "0.8",
+    },
   ];
 
   // Generate the XML sitemap with the pages data
