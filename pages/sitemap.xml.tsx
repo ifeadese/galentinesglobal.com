@@ -63,7 +63,7 @@ export const getServerSideProps: GetServerSideProps = async ({ res }) => {
       priority: "0.6",
     },
     {
-      url: "/partners",
+      url: "/support",
       lastmod: new Date().toISOString(),
       changefreq: "monthly",
       priority: "0.8",

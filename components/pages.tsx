@@ -1,4 +1,3 @@
-/* eslint-disable jsx-a11y/alt-image */
 import { HomeRounded, BallotRounded, CropOriginalRounded, InfoRounded, HelpRounded, EventAvailableRounded, PeopleRounded, HandshakeRounded } from '@mui/icons-material';
 
 export const pages = [
