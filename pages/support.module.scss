@@ -166,20 +166,16 @@
 .waysToSupport {
   background: white;
   color: $text-primary;
-  padding: 5rem;
+  padding: 4rem;
   position: relative;
   overflow: hidden;
 
-  @media (max-width: $lg-screens) {
-    padding: 4rem;
-  }
-
   @media (max-width: $md-screens) {
-    padding: 3rem;
+    padding: 4rem 3rem;
   }
 
   @media (max-width: $sm-screens) {
-    padding: 2rem;
+    padding: 3rem 2rem;
   }
 }
 

@@ -98,7 +98,7 @@ export default function SupportPage({ cms: stringifiedCMS }: SupportPageProps) {
             <div className={styles.tierIcon}>🍽️</div>
             <h3>Provide Hospitality</h3>
             <p>By providing meals and refreshments, you&apos;re creating moments of connection and care for our attendees. Food brings people together and creates opportunities for meaningful conversations.</p>
-            <p>These could be ready-made meals, hot or cold drinks, pastries, snacks at refreshment stations during the event. Your hospitality ensures that physical needs are met so spiritual growth can flourish.</p>
+            <p>These could be ready-made meals, hot or cold drinks, pastries, snacks at refreshment stations during the event. Your hospitality ensures that physical needs are met so attendees remain refreshed.</p>
           </div>
         </div>
       </section>

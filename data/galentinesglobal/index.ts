@@ -22,6 +22,8 @@ export const GALENTINESGLOBAL: CMSContent = {
       "/images/held-hands.jpg",
     ],
     carouselImages: [
+      "/images/anu.jpeg",
+      "/images/whitney.jpeg",
       "/images/volunteer.jpeg",
       "/images/prayer.jpg",
       "/images/dance.jpeg",
