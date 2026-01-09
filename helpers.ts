@@ -1,6 +1,4 @@
-import { useEffect, useState } from "react";
 import { GALENTINESGLOBAL } from "data/galentinesglobal/index";
-import { WINDSOFCHANGE } from "data/windsofchange/index";
 import { mergeWithDefaults } from "data/defaults";
 import { CMSContent } from "types";
 import { Event } from "types";
@@ -26,15 +24,7 @@ export function getEventFromCMS(cms: CMSContent): Event {
 }
 
 export function getCMSById(id: string | undefined): CMSContent {
-    let eventCMS: CMSContent;
-    switch (id) {
-        case 'WINDSOFCHANGE':
-            eventCMS = WINDSOFCHANGE;
-            break;
-        default:
-            eventCMS = GALENTINESGLOBAL;
-    }
-    // Merge with defaults to ensure all fields are present
+    let eventCMS: CMSContent = GALENTINESGLOBAL;
     return mergeWithDefaults(eventCMS);
 }
 

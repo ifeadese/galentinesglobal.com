@@ -20,8 +20,8 @@ export const pages = [
     icon: <PeopleRounded sx={{ color: 'lightgray' }} />,
   },
   {
-    name: "Partners",
-    url: `/partners`,
+    name: "Support",
+    url: `/support`,
     disabled: false,
     icon: <HandshakeRounded sx={{ color: 'lightgray' }} />,
   },
