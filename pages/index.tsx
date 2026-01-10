@@ -43,10 +43,10 @@ const ministers: Minister[] = [
     imageAlt: "Min. Toju Temile, Worship Leader"
   },
   {
-    name: "Chioma Nwankwo",
+    name: "Chioma Great-Nwankwo",
     role: "Worship Lead",
     image: "/images/chioma.jpeg",
-    imageAlt: "Chioma Nwankwo, Worship Lead"
+    imageAlt: "Chioma Great-Nwankwo, Worship Lead"
   },
 ];
 
