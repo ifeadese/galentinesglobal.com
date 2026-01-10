@@ -25,12 +25,6 @@ interface Minister {
 
 const ministers: Minister[] = [
   {
-    name: "Shile Adeyoyin",
-    role: "Host & Speaker",
-    image: "/images/founder.jpeg",
-    imageAlt: "Shile Adeyoyin, Host & Speaker"
-  },
-  {
     name: "Pst. Oyin Brandy",
     role: "Guest Speaker",
     image: "/images/oyin.jpeg",
@@ -47,7 +41,13 @@ const ministers: Minister[] = [
     role: "Worship Lead",
     image: "/images/toju.jpeg",
     imageAlt: "Min. Toju Temile, Worship Leader"
-  }
+  },
+  {
+    name: "Chioma Nwankwo",
+    role: "Worship Lead",
+    image: "/images/chioma.jpeg",
+    imageAlt: "Chioma Nwankwo, Worship Lead"
+  },
 ];
 
 export default function HomePage({ cms: stringifiedCMS }: HomePageProps) {
