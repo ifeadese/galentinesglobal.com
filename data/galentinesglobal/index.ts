@@ -3,7 +3,7 @@ import { CMSContent } from "types";
 export const GALENTINESGLOBAL: CMSContent = {
   general: {
     id: 'GALENTINESGLOBAL',
-    name: 'Galentines Global',
+    name: 'Galentines: The Love of God Conference',
     description: "Annual Ladies' Christian Faith Conference",
     marketingCopy: 'Empowering Women Through Faith',
     contactEmailAddress: 'galentineglobal@gmail.com',
