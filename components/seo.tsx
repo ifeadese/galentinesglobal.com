@@ -81,6 +81,8 @@ const SEO: React.FC<SEOProps> = ({
       <meta property="og:title" content={pageTitle} />
       <meta property="og:description" content={siteDescription} />
       <meta property="og:image" content={absoluteImageUrl} />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
       {absoluteUrl && <meta property="og:url" content={absoluteUrl} />}
       <meta property="og:site_name" content={siteName} />
 
