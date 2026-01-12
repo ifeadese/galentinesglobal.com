@@ -199,7 +199,7 @@ export default function SupportPage({ cms: stringifiedCMS }: SupportPageProps) {
             </a>
             <a href="https://galentines.fillout.com/volunteers" target="_blank" rel="noopener noreferrer" className={styles.ctaButtonLink}>
               <Button variant="secondary">
-                Volunteer With Us
+                Volunteer
                 <OpenInNewIcon sx={{ fontSize: '1rem', marginLeft: '0.5rem', verticalAlign: 'middle' }} />
               </Button>
             </a>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import Head from "next/head";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import Button from "components/button";
@@ -129,19 +130,67 @@ export default function HomePage({ cms: stringifiedCMS }: HomePageProps) {
     ? `The Love of God Conference ${eventYear}` 
     : undefined;
 
+  // Convert event date to ISO 8601 format for Event schema
+  const eventStartDate = isValidDate && eventDate
+    ? (() => {
+        try {
+          const date = new Date(eventDate);
+          if (!isNaN(date.getTime())) {
+            const year = date.getFullYear();
+            const month = String(date.getMonth() + 1).padStart(2, '0');
+            const day = String(date.getDate()).padStart(2, '0');
+            return `${year}-${month}-${day}`;
+          }
+        } catch {
+          // If parsing fails, return null
+        }
+        return null;
+      })()
+    : null;
+
+  // Event structured data schema
+  const eventSchema = eventStartDate ? {
+    "@context": "https://schema.org",
+    "@type": "Event",
+    "name": event.name,
+    "description": event.description,
+    "startDate": eventStartDate,
+    "url": siteUrl,
+    "image": `${siteUrl}${ogImage}`,
+    "organizer": {
+      "@type": "Organization",
+      "name": event.name,
+      "url": siteUrl,
+      ...(event.logo && {
+        "logo": `${siteUrl}${event.logo}`,
+      }),
+    },
+  } : null;
+
   return (
-    <Layout 
-      event={event}
-      seo={{
-        title: seoTitle,
-        description: isValidDate 
-          ? `${event.description} Join us on ${eventDate} for an empowering gathering of women in faith.`
-          : `${event.description} Join us for an empowering gathering of women in faith.`,
-        image: ogImage,
-        url: siteUrl,
-        type: "website",
-      }}
-    >
+    <>
+      {eventSchema && (
+        <Head>
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{
+              __html: JSON.stringify(eventSchema),
+            }}
+          />
+        </Head>
+      )}
+      <Layout 
+        event={event}
+        seo={{
+          title: seoTitle,
+          description: isValidDate 
+            ? `${event.description} Join us on ${eventDate} for an empowering gathering of women in faith.`
+            : `${event.description} Join us for an empowering gathering of women in faith.`,
+          image: ogImage,
+          url: siteUrl,
+          type: "website",
+        }}
+      >
       <header className={styles.heroImage}>
         <div className={styles.slideshowContainer}>
           {heroImages.map((image, index) => (
@@ -307,7 +356,8 @@ export default function HomePage({ cms: stringifiedCMS }: HomePageProps) {
           )}
         </div>
       </section>
-    </Layout>
+      </Layout>
+    </>
   );
 }
 
