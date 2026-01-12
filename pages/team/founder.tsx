@@ -1,4 +1,5 @@
 import React from "react";
+import Head from "next/head";
 import Layout from "components/layout";
 import TitleHero from "components/title-hero";
 import { getCMSById, getEventFromCMS } from "helpers";
@@ -24,17 +25,43 @@ export default function FounderPage({ cms: stringifiedCMS }: FounderPageProps) {
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
 
+  // Person structured data schema for founder
+  const personSchema = {
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Shile Adeyoyin",
+    "jobTitle": "Founder & Steward",
+    "description": "Founder and steward of Galentines Global, dedicated to empowering women through the revelation of the Father's love. A lawyer by profession and a worshipper at heart.",
+    "image": `${siteUrl}/images/founder.jpeg`,
+    "url": `${siteUrl}/team/founder`,
+    "worksFor": {
+      "@type": "Organization",
+      "name": event.name,
+      "url": siteUrl,
+    },
+    "knowsAbout": ["Women's Ministry", "Christian Faith", "Worship"],
+  };
+
   return (
-    <Layout 
-      event={event}
-      seo={{
-        title: "Meet The Founder",
-        description: "Learn about Shile Adeyoyin, the visionary behind Galentines Global, dedicated to empowering women through the revelation of the Father's love.",
-        image: "/images/founder.jpeg",
-        url: `${siteUrl}/team/founder`,
-        type: "profile",
-      }}
-    >
+    <>
+      <Head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(personSchema),
+          }}
+        />
+      </Head>
+      <Layout 
+        event={event}
+        seo={{
+          title: "Meet The Founder",
+          description: "Learn about Shile Adeyoyin, the visionary behind Galentines Global, dedicated to empowering women through the revelation of the Father's love.",
+          image: "/images/founder.jpeg",
+          url: `${siteUrl}/team/founder`,
+          type: "profile",
+        }}
+      >
       <TitleHero
         image="/images/founder.jpeg"
         imageAlt="Shile Adeyoyin, Founder & Steward"
@@ -57,7 +84,8 @@ export default function FounderPage({ cms: stringifiedCMS }: FounderPageProps) {
           </div>
         </div>
       </section>
-    </Layout>
+      </Layout>
+    </>
   );
 }
 
