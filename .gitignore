@@ -35,6 +35,5 @@ yarn-error.log*
 *.tsbuildinfo
 next-env.d.ts
 
-# Generated images (copied from data/galentinesglobal/images during build)
-# Keep 404.png as it's event-agnostic
+# Generated images (copied from images directory during build)
 public/images/*

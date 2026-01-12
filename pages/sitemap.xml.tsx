@@ -1,5 +1,6 @@
 import { GetServerSideProps } from "next";
-import { getCMSById, getEventFromCMS } from "helpers";
+import { getEventFromCMS } from "helpers";
+import { CMS } from "../cms";
 
 function generateSiteMap(pages: Array<{ url: string; lastmod?: string; changefreq?: string; priority?: string }>) {
   const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
@@ -27,7 +28,7 @@ function SiteMap() {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  const cms = getCMSById();
+  const cms = CMS;
   const event = getEventFromCMS(cms);
 
   // List of all pages

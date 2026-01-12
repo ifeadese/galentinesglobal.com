@@ -1,6 +1,6 @@
 import { CMSContent } from "types";
 
-export const GALENTINESGLOBAL: CMSContent = {
+export const CMS: CMSContent = {
   general: {
     id: 'GALENTINESGLOBAL',
     name: 'Galentines: The Love of God Conference',

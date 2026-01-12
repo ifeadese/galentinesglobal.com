@@ -6,17 +6,12 @@ import Button from "components/button";
 import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
-import { getCMSById, getEventFromCMS } from "helpers";
-import { CMSContent } from "types";
+import { getEventFromCMS } from "helpers";
+import { CMS } from "../cms";
 import styles from "./support.module.scss";
 
-interface SupportPageProps {
-  cms: string;
-}
-
-export default function SupportPage({ cms: stringifiedCMS }: SupportPageProps) {
-  const cms: CMSContent = JSON.parse(stringifiedCMS);
-  const event = getEventFromCMS(cms);
+export default function SupportPage() {
+  const event = getEventFromCMS(CMS);
   const [currentTierIndex, setCurrentTierIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
 
@@ -210,11 +205,4 @@ export default function SupportPage({ cms: stringifiedCMS }: SupportPageProps) {
   );
 }
 
-export const getStaticProps = () => {
-  return {
-    props: {
-      cms: JSON.stringify(getCMSById()),
-    },
-  };
-};
 

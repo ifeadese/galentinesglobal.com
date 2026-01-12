@@ -5,17 +5,13 @@ import Link from "next/link";
 import Button from "components/button";
 import Layout from "components/layout";
 import CardCarousel from "components/card-carousel";
-import { getCMSById, getEventFromCMS } from "helpers";
-import { CMSContent } from "types";
+import { getEventFromCMS } from "helpers";
+import { CMS } from "../cms";
 import EventIcon from "@mui/icons-material/Event";
 import PersonIcon from "@mui/icons-material/Person";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import styles from "pages/index.module.scss";
-
-interface HomePageProps {
-  cms: string;
-}
 
 interface Minister {
   name: string;
@@ -51,10 +47,9 @@ const ministers: Minister[] = [
   },
 ];
 
-export default function HomePage({ cms: stringifiedCMS }: HomePageProps) {
-  const cms: CMSContent = JSON.parse(stringifiedCMS);
-  const event = getEventFromCMS(cms);
-  const homeContent = cms.home;
+export default function HomePage() {
+  const event = getEventFromCMS(CMS);
+  const homeContent = CMS.home;
   const heroImages = homeContent.heroImages || [];
   const carouselImages = homeContent.carouselImages || [];
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
@@ -261,9 +256,9 @@ export default function HomePage({ cms: stringifiedCMS }: HomePageProps) {
       {/* About Us Section */}
       <section className={styles.aboutSection}>
         <div className={styles.aboutContent}>
-          {cms.about.paragraphs && cms.about.paragraphs.length > 0 && (
+          {CMS.about.paragraphs && CMS.about.paragraphs.length > 0 && (
             <div className={styles.aboutParagraphs}>
-              {cms.about.paragraphs.map((paragraph, index) => (
+              {CMS.about.paragraphs.map((paragraph, index) => (
                 <p key={index} className={styles.aboutParagraph}>
                   {paragraph}
                 </p>
@@ -374,10 +369,3 @@ export default function HomePage({ cms: stringifiedCMS }: HomePageProps) {
   );
 }
 
-export const getStaticProps = () => {
-  return {
-    props: {
-      cms: JSON.stringify(getCMSById()),
-    },
-  };
-};

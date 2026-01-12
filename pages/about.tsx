@@ -1,8 +1,8 @@
 import React from "react";
 import Layout from "components/layout";
 import TitleHero from "components/title-hero";
-import { getCMSById, getEventFromCMS } from "helpers";
-import { CMSContent } from "types";
+import { getEventFromCMS } from "helpers";
+import { CMS } from "../cms";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import Button from "components/button";
@@ -10,10 +10,6 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
 import styles from "./about.module.scss";
-
-interface AboutPageProps {
-  cms: string;
-}
 
 const getIconComponent = (iconName: string) => {
   switch (iconName) {
@@ -28,10 +24,9 @@ const getIconComponent = (iconName: string) => {
   }
 };
 
-export default function AboutPage({ cms: stringifiedCMS }: AboutPageProps) {
-  const cms: CMSContent = JSON.parse(stringifiedCMS);
-  const event = getEventFromCMS(cms);
-  const aboutContent = cms.about;
+export default function AboutPage() {
+  const event = getEventFromCMS(CMS);
+  const aboutContent = CMS.about;
 
   const founderData = {
     name: "Meet The Founder",
@@ -137,10 +132,3 @@ export default function AboutPage({ cms: stringifiedCMS }: AboutPageProps) {
   );
 }
 
-export const getStaticProps = () => {
-  return {
-    props: {
-      cms: JSON.stringify(getCMSById()),
-    },
-  };
-};

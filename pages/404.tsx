@@ -3,16 +3,12 @@ import Image from "next/legacy/image";
 import Button from "components/button";
 import Layout from "components/layout";
 import { CMSContent } from "types";
-import { getCMSById, getEventFromCMS } from "helpers";
+import { getEventFromCMS } from "helpers";
+import { CMS } from "../cms";
 
-interface ErrorPageProps {
-  cms: string;
-}
-
-export default function ErrorPage({ cms: stringifiedCMS }: ErrorPageProps) {
-  const cms: CMSContent = JSON.parse(stringifiedCMS);
-  const event = getEventFromCMS(cms);
-  const errorContent = cms.error404;
+export default function ErrorPage() {
+  const event = getEventFromCMS(CMS);
+  const errorContent = CMS.error404;
 
   return (
     <Layout event={event}>
@@ -29,10 +25,3 @@ export default function ErrorPage({ cms: stringifiedCMS }: ErrorPageProps) {
   );
 }
 
-export const getStaticProps = () => {
-  return {
-    props: {
-      cms: JSON.stringify(getCMSById()),
-    },
-  };
-};

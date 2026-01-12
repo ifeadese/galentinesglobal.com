@@ -3,21 +3,16 @@ import Layout from "components/layout";
 import TitleHero from "components/title-hero";
 import ContactForm from "components/contact-form";
 import EventCountdown from "components/event-countdown";
-import { getCMSById, getEventFromCMS, getEventDate } from "helpers";
-import { CMSContent } from "types";
+import { getEventFromCMS, getEventDate } from "helpers";
+import { CMS } from "../cms";
 import styles from "./rsvp.module.scss";
 
-interface RSVPPageProps {
-  cms: string;
-}
-
-export default function RSVPPage({ cms }: RSVPPageProps) {
-  const cmsContent: CMSContent = JSON.parse(cms);
-  const event = getEventFromCMS(cmsContent);
-  const eventDate = getEventDate(cmsContent);
+export default function RSVPPage() {
+  const event = getEventFromCMS(CMS);
+  const eventDate = getEventDate(CMS);
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
-  const eventDateStr = cmsContent.home.eventDate;
+  const eventDateStr = CMS.home.eventDate;
   const isValidDate = eventDateStr && eventDateStr !== "TBD";
 
   return (
@@ -90,11 +85,4 @@ export default function RSVPPage({ cms }: RSVPPageProps) {
   );
 }
 
-export const getStaticProps = () => {
-  return {
-    props: {
-      cms: JSON.stringify(getCMSById()),
-    },
-  };
-};
 

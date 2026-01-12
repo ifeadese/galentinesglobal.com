@@ -1,5 +1,3 @@
-import { GALENTINESGLOBAL } from "data/galentinesglobal/index";
-import { mergeWithDefaults } from "data/defaults";
 import { CMSContent } from "types";
 import { Event } from "types";
 
@@ -21,11 +19,6 @@ export function getEventFromCMS(cms: CMSContent): Event {
     facebookPageUrl: cms.general.facebookPageUrl,
     instagramPageUrl: cms.general.instagramPageUrl,
   };
-}
-
-// Get CMS content for Galentines Global (deprecated: no longer uses EVENT_ID)
-export function getCMSById(): CMSContent {
-    return mergeWithDefaults(GALENTINESGLOBAL);
 }
 
 /**

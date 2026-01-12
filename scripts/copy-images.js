@@ -3,15 +3,12 @@
 const fs = require('fs');
 const path = require('path');
 
-// Fixed to Galentines Global (no longer uses EVENT_ID)
-const eventDir = 'galentinesglobal';
-
-// Source directory (where images are stored for this event)
-const sourceDir = path.join(__dirname, '../data', eventDir, 'images');
+// Source directory (where images are stored - root level images directory)
+const sourceDir = path.join(__dirname, '../images');
 // Destination directory (where Next.js serves images from)
 const destDir = path.join(__dirname, '../public/images');
 
-console.log(`📦 Copying images for event: GALENTINESGLOBAL (${eventDir})`);
+console.log(`📦 Copying images from ${sourceDir}`);
 
 // Check if source directory exists
 if (!fs.existsSync(sourceDir)) {

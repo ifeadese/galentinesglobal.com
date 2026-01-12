@@ -2,18 +2,13 @@ import React from "react";
 import Head from "next/head";
 import Layout from "components/layout";
 import TitleHero from "components/title-hero";
-import { getCMSById, getEventFromCMS } from "helpers";
-import { CMSContent } from "types";
+import { getEventFromCMS } from "helpers";
+import { CMS } from "../../cms";
 import Image from "next/legacy/image";
 import styles from "./founder.module.scss";
 
-interface FounderPageProps {
-  cms: string;
-}
-
-export default function FounderPage({ cms: stringifiedCMS }: FounderPageProps) {
-  const cms: CMSContent = JSON.parse(stringifiedCMS);
-  const event = getEventFromCMS(cms);
+export default function FounderPage() {
+  const event = getEventFromCMS(CMS);
 
   const fullBio = [
     "When I was eleven years old, I moved to Canada and stepped into the four walls of a church for the very first time. The service felt pleasant but nothing spectacular or out of the ordinary happened—or so it seemed.",
@@ -89,11 +84,4 @@ export default function FounderPage({ cms: stringifiedCMS }: FounderPageProps) {
   );
 }
 
-export const getStaticProps = () => {
-  return {
-    props: {
-      cms: JSON.stringify(getCMSById()),
-    },
-  };
-};
 

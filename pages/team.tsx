@@ -1,8 +1,8 @@
 import React from "react";
 import Layout from "components/layout";
 import TitleHero from "components/title-hero";
-import { getCMSById, getEventFromCMS } from "helpers";
-import { CMSContent } from "types";
+import { getEventFromCMS } from "helpers";
+import { CMS } from "../cms";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import Button from "components/button";
@@ -52,9 +52,8 @@ const teamMembers: TeamMember[] = [
   }
 ];
 
-export default function TeamPage({ cms: stringifiedCMS }: TeamPageProps) {
-  const cms: CMSContent = JSON.parse(stringifiedCMS);
-  const event = getEventFromCMS(cms);
+export default function TeamPage() {
+  const event = getEventFromCMS(CMS);
 
   const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
 
@@ -161,11 +160,4 @@ export default function TeamPage({ cms: stringifiedCMS }: TeamPageProps) {
   );
 }
 
-export const getStaticProps = () => {
-  return {
-    props: {
-      cms: JSON.stringify(getCMSById()),
-    },
-  };
-};
 
