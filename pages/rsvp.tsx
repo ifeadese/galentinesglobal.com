@@ -93,7 +93,7 @@ export default function RSVPPage({ cms }: RSVPPageProps) {
 export const getStaticProps = () => {
   return {
     props: {
-      cms: JSON.stringify(getCMSById(process.env.EVENT_ID)),
+      cms: JSON.stringify(getCMSById()),
     },
   };
 };

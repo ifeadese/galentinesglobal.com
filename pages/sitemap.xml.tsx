@@ -27,7 +27,7 @@ function SiteMap() {
 }
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  const cms = getCMSById(process.env.EVENT_ID);
+  const cms = getCMSById();
   const event = getEventFromCMS(cms);
 
   // List of all pages

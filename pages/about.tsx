@@ -140,7 +140,7 @@ export default function AboutPage({ cms: stringifiedCMS }: AboutPageProps) {
 export const getStaticProps = () => {
   return {
     props: {
-      cms: JSON.stringify(getCMSById(process.env.EVENT_ID)),
+      cms: JSON.stringify(getCMSById()),
     },
   };
 };

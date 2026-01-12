@@ -3,24 +3,15 @@
 const fs = require('fs');
 const path = require('path');
 
-// Get event ID from environment variable (same logic as helpers.ts)
-const eventId = process.env.EVENT_ID || 'GALENTINESGLOBAL';
-const normalizedEventId = eventId.toLowerCase();
-
-// Map event IDs to directory names (normalize to match data directory structure)
-const eventDirMap = {
-  'galentinesglobal': 'galentinesglobal',
-  'windsofchange': 'windsofchange'
-};
-
-const eventDir = eventDirMap[normalizedEventId] || 'galentinesglobal';
+// Fixed to Galentines Global (no longer uses EVENT_ID)
+const eventDir = 'galentinesglobal';
 
 // Source directory (where images are stored for this event)
 const sourceDir = path.join(__dirname, '../data', eventDir, 'images');
 // Destination directory (where Next.js serves images from)
 const destDir = path.join(__dirname, '../public/images');
 
-console.log(`📦 Copying images for event: ${eventId} (${eventDir})`);
+console.log(`📦 Copying images for event: GALENTINESGLOBAL (${eventDir})`);
 
 // Check if source directory exists
 if (!fs.existsSync(sourceDir)) {

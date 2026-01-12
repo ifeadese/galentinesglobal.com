@@ -377,7 +377,7 @@ export default function HomePage({ cms: stringifiedCMS }: HomePageProps) {
 export const getStaticProps = () => {
   return {
     props: {
-      cms: JSON.stringify(getCMSById(process.env.EVENT_ID)),
+      cms: JSON.stringify(getCMSById()),
     },
   };
 };

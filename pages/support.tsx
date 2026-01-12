@@ -213,7 +213,7 @@ export default function SupportPage({ cms: stringifiedCMS }: SupportPageProps) {
 export const getStaticProps = () => {
   return {
     props: {
-      cms: JSON.stringify(getCMSById(process.env.EVENT_ID)),
+      cms: JSON.stringify(getCMSById()),
     },
   };
 };

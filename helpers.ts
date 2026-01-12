@@ -23,9 +23,9 @@ export function getEventFromCMS(cms: CMSContent): Event {
   };
 }
 
-export function getCMSById(id: string | undefined): CMSContent {
-    let eventCMS: CMSContent = GALENTINESGLOBAL;
-    return mergeWithDefaults(eventCMS);
+// Get CMS content for Galentines Global (deprecated: no longer uses EVENT_ID)
+export function getCMSById(): CMSContent {
+    return mergeWithDefaults(GALENTINESGLOBAL);
 }
 
 /**

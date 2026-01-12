@@ -92,7 +92,7 @@ export default function FounderPage({ cms: stringifiedCMS }: FounderPageProps) {
 export const getStaticProps = () => {
   return {
     props: {
-      cms: JSON.stringify(getCMSById(process.env.EVENT_ID)),
+      cms: JSON.stringify(getCMSById()),
     },
   };
 };
