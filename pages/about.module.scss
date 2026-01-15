@@ -1,5 +1,23 @@
 @import "/common.scss";
 
+.contentSection {
+  padding: 2rem 5%;
+  background: linear-gradient(180deg, rgba(255, 192, 203, 0.1) 0%, transparent 50%, rgba(255, 192, 203, 0.05) 100%);
+}
+
+.paragraphsContainer {
+  max-width: 56rem;
+  margin: 0 auto 2rem;
+  text-align: center;
+}
+
+.paragraph {
+  font-size: 1.125rem;
+  margin-bottom: 1rem;
+  line-height: 1.75rem;
+  font-weight: 500;
+}
+
 .aboutCards {
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;

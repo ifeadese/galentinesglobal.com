@@ -60,18 +60,10 @@ export default function AboutPage() {
       />
 
       {/* Content Section */}
-      <section style={{ 
-        padding: '2rem 5%',
-        background: `linear-gradient(180deg, rgba(255, 192, 203, 0.1) 0%, transparent 50%, rgba(255, 192, 203, 0.05) 100%)`
-      }}>
-        <div style={{ maxWidth: '56rem', margin: '0 auto 2rem', textAlign: 'center' }}>
+      <section className={styles.contentSection}>
+        <div className={styles.paragraphsContainer}>
           {aboutContent.paragraphs?.map((paragraph, index) => (
-            <p key={index} style={{ 
-              fontSize: '1.125rem', 
-              marginBottom: '1rem', 
-              lineHeight: '1.75rem',
-              fontWeight: 500
-            }}>
+            <p key={index} className={styles.paragraph}>
               {paragraph}
             </p>
           ))}
