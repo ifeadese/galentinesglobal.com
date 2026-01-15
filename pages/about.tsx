@@ -9,6 +9,7 @@ import Button from "components/button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
+import { SITE_URL } from "../constants";
 import styles from "./about.module.scss";
 
 const getIconComponent = (iconName: string) => {
@@ -39,7 +40,6 @@ export default function AboutPage() {
     ]
   };
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
 
   return (
     <Layout 
@@ -48,7 +48,7 @@ export default function AboutPage() {
         title: "About Us",
         description: "Learn about Galentines Global - a movement where women experience the healing and transforming power of God through prayer, worship and fellowship.",
         image: aboutContent.heroImage || "/images/ladies.JPG",
-        url: `${siteUrl}/about`,
+        url: `${SITE_URL}/about`,
         type: "website",
       }}
     >

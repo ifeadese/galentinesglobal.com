@@ -7,6 +7,7 @@ import Layout from "components/layout";
 import CardCarousel from "components/card-carousel";
 import { getEventFromCMS, getEventDate } from "helpers";
 import { CMS } from "../cms";
+import { SITE_URL } from "../constants";
 import EventIcon from "@mui/icons-material/Event";
 import PersonIcon from "@mui/icons-material/Person";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
@@ -87,7 +88,6 @@ export default function HomePage() {
     );
   };
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
   const ogImage = homeContent.heroImages?.[0] || homeContent.mainLogo || event.logo || "/images/panelists.jpeg";
   
   // Extract year from event date if it's a valid date (not "TBD")
@@ -199,8 +199,8 @@ export default function HomePage() {
     "startDate": formatDateForSchema(eventDateObj), // Uses same Date object as countdown (1:30 PM)
     "endDate": eventEndDate,
     "eventStatus": "https://schema.org/EventScheduled",
-    "url": siteUrl,
-    "image": `${siteUrl}${ogImage}`,
+    "url": SITE_URL,
+    "image": `${SITE_URL}${ogImage}`,
     "location": {
       "@type": "Place",
       "name": "Ottawa, ON", // Venue details sent after RSVP confirmation
@@ -216,7 +216,7 @@ export default function HomePage() {
       "price": "0",
       "priceCurrency": "CAD",
       "availability": "https://schema.org/InStock",
-      "url": `${siteUrl}/rsvp`,
+      "url": `${SITE_URL}/rsvp`,
       ...(validFromDate && { "validFrom": validFromDate })
     },
     "performer": ministers.map(minister => ({
@@ -227,9 +227,9 @@ export default function HomePage() {
     "organizer": {
       "@type": "Organization",
       "name": event.name,
-      "url": siteUrl,
+      "url": SITE_URL,
       ...(event.logo && {
-        "logo": `${siteUrl}${event.logo}`,
+        "logo": `${SITE_URL}${event.logo}`,
       }),
     },
   } : null;
@@ -254,7 +254,7 @@ export default function HomePage() {
             ? `${event.description} Join us on ${eventDate} for an empowering gathering of women in faith.`
             : `${event.description} Join us for an empowering gathering of women in faith.`,
           image: ogImage,
-          url: siteUrl,
+          url: SITE_URL,
           type: "website",
         }}
       >

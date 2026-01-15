@@ -8,6 +8,7 @@ import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { getEventFromCMS } from "helpers";
 import { CMS } from "../cms";
+import { SITE_URL } from "../constants";
 import styles from "./support.module.scss";
 
 export default function SupportPage() {
@@ -37,7 +38,6 @@ export default function SupportPage() {
     );
   };
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
 
   return (
     <Layout 
@@ -46,7 +46,7 @@ export default function SupportPage() {
         title: "Support Galentines",
         description: "Partner with us to empower women through faith. Your support makes transformation possible—providing space, resources, and support for women to encounter God and discover their calling.",
         image: "/images/ladies.JPG",
-        url: `${siteUrl}/support`,
+        url: `${SITE_URL}/support`,
         type: "website",
       }}
     >

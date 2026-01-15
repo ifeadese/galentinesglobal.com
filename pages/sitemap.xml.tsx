@@ -1,17 +1,16 @@
 import { GetServerSideProps } from "next";
 import { getEventFromCMS } from "helpers";
 import { CMS } from "../cms";
+import { SITE_URL } from "../constants";
 
 function generateSiteMap(pages: Array<{ url: string; lastmod?: string; changefreq?: string; priority?: string }>) {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
-  
   return `<?xml version="1.0" encoding="UTF-8"?>
    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
      ${pages
        .map((page) => {
          return `
        <url>
-           <loc>${baseUrl}${page.url}</loc>
+           <loc>${SITE_URL}${page.url}</loc>
            ${page.lastmod ? `<lastmod>${page.lastmod}</lastmod>` : ""}
            ${page.changefreq ? `<changefreq>${page.changefreq}</changefreq>` : ""}
            ${page.priority ? `<priority>${page.priority}</priority>` : ""}

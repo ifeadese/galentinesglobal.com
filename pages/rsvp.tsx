@@ -5,13 +5,13 @@ import ContactForm from "components/contact-form";
 import EventCountdown from "components/event-countdown";
 import { getEventFromCMS, getEventDate } from "helpers";
 import { CMS } from "../cms";
+import { SITE_URL } from "../constants";
 import styles from "./rsvp.module.scss";
 
 export default function RSVPPage() {
   const event = getEventFromCMS(CMS);
   const eventDate = getEventDate(CMS);
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
   const eventDateStr = CMS.home.eventDate;
   const isValidDate = eventDateStr && eventDateStr !== "TBD";
 
@@ -24,7 +24,7 @@ export default function RSVPPage() {
           ? `RSVP for The Love of God Conference ${eventDateStr}. Join us for an empowering gathering of women in faith.`
           : "RSVP for The Love of God Conference. Join us for an empowering gathering of women in faith.",
         image: "/images/rsvp.png",
-        url: `${siteUrl}/rsvp`,
+        url: `${SITE_URL}/rsvp`,
         type: "website",
         preloadImage: "/images/rsvp.png", // Preload hero image for faster rendering
       }}

@@ -4,6 +4,7 @@ import Layout from "components/layout";
 import TitleHero from "components/title-hero";
 import { getEventFromCMS } from "helpers";
 import { CMS } from "../../cms";
+import { SITE_URL } from "../../constants";
 import Image from "next/legacy/image";
 import styles from "./founder.module.scss";
 
@@ -18,7 +19,6 @@ export default function FounderPage() {
     "By profession, I'm a lawyer. At heart, I'm a worshipper. I love cooking for my loved ones, and I almost always have a song on my lips. My prayer is that the same love of God that found me will find every heart."
   ];
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
 
   // Person structured data schema for founder
   const personSchema = {
@@ -27,12 +27,12 @@ export default function FounderPage() {
     "name": "Shile Adeyoyin",
     "jobTitle": "Founder & Steward",
     "description": "Founder and steward of Galentines Global, dedicated to empowering women through the revelation of the Father's love. A lawyer by profession and a worshipper at heart.",
-    "image": `${siteUrl}/images/founder.jpeg`,
-    "url": `${siteUrl}/team/founder`,
+    "image": `${SITE_URL}/images/founder.jpeg`,
+    "url": `${SITE_URL}/team/founder`,
     "worksFor": {
       "@type": "Organization",
       "name": event.name,
-      "url": siteUrl,
+      "url": SITE_URL,
     },
     "knowsAbout": ["Women's Ministry", "Christian Faith", "Worship"],
   };
@@ -53,7 +53,7 @@ export default function FounderPage() {
           title: "Meet The Founder",
           description: "Learn about Shile Adeyoyin, the visionary behind Galentines Global, dedicated to empowering women through the revelation of the Father's love.",
           image: "/images/founder.jpeg",
-          url: `${siteUrl}/team/founder`,
+          url: `${SITE_URL}/team/founder`,
           type: "profile",
         }}
       >

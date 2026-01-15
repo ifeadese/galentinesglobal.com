@@ -3,6 +3,7 @@ import Layout from "components/layout";
 import TitleHero from "components/title-hero";
 import { getEventFromCMS } from "helpers";
 import { CMS } from "../cms";
+import { SITE_URL } from "../constants";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import Button from "components/button";
@@ -55,7 +56,6 @@ const teamMembers: TeamMember[] = [
 export default function TeamPage() {
   const event = getEventFromCMS(CMS);
 
-  const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
 
   return (
     <Layout 
@@ -64,7 +64,7 @@ export default function TeamPage() {
         title: "Our Team",
         description: "Meet the passionate team behind Galentines Global, dedicated to empowering women through faith and community.",
         image: "/images/ladies-2.JPG",
-        url: `${siteUrl}/team`,
+        url: `${SITE_URL}/team`,
         type: "website",
       }}
     >

@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import { Event } from "types";
+import { SITE_URL } from "../constants";
 
 interface SEOProps {
   event: Event;
@@ -23,19 +24,18 @@ const SEO: React.FC<SEOProps> = ({
   noindex = false,
   preloadImage,
 }) => {
-  const baseUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://galentinesglobal.com";
   const siteName = event.name;
   const siteDescription = description || event.description;
   const pageTitle = title ? `${title} | ${siteName}` : siteName;
   const pageImage = image || event.logo || "/images/galentines-gradient-logo.svg";
   const absoluteImageUrl = pageImage.startsWith("http") 
     ? pageImage 
-    : `${baseUrl}${pageImage}`;
+    : `${SITE_URL}${pageImage}`;
   
   // Only set canonical/og:url if URL is explicitly provided to avoid hydration mismatches
   // If no URL is provided, we'll skip these tags rather than using window.location.href
   const absoluteUrl = url 
-    ? (url.startsWith("http") ? url : `${baseUrl}${url}`)
+    ? (url.startsWith("http") ? url : `${SITE_URL}${url}`)
     : null;
 
   // Structured Data - Organization
@@ -44,9 +44,9 @@ const SEO: React.FC<SEOProps> = ({
     "@type": "Organization",
     "name": siteName,
     "description": event.description,
-    "url": baseUrl,
+    "url": SITE_URL,
     ...(event.logo && {
-      "logo": `${baseUrl}${event.logo}`,
+      "logo": `${SITE_URL}${event.logo}`,
     }),
     ...(event.contactEmailAddress && {
       "email": event.contactEmailAddress,
@@ -72,7 +72,7 @@ const SEO: React.FC<SEOProps> = ({
         <link
           rel="preload"
           as="image"
-          href={preloadImage.startsWith("http") ? preloadImage : `${baseUrl}${preloadImage}`}
+          href={preloadImage.startsWith("http") ? preloadImage : `${SITE_URL}${preloadImage}`}
         />
       )}
 
