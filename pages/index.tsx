@@ -5,7 +5,7 @@ import Link from "next/link";
 import Button from "components/button";
 import Layout from "components/layout";
 import CardCarousel from "components/card-carousel";
-import { getEventFromCMS } from "helpers";
+import { getEventFromCMS, getEventDate } from "helpers";
 import { CMS } from "../cms";
 import EventIcon from "@mui/icons-material/Event";
 import PersonIcon from "@mui/icons-material/Person";
@@ -125,33 +125,105 @@ export default function HomePage() {
     ? `The Love of God Conference ${eventYear}` 
     : undefined;
 
-  // Convert event date to ISO 8601 format for Event schema
-  const eventStartDate = isValidDate && eventDate
+  // Get the event date using the same helper as the countdown component
+  // This ensures consistency between structured data and countdown timer
+  const eventDateObj = getEventDate(CMS);
+  
+  // Format date for structured data (ISO 8601)
+  // Event is in February, so always EST (UTC-5)
+  const formatDateForSchema = (date: Date): string => {
+    const formatter = new Intl.DateTimeFormat('en-CA', {
+      timeZone: 'America/Toronto',
+      year: 'numeric',
+      month: '2-digit',
+      day: '2-digit',
+      hour: '2-digit',
+      minute: '2-digit',
+      second: '2-digit',
+      hour12: false
+    });
+    
+    const parts = formatter.formatToParts(date);
+    const year = parts.find(p => p.type === 'year')?.value || '';
+    const month = parts.find(p => p.type === 'month')?.value || '';
+    const day = parts.find(p => p.type === 'day')?.value || '';
+    const hour = parts.find(p => p.type === 'hour')?.value || '';
+    const minute = parts.find(p => p.type === 'minute')?.value || '';
+    const second = parts.find(p => p.type === 'second')?.value || '00';
+    
+    // February is always EST (UTC-5)
+    return `${year}-${month}-${day}T${hour}:${minute}:${second}-05:00`;
+  };
+
+  // Calculate endDate (same day, 9 PM EST)
+  const eventEndDate = eventDateObj 
+    ? (() => {
+        const formatter = new Intl.DateTimeFormat('en-CA', {
+          timeZone: 'America/Toronto',
+          year: 'numeric',
+          month: '2-digit',
+          day: '2-digit',
+        });
+        
+        const parts = formatter.formatToParts(eventDateObj);
+        const year = parts.find(p => p.type === 'year')?.value || '';
+        const month = parts.find(p => p.type === 'month')?.value || '';
+        const day = parts.find(p => p.type === 'day')?.value || '';
+        
+        return `${year}-${month}-${day}T21:00:00-05:00`;
+      })()
+    : null;
+
+  // Calculate validFrom date (when RSVPs opened - 6 months before event, static to avoid hydration mismatch)
+  // This ensures the offer is always valid and prevents SSR/client timestamp differences
+  const validFromDate = eventDateObj 
     ? (() => {
         try {
-          const date = new Date(eventDate);
-          if (!isNaN(date.getTime())) {
-            const year = date.getFullYear();
-            const month = String(date.getMonth() + 1).padStart(2, '0');
-            const day = String(date.getDate()).padStart(2, '0');
-            return `${year}-${month}-${day}`;
-          }
+          // Set validFrom to 6 months before event date (when RSVPs typically open)
+          const validFrom = new Date(eventDateObj);
+          validFrom.setMonth(validFrom.getMonth() - 6);
+          return validFrom.toISOString();
         } catch {
-          // If parsing fails, return null
+          // Fallback to a fixed date if calculation fails
+          return "2024-01-01T00:00:00-05:00";
         }
-        return null;
       })()
     : null;
 
   // Event structured data schema
-  const eventSchema = eventStartDate ? {
+  const eventSchema = eventDateObj ? {
     "@context": "https://schema.org",
     "@type": "Event",
     "name": event.name,
     "description": event.description,
-    "startDate": eventStartDate,
+    "startDate": formatDateForSchema(eventDateObj), // Uses same Date object as countdown (1:30 PM)
+    "endDate": eventEndDate,
+    "eventStatus": "https://schema.org/EventScheduled",
     "url": siteUrl,
     "image": `${siteUrl}${ogImage}`,
+    "location": {
+      "@type": "Place",
+      "name": "Ottawa, ON", // Venue details sent after RSVP confirmation
+      "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "Ottawa",
+        "addressRegion": "ON",
+        "addressCountry": "CA"
+      }
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": "0",
+      "priceCurrency": "CAD",
+      "availability": "https://schema.org/InStock",
+      "url": `${siteUrl}/rsvp`,
+      ...(validFromDate && { "validFrom": validFromDate })
+    },
+    "performer": ministers.map(minister => ({
+      "@type": "Person",
+      "name": minister.name,
+      "jobTitle": minister.role
+    })),
     "organizer": {
       "@type": "Organization",
       "name": event.name,

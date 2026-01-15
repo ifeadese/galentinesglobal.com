@@ -23,7 +23,7 @@ export function getEventFromCMS(cms: CMSContent): Event {
 
 /**
  * Get the event date as a Date object from CMS content
- * Parses date as 10:00 AM EST/EDT (America/Toronto - Ottawa timezone)
+ * Parses date as 1:30 PM EST/EDT (America/Toronto - Ottawa timezone)
  * Returns null if the date cannot be parsed
  */
 export function getEventDate(cms: CMSContent): Date | null {
@@ -48,10 +48,10 @@ export function getEventDate(cms: CMSContent): Date | null {
     // Create ISO date string: YYYY-MM-DD
     const isoDateStr = `${year}-${String(month + 1).padStart(2, '0')}-${String(day).padStart(2, '0')}`;
     
-    // Try EST first (UTC-5): 10am EST = 3pm UTC (15:00)
-    let estDate = new Date(`${isoDateStr}T15:00:00Z`);
+    // Try EST first (UTC-5): 1:30 PM EST = 18:30 UTC (6:30 PM UTC)
+    let estDate = new Date(`${isoDateStr}T18:30:00Z`);
     
-    // Verify this gives us 10am in America/Toronto timezone
+    // Verify this gives us 13:30 (1:30 PM) in America/Toronto timezone
     let verifyStr = estDate.toLocaleString('en-US', {
       timeZone: 'America/Toronto',
       hour: '2-digit',
@@ -59,9 +59,9 @@ export function getEventDate(cms: CMSContent): Date | null {
       hour12: false
     });
     
-    // If not 10:00, try EDT (UTC-4): 10am EDT = 2pm UTC (14:00)
-    if (verifyStr !== '10:00') {
-      estDate = new Date(`${isoDateStr}T14:00:00Z`);
+    // If not 13:30, try EDT (UTC-4): 1:30 PM EDT = 17:30 UTC (5:30 PM UTC)
+    if (verifyStr !== '13:30') {
+      estDate = new Date(`${isoDateStr}T17:30:00Z`);
       verifyStr = estDate.toLocaleString('en-US', {
         timeZone: 'America/Toronto',
         hour: '2-digit',
@@ -69,9 +69,9 @@ export function getEventDate(cms: CMSContent): Date | null {
         hour12: false
       });
       
-      // If still not 10:00, fall back to EST
-      if (verifyStr !== '10:00') {
-        estDate = new Date(`${isoDateStr}T15:00:00Z`);
+      // If still not 13:30, fall back to EST
+      if (verifyStr !== '13:30') {
+        estDate = new Date(`${isoDateStr}T18:30:00Z`);
       }
     }
     
