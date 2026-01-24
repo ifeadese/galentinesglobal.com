@@ -6,16 +6,10 @@ import LoadingOverlay from "./loading-overlay";
 import FormField from "./form-field";
 import styles from "./form.module.scss";
 
-const SHUTTLE_INTEREST_OPTIONS: Array<{ value: string; label: string }> = [
-  { value: "Yes", label: "Yes" },
-  { value: "No", label: "No" },
-];
-
 interface RSVPFormData {
   fullName: string;
   email: string;
   phone: string;
-  shuttleInterest: string;
   [key: string]: string;
 }
 
@@ -32,7 +26,6 @@ const RSVPForm: React.FC<RSVPFormProps> = ({
     fullName: "",
     email: "",
     phone: "",
-    shuttleInterest: "",
   };
 
   const {
@@ -102,17 +95,6 @@ const RSVPForm: React.FC<RSVPFormProps> = ({
           required
           placeholder="(123) 456-7890"
           disabled={isSubmitting}
-        />
-
-        <FormField
-          name="shuttleInterest"
-          label="I'm interested in shuttle service from Toronto to Ottawa"
-          type="select"
-          value={formData.shuttleInterest}
-          onChange={handleChange}
-          required
-          disabled={isSubmitting}
-          options={SHUTTLE_INTEREST_OPTIONS}
           isLast
         />
 
