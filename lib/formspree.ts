@@ -4,56 +4,39 @@
  * Formspree is a form backend service that handles form submissions,
  * email notifications, and webhook integrations.
  * 
- * To use:
- * 1. Sign up at https://formspree.io
- * 2. Create a form and get your form ID (e.g., "xvgwqkny")
- * 3. Set FORMSPREE_FORM_ID environment variable in Vercel
+ * Each form should provide its own endpoint URL when calling submitToFormspree.
  */
-
-/**
- * Get Formspree form ID from environment variables
- * Uses NEXT_PUBLIC_ prefix so it's accessible on the client side
- */
-export function getFormspreeFormId(): string | null {
-  const formId = process.env.NEXT_PUBLIC_FORMSPREE_FORM_ID || process.env.FORMSPREE_FORM_ID || null;
-  if (!formId) {
-    console.warn('[Formspree] Form ID not found. Check NEXT_PUBLIC_FORMSPREE_FORM_ID environment variable.');
-  }
-  return formId;
-}
-
-/**
- * Check if Formspree is configured
- */
-export function isFormspreeConfigured(): boolean {
-  return !!getFormspreeFormId();
-}
 
 /**
  * Submit form data to Formspree
  * 
  * @param data Form data to submit
- * @param redirectUrl Optional redirect URL after successful submission
- * @returns Promise<boolean> Success status
+ * @param options Optional configuration: endpoint URL, redirect URL
+ * @returns Promise with success status and error message if failed
  */
-export async function submitToFormspree(data: Record<string, any>, redirectUrl?: string): Promise<boolean> {
-  const formId = getFormspreeFormId();
-  
-  if (!formId) {
-    console.warn('[Formspree] Not configured. Set FORMSPREE_FORM_ID in environment variables.');
-    return false;
+export interface SubmitToFormspreeResult {
+  success: boolean;
+  error?: string;
+}
+
+export async function submitToFormspree(
+  data: Record<string, any>,
+  options: {
+    endpoint: string;
+    redirectUrl?: string;
   }
+): Promise<SubmitToFormspreeResult> {
+  // Endpoint is required - each form should provide its own endpoint
+  const submitUrl = options.endpoint;
 
   try {
-    const submitUrl = `https://formspree.io/f/${formId}`;
-    
     // Add redirect URL to data if provided
-    const dataWithRedirect = redirectUrl ? { ...data, _next: redirectUrl } : data;
+    const dataWithRedirect = options?.redirectUrl ? { ...data, _next: options.redirectUrl } : data;
     
     console.log('[Formspree] Submitting form data:', {
       url: submitUrl,
       fields: Object.keys(data),
-      hasRedirect: !!redirectUrl,
+      hasRedirect: !!options?.redirectUrl,
     });
     
     const response = await fetch(submitUrl, {
@@ -65,29 +48,62 @@ export async function submitToFormspree(data: Record<string, any>, redirectUrl?:
       body: JSON.stringify(dataWithRedirect),
     });
 
-    const responseData = await response.json();
+    // Check if response is JSON before parsing
+    const contentType = response.headers.get('content-type');
+    let responseData: any;
+    
+    try {
+      if (contentType && contentType.includes('application/json')) {
+        responseData = await response.json();
+      } else {
+        // If not JSON, read as text for error message
+        const text = await response.text();
+        throw new Error(`Unexpected response format: ${text.substring(0, 100)}`);
+      }
+    } catch (parseError: any) {
+      // If JSON parsing fails, return a structured error
+      console.error('[Formspree] Failed to parse response:', {
+        status: response.status,
+        statusText: response.statusText,
+        contentType,
+        parseError: parseError.message,
+      });
+      return {
+        success: false,
+        error: response.ok 
+          ? 'Received invalid response from server'
+          : `Server error (${response.status}): ${response.statusText}`,
+      };
+    }
 
     if (response.ok) {
       console.log('[Formspree] Successfully submitted form:', {
         next: responseData.next,
         message: responseData.message,
       });
-      return true;
+      return { success: true };
     } else {
+      const errorMessage = responseData.error || 'Form submission failed';
       console.error('[Formspree] Submission failed:', {
         status: response.status,
         statusText: response.statusText,
         errors: responseData.errors,
         error: responseData.error,
       });
-      return false;
+      return {
+        success: false,
+        error: errorMessage,
+      };
     }
   } catch (error: any) {
     console.error('[Formspree] Error submitting form:', {
       error: error.message,
       stack: error.stack,
     });
-    return false;
+    return {
+      success: false,
+      error: error.message || 'Network error',
+    };
   }
 }
 

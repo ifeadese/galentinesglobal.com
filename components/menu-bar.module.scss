@@ -31,6 +31,8 @@
     padding: unset;
     width: fit-content;
     margin: 0;
+    align-items: center;
+    gap: 0.5rem;
 
     >* {
       font-weight: bold;
@@ -47,6 +49,30 @@
           color: $primary;
         }
       }
+    }
+  }
+
+  .rsvpButton {
+    background-color: $primary;
+    color: $text-on-dark;
+    padding: 0.75rem 1.5rem;
+    border-radius: 0.5rem;
+    text-decoration: none;
+    font-weight: 600;
+    letter-spacing: 1px;
+    transition: all 0.3s ease;
+    box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+      rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+    display: inline-block;
+
+    &:hover {
+      background-color: $bg-primary;
+      color: $text-primary;
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.95);
     }
   }
 
@@ -149,6 +175,33 @@
   &:hover {
     color: $primary;
     transform: scale(1.05);
+  }
+}
+
+.mobileRsvpButton {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $primary;
+  color: $text-on-dark;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 1.5rem;
+  letter-spacing: 2px;
+  transition: all 0.3s ease;
+  padding: 1rem 2rem;
+  border-radius: 0.5rem;
+  box-shadow: rgba(14, 30, 37, 0.12) 0px 2px 4px 0px,
+    rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
+
+  &:hover {
+    background-color: $bg-primary;
+    color: $text-primary;
+    transform: scale(1.05);
+  }
+
+  &:active {
+    transform: scale(0.95);
   }
 }
 

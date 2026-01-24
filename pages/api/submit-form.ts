@@ -1,6 +1,6 @@
 import type { NextApiRequest, NextApiResponse } from 'next';
 import { sanitizeFormData } from 'lib/sanitize';
-import { submitToFormspree, isFormspreeConfigured } from 'lib/formspree';
+import { submitToFormspree } from 'lib/formspree';
 
 export default async function handler(
   req: NextApiRequest,
@@ -13,18 +13,31 @@ export default async function handler(
   try {
     const data = sanitizeFormData(req.body);
     
-    // Submit to Formspree - handles form submission and email notifications
-    if (!isFormspreeConfigured()) {
+    // This API route requires an endpoint to be provided in the request body
+    // Note: This route is currently unused - all forms submit directly to Formspree
+    const endpoint = req.body._endpoint;
+    
+    if (!endpoint) {
       return res.status(503).json({ 
-        error: 'Form submissions are temporarily unavailable. Please try again later or contact the event organizer.' 
+        error: 'Form submissions are temporarily unavailable. Please provide an endpoint.' 
       });
     }
     
-    const formspreeSuccess = await submitToFormspree(data);
+    // Validate endpoint to prevent SSRF attacks - only allow Formspree endpoints
+    // Formspree endpoints follow the pattern: https://formspree.io/f/[alphanumeric]
+    const FORMSPREE_ENDPOINT_PATTERN = /^https:\/\/formspree\.io\/f\/[a-zA-Z0-9]+$/;
+    if (!FORMSPREE_ENDPOINT_PATTERN.test(endpoint)) {
+      console.error('[API] Invalid endpoint format attempted:', endpoint);
+      return res.status(400).json({ 
+        error: 'Invalid endpoint format. Only Formspree endpoints are allowed.' 
+      });
+    }
     
-    if (!formspreeSuccess) {
+    const result = await submitToFormspree(data, { endpoint });
+    
+    if (!result.success) {
       return res.status(503).json({ 
-        error: 'Form submission failed. Please try again later or contact the event organizer.' 
+        error: result.error || 'Form submission failed. Please try again later or contact the event organizer.' 
       });
     }
     

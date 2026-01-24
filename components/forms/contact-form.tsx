@@ -6,28 +6,28 @@ import LoadingOverlay from "./loading-overlay";
 import FormField from "./form-field";
 import styles from "./form.module.scss";
 
-interface RSVPFormData {
-  fullName: string;
+interface ContactFormData {
+  name: string;
   email: string;
-  phone: string;
-  shuttleInterest: string;
+  subject: string;
+  message: string;
   [key: string]: string;
 }
 
-interface RSVPFormProps {
+interface ContactFormProps {
   description?: React.ReactNode;
   disabled?: boolean;
 }
 
-const RSVPForm: React.FC<RSVPFormProps> = ({
+const ContactForm: React.FC<ContactFormProps> = ({
   description,
   disabled = false,
 }) => {
-  const initialData: RSVPFormData = {
-    fullName: "",
+  const initialData: ContactFormData = {
+    name: "",
     email: "",
-    phone: "",
-    shuttleInterest: "",
+    subject: "",
+    message: "",
   };
 
   const {
@@ -36,24 +36,18 @@ const RSVPForm: React.FC<RSVPFormProps> = ({
     submitStatus,
     handleChange,
     handleSubmit,
-  } = useFormSubmission<RSVPFormData>(initialData, {
-    formspreeEndpoint: "https://formspree.io/f/xqeazbvb",
+  } = useFormSubmission<ContactFormData>(initialData, {
+    formspreeEndpoint: "https://formspree.io/f/xrepaldn",
     successMessage:
-      "Registration is a two-step process. Please check the email sent to you for additional important information on step 2.",
+      "Thank you for reaching out! We've received your message and will get back to you as soon as possible.",
   });
 
   // Show success message instead of form when successfully submitted
   if (submitStatus.type === "success") {
     return (
       <SuccessMessage
-        title="Step 1 Complete!"
+        title="Message Sent!"
         message={submitStatus.message}
-        spamNote={
-          <>
-            💌 <strong>Tip:</strong> Check your spam or junk folder if you
-            don&apos;t see the confirmation email in your inbox.
-          </>
-        }
       />
     );
   }
@@ -67,13 +61,13 @@ const RSVPForm: React.FC<RSVPFormProps> = ({
         )}
 
         <FormField
-          name="fullName"
-          label="Full Name"
+          name="name"
+          label="Name"
           type="text"
-          value={formData.fullName}
+          value={formData.name}
           onChange={handleChange}
           required
-          placeholder="Jane Doe"
+          placeholder="Your name"
           disabled={isSubmitting}
         />
 
@@ -89,28 +83,24 @@ const RSVPForm: React.FC<RSVPFormProps> = ({
         />
 
         <FormField
-          name="phone"
-          label="Phone Number"
-          type="tel"
-          value={formData.phone}
+          name="subject"
+          label="Subject"
+          type="text"
+          value={formData.subject}
           onChange={handleChange}
-          required
-          placeholder="(123) 456-7890"
+          placeholder="What is this regarding?"
           disabled={isSubmitting}
         />
 
         <FormField
-          name="shuttleInterest"
-          label="I'm interested in shuttle service from Toronto to Ottawa"
-          type="select"
-          value={formData.shuttleInterest}
+          name="message"
+          label="Message"
+          type="textarea"
+          value={formData.message}
           onChange={handleChange}
           required
+          placeholder="Your message..."
           disabled={isSubmitting}
-          options={[
-            { value: "Yes", label: "Yes" },
-            { value: "No", label: "No" },
-          ]}
           isLast
         />
 
@@ -126,7 +116,7 @@ const RSVPForm: React.FC<RSVPFormProps> = ({
             variant="primary"
             disabled={isSubmitting || disabled}
           >
-            {isSubmitting ? "Submitting..." : "Submit"}
+            {isSubmitting ? "Sending..." : "Send Message"}
           </Button>
         </div>
       </form>
@@ -134,4 +124,4 @@ const RSVPForm: React.FC<RSVPFormProps> = ({
   );
 };
 
-export default RSVPForm;
+export default ContactForm;

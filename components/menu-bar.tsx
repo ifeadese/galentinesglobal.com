@@ -49,12 +49,22 @@ const MenuBar = ({ siteName, logo, logoAlt, isDrawerOpen, showDrawer }: MenuBarP
         )}
         <ul className={styles.desktopMenu}>
           {pages.map((page, idx) => {
-            if (!page.disabled)
+            if (!page.disabled) {
+              if (page.isButton) {
+                return (
+                  <li key={idx}>
+                    <Link href={page.url} legacyBehavior>
+                      <a className={styles.rsvpButton}>{page.name}</a>
+                    </Link>
+                  </li>
+                );
+              }
               return (
                 <li key={idx}>
                   <Link href={page.url} legacyBehavior>{page.name}</Link>
                 </li>
               );
+            }
           })}
         </ul>
         <div className={styles.navIcon}>
@@ -76,7 +86,20 @@ const MenuBar = ({ siteName, logo, logoAlt, isDrawerOpen, showDrawer }: MenuBarP
           <nav className={styles.mobileMenu} onClick={(e) => e.stopPropagation()}>
             <ul>
               {pages.map((page, idx) => {
-                if (!page.disabled)
+                if (!page.disabled) {
+                  if (page.isButton) {
+                    return (
+                      <li key={idx}>
+                        <Link 
+                          href={page.url} 
+                          className={styles.mobileRsvpButton}
+                          onClick={() => showDrawer(false)}
+                        >
+                          {page.name}
+                        </Link>
+                      </li>
+                    );
+                  }
                   return (
                     <li key={idx}>
                       <Link 
@@ -88,6 +111,7 @@ const MenuBar = ({ siteName, logo, logoAlt, isDrawerOpen, showDrawer }: MenuBarP
                       </Link>
                     </li>
                   );
+                }
               })}
             </ul>
           </nav>

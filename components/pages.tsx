@@ -1,6 +1,15 @@
-import { HomeRounded, BallotRounded, CropOriginalRounded, InfoRounded, HelpRounded, EventAvailableRounded, PeopleRounded, HandshakeRounded } from '@mui/icons-material';
+import React from 'react';
+import { HomeRounded, InfoRounded, EventAvailableRounded, PeopleRounded, HandshakeRounded, EmailRounded } from '@mui/icons-material';
 
-export const pages = [
+export interface Page {
+  name: string;
+  url: string;
+  disabled: boolean;
+  icon: React.ReactNode;
+  isButton?: boolean;
+}
+
+export const pages: Page[] = [
   {
     name: "Home",
     url: `/`,
@@ -26,10 +35,16 @@ export const pages = [
     icon: <HandshakeRounded sx={{ color: 'lightgray' }} />,
   },
   {
+    name: "Contact",
+    url: `/contact`,
+    disabled: false,
+    icon: <EmailRounded sx={{ color: 'lightgray' }} />,
+  },
+  {
     name: "RSVP",
     url: `/rsvp`,
     disabled: false,
     icon: <EventAvailableRounded sx={{ color: 'lightgray' }} />,
+    isButton: true,
   },
-
 ];

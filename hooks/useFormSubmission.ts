@@ -1,14 +1,11 @@
 import { useState } from "react";
-import { isFormspreeConfigured, getFormspreeFormId } from "lib/formspree";
+import { submitToFormspree } from "lib/formspree";
 import { sanitizeFormData } from "lib/sanitize";
 
 export interface SubmitStatus {
   type: "success" | "error" | null;
   message: string;
 }
-
-const FORM_UNAVAILABLE_MESSAGE =
-  "Form submissions are temporarily unavailable. Please try again later or contact the event organizer.";
 
 const FORM_SUBMISSION_FAILED_MESSAGE =
   "Form submission failed. Please try again later or contact the event organizer.";
@@ -17,14 +14,14 @@ const NETWORK_ERROR_MESSAGE =
   "Network error. Please check your connection and try again.";
 
 interface UseFormSubmissionOptions {
-  formspreeEndpoint?: string;
+  formspreeEndpoint: string; // Required - each form must provide its endpoint
   successMessage?: string;
   onSuccess?: (data: Record<string, string>) => void;
 }
 
 export function useFormSubmission<T extends Record<string, string>>(
   initialData: T,
-  options: UseFormSubmissionOptions = {}
+  options: UseFormSubmissionOptions
 ) {
   const [formData, setFormData] = useState<T>(initialData);
   const [isSubmitting, setIsSubmitting] = useState(false);
@@ -54,30 +51,6 @@ export function useFormSubmission<T extends Record<string, string>>(
     
     const successMessage = options.successMessage || "Thank you! Your submission has been received successfully.";
 
-    // Determine the Formspree endpoint
-    let submitUrl: string;
-    if (options.formspreeEndpoint) {
-      submitUrl = options.formspreeEndpoint;
-    } else {
-      // Check if Formspree is configured via environment variable
-      if (!isFormspreeConfigured()) {
-        setSubmitStatus({
-          type: "error",
-          message: FORM_UNAVAILABLE_MESSAGE,
-        });
-        return;
-      }
-      const formId = getFormspreeFormId();
-      if (!formId) {
-        setSubmitStatus({
-          type: "error",
-          message: FORM_UNAVAILABLE_MESSAGE,
-        });
-        return;
-      }
-      submitUrl = `https://formspree.io/f/${formId}`;
-    }
-
     setIsSubmitting(true);
     setSubmitStatus({ type: null, message: "" });
 
@@ -85,18 +58,12 @@ export function useFormSubmission<T extends Record<string, string>>(
       // Sanitize form data
       const sanitizedData = sanitizeFormData(formData);
 
-      const response = await fetch(submitUrl, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
-        },
-        body: JSON.stringify(sanitizedData),
+      // Submit using the centralized Formspree function
+      const result = await submitToFormspree(sanitizedData, {
+        endpoint: options.formspreeEndpoint,
       });
 
-      const result = await response.json();
-
-      if (response.ok) {
+      if (result.success) {
         setSubmitStatus({
           type: "success",
           message: successMessage,
