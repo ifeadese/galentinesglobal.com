@@ -7,7 +7,6 @@ import { SITE_URL } from "../constants";
 import Image from "next/legacy/image";
 import Link from "next/link";
 import Button from "components/button";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import styles from "./team.module.scss";
 
 interface TeamPageProps {
@@ -148,12 +147,11 @@ export default function TeamPage() {
           <p className={styles.joinDescription}>
             We&apos;re always looking for passionate individuals to join our mission of empowering women through faith and community.
           </p>
-          <a href="https://galentines.fillout.com/volunteers" target="_blank" rel="noopener noreferrer" className={styles.joinLink}>
+          <Link href="/volunteer" className={styles.joinLink}>
             <Button variant="primary">
               Volunteer With Us
-              <OpenInNewIcon sx={{ fontSize: '1rem', marginLeft: '0.5rem', verticalAlign: 'middle' }} />
             </Button>
-          </a>
+          </Link>
         </div>
       </section>
     </Layout>

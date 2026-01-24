@@ -4,7 +4,7 @@ import styles from "./form.module.scss";
 interface FormFieldProps {
   name: string;
   label: string;
-  type?: "text" | "email" | "tel" | "textarea" | "select";
+  type?: "text" | "email" | "tel" | "textarea" | "select" | "date";
   value: string;
   onChange: (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
@@ -69,7 +69,7 @@ const FormField: React.FC<FormFieldProps> = ({
         <input
           id={name}
           name={name}
-          type={type}
+          type={type === "date" ? "date" : type}
           value={value}
           onChange={onChange}
           required={required}

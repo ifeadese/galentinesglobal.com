@@ -1,5 +1,5 @@
 import React from 'react';
-import { HomeRounded, InfoRounded, EventAvailableRounded, PeopleRounded, HandshakeRounded, EmailRounded } from '@mui/icons-material';
+import { HomeRounded, InfoRounded, EventAvailableRounded, PeopleRounded, HandshakeRounded, EmailRounded, VolunteerActivismRounded } from '@mui/icons-material';
 
 export interface Page {
   name: string;

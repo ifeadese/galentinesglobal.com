@@ -6,6 +6,11 @@ import LoadingOverlay from "./loading-overlay";
 import FormField from "./form-field";
 import styles from "./form.module.scss";
 
+const SHUTTLE_INTEREST_OPTIONS: Array<{ value: string; label: string }> = [
+  { value: "Yes", label: "Yes" },
+  { value: "No", label: "No" },
+];
+
 interface RSVPFormData {
   fullName: string;
   email: string;
@@ -107,10 +112,7 @@ const RSVPForm: React.FC<RSVPFormProps> = ({
           onChange={handleChange}
           required
           disabled={isSubmitting}
-          options={[
-            { value: "Yes", label: "Yes" },
-            { value: "No", label: "No" },
-          ]}
+          options={SHUTTLE_INTEREST_OPTIONS}
           isLast
         />
 

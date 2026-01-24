@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Image from "next/legacy/image";
+import Link from "next/link";
 import Layout from "components/layout";
 import TitleHero from "components/title-hero";
 import Button from "components/button";
-import OpenInNewIcon from "@mui/icons-material/OpenInNew";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import { getEventFromCMS } from "helpers";
@@ -192,12 +192,11 @@ export default function SupportPage() {
                 Contact Us
               </Button>
             </a>
-            <a href="https://galentines.fillout.com/volunteers" target="_blank" rel="noopener noreferrer" className={styles.ctaButtonLink}>
+            <Link href="/volunteer" className={styles.ctaButtonLink}>
               <Button variant="secondary">
                 Volunteer
-                <OpenInNewIcon sx={{ fontSize: '1rem', marginLeft: '0.5rem', verticalAlign: 'middle' }} />
               </Button>
-            </a>
+            </Link>
           </div>
         </div>
       </section>

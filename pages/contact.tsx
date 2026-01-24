@@ -26,7 +26,7 @@ export default function ContactPage() {
         image="/images/rsvp.png"
         imageAlt="Contact Us"
         title="Contact"
-        subtitle="We're here to help"
+        subtitle="We'd love to hear from you"
       />
 
       <section className={styles.section}>

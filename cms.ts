@@ -76,8 +76,8 @@ export const CMS: CMSContent = {
       {
         title: "Volunteer With Us",
         image: "/images/volunteer.jpeg",
-        link: "https://galentines.fillout.com/volunteers",
-        openInNewTab: true
+        link: "/volunteer",
+        openInNewTab: false
       },
       {
         title: "Partner With Us",
