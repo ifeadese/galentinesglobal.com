@@ -7,12 +7,15 @@
 
 .form {
   width: 100%;
+  max-width: 100%;
   margin: 0 auto;
   padding: 2rem 1.7rem;
   background: rgba(255, 255, 255, 0.9);
   border-radius: 12px;
   box-shadow: 0 4px 20px var(--shadow-soft);
   position: relative;
+  box-sizing: border-box;
+  overflow-x: hidden;
 }
 
 .loadingOverlay {
@@ -62,6 +65,10 @@
 
 .field {
   margin-bottom: 1.5rem;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  overflow: hidden;
 
   &.lastField {
     margin-bottom: 0;
@@ -88,6 +95,7 @@
 .textarea,
 .select {
   width: 100%;
+  max-width: 100%;
   padding: 0.75rem 1rem;
   border: 2px solid var(--color-border-light);
   border-radius: 8px;
@@ -96,6 +104,8 @@
   color: var(--color-text-primary);
   background: white;
   transition: all 0.3s ease;
+  box-sizing: border-box;
+  overflow: hidden;
 
   &:focus {
     outline: none;
@@ -111,6 +121,42 @@
   &:disabled {
     opacity: 0.6;
     cursor: not-allowed;
+  }
+}
+
+// Date input specific styling
+.input[type="date"] {
+  position: relative;
+  color-scheme: light;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
+  
+  // Remove default date picker icon on some browsers
+  &::-webkit-calendar-picker-indicator {
+    cursor: pointer;
+    opacity: 1;
+    margin-left: 0.5rem;
+  }
+  
+  // Ensure consistent appearance
+  &::-webkit-inner-spin-button,
+  &::-webkit-clear-button {
+    display: none;
+    -webkit-appearance: none;
+  }
+  
+  // Prevent overflow from native browser styling
+  &::-webkit-datetime-edit {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
+  }
+  
+  &::-webkit-datetime-edit-fields-wrapper {
+    width: 100%;
+    max-width: 100%;
+    overflow: hidden;
   }
 }
 
