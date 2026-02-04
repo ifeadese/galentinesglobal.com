@@ -34,7 +34,8 @@ export const CMS: CMSContent = {
     mainLogoAlt: "The Love of God",
     verse: "..to know the love of Christ which passes knowledge; that you might be filled with all the fullness of God.\" - Ephesians 3:19",
     eventDate: "February 7, 2026",
-    host: "Hosted by Shile Adeyoyin",
+    venue: "Lord Elgin Hotel",
+    venueAddress: "100 Elgin St, Ottawa",
   },
   about: {
     heroTitle: "About Galentines",

@@ -9,7 +9,9 @@ import { getEventFromCMS, getEventDate } from "helpers";
 import { CMS } from "../cms";
 import { SITE_URL } from "../constants";
 import EventIcon from "@mui/icons-material/Event";
-import PersonIcon from "@mui/icons-material/Person";
+import LocationOnIcon from "@mui/icons-material/LocationOn";
+import HomeIcon from "@mui/icons-material/Home";
+import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import styles from "pages/index.module.scss";
@@ -203,9 +205,10 @@ export default function HomePage() {
     "image": `${SITE_URL}${ogImage}`,
     "location": {
       "@type": "Place",
-      "name": "Ottawa, ON", // Venue details sent after RSVP confirmation
+      "name": "Lord Elgin Hotel",
       "address": {
         "@type": "PostalAddress",
+        "streetAddress": "100 Elgin St",
         "addressLocality": "Ottawa",
         "addressRegion": "ON",
         "addressCountry": "CA"
@@ -313,8 +316,18 @@ export default function HomePage() {
             </span>
             <span className={styles.eventInfoDivider}>•</span>
             <span className={styles.eventInfoItem}>
-              <PersonIcon sx={{ fontSize: '1rem', marginRight: '0.5rem', verticalAlign: 'middle' }} />
-              <small>{homeContent.host}</small>
+              <AccessTimeIcon sx={{ fontSize: '1rem', marginRight: '0.5rem', verticalAlign: 'middle' }} />
+              <small>1:30PM</small>
+            </span>
+            <span className={styles.eventInfoDivider}>•</span>
+            <span className={styles.eventInfoItem}>
+              <HomeIcon sx={{ fontSize: '1rem', marginRight: '0.5rem', verticalAlign: 'middle' }} />
+              <small>{homeContent.venue}</small>
+            </span>
+            <span className={styles.eventInfoDivider}>•</span>
+            <span className={styles.eventInfoItem}>
+              <LocationOnIcon sx={{ fontSize: '1rem', marginRight: '0.5rem', verticalAlign: 'middle' }} />
+              <small>{homeContent.venueAddress}</small>
             </span>
           </div>
           <Link href="/rsvp" legacyBehavior>
