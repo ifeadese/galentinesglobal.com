@@ -56,10 +56,16 @@ const RSVPForm: React.FC<RSVPFormProps> = ({
     );
   }
 
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (disabled) return;
+    handleSubmit(e);
+  };
+
   return (
     <div className={styles.formWrapper}>
       {isSubmitting && <LoadingOverlay />}
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form onSubmit={handleFormSubmit} className={styles.form}>
         {description && (
           <p className={styles.description}>{description}</p>
         )}
@@ -72,7 +78,7 @@ const RSVPForm: React.FC<RSVPFormProps> = ({
           onChange={handleChange}
           required
           placeholder="Jane Doe"
-          disabled={isSubmitting}
+          disabled={isSubmitting || disabled}
         />
 
         <FormField
@@ -83,7 +89,7 @@ const RSVPForm: React.FC<RSVPFormProps> = ({
           onChange={handleChange}
           required
           placeholder="your.email@example.com"
-          disabled={isSubmitting}
+          disabled={isSubmitting || disabled}
         />
 
         <FormField
@@ -94,7 +100,7 @@ const RSVPForm: React.FC<RSVPFormProps> = ({
           onChange={handleChange}
           required
           placeholder="(123) 456-7890"
-          disabled={isSubmitting}
+          disabled={isSubmitting || disabled}
           isLast
         />
 

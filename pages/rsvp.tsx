@@ -42,7 +42,10 @@ export default function RSVPPage() {
 
       <section className={styles.section}>
         <div className={styles.formContainer}>
-          <RSVPForm description="Fill the form below to confirm your attendance. We'd love to see you there!" />
+          <RSVPForm 
+            description="RSVP registration is currently closed. The form below is disabled." 
+            disabled={true}
+          />
         </div>
       </section>
     </Layout>
