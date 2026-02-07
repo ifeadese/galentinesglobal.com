@@ -330,9 +330,9 @@ export default function HomePage() {
               <small>{homeContent.venueAddress}</small>
             </span>
           </div>
-          <Link href="/rsvp" legacyBehavior>
+          <Link href="/about" legacyBehavior>
             <Button variant="primary">
-              RSVP Now
+              About Us
             </Button>
           </Link>
         </div>

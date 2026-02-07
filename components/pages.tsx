@@ -1,5 +1,5 @@
 import React from 'react';
-import { HomeRounded, InfoRounded, EventAvailableRounded, PeopleRounded, HandshakeRounded, EmailRounded, VolunteerActivismRounded } from '@mui/icons-material';
+import { HomeRounded, InfoRounded, PeopleRounded, HandshakeRounded, EmailRounded, VolunteerActivismRounded } from '@mui/icons-material';
 
 export interface Page {
   name: string;
@@ -39,12 +39,5 @@ export const pages: Page[] = [
     url: `/contact`,
     disabled: false,
     icon: <EmailRounded sx={{ color: 'lightgray' }} />,
-  },
-  {
-    name: "RSVP",
-    url: `/rsvp`,
-    disabled: false,
-    icon: <EventAvailableRounded sx={{ color: 'lightgray' }} />,
-    isButton: true,
   },
 ];
