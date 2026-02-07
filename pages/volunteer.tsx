@@ -31,7 +31,7 @@ export default function VolunteerPage() {
 
       <section className={styles.section}>
         <div className={styles.formContainer}>
-          <VolunteerForm description="We're looking for passionate volunteers to help make our next edition of Galentines a success! Fill out the form below to express your interest." />
+          <VolunteerForm description="We could always use the help of passionate volunteers in making our next edition of Galentines a success! Fill out the form below to express your interest." />
         </div>
       </section>
     </Layout>

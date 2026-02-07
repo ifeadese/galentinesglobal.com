@@ -3,6 +3,7 @@ import Image from "next/legacy/image";
 import styles from "components/footer.module.scss";
 import { SocialIcon } from "react-social-icons";
 
+const YOUTUBE_STREAMS_URL = "https://www.youtube.com/@swisShile/streams";
 
 const iconStyles = { 
   margin: '0.5rem', 
@@ -10,7 +11,12 @@ const iconStyles = {
   width: 40,
   border: '1px solid rgba(220, 108, 140, 0.4)',
   borderRadius: '50%'
-}
+};
+
+const iconColors = {
+  bgColor: "rgb(255, 240, 245)",
+  fgColor: "rgb(220, 108, 140)"
+};
 
 interface FooterProps {
   contactEmailAddress: string;
@@ -38,7 +44,7 @@ export const Footer = ({ contactEmailAddress, logo, logoAlt, facebookPageUrl, in
             <div className={styles.conference}>
               <span>The Love of God Conference</span>
               <span className={styles.separator}>•</span>
-              <span>February 7, 2026</span>
+              <span>Every February</span>
             </div>
             <div className={styles.copyright}>
               <span>&copy; 2026 Galentines Global</span>
@@ -46,9 +52,10 @@ export const Footer = ({ contactEmailAddress, logo, logoAlt, facebookPageUrl, in
               <span>All rights reserved.</span>
             </div>
             <div className={styles.socialIcons}>
-                {contactEmailAddress && <SocialIcon url={`mailto:${contactEmailAddress}`} style={iconStyles} bgColor="rgb(255, 240, 245)" fgColor="rgb(220, 108, 140)" />}
-                {facebookPageUrl && <SocialIcon url={facebookPageUrl} style={iconStyles} bgColor="rgb(255, 240, 245)" fgColor="rgb(220, 108, 140)" />}
-                {instagramPageUrl && <SocialIcon url={instagramPageUrl} style={iconStyles} bgColor="rgb(255, 240, 245)" fgColor="rgb(220, 108, 140)" />}
+                {contactEmailAddress && <SocialIcon url={`mailto:${contactEmailAddress}`} style={iconStyles} bgColor={iconColors.bgColor} fgColor={iconColors.fgColor} />}
+                {facebookPageUrl && <SocialIcon url={facebookPageUrl} style={iconStyles} bgColor={iconColors.bgColor} fgColor={iconColors.fgColor} />}
+                {instagramPageUrl && <SocialIcon url={instagramPageUrl} style={iconStyles} bgColor={iconColors.bgColor} fgColor={iconColors.fgColor} />}
+                <SocialIcon url={YOUTUBE_STREAMS_URL} style={iconStyles} bgColor={iconColors.bgColor} fgColor={iconColors.fgColor} />
             </div>
         </footer >
     );

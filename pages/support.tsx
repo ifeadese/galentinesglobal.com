@@ -187,11 +187,11 @@ export default function SupportPage() {
           <h2>Thank You!</h2>
           <p>Your support is honored beyond partnership. It&apos;s an act of faith which can be expressed in many forms. Whatever you have to offer; time, talent, or treasure—it&apos;ll be greatly appreciated.</p>
           <div className={styles.ctaButtons}>
-            <a href={`mailto:${event.contactEmailAddress}?subject=Support Inquiry`} className={styles.ctaButtonLink}>
+            <Link href="/contact" className={styles.ctaButtonLink}>
               <Button variant="primary">
                 Contact Us
               </Button>
-            </a>
+            </Link>
             <Link href="/volunteer" className={styles.ctaButtonLink}>
               <Button variant="secondary">
                 Volunteer
