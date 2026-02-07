@@ -32,9 +32,6 @@ interface VolunteerFormData {
   phone: string;
   isChristian: string;
   volunteerCapacity: string;
-  availabilityStartDate: string;
-  availabilityEndDate: string;
-  additionalInfo: string;
   [key: string]: string;
 }
 
@@ -53,9 +50,6 @@ const VolunteerForm: React.FC<VolunteerFormProps> = ({
     phone: "",
     isChristian: "",
     volunteerCapacity: "",
-    availabilityStartDate: "",
-    availabilityEndDate: "",
-    additionalInfo: "",
   };
 
   const {
@@ -141,36 +135,6 @@ const VolunteerForm: React.FC<VolunteerFormProps> = ({
           required
           disabled={isSubmitting}
           options={VOLUNTEER_CAPACITY_OPTIONS}
-        />
-
-        <FormField
-          name="availabilityStartDate"
-          label="Availability Start Date"
-          type="date"
-          value={formData.availabilityStartDate}
-          onChange={handleChange}
-          required
-          disabled={isSubmitting}
-        />
-
-        <FormField
-          name="availabilityEndDate"
-          label="Availability End Date"
-          type="date"
-          value={formData.availabilityEndDate}
-          onChange={handleChange}
-          required
-          disabled={isSubmitting}
-        />
-
-        <FormField
-          name="additionalInfo"
-          label="Is there anything else you'd like to share with us?"
-          type="textarea"
-          value={formData.additionalInfo}
-          onChange={handleChange}
-          placeholder="Any additional information you'd like to share..."
-          disabled={isSubmitting}
           isLast
         />
 

@@ -25,8 +25,8 @@ export default function VolunteerPage() {
       <TitleHero
         image="/images/rsvp.png"
         imageAlt="Volunteer"
-        title="Volunteer"
-        subtitle="We'd love to have you join us"
+        title="Join the team"
+        subtitle="Our volunteers help us make an impact"
       />
 
       <section className={styles.section}>
