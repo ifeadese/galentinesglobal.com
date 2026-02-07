@@ -332,7 +332,7 @@ export default function HomePage() {
             </span>
           </div>
           <a 
-            href="https://www.youtube.com/watch?v=QgXxQq466mo" 
+            href="https://www.youtube.com/@swisShile/streams" 
             target="_blank" 
             rel="noopener noreferrer"
             className={styles.liveStreamButton}
