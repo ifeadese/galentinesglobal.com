@@ -12,6 +12,7 @@ import EventIcon from "@mui/icons-material/Event";
 import LocationOnIcon from "@mui/icons-material/LocationOn";
 import HomeIcon from "@mui/icons-material/Home";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
+import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 import styles from "pages/index.module.scss";
@@ -330,11 +331,15 @@ export default function HomePage() {
               <small>{homeContent.venueAddress}</small>
             </span>
           </div>
-          <Link href="/about" legacyBehavior>
-            <Button variant="primary">
-              About Us
-            </Button>
-          </Link>
+          <a 
+            href="https://www.youtube.com/watch?v=QgXxQq466mo" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className={styles.liveStreamButton}
+          >
+            <PlayArrowIcon sx={{ fontSize: '1.5rem', marginRight: '0.5rem' }} />
+            Watch Live Stream
+          </a>
         </div>
       </header>
 
