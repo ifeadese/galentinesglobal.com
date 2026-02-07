@@ -31,7 +31,7 @@ export default function FeedbackPage() {
 
       <section className={styles.section}>
         <div className={styles.formContainer}>
-          <FeedbackForm description="Thank you for attending The Love of God Conference! Your feedback is valuable and helps us improve future events. Please share your thoughts below." />
+          <FeedbackForm description="Thank you for attending Galentines! Your feedback is valuable and helps us improve future events. Please share your thoughts below." />
         </div>
       </section>
     </Layout>
