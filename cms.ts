@@ -33,9 +33,8 @@ export const CMS: CMSContent = {
     mainLogo: "/images/the-love-of-god.svg",
     mainLogoAlt: "The Love of God",
     verse: "..to know the love of Christ which passes knowledge; that you might be filled with all the fullness of God.\" - Ephesians 3:19",
-    eventDate: "February 7, 2026",
-    venue: "Lord Elgin Hotel",
-    venueAddress: "100 Elgin St, Ottawa",
+    eventDate: "Every February",
+    venueAddress: "Ottawa, ON",
   },
   about: {
     heroTitle: "About Galentines",

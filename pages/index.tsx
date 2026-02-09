@@ -206,10 +206,8 @@ export default function HomePage() {
     "image": `${SITE_URL}${ogImage}`,
     "location": {
       "@type": "Place",
-      "name": "Lord Elgin Hotel",
       "address": {
         "@type": "PostalAddress",
-        "streetAddress": "100 Elgin St",
         "addressLocality": "Ottawa",
         "addressRegion": "ON",
         "addressCountry": "CA"
@@ -314,16 +312,6 @@ export default function HomePage() {
             <span className={styles.eventInfoItem}>
               <EventIcon sx={{ fontSize: '1rem', marginRight: '0.5rem', verticalAlign: 'middle' }} />
               <small>{homeContent.eventDate}</small>
-            </span>
-            <span className={styles.eventInfoDivider}>•</span>
-            <span className={styles.eventInfoItem}>
-              <AccessTimeIcon sx={{ fontSize: '1rem', marginRight: '0.5rem', verticalAlign: 'middle' }} />
-              <small>1:30PM</small>
-            </span>
-            <span className={styles.eventInfoDivider}>•</span>
-            <span className={styles.eventInfoItem}>
-              <HomeIcon sx={{ fontSize: '1rem', marginRight: '0.5rem', verticalAlign: 'middle' }} />
-              <small>{homeContent.venue}</small>
             </span>
             <span className={styles.eventInfoDivider}>•</span>
             <span className={styles.eventInfoItem}>
