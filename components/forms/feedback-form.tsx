@@ -8,8 +8,6 @@ import styles from "./form.module.scss";
 
 interface FeedbackFormData {
   eventAttended: string;
-  isAnonymous: string;
-  fullName: string;
   howDidYouFindIt: string;
   whatCouldBeBetter: string;
   otherComments: string;
@@ -32,14 +30,11 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
   description,
   disabled = false,
 }) => {
-  const [isAnonymous, setIsAnonymous] = useState(false);
   const [validationError, setValidationError] = useState("");
   const [needsConfirmation, setNeedsConfirmation] = useState(false);
   
   const initialData: FeedbackFormData = {
     eventAttended: "",
-    isAnonymous: "",
-    fullName: "",
     howDidYouFindIt: "",
     whatCouldBeBetter: "",
     otherComments: "",
@@ -66,34 +61,9 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
     handleChange(e);
   };
 
-  const handleAnonymousChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const checked = e.target.checked;
-    setIsAnonymous(checked);
-    handleChange({
-      ...e,
-      target: {
-        ...e.target,
-        name: "isAnonymous",
-        value: checked ? "yes" : "no",
-      },
-    } as React.ChangeEvent<HTMLInputElement>);
-    if (checked) {
-      handleChange({
-        ...e,
-        target: {
-          ...e.target,
-          name: "fullName",
-          value: "",
-        },
-      } as React.ChangeEvent<HTMLInputElement>);
-    }
-  };
-
   const handleFormSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     setValidationError("");
-    
-    if (!isAnonymous && !formData.fullName.trim()) return;
     
     const hasFeedback = formData.howDidYouFindIt.trim() || formData.whatCouldBeBetter.trim() || formData.otherComments.trim();
     if (!hasFeedback) {
@@ -128,34 +98,6 @@ const FeedbackForm: React.FC<FeedbackFormProps> = ({
         {description && (
           <p className={styles.description}>{description}</p>
         )}
-
-        <div className={styles.anonymousSection}>
-          <div className={styles.field}>
-            <label className={styles.checkboxLabel}>
-              <input
-                type="checkbox"
-                checked={isAnonymous}
-                onChange={handleAnonymousChange}
-                disabled={isSubmitting || disabled}
-                className={styles.checkbox}
-              />
-              <span>Keep me anonymous</span>
-            </label>
-          </div>
-
-          {!isAnonymous && (
-            <FormField
-              name="fullName"
-              label="Full Name"
-              type="text"
-              value={formData.fullName}
-              onChange={handleChange}
-              required
-              placeholder="Jane Doe"
-              disabled={isSubmitting || disabled}
-            />
-          )}
-        </div>
 
         <FormField
           name="eventAttended"

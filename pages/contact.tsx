@@ -15,7 +15,7 @@ export default function ContactPage() {
       event={event}
       seo={{
         title: "Contact",
-        description: "Get in touch with us. We'd love to hear from you and answer any questions you may have about The Love of God Conference.",
+        description: "Have a question, feedback or testimony? Get in touch with us. We'd love to hear from you.",
         image: "/images/rsvp.png",
         url: `${SITE_URL}/contact`,
         type: "website",
@@ -31,7 +31,7 @@ export default function ContactPage() {
 
       <section className={styles.section}>
         <div className={styles.formContainer}>
-          <ContactForm description="Have a question or want to get in touch? Fill out the form below and we'll get back to you as soon as possible." />
+          <ContactForm description="Have a question, feedback or testimony? Fill the form below. We would love to hear from you." />
         </div>
       </section>
     </Layout>

@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import Button from "components/button";
 import { useFormSubmission } from "hooks/useFormSubmission";
 import SuccessMessage from "./success-message";
@@ -7,12 +7,30 @@ import FormField from "./form-field";
 import styles from "./form.module.scss";
 
 interface ContactFormData {
-  name: string;
+  isAnonymous: string;
+  fullName: string;
   email: string;
-  subject: string;
+  category: string;
+  eventSpecific: string;
   message: string;
   [key: string]: string;
 }
+
+const CATEGORY_OPTIONS = [
+  "Inquiry",
+  "Feedback",
+  "Testimony",
+  "Other",
+].map((category) => ({ value: category, label: category }));
+
+const EVENT_SPECIFIC_OPTIONS = [
+  "No",
+  "Yes. Galentines 2023: In-Bold",
+  "Yes. Galentines 2024: In-Purpose",
+  "Yes. Galentines 2025: Made Anew",
+  "Yes. Galentines 2026: The Love of God Conference",
+  "For future edition(s)",
+].map((event) => ({ value: event, label: event }));
 
 interface ContactFormProps {
   description?: React.ReactNode;
@@ -23,10 +41,14 @@ const ContactForm: React.FC<ContactFormProps> = ({
   description,
   disabled = false,
 }) => {
+  const [isAnonymous, setIsAnonymous] = useState(false);
+  
   const initialData: ContactFormData = {
-    name: "",
+    isAnonymous: "",
+    fullName: "",
     email: "",
-    subject: "",
+    category: "",
+    eventSpecific: "",
     message: "",
   };
 
@@ -42,6 +64,29 @@ const ContactForm: React.FC<ContactFormProps> = ({
       "Thank you for reaching out! We've received your message and will get back to you as soon as possible.",
   });
 
+  const handleAnonymousChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const checked = e.target.checked;
+    setIsAnonymous(checked);
+    handleChange({
+      ...e,
+      target: { ...e.target, name: "isAnonymous", value: checked ? "yes" : "no" },
+    } as React.ChangeEvent<HTMLInputElement>);
+    if (checked) {
+      ["fullName", "email"].forEach((field) => {
+        handleChange({
+          ...e,
+          target: { ...e.target, name: field, value: "" },
+        } as React.ChangeEvent<HTMLInputElement>);
+      });
+    }
+  };
+
+  const handleFormSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!isAnonymous && (!formData.fullName.trim() || !formData.email.trim())) return;
+    handleSubmit(e);
+  };
+
   // Show success message instead of form when successfully submitted
   if (submitStatus.type === "success") {
     return (
@@ -52,44 +97,76 @@ const ContactForm: React.FC<ContactFormProps> = ({
     );
   }
 
+  const isDisabled = isSubmitting || disabled;
+
   return (
     <div className={styles.formWrapper}>
       {isSubmitting && <LoadingOverlay />}
-      <form onSubmit={handleSubmit} className={styles.form}>
+      <form onSubmit={handleFormSubmit} className={styles.form}>
         {description && (
           <p className={styles.description}>{description}</p>
         )}
 
+        <div className={styles.anonymousSection}>
+          <div className={styles.field}>
+            <label className={styles.checkboxLabel}>
+              <input
+                type="checkbox"
+                checked={isAnonymous}
+                onChange={handleAnonymousChange}
+                disabled={isDisabled}
+                className={styles.checkbox}
+              />
+              <span>Keep me anonymous</span>
+            </label>
+          </div>
+
+          {!isAnonymous && (
+            <>
+              <FormField
+                name="fullName"
+                label="Full Name"
+                type="text"
+                value={formData.fullName}
+                onChange={handleChange}
+                required
+                placeholder="Jane Doe"
+                disabled={isDisabled}
+              />
+              <FormField
+                name="email"
+                label="Email Address"
+                type="email"
+                value={formData.email}
+                onChange={handleChange}
+                required
+                placeholder="your.email@example.com"
+                disabled={isDisabled}
+              />
+            </>
+          )}
+        </div>
+
         <FormField
-          name="name"
-          label="Name"
-          type="text"
-          value={formData.name}
+          name="category"
+          label="Category"
+          type="select"
+          value={formData.category}
           onChange={handleChange}
           required
-          placeholder="Your name"
-          disabled={isSubmitting}
+          disabled={isDisabled}
+          options={CATEGORY_OPTIONS}
         />
 
         <FormField
-          name="email"
-          label="Email Address"
-          type="email"
-          value={formData.email}
+          name="eventSpecific"
+          label="Is this regarding any of our events?"
+          type="select"
+          value={formData.eventSpecific}
           onChange={handleChange}
           required
-          placeholder="your.email@example.com"
-          disabled={isSubmitting}
-        />
-
-        <FormField
-          name="subject"
-          label="Subject"
-          type="text"
-          value={formData.subject}
-          onChange={handleChange}
-          placeholder="What is this regarding?"
-          disabled={isSubmitting}
+          disabled={isDisabled}
+          options={EVENT_SPECIFIC_OPTIONS}
         />
 
         <FormField
@@ -100,7 +177,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
           onChange={handleChange}
           required
           placeholder="Your message..."
-          disabled={isSubmitting}
+          disabled={isDisabled}
           isLast
         />
 
@@ -114,7 +191,7 @@ const ContactForm: React.FC<ContactFormProps> = ({
           <Button
             type="submit"
             variant="primary"
-            disabled={isSubmitting || disabled}
+            disabled={isDisabled}
           >
             {isSubmitting ? "Sending..." : "Send Message"}
           </Button>
