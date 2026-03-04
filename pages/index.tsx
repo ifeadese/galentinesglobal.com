@@ -252,7 +252,7 @@ export default function HomePage() {
             <div className={styles.heroTextLine}>A Space</div>
             <div className={styles.heroTextLine}><span className={styles.boldText}>for women</span></div>
             <div className={styles.heroTextLine}>to <span className={styles.italicText}>encounter</span></div>
-            <div className={styles.heroTextLine}>God's love</div>
+            <div className={styles.heroTextLine}>God&apos;s love</div>
           </div>
           <h1 style={{ 
             position: 'absolute',
