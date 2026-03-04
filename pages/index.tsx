@@ -8,10 +8,6 @@ import CardCarousel from "components/card-carousel";
 import { getEventFromCMS, getEventDate } from "helpers";
 import { CMS } from "../cms";
 import { SITE_URL } from "../constants";
-import EventIcon from "@mui/icons-material/Event";
-import LocationOnIcon from "@mui/icons-material/LocationOn";
-import HomeIcon from "@mui/icons-material/Home";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import PlayArrowIcon from "@mui/icons-material/PlayArrow";
 import ArrowBackIosIcon from "@mui/icons-material/ArrowBackIos";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -56,18 +52,8 @@ export default function HomePage() {
   const homeContent = CMS.home;
   const heroImages = homeContent.heroImages || [];
   const carouselImages = homeContent.carouselImages || [];
-  const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const [currentMinisterIndex, setCurrentMinisterIndex] = useState(0);
   const [isMobile, setIsMobile] = useState(false);
-
-  useEffect(() => {
-    if (heroImages.length === 0) return;
-    const interval = setInterval(() => {
-      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length);
-    }, 5000); // Change image every 5 seconds
-
-    return () => clearInterval(interval);
-  }, [heroImages.length]);
 
   // Detect mobile viewport (carousel only on very small screens)
   useEffect(() => {
@@ -261,37 +247,13 @@ export default function HomePage() {
         }}
       >
       <header className={styles.heroImage}>
-        <div className={styles.slideshowContainer}>
-          {heroImages.map((image, index) => (
-            <div
-              key={image}
-              className={`${styles.slide} ${index === currentImageIndex ? styles.active : ''}`}
-            >
-              <Image 
-                src={image} 
-                alt={`${event.name} ${index + 1}`}
-                layout="fill"
-                objectFit="cover"
-                priority={index === 0}
-                unoptimized={false}
-              />
-            </div>
-          ))}
-        </div>
         <div className={styles.content}>
-          <p className={styles.presents}>Presents...</p>
-          {homeContent.mainLogo && (
-            <Image 
-              src={homeContent.mainLogo} 
-              alt={homeContent.mainLogoAlt || event.name}
-              width={750}
-              height={226}
-              className={styles.logo}
-              quality={100}
-              priority
-              unoptimized
-            />
-          )}
+          <div className={styles.heroText}>
+            <div className={styles.heroTextLine}>A Space</div>
+            <div className={styles.heroTextLine}><span className={styles.boldText}>for women</span></div>
+            <div className={styles.heroTextLine}>to <span className={styles.italicText}>encounter</span></div>
+            <div className={styles.heroTextLine}>God's love</div>
+          </div>
           <h1 style={{ 
             position: 'absolute',
             width: '1px',
@@ -308,17 +270,6 @@ export default function HomePage() {
           <small className={styles.verse}>
             &ldquo;{homeContent.verse}
           </small>
-          <div className={styles.eventInfo}>
-            <span className={styles.eventInfoItem}>
-              <EventIcon sx={{ fontSize: '1rem', marginRight: '0.5rem', verticalAlign: 'middle' }} />
-              <small>{homeContent.eventDate}</small>
-            </span>
-            <span className={styles.eventInfoDivider}>•</span>
-            <span className={styles.eventInfoItem}>
-              <LocationOnIcon sx={{ fontSize: '1rem', marginRight: '0.5rem', verticalAlign: 'middle' }} />
-              <small>{homeContent.venueAddress}</small>
-            </span>
-          </div>
           <a 
             href="https://www.youtube.com/@swisShile/streams" 
             target="_blank" 
@@ -330,6 +281,15 @@ export default function HomePage() {
           </a>
         </div>
       </header>
+
+      {/* Carousel Section */}
+      {carouselImages.length > 0 && (
+        <section className={styles.carouselSection}>
+          <div className={styles.carouselContainer}>
+            <CardCarousel cards={carouselImages.map((image) => ({ image, title: '' }))} />
+          </div>
+        </section>
+      )}
 
       {/* About Us Section */}
       <section className={styles.aboutSection}>
@@ -356,11 +316,6 @@ export default function HomePage() {
             </Button>
           </Link>
         </div>
-        {carouselImages.length > 0 && (
-          <div className={styles.carouselContainer}>
-            <CardCarousel cards={carouselImages.map((image) => ({ image, title: '' }))} />
-          </div>
-        )}
       </section>
 
       {/* Ministers Section */}

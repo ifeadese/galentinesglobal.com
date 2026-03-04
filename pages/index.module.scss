@@ -1,15 +1,14 @@
 @import "/common.scss";
 
 .heroImage {
-  background: black;
+  background: transparent;
   overflow: hidden;
   display: flex;
   justify-content: center;
   box-sizing: border-box;
   position: relative;
   width: 100%;
-  height: 100vh;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  height: fit-content;
 }
 
 .slideshowContainer {
@@ -47,13 +46,15 @@
 .content {
   display: flex;
   flex-direction: column;
-  position: absolute;
+  position: relative;
   text-align: center;
   align-items: center;
   align-self: center;
-  color: white;
+  color: $color-text-primary;
   max-width: 70%;
   z-index: 2;
+  width: 100%;
+  padding: 4rem 0 6rem 0;
 
   h1 {
     margin: unset;
@@ -65,8 +66,9 @@
 
   .verse {
     font-style: italic;
-    margin: 1.5rem 0;
+    margin: 1.5rem 0 0 0;
     line-height: 1.8;
+    max-width: 500px;
   }
 
   .eventInfo {
@@ -140,6 +142,38 @@
     }
   }
 
+  .heroText {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: unset;
+    text-align: center;
+    gap: 0.5rem;
+  }
+
+  .heroTextLine {
+    font-family: "Parkinsans", sans-serif;
+    font-size: 4rem;
+    font-weight: 300;
+    line-height: 1.1;
+    letter-spacing: 1px;
+    color: $color-text-primary;
+    margin: unset;
+
+    @media (max-width: $md-screens) {
+      font-size: 2rem;
+    }
+  }
+
+  .boldText {
+    font-weight: 700;
+  }
+
+  .italicText {
+    font-style: italic;
+  }
+
   button {
     margin: 2rem 0;
     width: fit-content;
@@ -164,6 +198,12 @@
   font-weight: 500;
 }
 
+.carouselSection {
+  width: 100%;
+  overflow-x: hidden;
+  background: transparent;
+}
+
 .carouselContainer {
   width: 100%;
   margin: 1rem 0;
@@ -183,7 +223,7 @@
 
 .ministersSection {
   padding: 3rem 5%;
-  background: white;
+  background: transparent;
   border-top: 2px solid rgba(220, 108, 140, 0.15);
 }
 

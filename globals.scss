@@ -1,6 +1,17 @@
 @import "/common.scss";
 
 // ============================================
+// FONTS
+// ============================================
+@font-face {
+  font-family: "Parkinsans";
+  src: url("/fonts/Parkinsans-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+// ============================================
 // CSS CUSTOM PROPERTIES (For React/Inline Styles)
 // Must be in globals.scss (not common.scss) because :root is global
 // ============================================
@@ -49,7 +60,7 @@
 
 html,
 body {
-  @include gradient-bg-primary; // Main background gradient (pink to white)
+  background: white;
   padding: 0;
   margin: 0;
   min-width: 320px;
