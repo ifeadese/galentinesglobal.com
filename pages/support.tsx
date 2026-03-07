@@ -75,9 +75,9 @@ export default function SupportPage() {
                 <Image 
                   src="/images/interac-logo.png"
                   alt="Interac e-Transfer"
-                  width={150}
-                  height={150}
+                  layout="fill"
                   objectFit="contain"
+                  objectPosition="center"
                 />
               </div>
               <p className={styles.contributionText}>
@@ -183,9 +183,20 @@ export default function SupportPage() {
 
       {/* CTA Section */}
       <section className={styles.ctaSection}>
+        <div className={styles.ctaImageContainer}>
+          <Image 
+            src="/images/panelists-2.JPG"
+            alt="Women gathering in faith and community"
+            layout="fill"
+            objectFit="cover"
+            objectPosition="center"
+            priority
+          />
+          <div className={styles.ctaOverlay}></div>
+        </div>
         <div className={styles.ctaContent}>
-          <h2>Thank You!</h2>
-          <p>Your support is honored beyond partnership. It&apos;s an act of faith which can be expressed in many forms. Whatever you have to offer; time, talent, or treasure—it&apos;ll be greatly appreciated.</p>
+          <h2 className={styles.ctaTitle}>Thank You!</h2>
+          <p className={styles.ctaText}>Your support is an act of faith. Whether time, talent, or treasure—every contribution matters and is deeply appreciated.</p>
           <div className={styles.ctaButtons}>
             <Link href="/contact" className={styles.ctaButtonLink}>
               <Button variant="primary">

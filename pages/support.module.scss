@@ -131,11 +131,17 @@
   }
 
   .logoWrapper {
+    width: 150px;
+    height: 150px;
     overflow: hidden;
     background: rgba(255, 255, 255, 0.1);
     padding: 0;
     backdrop-filter: blur(10px);
     transform: scale(0.7);
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
   }
 
   .contributionText {
@@ -238,7 +244,7 @@
   gap: 2rem;
   align-items: stretch;
 
-  @media (max-width: 768px) {
+  @media (max-width: $md-screens) {
     display: none; // Hide grid when carousel is active
   }
 }
@@ -246,7 +252,7 @@
 .tiersCarousel {
   display: none;
 
-  @media (max-width: 768px) {
+  @media (max-width: $md-screens) {
     display: block;
     width: 100%;
     max-width: 100%;
@@ -263,7 +269,7 @@
   width: 100%;
   box-sizing: border-box;
 
-  @media (max-width: 768px) {
+  @media (max-width: $md-screens) {
     width: 100%;
     max-width: 100%;
   }
@@ -272,7 +278,7 @@
 .tiersNavigation {
   display: none;
 
-  @media (max-width: 768px) {
+  @media (max-width: $md-screens) {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -346,7 +352,7 @@
     padding: 1.75rem 1.25rem;
   }
 
-  @media (max-width: 768px) {
+  @media (max-width: $md-screens) {
     width: 100%;
     min-width: 100%;
     max-width: 100%;
@@ -491,81 +497,111 @@
 
 // CTA Section
 .ctaSection {
-  padding: 5rem 5%;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 240, 245, 0.4) 0%,
-    rgba(255, 192, 203, 0.2) 25%,
-    rgba(220, 108, 140, 0.15) 50%,
-    rgba(255, 192, 203, 0.2) 75%,
-    rgba(255, 240, 245, 0.4) 100%
-  );
-  color: $text-primary;
-  text-align: center;
-  border-top: 2px solid rgba(220, 108, 140, 0.15);
-  position: relative;
+  background: black;
   overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(
-      circle at 30% 50%,
-      rgba(220, 108, 140, 0.08) 0%,
-      transparent 50%
-    ),
-    radial-gradient(
-      circle at 70% 50%,
-      rgba(255, 192, 203, 0.1) 0%,
-      transparent 50%
-    );
-    pointer-events: none;
-    z-index: 0;
-  }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-sizing: border-box;
+  position: relative;
+  width: 90%;
+  border-radius: 1.5rem;
+  min-height: 60vh;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  margin-bottom: 2rem;
 
   @media (max-width: $lg-screens) {
-    padding: 4rem 5%;
-  }
-
-  @media (max-width: $md-screens) {
-    padding: 3rem 5%;
+    min-height: 45vh;
   }
 }
 
-.ctaContent {
-  max-width: 800px;
-  margin: 0 auto;
-  position: relative;
+.ctaImageContainer {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
   z-index: 1;
 
-  h2 {
-    font-size: 2.5rem;
-    margin: 0 0 1.5rem 0;
-    font-weight: 700;
-    @include gradient-text-primary;
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-
-    @media (max-width: $lg-screens) {
-      font-size: 2rem;
-    }
+  > span {
+    height: 100%;
   }
 
-  p {
+  img {
+    object-fit: cover;
+  }
+}
+
+.ctaOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.65); // Darker overlay for better text contrast
+  z-index: 2;
+}
+
+.ctaContent {
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  text-align: center;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  z-index: 3;
+  padding: 3rem 5%;
+  max-width: 90%;
+  width: 100%;
+
+  @media (max-width: $lg-screens) {
+    max-width: 95%;
+    padding: 2rem 5%;
+  }
+}
+
+.ctaTitle {
+  font-family: "Parkinsans", sans-serif;
+  font-size: 3.5rem;
+  font-weight: 700;
+  letter-spacing: 3px;
+  text-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+  color: white;
+  margin: 0 0 0.5rem 0;
+
+  @media (max-width: $lg-screens) {
+    font-size: 2.5rem;
+    letter-spacing: 2px;
+  }
+
+  @media (max-width: $md-screens) {
+    font-size: 2rem;
+  }
+}
+
+.ctaText {
+  font-family: "Parkinsans", sans-serif;
+  font-size: 1.25rem;
+  font-weight: 400;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+  color: white;
+  opacity: 0.95;
+  margin: 0;
+  max-width: 600px;
+
+  @media (max-width: $lg-screens) {
+    font-size: 1.125rem;
+  }
+
+  @media (max-width: $md-screens) {
     font-size: 1rem;
-    color: rgba($text-primary, 0.8);
-    line-height: 2rem;
   }
 }
 
 .ctaButtons {
   display: flex;
-  gap: 1.5rem;
+  gap: 0.75rem; // Reduced gap between buttons
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 1.5rem;
@@ -574,17 +610,30 @@
 .ctaButtonLink {
   text-decoration: none;
 
-  // Ensure buttons in CTA section have proper hover states for light background
-  :global(button.default.primary:hover:enabled) {
+  // Primary button styles for dark overlay
+  :global(button.default.primary) {
     background-color: $primary !important;
     color: var(--color-text-on-dark) !important;
     border-color: $primary !important;
+
+    &:hover:enabled {
+      background-color: $bg-primary !important;
+      color: $text-primary !important;
+      border-color: $primary !important;
+    }
   }
 
-  :global(button.default.secondary:hover:enabled) {
-    background-color: $primary !important;
-    color: var(--color-text-on-dark) !important;
-    border-color: $primary !important;
+  // Secondary button - white outline and text for dark overlay
+  :global(button.default.secondary) {
+    background-color: transparent !important;
+    color: white !important;
+    border-color: white !important;
+
+    &:hover:enabled {
+      background-color: white !important;
+      color: $text-primary !important;
+      border-color: white !important;
+    }
   }
 
   @media (max-width: 640px) {

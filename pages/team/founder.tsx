@@ -1,7 +1,6 @@
 import React from "react";
 import Head from "next/head";
 import Layout from "components/layout";
-import TitleHero from "components/title-hero";
 import { getEventFromCMS } from "helpers";
 import { CMS } from "../../cms";
 import { SITE_URL } from "../../constants";
@@ -57,15 +56,22 @@ export default function FounderPage() {
           type: "profile",
         }}
       >
-      <TitleHero
-        image="/images/founder.jpeg"
-        imageAlt="Shile Adeyoyin, Founder & Steward"
-        title="Meet The Founder"
-        subtitle="Shile Adeyoyin"
-      />
-
       <section className={styles.founderSection}>
         <div className={styles.container}>
+          <div className={styles.contentHeader}>
+            <h1 className={styles.contentTitle}>Meet The Founder</h1>
+            <p className={styles.contentSubtitle}>Shile Adeyoyin</p>
+          </div>
+          <div className={styles.founderImageWrapper}>
+            <Image
+              src="/images/founder.jpeg"
+              alt="Shile Adeyoyin, Founder & Steward"
+              layout="fill"
+              objectFit="contain"
+              objectPosition="center"
+              className={styles.founderImage}
+            />
+          </div>
           <div className={styles.founderContent}>
             <div className={styles.bioContent}>
               <div className={styles.bioText}>

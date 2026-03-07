@@ -68,8 +68,8 @@
 .founderImageWrapper {
   flex: 0 0 40%;
   width: 40%;
-  height: auto;
   min-height: 500px;
+  height: 100%;
   border-radius: 1rem 0 0 1rem;
   overflow: hidden;
   position: relative;
@@ -116,10 +116,12 @@
   flex-direction: column;
   justify-content: center;
   padding: 2.5rem;
+  align-items: flex-start; // Left-align all content
 
   // Adjust padding when stacked (600px breakpoint)
   @media (max-width: 600px) {
     text-align: center;
+    align-items: center; // Center on mobile
     padding: 2rem;
   }
 }
@@ -178,6 +180,7 @@
 
 .founderDescription {
   max-width: 600px;
+  width: 100%; // Ensure it takes full width of parent
 
   @media (max-width: $md-screens) {
     max-width: 100%;
@@ -186,6 +189,7 @@
 
 .founderButton {
   margin-top: 1.5rem;
+  align-self: flex-start; // Left-align button within flex container
 
   button {
     padding: 0.75rem 1.5rem !important;
@@ -193,8 +197,7 @@
   }
 
   @media (max-width: $md-screens) {
-    display: flex;
-    justify-content: center;
+    align-self: center; // Center on mobile
   }
 }
 

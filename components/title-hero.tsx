@@ -24,6 +24,7 @@ const TitleHero = ({ image, imageAlt, title, subtitle, children, objectPosition 
             objectPosition={objectPosition}
             priority
           />
+          <div className={styles.heroOverlay}></div>
         </div>
       )}
       <div className={styles.heroContent}>
