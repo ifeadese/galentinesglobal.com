@@ -14,8 +14,18 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin-bottom: 2rem;
 
+  &.noImage {
+    background: transparent;
+    box-shadow: none;
+    min-height: auto;
+  }
+
   @media (max-width: $lg-screens) {
     min-height: 45vh;
+
+    &.noImage {
+      min-height: auto;
+    }
   }
 }
 
@@ -56,6 +66,11 @@
   }
 }
 
+.heroSection.noImage .heroContent {
+  color: $color-text-primary;
+  top: 0;
+}
+
 .heroTitle {
   font-family: "Parkinsans", sans-serif;
   font-size: 3.5rem;
@@ -75,6 +90,11 @@
   }
 }
 
+.heroSection.noImage .heroTitle {
+  text-shadow: none;
+  color: $color-text-primary;
+}
+
 .heroSubtitle {
   font-family: "Parkinsans", sans-serif;
   font-size: 1.25rem;
@@ -92,6 +112,12 @@
   @media (max-width: $md-screens) {
     font-size: 1rem;
   }
+}
+
+.heroSection.noImage .heroSubtitle {
+  text-shadow: none;
+  color: $color-text-secondary;
+  opacity: 1;
 }
 
 .heroChildren {

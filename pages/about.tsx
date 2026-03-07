@@ -1,6 +1,5 @@
 import React from "react";
 import Layout from "components/layout";
-import TitleHero from "components/title-hero";
 import { getEventFromCMS } from "helpers";
 import { CMS } from "../cms";
 import Image from "next/legacy/image";
@@ -11,6 +10,12 @@ import VisibilityIcon from "@mui/icons-material/Visibility";
 import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
 import { SITE_URL } from "../constants";
 import styles from "./about.module.scss";
+
+interface Feature {
+  icon: string;
+  title: string;
+  description: string;
+}
 
 const getIconComponent = (iconName: string) => {
   switch (iconName) {
@@ -40,7 +45,6 @@ export default function AboutPage() {
     ]
   };
 
-
   return (
     <Layout 
       event={event}
@@ -52,15 +56,11 @@ export default function AboutPage() {
         type: "website",
       }}
     >
-      <TitleHero
-        image={aboutContent.heroImage!}
-        imageAlt={aboutContent.heroImageAlt!}
-        title={aboutContent.heroTitle!}
-        subtitle={aboutContent.heroSubtitle!}
-      />
-
       {/* Content Section */}
       <section className={styles.contentSection}>
+        <div className={styles.contentHeader}>
+          <h1 className={styles.contentTitle}>{aboutContent.heroTitle!}</h1>
+        </div>
         <div className={styles.paragraphsContainer}>
           {aboutContent.paragraphs?.map((paragraph, index) => (
             <p key={index} className={styles.paragraph}>
@@ -70,7 +70,7 @@ export default function AboutPage() {
         </div>
 
         <div className={styles.aboutCards}>
-          {aboutContent.features?.map((feature: any, index: number) => {
+          {aboutContent.features?.map((feature: Feature, index: number) => {
             const IconComponent = getIconComponent(feature.icon);
             return (
               <div key={index} className={styles.featureCard}>
