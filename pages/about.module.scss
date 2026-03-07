@@ -1,4 +1,5 @@
 @import "/common.scss";
+@import "/styles/_content-header.scss";
 
 .contentSection {
   padding: 2rem 5%;
@@ -7,26 +8,12 @@
 }
 
 .contentHeader {
-  max-width: 56rem;
-  margin: 0 auto;
-  text-align: center;
+  @include content-header;
+  margin-bottom: 1rem;
 }
 
 .contentTitle {
-  font-size: 3.5rem;
-  font-weight: 700;
-  letter-spacing: 3px;
-  color: $color-text-primary;
-  margin: 0 0 0.5rem 0;
-
-  @media (max-width: $lg-screens) {
-    font-size: 2.5rem;
-    letter-spacing: 2px;
-  }
-
-  @media (max-width: $md-screens) {
-    font-size: 2rem;
-  }
+  @include content-title;
 }
 
 .paragraphsContainer {
@@ -255,7 +242,9 @@
   -webkit-text-fill-color: transparent;
   background-clip: text;
   letter-spacing: 0.5px;
-  line-height: 1.2;
+  line-height: 1.4; // Increased to prevent descender clipping (y, g, p, q, j)
+  padding-bottom: 0.25rem; // Extra space for descenders
+  display: inline-block; // Prevents clipping with background-clip
 
   @media (max-width: $md-screens) {
     font-size: 1.875rem;

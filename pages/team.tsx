@@ -9,10 +9,6 @@ import Link from "next/link";
 import Button from "components/button";
 import styles from "./team.module.scss";
 
-interface TeamPageProps {
-  cms: string;
-}
-
 interface TeamMember {
   name: string;
   role: string;
@@ -67,15 +63,12 @@ export default function TeamPage() {
         type: "website",
       }}
     >
-      <TitleHero
-        image="/images/ladies-2.JPG"
-        imageAlt="Our Team"
-        title="Our Team"
-        subtitle="Meet the passionate team behind Galentines Global"
-      />
-
       <section className={styles.teamSection}>
         <div className={styles.container}>
+          <div className={styles.contentHeader}>
+            <h1 className={styles.contentTitle}>Our Team</h1>
+            <p className={styles.contentSubtitle}>Meet the passionate team behind Galentines Global</p>
+          </div>
           {/* Founder Section - Larger with description */}
           <div className={styles.founderCard}>
             <div className={styles.founderImageWrapper}>
@@ -141,21 +134,19 @@ export default function TeamPage() {
       </section>
 
       {/* Join the Team Section */}
-      <section className={styles.joinSection}>
-        <div className={styles.joinContainer}>
-          <h2 className={styles.joinTitle}>Join the Team</h2>
-          <p className={styles.joinDescription}>
-            We&apos;re always looking for passionate individuals to join our mission of empowering women through faith and community.
-          </p>
-          <Link href="/volunteer" className={styles.joinLink}>
-            <Button variant="primary">
-              Volunteer With Us
-            </Button>
-          </Link>
-        </div>
-      </section>
+      <TitleHero
+        image="/images/ladies-2.JPG"
+        imageAlt="Join Our Team"
+        title="Join the Team"
+        subtitle="Be part of a movement that transforms lives through faith, love, and sisterhood."
+      >
+        <Link href="/volunteer" legacyBehavior>
+          <Button variant="primary">
+            Volunteer With Us
+          </Button>
+        </Link>
+      </TitleHero>
     </Layout>
   );
 }
-
 
