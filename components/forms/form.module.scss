@@ -10,8 +10,9 @@
   max-width: 100%;
   margin: 0 auto;
   padding: 2rem 1.7rem;
-  background: rgba(255, 255, 255, 0.9);
+  @include gradient-card-default; // Using brand gradient mixin (matches feature cards)
   border-radius: 12px;
+  border: 1px solid $border-light; // Using design system border variable
   box-shadow: 0 4px 20px var(--shadow-soft);
   position: relative;
   box-sizing: border-box;

@@ -1,6 +1,5 @@
 import React from "react";
 import Layout from "components/layout";
-import TitleHero from "components/title-hero";
 import ContactForm from "components/forms/contact-form";
 import { getEventFromCMS } from "helpers";
 import { CMS } from "../cms";
@@ -22,14 +21,11 @@ export default function ContactPage() {
         preloadImage: "/images/rsvp.png",
       }}
     >
-      <TitleHero
-        image="/images/rsvp.png"
-        imageAlt="Contact Us"
-        title="Contact"
-        subtitle="We'd love to hear from you"
-      />
-
       <section className={styles.section}>
+        <div className={styles.contentHeader}>
+          <h1 className={styles.contentTitle}>Contact</h1>
+          <p className={styles.contentSubtitle}>We'd love to hear from you</p>
+        </div>
         <div className={styles.formContainer}>
           <ContactForm description="Have a question, feedback or testimony? Fill the form below. We would love to hear from you." />
         </div>
