@@ -41,11 +41,6 @@ export const Footer = ({ contactEmailAddress, logo, logoAlt, facebookPageUrl, in
               </div>
             )}
             
-            <div className={styles.conference}>
-              <span>The Love of God Conference</span>
-              <span className={styles.separator}>•</span>
-              <span>Every February</span>
-            </div>
             <div className={styles.copyright}>
               <span>&copy; 2026 Galentines Global</span>
               <span className={styles.separator}>•</span>
