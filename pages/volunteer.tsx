@@ -1,6 +1,5 @@
 import React from "react";
 import Layout from "components/layout";
-import TitleHero from "components/title-hero";
 import VolunteerForm from "components/forms/volunteer-form";
 import { getEventFromCMS } from "helpers";
 import { CMS } from "../cms";
@@ -22,14 +21,11 @@ export default function VolunteerPage() {
         preloadImage: "/images/rsvp.png",
       }}
     >
-      <TitleHero
-        image="/images/rsvp.png"
-        imageAlt="Volunteer"
-        title="Join the team"
-        subtitle="Our volunteers help us make an impact"
-      />
-
       <section className={styles.section}>
+        <div className={styles.contentHeader}>
+          <h1 className={styles.contentTitle}>Volunteer</h1>
+          <p className={styles.contentSubtitle}>Join the team</p>
+        </div>
         <div className={styles.formContainer}>
           <VolunteerForm description="We could always use the help of passionate volunteers in making our next edition of Galentines a success! Fill out the form below to express your interest." />
         </div>
