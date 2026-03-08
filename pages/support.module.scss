@@ -573,16 +573,20 @@
 .ctaButtonLink {
   text-decoration: none;
 
-  // All buttons in CTA section - white styling for dark overlay
-  button {
-    background-color: white !important;
-    color: $text-primary !important;
-    border: 1px solid white !important;
+  // Primary button - matches home page live stream button
+  :global([class*="primary"]) {
+    background-color: $primary !important;
+    color: $text-on-dark !important;
+    border: none !important;
 
     &:hover:enabled {
-      background-color: transparent !important;
-      color: white !important;
-      border-color: white !important;
+      background-color: $bg-primary !important;
+      color: $text-primary !important;
+      transform: scale(1.05);
+    }
+
+    &:active {
+      transform: scale(0.95);
     }
   }
 
@@ -590,7 +594,7 @@
   :global([class*="secondary"]) {
     background-color: transparent !important;
     color: white !important;
-    border-color: white !important;
+    border: 1px solid white !important;
 
     &:hover:enabled {
       background-color: white !important;
