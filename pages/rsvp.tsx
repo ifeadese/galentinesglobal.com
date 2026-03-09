@@ -1,6 +1,5 @@
 import React from "react";
 import Layout from "components/layout";
-import TitleHero from "components/title-hero";
 import RSVPForm from "components/forms/rsvp-form";
 import EventCountdown from "components/event-countdown";
 import { getEventFromCMS, getEventDate } from "helpers";
@@ -26,21 +25,18 @@ export default function RSVPPage() {
         image: "/images/rsvp.png",
         url: `${SITE_URL}/rsvp`,
         type: "website",
-        preloadImage: "/images/rsvp.png", // Preload hero image for faster rendering
+        preloadImage: "/images/rsvp.png",
       }}
     >
-      <TitleHero
-        image="/images/rsvp.png"
-        imageAlt="RSVP"
-        title="RSVP"
-        subtitle={
-          eventDate ? (
-            <EventCountdown eventDate={eventDate} prefixText="To see you in" />
-          ) : undefined
-        }
-      />
-
       <section className={styles.section}>
+        <div className={styles.contentHeader}>
+          <h1 className={styles.contentTitle}>RSVP</h1>
+          {eventDate && (
+            <div className={styles.contentSubtitle}>
+              <EventCountdown eventDate={eventDate} prefixText="To see you in" />
+            </div>
+          )}
+        </div>
         <div className={styles.formContainer}>
           <RSVPForm 
             description="RSVP registration is currently closed. The form below is disabled." 

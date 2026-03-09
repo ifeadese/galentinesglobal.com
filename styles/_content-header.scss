@@ -1,26 +1,34 @@
 // Shared content header styles for pages
-// Used by: about.module.scss, team.module.scss
+// Used by: about, contact, volunteer, rsvp, team, support, team/founder
 
 @mixin content-header {
   max-width: 56rem;
-  margin: 0 auto;
+  margin: 0 auto 2rem;
   text-align: center;
 }
 
 @mixin content-title {
-  font-size: 3.5rem;
-  font-weight: 700;
+  font-size: 5rem;
+  font-weight: 800;
   letter-spacing: 3px;
   color: $color-text-primary;
   margin: 0 0 0.5rem 0;
 
   @media (max-width: $lg-screens) {
-    font-size: 2.5rem;
+    font-size: 3.85rem;
     letter-spacing: 2px;
   }
 
   @media (max-width: $md-screens) {
-    font-size: 2rem;
+    font-size: 3.3rem;
+  }
+
+  @media (max-width: 425px) {
+    font-size: 2.75rem;
+  }
+
+  @media (max-width: $xs-screens) {
+    font-size: 2.2rem;
   }
 }
 
