@@ -1,10 +1,8 @@
 import React from "react";
 import Layout from "components/layout";
+import FounderCard from "components/founder-card";
 import { getEventFromCMS } from "helpers";
 import { CMS } from "../cms";
-import Image from "next/legacy/image";
-import Link from "next/link";
-import Button from "components/button";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import VisibilityIcon from "@mui/icons-material/Visibility";
 import DirectionsWalkIcon from "@mui/icons-material/DirectionsWalk";
@@ -34,9 +32,10 @@ export default function AboutPage() {
   const event = getEventFromCMS(CMS);
   const aboutContent = CMS.about;
 
+  // Founder data - shared with team page
   const founderData = {
-    name: "Meet The Founder",
-    role: "Shile Adeyoyin",
+    name: "Shile Adeyoyin",
+    role: "Founder & Steward",
     image: "/images/founder.jpeg",
     imageAlt: "Shile Adeyoyin, Founder & Steward of Galentines Global",
     description: [
@@ -85,40 +84,15 @@ export default function AboutPage() {
             );
           })}
         </div>
-      </section>
 
-      {/* Founder Section */}
-      <section className={styles.founderSection}>
-        <div className={styles.founderContainer}>
-          <div className={styles.founderCard}>
-            <div className={styles.founderImageWrapper}>
-              <Image
-                src={founderData.image}
-                alt={founderData.imageAlt}
-                layout="fill"
-                objectFit="cover"
-                objectPosition="center top"
-                className={styles.founderImage}
-              />
-            </div>
-            <div className={styles.founderContent}>
-              <h2 className={styles.founderName}>{founderData.name}</h2>
-              <p className={styles.founderRole}>{founderData.role}</p>
-              <div className={styles.founderDescription}>
-                {founderData.description.map((paragraph, index) => (
-                  <p key={index} className={styles.founderDescriptionParagraph}>
-                    {paragraph}
-                  </p>
-                ))}
-                <div className={styles.founderButton}>
-                  <Link href="/team/founder" legacyBehavior>
-                    <Button variant="secondary">Learn More</Button>
-                  </Link>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        <FounderCard
+          title="Meet The Founder"
+          name={founderData.name}
+          role={founderData.role}
+          image={founderData.image}
+          imageAlt={founderData.imageAlt}
+          description={founderData.description}
+        />
       </section>
     </Layout>
   );

@@ -1,6 +1,7 @@
 import React from "react";
 import Layout from "components/layout";
 import TitleHero from "components/title-hero";
+import FounderCard from "components/founder-card";
 import { getEventFromCMS } from "helpers";
 import { CMS } from "../cms";
 import { SITE_URL } from "../constants";
@@ -70,42 +71,13 @@ export default function TeamPage() {
             <p className={styles.contentSubtitle}>Meet the passionate team behind Galentines Global</p>
           </div>
           {/* Founder Section - Larger with description */}
-          <div className={styles.founderCard}>
-            <div className={styles.founderImageWrapper}>
-              <Image
-                src={teamMembers[0].image}
-                alt={teamMembers[0].imageAlt}
-                layout="fill"
-                objectFit="cover"
-                objectPosition="center top"
-                className={styles.founderImage}
-              />
-            </div>
-            <div className={styles.founderContent}>
-              <h2 className={styles.founderName}>{teamMembers[0].name}</h2>
-              <p className={styles.founderRole}>{teamMembers[0].role}</p>
-              {teamMembers[0].description && (
-                <div className={styles.founderDescription}>
-                  {Array.isArray(teamMembers[0].description) ? (
-                    teamMembers[0].description.map((paragraph, index) => (
-                      <p key={index} className={styles.founderDescriptionParagraph}>
-                        {paragraph}
-                      </p>
-                    ))
-                  ) : (
-                    <p className={styles.founderDescriptionParagraph}>
-                      {teamMembers[0].description}
-                    </p>
-                  )}
-                  <div className={styles.founderButton}>
-                    <Link href="/team/founder" legacyBehavior>
-                      <Button variant="secondary">Learn More</Button>
-                    </Link>
-                  </div>
-                </div>
-              )}
-            </div>
-          </div>
+          <FounderCard
+            name={teamMembers[0].name}
+            role={teamMembers[0].role}
+            image={teamMembers[0].image}
+            imageAlt={teamMembers[0].imageAlt}
+            description={teamMembers[0].description || ""}
+          />
 
           {/* Team Members Section */}
           <div className={styles.teamMembersSection}>
