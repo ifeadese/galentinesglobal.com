@@ -1,4 +1,4 @@
-@import "../common.scss";
+@use "../common";
 
 .founderCard {
   display: flex;
@@ -14,16 +14,16 @@
   max-width: 72rem;
   margin-left: auto;
   margin-right: auto;
-  @include gradient-card-default;
+  @include common.gradient-card-default;
   box-shadow: 
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06),
-    0 0 0 1px $shadow-subtle;
+    0 0 0 1px common.$shadow-subtle;
   position: relative;
   overflow: hidden;
 
   // Stack founder card on smaller screens
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     min-width: unset;
     width: 100%;
   }
@@ -87,7 +87,7 @@
 .founderTitle {
   font-size: 0.75rem;
   font-weight: 600;
-  color: $primary;
+  color: common.$primary;
   letter-spacing: 2px;
   text-transform: uppercase;
   margin-bottom: 0.5rem;
@@ -98,7 +98,7 @@
   font-size: 2.25rem;
   font-weight: 700;
   margin: 0 0 0.75rem 0;
-  @include gradient-text-primary;
+  @include common.gradient-text-primary;
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -107,7 +107,7 @@
   padding-bottom: 0.25rem;
   display: inline-block;
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     font-size: 1.875rem;
     margin-bottom: 0.5rem;
   }
@@ -116,7 +116,7 @@
 .founderRole {
   font-size: 0.875rem;
   font-weight: 600;
-  color: $primary;
+  color: common.$primary;
   margin: 0 0 1.75rem 0;
   letter-spacing: 1.5px;
   text-transform: uppercase;
@@ -131,11 +131,11 @@
     left: 0;
     width: 60px;
     height: 2px;
-    @include gradient-line-accent;
+    @include common.gradient-line-accent;
     border-radius: 2px;
   }
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     margin-bottom: 1.25rem;
     padding-bottom: 0.5rem;
 
@@ -150,7 +150,7 @@
   max-width: 600px;
   width: 100%;
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     max-width: 100%;
   }
 }
@@ -164,7 +164,7 @@
     font-size: 14px !important;
   }
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     align-self: center;
   }
 }
@@ -172,7 +172,7 @@
 .founderDescriptionParagraph {
   font-size: 1.125rem;
   line-height: 1.75rem;
-  color: rgba($text-primary, 0.9);
+  color: rgba(common.$text-primary, 0.9);
   margin: 0 0 1rem 0;
   font-weight: 500;
 
@@ -180,7 +180,7 @@
     margin-bottom: 0;
   }
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     font-size: 1.125rem;
     line-height: 1.75rem;
   }

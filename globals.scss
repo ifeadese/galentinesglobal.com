@@ -1,4 +1,4 @@
-@import "./common.scss";
+@use "common";
 
 // ============================================
 // FONTS
@@ -25,40 +25,40 @@
 // ============================================
 :root {
   // Primary Colors
-  --color-primary: #{$color-primary};
-  --color-primary-light: #{$color-primary-light};
-  --color-primary-dark: #{$color-primary-dark};
+  --color-primary: #{common.$color-primary};
+  --color-primary-light: #{common.$color-primary-light};
+  --color-primary-dark: #{common.$color-primary-dark};
   
   // Secondary Colors
-  --color-secondary: #{$color-secondary};
-  --color-secondary-light: #{$color-secondary-light};
+  --color-secondary: #{common.$color-secondary};
+  --color-secondary-light: #{common.$color-secondary-light};
   
   // Background Colors
-  --color-bg-primary: #{$color-bg-primary};
-  --color-bg-secondary: #{$color-bg-secondary};
-  --color-bg-cream: #{$color-bg-cream};
-  --color-bg-light: #{$color-bg-light};
-  --color-bg-muted: #{$color-bg-muted};
-  --color-bg-dark: #{$color-bg-dark};
-  --color-bg-darker: #{$color-bg-darker};
+  --color-bg-primary: #{common.$color-bg-primary};
+  --color-bg-secondary: #{common.$color-bg-secondary};
+  --color-bg-cream: #{common.$color-bg-cream};
+  --color-bg-light: #{common.$color-bg-light};
+  --color-bg-muted: #{common.$color-bg-muted};
+  --color-bg-dark: #{common.$color-bg-dark};
+  --color-bg-darker: #{common.$color-bg-darker};
   
   // Text Colors
-  --color-text-primary: #{$color-text-primary};
-  --color-text-secondary: #{$color-text-secondary};
-  --color-text-light: #{$color-text-light};
-  --color-text-on-dark: #{$color-text-on-dark};
-  --color-text-accent: #{$color-text-accent};
+  --color-text-primary: #{common.$color-text-primary};
+  --color-text-secondary: #{common.$color-text-secondary};
+  --color-text-light: #{common.$color-text-light};
+  --color-text-on-dark: #{common.$color-text-on-dark};
+  --color-text-accent: #{common.$color-text-accent};
   
   // Accent Colors
-  --color-accent-pink-light: #{$color-accent-pink-light};
-  --color-accent-pink-medium: #{$color-accent-pink-medium};
-  --color-accent-rose: #{$color-accent-rose};
-  --color-accent-rose-dark: #{$color-accent-rose-dark};
+  --color-accent-pink-light: #{common.$color-accent-pink-light};
+  --color-accent-pink-medium: #{common.$color-accent-pink-medium};
+  --color-accent-rose: #{common.$color-accent-rose};
+  --color-accent-rose-dark: #{common.$color-accent-rose-dark};
   
   // Borders
-  --color-border-light: #{$border-light};
-  --color-border-medium: #{$color-border-dark};
-  --color-border-dark: #{$border-dark};
+  --color-border-light: #{common.$border-light};
+  --color-border-medium: #{common.$color-border-dark};
+  --color-border-dark: #{common.$border-dark};
   
   // Shadows (as rgba strings for inline styles - using primary color)
   --shadow-subtle: rgba(220, 108, 140, 0.05);
@@ -73,7 +73,7 @@ body {
   margin: 0;
   min-width: 320px;
   font-family: "Montserrat", serif;
-  color: $text-primary;
+  color: common.$text-primary;
 }
 
 h1 {
@@ -92,12 +92,12 @@ h1,
 h2,
 h3 {
   letter-spacing: 2px;
-  color: $primary; // Using semantic primary color
+  color: common.$primary; // Using semantic primary color
   margin: 2rem 0;
 }
 
 a {
-  color: $text-primary; // Using semantic text color
+  color: common.$text-primary; // Using semantic text color
   text-decoration: none;
 }
 
@@ -139,7 +139,7 @@ section {
   }
 }
 
-@media (max-width: $lg-screens) {
+@media (max-width: common.$lg-screens) {
   main {
     >section>p {
       margin: 5%;

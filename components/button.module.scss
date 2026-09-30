@@ -1,4 +1,4 @@
-@import "../common.scss";
+@use "../common";
 
 .default {
   border-radius: 0.5rem;
@@ -18,12 +18,12 @@
 }
 
 .default.primary {
-  background-color: $primary; // Using semantic primary color
-  color: $text-on-dark;
+  background-color: common.$primary; // Using semantic primary color
+  color: common.$text-on-dark;
 
   &:hover:not(:disabled) {
-    background-color: $bg-primary;
-    color: $text-primary;
+    background-color: common.$bg-primary;
+    color: common.$text-primary;
     transition: all 0.5s ease;
   }
 
@@ -34,12 +34,12 @@
 
 .default.secondary {
   background-color: transparent;
-  color: $primary; // Using semantic primary color
-  border: 1px solid $primary;
+  color: common.$primary; // Using semantic primary color
+  border: 1px solid common.$primary;
 
   &:hover:not(:disabled) {
-    background-color: $bg-primary;
-    color: $text-primary;
+    background-color: common.$bg-primary;
+    color: common.$text-primary;
     transition: all 0.5s ease;
   }
 

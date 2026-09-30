@@ -1,5 +1,5 @@
-@import "../common.scss";
-@import "../styles/_content-header.scss";
+@use "../common";
+@use "../styles/content-header" as header;
 
 .contentSection {
   padding: 4rem 5%;
@@ -8,12 +8,12 @@
 }
 
 .contentHeader {
-  @include content-header;
+  @include header.content-header;
   margin-bottom: 1rem;
 }
 
 .contentTitle {
-  @include content-title;
+  @include header.content-title;
 }
 
 .paragraphsContainer {
@@ -36,7 +36,7 @@
   max-width: 72rem;
   margin: 1.5rem auto;
 
-  @media (max-width: $lg-screens) {
+  @media (max-width: common.$lg-screens) {
     grid-template-columns: 1fr;
     gap: 1.5rem;
   }
@@ -45,11 +45,11 @@
 .featureCard {
   border-radius: 1rem;
   border: none;
-  @include gradient-card-default; // Using brand gradient mixin
+  @include common.gradient-card-default; // Using brand gradient mixin
   box-shadow: 
     0 4px 6px -1px rgba(0, 0, 0, 0.1),
     0 2px 4px -1px rgba(0, 0, 0, 0.06),
-    0 0 0 1px $shadow-subtle; // Using semantic shadow
+    0 0 0 1px common.$shadow-subtle; // Using semantic shadow
   padding: 1.5rem;
   text-align: center;
   transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
@@ -62,7 +62,7 @@
     left: 0;
     right: 0;
     height: 3px;
-    @include gradient-line-accent; // Using brand gradient mixin
+    @include common.gradient-line-accent; // Using brand gradient mixin
     opacity: 0;
     transition: opacity 0.4s ease;
   }
@@ -70,9 +70,9 @@
   &:hover {
     transform: translateY(-8px) scale(1.02);
     box-shadow: 
-      0 20px 25px -5px $shadow-medium,
-      0 10px 10px -5px $shadow-soft;
-    @include gradient-card-hover; // Using brand gradient mixin
+      0 20px 25px -5px common.$shadow-medium,
+      0 10px 10px -5px common.$shadow-soft;
+    @include common.gradient-card-hover; // Using brand gradient mixin
 
     &::before {
       opacity: 1;
@@ -87,7 +87,7 @@
     }
 
     .cardTitle {
-      color: $primary; // Using semantic primary color
+      color: common.$primary; // Using semantic primary color
       transform: translateX(2px);
     }
   }
@@ -139,7 +139,7 @@
   margin-bottom: 0.75rem;
   letter-spacing: 1px;
   transition: all 0.3s ease;
-  @include gradient-text-primary; // Using brand gradient mixin
+  @include common.gradient-text-primary; // Using brand gradient mixin
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -149,12 +149,12 @@
   font-family: "Parkinsans", sans-serif;
   font-size: 0.875rem;
   line-height: 1.5rem;
-  color: rgba($text-primary, 0.8); // Using semantic text color with opacity
+  color: rgba(common.$text-primary, 0.8); // Using semantic text color with opacity
   font-weight: 500;
   transition: color 0.3s ease;
 
   .featureCard:hover & {
-    color: rgba($text-primary, 0.95); // Using semantic text color with opacity
+    color: rgba(common.$text-primary, 0.95); // Using semantic text color with opacity
   }
 }
 

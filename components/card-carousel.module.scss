@@ -1,4 +1,4 @@
-@import "../common.scss";
+@use "../common";
 
 .carouselWrapper {
   position: relative;
@@ -26,7 +26,7 @@
   transform: translateZ(0);
   -webkit-transform: translateZ(0);
 
-  @media (min-width: $lg-screens) {
+  @media (min-width: common.$lg-screens) {
     gap: 1rem;
   }
 }

@@ -1,5 +1,5 @@
-@import "../common.scss";
-@import "../styles/_content-header.scss";
+@use "../common";
+@use "../styles/content-header" as header;
 
 // Impact Story Section
 .impactStory {
@@ -11,21 +11,21 @@
   flex-direction: column;
   align-items: center; // Center the content
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     padding: 2rem 5%;
   }
 }
 
 .contentHeader {
-  @include content-header;
+  @include header.content-header;
 }
 
 .contentTitle {
-  @include content-title;
+  @include header.content-title;
 }
 
 .contentSubtitle {
-  @include content-subtitle;
+  @include header.content-subtitle;
 }
 
 .storyContent {
@@ -36,14 +36,14 @@
   will-change: opacity;
   text-align: center; // Center-align text
 
-  @media (max-width: $sm-screens) {
+  @media (max-width: common.$sm-screens) {
     max-width: 400px; // Smaller width on mobile only
   }
 
   > p {
     font-size: 1rem; // Reduced from 1.125rem
     margin: 0 0 1.5rem 0;
-    color: rgba($text-primary, 0.9);
+    color: rgba(common.$text-primary, 0.9);
     line-height: 1.75rem;
     text-align: center; // Center-align text
 
@@ -56,10 +56,10 @@
 .storyQuote {
   margin: 2.5rem 0;
   padding-left: 2rem;
-  border-left: 3px solid $primary;
+  border-left: 3px solid common.$primary;
   font-style: italic;
   font-size: 1rem;
-  color: $text-primary;
+  color: common.$text-primary;
 
   cite {
     display: block;
@@ -67,7 +67,7 @@
     font-style: normal;
     font-size: 0.875rem;
     font-family: "Parkinsans", sans-serif;
-    color: $primary;
+    color: common.$primary;
   }
 }
 
@@ -89,14 +89,14 @@
   width: 100%;
   min-height: 0;
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     flex-direction: column;
     gap: 1.5rem;
     align-items: flex-start;
     min-height: auto;
   }
 
-  @media (max-width: $sm-screens) {
+  @media (max-width: common.$sm-screens) {
     gap: 1rem;
   }
 }
@@ -129,11 +129,11 @@
     z-index: 0;
   }
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     min-height: 350px;
   }
 
-  @media (max-width: $sm-screens) {
+  @media (max-width: common.$sm-screens) {
     min-height: 300px;
   }
 }
@@ -176,11 +176,11 @@
     text-align: center;
     line-height: 2rem;
 
-    @media (max-width: $lg-screens) {
+    @media (max-width: common.$lg-screens) {
       font-size: 18px;
     }
 
-    @media (max-width: $md-screens) {
+    @media (max-width: common.$md-screens) {
       font-size: 16px;
     }
   }
@@ -195,17 +195,17 @@
 
 .waysToSupport {
   background: white;
-  color: $text-primary;
+  color: common.$text-primary;
   padding: 4rem;
   position: relative;
   overflow: hidden;
   font-family: "Parkinsans", sans-serif;
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     padding: 5rem 3rem; // More top and bottom padding on mobile
   }
 
-  @media (max-width: $sm-screens) {
+  @media (max-width: common.$sm-screens) {
     padding: 4rem 2rem; // More top and bottom padding on small screens
   }
 }
@@ -219,11 +219,11 @@
   position: relative;
   z-index: 1;
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     margin-bottom: 1.5rem;
   }
 
-  @media (max-width: $sm-screens) {
+  @media (max-width: common.$sm-screens) {
     margin-bottom: 1rem;
   }
 
@@ -231,7 +231,7 @@
     font-size: 2.5rem;
     margin: 0 auto;
     font-weight: 700;
-    @include gradient-text-primary;
+    @include common.gradient-text-primary;
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
@@ -239,11 +239,11 @@
     width: fit-content;
     display: block;
 
-    @media (max-width: $lg-screens) {
+    @media (max-width: common.$lg-screens) {
       font-size: 2rem;
     }
 
-    @media (max-width: $md-screens) {
+    @media (max-width: common.$md-screens) {
       font-size: 1.75rem;
       width: 100%;
     }
@@ -251,10 +251,10 @@
 
   p {
     font-size: 1.25rem;
-    color: rgba($text-primary, 0.85);
+    color: rgba(common.$text-primary, 0.85);
     line-height: 1.75rem;
 
-    @media (max-width: $md-screens) {
+    @media (max-width: common.$md-screens) {
       font-size: 1.125rem;
     }
   }
@@ -270,7 +270,7 @@
   gap: 2rem;
   align-items: stretch;
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     display: none; // Hide grid when carousel is active
   }
 }
@@ -278,7 +278,7 @@
 .tiersCarousel {
   display: none;
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     display: block;
     width: 90%; // Match CTA section width on tablet
     max-width: 90%;
@@ -289,7 +289,7 @@
     padding: 0;
     border-radius: 1.5rem; // Match CTA section border radius
 
-    @media (max-width: $sm-screens) {
+    @media (max-width: common.$sm-screens) {
       width: 100%; // Full width on mobile only
       max-width: 100%;
       border-radius: 0; // Remove border radius on mobile
@@ -304,7 +304,7 @@
   width: 100%;
   box-sizing: border-box;
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     width: 100%;
     max-width: 100%;
   }
@@ -313,7 +313,7 @@
 .tiersNavigation {
   display: none;
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -330,9 +330,9 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background: $color-primary;
+  background: common.$color-primary;
   border: none;
-  color: $color-text-on-dark;
+  color: common.$color-text-on-dark;
   cursor: pointer;
   display: flex;
   align-items: center;
@@ -342,7 +342,7 @@
   flex-shrink: 0;
 
   &:hover {
-    background: $color-primary-dark;
+    background: common.$color-primary-dark;
     transform: scale(1.1);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
   }
@@ -375,12 +375,12 @@
   &:hover {
     transform: translateY(-8px) scale(1.02);
     box-shadow: 
-      0 20px 25px -5px $shadow-medium,
-      0 10px 10px -5px $shadow-soft;
-    @include gradient-card-default; // Show background on hover
+      0 20px 25px -5px common.$shadow-medium,
+      0 10px 10px -5px common.$shadow-soft;
+    @include common.gradient-card-default; // Show background on hover
   }
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     width: 100%;
     min-width: 100%;
     max-width: 100%;
@@ -392,7 +392,7 @@
 
 // Carousel-specific card styles to prevent clipping
 .tiersCarousel .tierCard {
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     width: 100%; // Full container width for each card
     min-width: 100%;
     max-width: 100%;
@@ -425,7 +425,7 @@
   margin: 0 0 0.75rem 0;
   letter-spacing: 1px;
   transition: all 0.3s ease;
-  @include gradient-text-primary; // Using brand gradient mixin
+  @include common.gradient-text-primary; // Using brand gradient mixin
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -436,7 +436,7 @@
   font-family: "Parkinsans", sans-serif;
   font-size: 0.875rem;
   line-height: 1.5rem;
-  color: rgba($text-primary, 0.8); // Using semantic text color with opacity
+  color: rgba(common.$text-primary, 0.8); // Using semantic text color with opacity
   font-weight: 500;
   transition: color 0.3s ease;
   margin: 0 0 1rem 0;
@@ -446,14 +446,14 @@
   }
 
   .tierCard:hover & {
-    color: rgba($text-primary, 0.95); // Using semantic text color with opacity
+    color: rgba(common.$text-primary, 0.95); // Using semantic text color with opacity
   }
 }
 
 // Remove old card-specific styles - now using unified tierCard styling
 // Keep strong tag styling for email addresses
 .tierCard p strong {
-  color: $text-primary;
+  color: common.$text-primary;
   font-weight: 600;
 }
 
@@ -472,7 +472,7 @@
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   margin-bottom: 2rem;
 
-  @media (max-width: $lg-screens) {
+  @media (max-width: common.$lg-screens) {
     min-height: 45vh;
   }
 }
@@ -517,7 +517,7 @@
   max-width: 90%;
   width: 100%;
 
-  @media (max-width: $lg-screens) {
+  @media (max-width: common.$lg-screens) {
     max-width: 95%;
     padding: 2rem 5%;
   }
@@ -532,12 +532,12 @@
   color: white;
   margin: 0 0 0.5rem 0;
 
-  @media (max-width: $lg-screens) {
+  @media (max-width: common.$lg-screens) {
     font-size: 2.5rem;
     letter-spacing: 2px;
   }
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     font-size: 2rem;
   }
 }
@@ -552,11 +552,11 @@
   margin: 0;
   max-width: 600px;
 
-  @media (max-width: $lg-screens) {
+  @media (max-width: common.$lg-screens) {
     font-size: 1.125rem;
   }
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     font-size: 1rem;
   }
 }
@@ -574,13 +574,13 @@
 
   // Primary button - matches home page live stream button
   :global([class*="primary"]) {
-    background-color: $primary !important;
-    color: $text-on-dark !important;
+    background-color: common.$primary !important;
+    color: common.$text-on-dark !important;
     border: none !important;
 
     &:hover:enabled {
-      background-color: $bg-primary !important;
-      color: $text-primary !important;
+      background-color: common.$bg-primary !important;
+      color: common.$text-primary !important;
       transform: scale(1.05);
     }
 
@@ -597,7 +597,7 @@
 
     &:hover:enabled {
       background-color: white !important;
-      color: $text-primary !important;
+      color: common.$text-primary !important;
       border-color: white !important;
     }
   }

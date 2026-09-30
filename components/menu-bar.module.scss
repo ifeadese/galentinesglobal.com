@@ -1,4 +1,4 @@
-@import "../common.scss";
+@use "../common";
 
 .menuContainer {
   display: flex;
@@ -42,16 +42,16 @@
       font-size: 1rem;
       padding: 0 1rem;
       letter-spacing: 1px;
-      color: $color-text-primary;
+      color: common.$color-text-primary;
 
       a {
         font-family: "Parkinsans", sans-serif;
-        color: $color-text-primary;
+        color: common.$color-text-primary;
         transition: color 0.3s ease, font-weight 0.3s ease;
         font-weight: inherit;
 
         &:hover {
-          color: $primary;
+          color: common.$primary;
           font-weight: 700;
         }
       }
@@ -59,8 +59,8 @@
   }
 
   .rsvpButton {
-    background-color: $primary;
-    color: $text-on-dark;
+    background-color: common.$primary;
+    color: common.$text-on-dark;
     padding: 0.75rem 1.5rem;
     border-radius: 0.5rem;
     text-decoration: none;
@@ -72,8 +72,8 @@
     display: inline-block;
 
     &:hover {
-      background-color: $bg-primary;
-      color: $text-primary;
+      background-color: common.$bg-primary;
+      color: common.$text-primary;
       transform: scale(1.05);
     }
 
@@ -132,7 +132,7 @@
   }
 
   svg {
-    color: $text-primary !important;
+    color: common.$text-primary !important;
   }
 }
 
@@ -170,7 +170,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  color: $text-primary;
+  color: common.$text-primary;
   text-decoration: none;
   font-family: "Parkinsans", sans-serif;
   font-weight: 600;
@@ -180,7 +180,7 @@
   padding: 1rem 2rem;
 
   &:hover {
-    color: $primary;
+    color: common.$primary;
     transform: scale(1.05);
   }
 }
@@ -189,8 +189,8 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background-color: $primary;
-  color: $text-on-dark;
+  background-color: common.$primary;
+  color: common.$text-on-dark;
   text-decoration: none;
   font-family: "Parkinsans", sans-serif;
   font-weight: 600;
@@ -203,8 +203,8 @@
     rgba(14, 30, 37, 0.32) 0px 2px 16px 0px;
 
   &:hover {
-    background-color: $bg-primary;
-    color: $text-primary;
+    background-color: common.$bg-primary;
+    color: common.$text-primary;
     transform: scale(1.05);
   }
 
@@ -213,7 +213,7 @@
   }
 }
 
-@media (max-width: $md-screens) {
+@media (max-width: common.$md-screens) {
   .menuContainer {
     padding: 4.5% 3% 5% 5%;
     
@@ -241,7 +241,7 @@
   }
 }
 
-@media (max-width: $sm-screens) {
+@media (max-width: common.$sm-screens) {
   .menuContainer {
     padding: 9% 3% 9% 5%;
   }
