@@ -1,6 +1,5 @@
 import React from "react";
 import Image from "next/legacy/image";
-import Link from "next/link";
 import Button from "components/button";
 import styles from "./founder-card.module.scss";
 
@@ -51,9 +50,7 @@ export default function FounderCard({
           ))}
           {linkHref && (
             <div className={styles.founderButton}>
-              <Link href={linkHref} legacyBehavior>
-                <Button variant="secondary">{linkText}</Button>
-              </Link>
+              <Button href={linkHref} variant="secondary">{linkText}</Button>
             </div>
           )}
         </div>

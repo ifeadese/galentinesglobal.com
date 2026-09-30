@@ -1,4 +1,3 @@
-import Link from "next/link";
 import Image from "next/legacy/image";
 import Button from "components/button";
 import Layout from "components/layout";
@@ -17,9 +16,7 @@ export default function ErrorPage() {
         <h1 style={{ marginBottom: 'unset' }}>{errorContent.title!}</h1>
         <br />
         <p style={{ marginTop: 'unset' }}>{errorContent.message!}</p>
-        <Link href={errorContent.buttonLink!} legacyBehavior>
-          <Button variant="primary">{errorContent.buttonText!}</Button>
-        </Link>
+        <Button href={errorContent.buttonLink!} variant="primary">{errorContent.buttonText!}</Button>
       </section>
     </Layout>
   );

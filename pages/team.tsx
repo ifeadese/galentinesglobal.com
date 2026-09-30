@@ -6,7 +6,6 @@ import { getEventFromCMS } from "helpers";
 import { CMS } from "../cms";
 import { SITE_URL } from "../constants";
 import Image from "next/legacy/image";
-import Link from "next/link";
 import Button from "components/button";
 import styles from "./team.module.scss";
 
@@ -112,11 +111,9 @@ export default function TeamPage() {
         title="Join the Team"
         subtitle="Be part of a movement that transforms lives through faith, love, and sisterhood."
       >
-        <Link href="/volunteer" legacyBehavior>
-          <Button variant="primary">
-            Volunteer With Us
-          </Button>
-        </Link>
+        <Button href="/volunteer" variant="primary">
+          Volunteer With Us
+        </Button>
       </TitleHero>
     </Layout>
   );

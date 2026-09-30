@@ -53,15 +53,13 @@ const MenuBar = ({ siteName, logo, logoAlt, isDrawerOpen, showDrawer }: MenuBarP
               if (page.isButton) {
                 return (
                   <li key={idx}>
-                    <Link href={page.url} legacyBehavior>
-                      <a className={styles.rsvpButton}>{page.name}</a>
-                    </Link>
+                    <Link href={page.url} className={styles.rsvpButton}>{page.name}</Link>
                   </li>
                 );
               }
               return (
                 <li key={idx}>
-                  <Link href={page.url} legacyBehavior>{page.name}</Link>
+                  <Link href={page.url}>{page.name}</Link>
                 </li>
               );
             }
