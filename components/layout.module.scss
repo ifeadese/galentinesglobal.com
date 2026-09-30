@@ -1,6 +1,6 @@
-@import "/common.scss";
+@import "../common.scss";
 
-.container :global {
+.container {
   justify-content: center;
   align-items: center;
   min-width: $xs-screens;

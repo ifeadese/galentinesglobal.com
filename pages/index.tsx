@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Head from "next/head";
 import Image from "next/legacy/image";
-import Link from "next/link";
 import Button from "components/button";
 import Layout from "components/layout";
 import CardCarousel from "components/card-carousel";
@@ -303,18 +302,17 @@ export default function HomePage() {
               ))}
             </div>
           )}
-          <Link href="/about" legacyBehavior>
-            <Button 
-              variant="secondary" 
-              style={{
-                color: 'var(--color-text-primary)',
-                borderColor: 'var(--color-text-primary)',
-                boxShadow: 'none',
-              }}
-            >
-              Learn More
-            </Button>
-          </Link>
+          <Button
+            href="/about"
+            variant="secondary"
+            style={{
+              color: 'var(--color-text-primary)',
+              borderColor: 'var(--color-text-primary)',
+              boxShadow: 'none',
+            }}
+          >
+            Learn More
+          </Button>
         </div>
       </section>
 

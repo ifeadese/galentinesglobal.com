@@ -16,7 +16,7 @@
     "module": "esnext",
     "resolveJsonModule": true,
     "moduleResolution": "bundler",
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "isolatedModules": true,
     "plugins": [
       {

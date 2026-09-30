@@ -1,4 +1,4 @@
-@import "/common.scss";
+@import "../common.scss";
 
 .default {
   border-radius: 0.5rem;
@@ -14,13 +14,14 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
+  text-decoration: none;
 }
 
 .default.primary {
   background-color: $primary; // Using semantic primary color
   color: $text-on-dark;
 
-  &:hover:enabled {
+  &:hover:not(:disabled) {
     background-color: $bg-primary;
     color: $text-primary;
     transition: all 0.5s ease;
@@ -36,7 +37,7 @@
   color: $primary; // Using semantic primary color
   border: 1px solid $primary;
 
-  &:hover:enabled {
+  &:hover:not(:disabled) {
     background-color: $bg-primary;
     color: $text-primary;
     transition: all 0.5s ease;

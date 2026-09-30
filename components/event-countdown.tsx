@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useSyncExternalStore } from 'react';
 
 interface EventCountdownProps {
   eventDate: Date;
@@ -14,27 +14,40 @@ interface TimeRemaining {
   isPast: boolean;
 }
 
+// A one-second clock exposed as an external store. The server snapshot is
+// null, so the countdown renders nothing on the server and during hydration
+// and only appears once React is running on the client. That avoids a
+// server/client mismatch, which React 19 reports as a hydration error.
+let now = Date.now();
+
+function subscribe(onTick: () => void) {
+  const interval = setInterval(() => {
+    now = Date.now();
+    onTick();
+  }, 1000);
+  return () => clearInterval(interval);
+}
+
+const getClientNow = () => now;
+const getServerNow = () => null;
+
 /**
  * Displays a friendly, celebratory countdown to the event date
  * Updates every second for a live countdown experience
- * Returns null when event date has passed
+ * Renders nothing on the server, and nothing once the event has passed
  */
 export default function EventCountdown({ 
   eventDate, 
   prefixText,
   className 
 }: EventCountdownProps) {
-  const [timeRemaining, setTimeRemaining] = useState<TimeRemaining>(
-    () => calculateTimeRemaining(eventDate)
-  );
+  const clientNow = useSyncExternalStore(subscribe, getClientNow, getServerNow);
 
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setTimeRemaining(calculateTimeRemaining(eventDate));
-    }, 1000);
+  if (clientNow === null) {
+    return null;
+  }
 
-    return () => clearInterval(interval);
-  }, [eventDate]);
+  const timeRemaining = calculateTimeRemaining(eventDate, clientNow);
 
   // Hide entirely when event has passed
   if (timeRemaining.isPast) {
@@ -46,16 +59,11 @@ export default function EventCountdown({
     ? `${prefixText} ${countdownText}`
     : countdownText;
 
-  // Suppress hydration warning since time will differ between server and client
-  return (
-    <span className={className} suppressHydrationWarning>
-      {content}
-    </span>
-  );
+  return <span className={className}>{content}</span>;
 }
 
-function calculateTimeRemaining(eventDate: Date): TimeRemaining {
-  const diff = eventDate.getTime() - Date.now();
+function calculateTimeRemaining(eventDate: Date, now: number): TimeRemaining {
+  const diff = eventDate.getTime() - now;
   
   if (diff <= 0) {
     return { days: 0, hours: 0, minutes: 0, seconds: 0, isPast: true };
