@@ -1,7 +1,7 @@
-@import "../common.scss";
+@use "../common";
 
 .container {
   justify-content: center;
   align-items: center;
-  min-width: $xs-screens;
+  min-width: common.$xs-screens;
 }

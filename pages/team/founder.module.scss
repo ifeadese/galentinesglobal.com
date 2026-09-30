@@ -1,12 +1,12 @@
-@import "../../common.scss";
-@import "../../styles/_content-header.scss";
+@use "../../common";
+@use "../../styles/content-header" as header;
 
 .founderSection {
   padding: 4rem 5%;
   background: #ffffff;
   font-family: "Parkinsans", sans-serif;
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     padding: 2rem 5%;
   }
 }
@@ -17,15 +17,15 @@
 }
 
 .contentHeader {
-  @include content-header;
+  @include header.content-header;
 }
 
 .contentTitle {
-  @include content-title;
+  @include header.content-title;
 }
 
 .contentSubtitle {
-  @include content-subtitle;
+  @include header.content-subtitle;
 }
 
 .founderImageWrapper {
@@ -37,7 +37,7 @@
   position: relative;
   aspect-ratio: 3 / 4; // Maintain aspect ratio similar to carousel cards
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     margin-bottom: 2rem;
     width: 100%;
     max-width: 300px;
@@ -72,7 +72,7 @@
 .bioParagraph {
   font-size: 1.125rem;
   line-height: 1.85rem;
-  color: rgba($text-primary, 0.9);
+  color: rgba(common.$text-primary, 0.9);
   margin: 0 0 1.5rem 0;
   font-weight: 400;
 
@@ -80,7 +80,7 @@
     margin-bottom: 0;
   }
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     font-size: 1rem;
     line-height: 1.75rem;
     margin-bottom: 1.25rem;

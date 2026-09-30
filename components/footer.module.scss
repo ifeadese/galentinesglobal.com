@@ -1,4 +1,4 @@
-@import '../common.scss';
+@use "../common";
 
 .footer {
   border-top: 2px solid rgba(220, 108, 140, 0.15);
@@ -28,12 +28,12 @@
     flex-wrap: wrap;
 
     .separator {
-      @media (max-width: $lg-screens) {
+      @media (max-width: common.$lg-screens) {
         display: none;
       }
     }
 
-    @media (max-width: $lg-screens) {
+    @media (max-width: common.$lg-screens) {
       flex-direction: column;
       gap: 0.25rem;
       line-height: 1.4;
@@ -70,13 +70,13 @@
   }
 
   .privacyLink {
-    color: $color-primary;
+    color: common.$color-primary;
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s ease;
 
     &:hover {
-      color: $color-primary-dark;
+      color: common.$color-primary-dark;
       text-decoration: underline;
     }
   }

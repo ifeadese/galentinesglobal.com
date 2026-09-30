@@ -1,5 +1,5 @@
-@import "../common.scss";
-@import "../styles/_content-header.scss";
+@use "../common";
+@use "../styles/content-header" as header;
 
 .section {
   padding: 2rem 5%;
@@ -8,15 +8,15 @@
 }
 
 .contentHeader {
-  @include content-header;
+  @include header.content-header;
 }
 
 .contentTitle {
-  @include content-title;
+  @include header.content-title;
 }
 
 .contentSubtitle {
-  @include content-subtitle;
+  @include header.content-subtitle;
 }
 
 .formContainer {

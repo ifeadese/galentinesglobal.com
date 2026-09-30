@@ -1,4 +1,4 @@
-@import "../common.scss";
+@use "../common";
 
 .heroSection {
   background: black;
@@ -20,7 +20,7 @@
     min-height: auto;
   }
 
-  @media (max-width: $lg-screens) {
+  @media (max-width: common.$lg-screens) {
     min-height: 45vh;
 
     &.noImage {
@@ -70,14 +70,14 @@
   width: 100%;
   top: 1rem;
 
-  @media (max-width: $lg-screens) {
+  @media (max-width: common.$lg-screens) {
     max-width: 95%;
     padding: 2rem 5%;
   }
 }
 
 .heroSection.noImage .heroContent {
-  color: $color-text-primary;
+  color: common.$color-text-primary;
   top: 0;
 }
 
@@ -90,19 +90,19 @@
   color: white;
   margin: 0 0 0.5rem 0;
 
-  @media (max-width: $lg-screens) {
+  @media (max-width: common.$lg-screens) {
     font-size: 2.5rem;
     letter-spacing: 2px;
   }
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     font-size: 2rem;
   }
 }
 
 .heroSection.noImage .heroTitle {
   text-shadow: none;
-  color: $color-text-primary;
+  color: common.$color-text-primary;
 }
 
 .heroSubtitle {
@@ -115,18 +115,18 @@
   margin: 0;
   max-width: 600px;
 
-  @media (max-width: $lg-screens) {
+  @media (max-width: common.$lg-screens) {
     font-size: 1.125rem;
   }
 
-  @media (max-width: $md-screens) {
+  @media (max-width: common.$md-screens) {
     font-size: 1rem;
   }
 }
 
 .heroSection.noImage .heroSubtitle {
   text-shadow: none;
-  color: $color-text-secondary;
+  color: common.$color-text-secondary;
   opacity: 1;
 }
 
