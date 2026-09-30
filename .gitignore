@@ -37,3 +37,9 @@ next-env.d.ts
 
 # Generated images (copied from images directory during build)
 public/images/*
+
+# local env files (pulled with `vercel env pull`)
+.env
+
+# Payload local media uploads (only used when no Blob token is set)
+/media

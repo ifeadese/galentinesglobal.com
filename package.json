@@ -2,26 +2,41 @@
   "name": "galentinesglobal.com",
   "version": "0.1.0",
   "private": true,
+  "type": "module",
   "scripts": {
-    "copy-images": "node scripts/copy-images.js",
+    "copy-images": "node scripts/copy-images.cjs",
     "dev": "npm run copy-images && next dev",
-    "build": "npm run copy-images && next build",
+    "build": "npm run copy-images && payload migrate && next build",
     "start": "next start",
     "lint": "eslint .",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "payload": "payload",
+    "migrate": "payload migrate",
+    "migrate:create": "payload migrate:create",
+    "migrate:status": "payload migrate:status",
+    "generate:types": "payload generate:types",
+    "generate:importmap": "payload generate:importmap"
   },
   "dependencies": {
     "@emotion/react": "^11.11.4",
     "@emotion/styled": "^11.11.0",
     "@mui/icons-material": "^5.15.11",
     "@mui/material": "^5.15.11",
+    "@payloadcms/db-postgres": "3.90.2",
+    "@payloadcms/next": "3.90.2",
+    "@payloadcms/richtext-lexical": "3.90.2",
+    "@payloadcms/storage-vercel-blob": "3.90.2",
+    "@payloadcms/ui": "3.90.2",
     "@vercel/analytics": "^1.2.2",
+    "graphql": "^16.14.2",
     "hamburger-react": "^2.5.0",
     "next": "16.3.7",
+    "payload": "3.90.2",
     "react": "19.3.0",
     "react-dom": "19.3.0",
     "react-social-icons": "^6.14.0",
-    "sass": "^1.71.1"
+    "sass": "^1.71.1",
+    "sharp": "^0.35.5"
   },
   "devDependencies": {
     "@types/node": "^20.11.24",
@@ -29,6 +44,7 @@
     "@types/react-dom": "19.3.0",
     "eslint": "^9.39.5",
     "eslint-config-next": "16.3.7",
+    "tsx": "^4.23.15",
     "typescript": "^5.3.3"
   }
 }

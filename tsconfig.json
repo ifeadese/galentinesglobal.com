@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "target": "es5",
+    "target": "ES2022",
     "lib": [
       "dom",
       "dom.iterable",
@@ -36,6 +36,9 @@
       ],
       "lib/*": [
         "lib/*"
+      ],
+      "@payload-config": [
+        "./payload.config.ts"
       ]
     }
   },
@@ -43,7 +46,8 @@
     "next-env.d.ts",
     "**/*.ts",
     "**/*.tsx",
-    ".next/types/**/*.ts"
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts"
   ],
   "exclude": [
     "node_modules"
