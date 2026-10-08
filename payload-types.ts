@@ -67,8 +67,10 @@ export interface Config {
   };
   blocks: {};
   collections: {
-    users: User;
+    'team-members': TeamMember;
+    ministers: Minister;
     media: Media;
+    users: User;
     'payload-kv': PayloadKv;
     'payload-locked-documents': PayloadLockedDocument;
     'payload-preferences': PayloadPreference;
@@ -76,8 +78,10 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
-    users: UsersSelect<false> | UsersSelect<true>;
+    'team-members': TeamMembersSelect<false> | TeamMembersSelect<true>;
+    ministers: MinistersSelect<false> | MinistersSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
+    users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
     'payload-locked-documents': PayloadLockedDocumentsSelect<false> | PayloadLockedDocumentsSelect<true>;
     'payload-preferences': PayloadPreferencesSelect<false> | PayloadPreferencesSelect<true>;
@@ -87,8 +91,20 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'site-settings': SiteSetting;
+    home: Home;
+    about: About;
+    support: Support;
+    'not-found': NotFound;
+  };
+  globalsSelect: {
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    home: HomeSelect<false> | HomeSelect<true>;
+    about: AboutSelect<false> | AboutSelect<true>;
+    support: SupportSelect<false> | SupportSelect<true>;
+    'not-found': NotFoundSelect<false> | NotFoundSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -119,30 +135,38 @@ export interface UserAuthOperations {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users".
+ * via the `definition` "team-members".
  */
-export interface User {
+export interface TeamMember {
   id: number;
-  name?: string | null;
-  updatedAt: string;
-  createdAt: string;
-  email: string;
-  resetPasswordToken?: string | null;
-  resetPasswordExpiration?: string | null;
-  salt?: string | null;
-  hash?: string | null;
-  resetPasswordRequestedAt?: string | null;
-  loginAttempts?: number | null;
-  lockUntil?: string | null;
-  sessions?:
+  _order?: string | null;
+  name: string;
+  role: string;
+  photo: number | Media;
+  /**
+   * The founder is featured on the About and Team pages and has their own page.
+   */
+  isFounder?: boolean | null;
+  /**
+   * Shown on the founder card on the About and Team pages.
+   */
+  shortBio?:
     | {
-        id: string;
-        createdAt?: string | null;
-        expiresAt: string;
+        text: string;
+        id?: string | null;
       }[]
     | null;
-  password?: string | null;
-  collection: 'users';
+  /**
+   * Shown on the "Meet the Founder" page.
+   */
+  fullBio?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -195,6 +219,52 @@ export interface Media {
   };
 }
 /**
+ * Guest speakers and worship leaders shown in "Our Ministers" on the home page.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ministers".
+ */
+export interface Minister {
+  id: number;
+  _order?: string | null;
+  name: string;
+  role: string;
+  photo: number | Media;
+  /**
+   * Untick to hide a past speaker without deleting them.
+   */
+  active?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users".
+ */
+export interface User {
+  id: number;
+  name?: string | null;
+  updatedAt: string;
+  createdAt: string;
+  email: string;
+  resetPasswordToken?: string | null;
+  resetPasswordExpiration?: string | null;
+  salt?: string | null;
+  hash?: string | null;
+  resetPasswordRequestedAt?: string | null;
+  loginAttempts?: number | null;
+  lockUntil?: string | null;
+  sessions?:
+    | {
+        id: string;
+        createdAt?: string | null;
+        expiresAt: string;
+      }[]
+    | null;
+  password?: string | null;
+  collection: 'users';
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv".
  */
@@ -219,12 +289,20 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
-        relationTo: 'users';
-        value: number | User;
+        relationTo: 'team-members';
+        value: number | TeamMember;
+      } | null)
+    | ({
+        relationTo: 'ministers';
+        value: number | Minister;
       } | null)
     | ({
         relationTo: 'media';
         value: number | Media;
+      } | null)
+    | ({
+        relationTo: 'users';
+        value: number | User;
       } | null);
   globalSlug?: string | null;
   user: {
@@ -270,27 +348,41 @@ export interface PayloadMigration {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
- * via the `definition` "users_select".
+ * via the `definition` "team-members_select".
  */
-export interface UsersSelect<T extends boolean = true> {
+export interface TeamMembersSelect<T extends boolean = true> {
+  _order?: T;
   name?: T;
-  updatedAt?: T;
-  createdAt?: T;
-  email?: T;
-  resetPasswordToken?: T;
-  resetPasswordExpiration?: T;
-  salt?: T;
-  hash?: T;
-  resetPasswordRequestedAt?: T;
-  loginAttempts?: T;
-  lockUntil?: T;
-  sessions?:
+  role?: T;
+  photo?: T;
+  isFounder?: T;
+  shortBio?:
     | T
     | {
+        text?: T;
         id?: T;
-        createdAt?: T;
-        expiresAt?: T;
       };
+  fullBio?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ministers_select".
+ */
+export interface MinistersSelect<T extends boolean = true> {
+  _order?: T;
+  name?: T;
+  role?: T;
+  photo?: T;
+  active?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -348,6 +440,30 @@ export interface MediaSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "users_select".
+ */
+export interface UsersSelect<T extends boolean = true> {
+  name?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  email?: T;
+  resetPasswordToken?: T;
+  resetPasswordExpiration?: T;
+  salt?: T;
+  hash?: T;
+  resetPasswordRequestedAt?: T;
+  loginAttempts?: T;
+  lockUntil?: T;
+  sessions?:
+    | T
+    | {
+        id?: T;
+        createdAt?: T;
+        expiresAt?: T;
+      };
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "payload-kv_select".
  */
 export interface PayloadKvSelect<T extends boolean = true> {
@@ -385,6 +501,259 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * Used across every page: navigation, footer and search results.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: number;
+  /**
+   * Shown in browser tabs and search results.
+   */
+  name: string;
+  /**
+   * Short summary used for search results and link previews.
+   */
+  description: string;
+  /**
+   * Shown in the footer and as the Interac donation address.
+   */
+  contactEmail: string;
+  logo: number | Media;
+  instagramUrl?: string | null;
+  facebookUrl?: string | null;
+  /**
+   * Used by the "Watch Live Stream" button and the footer YouTube icon.
+   */
+  liveStreamUrl?: string | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home".
+ */
+export interface Home {
+  id: number;
+  /**
+   * Next conference date, e.g. "February 7, 2026". Drives the countdown and the RSVP page. Text like "Every February" or "TBD" hides the countdown.
+   */
+  eventDate: string;
+  /**
+   * Scripture shown under the hero heading.
+   */
+  verse: string;
+  /**
+   * Conference theme artwork, used for link previews when there are no hero images.
+   */
+  mainLogo?: (number | null) | Media;
+  /**
+   * The first image is used for link previews (e.g. when the site is shared).
+   */
+  heroImages?: (number | Media)[] | null;
+  /**
+   * Photos in the scrolling carousel below the hero.
+   */
+  carouselImages?: (number | Media)[] | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about".
+ */
+export interface About {
+  id: number;
+  title: string;
+  /**
+   * Used for link previews when the page is shared.
+   */
+  image?: (number | null) | Media;
+  /**
+   * Also shown in the "About" section of the home page.
+   */
+  paragraphs?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  features?:
+    | {
+        icon: 'favorite' | 'visibility' | 'directions_walk';
+        title: string;
+        description: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "support".
+ */
+export interface Support {
+  id: number;
+  title: string;
+  subtitle?: string | null;
+  story?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Write {email} anywhere in a paragraph to insert the contact email in bold.
+   */
+  waysToSupport?:
+    | {
+        /**
+         * A single emoji, e.g. 💰
+         */
+        icon: string;
+        title: string;
+        paragraphs?:
+          | {
+              text: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  thankYou: {
+    title: string;
+    text: string;
+    image?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Shown when someone visits a page that does not exist.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "not-found".
+ */
+export interface NotFound {
+  id: number;
+  title: string;
+  message: string;
+  image?: (number | null) | Media;
+  buttonText: string;
+  buttonLink: string;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  name?: T;
+  description?: T;
+  contactEmail?: T;
+  logo?: T;
+  instagramUrl?: T;
+  facebookUrl?: T;
+  liveStreamUrl?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "home_select".
+ */
+export interface HomeSelect<T extends boolean = true> {
+  eventDate?: T;
+  verse?: T;
+  mainLogo?: T;
+  heroImages?: T;
+  carouselImages?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about_select".
+ */
+export interface AboutSelect<T extends boolean = true> {
+  title?: T;
+  image?: T;
+  paragraphs?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  features?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        description?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "support_select".
+ */
+export interface SupportSelect<T extends boolean = true> {
+  title?: T;
+  subtitle?: T;
+  story?:
+    | T
+    | {
+        text?: T;
+        id?: T;
+      };
+  waysToSupport?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        paragraphs?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  thankYou?:
+    | T
+    | {
+        title?: T;
+        text?: T;
+        image?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "not-found_select".
+ */
+export interface NotFoundSelect<T extends boolean = true> {
+  title?: T;
+  message?: T;
+  image?: T;
+  buttonText?: T;
+  buttonLink?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

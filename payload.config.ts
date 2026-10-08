@@ -7,7 +7,14 @@ import sharp from 'sharp'
 import { fileURLToPath } from 'url'
 
 import { Media } from './collections/Media'
+import { Ministers } from './collections/Ministers'
+import { TeamMembers } from './collections/TeamMembers'
 import { Users } from './collections/Users'
+import { About } from './globals/About'
+import { Home } from './globals/Home'
+import { NotFound } from './globals/NotFound'
+import { SiteSettings } from './globals/SiteSettings'
+import { Support } from './globals/Support'
 import { migrations } from './migrations'
 
 const filename = fileURLToPath(import.meta.url)
@@ -21,9 +28,9 @@ export default buildConfig({
     },
     meta: {
       titleSuffix: ' - Galentines CMS',
-    },
-  },
-  collections: [Users, Media],
+    },  },
+  collections: [TeamMembers, Ministers, Media, Users],
+  globals: [SiteSettings, Home, About, Support, NotFound],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || '',
   typescript: {
